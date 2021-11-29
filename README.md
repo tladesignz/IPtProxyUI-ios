@@ -1,8 +1,8 @@
 # IPtProxyUI
 
-[![Version](https://img.shields.io/cocoapods/v/IPtProxyUI-ios.svg?style=flat)](https://cocoapods.org/pods/IPtProxyUI-ios)
-[![License](https://img.shields.io/cocoapods/l/IPtProxyUI-ios.svg?style=flat)](https://cocoapods.org/pods/IPtProxyUI-ios)
-[![Platform](https://img.shields.io/cocoapods/p/IPtProxyUI-ios.svg?style=flat)](https://cocoapods.org/pods/IPtProxyUI-ios)
+[![Version](https://img.shields.io/cocoapods/v/IPtProxyUI.svg?style=flat)](https://cocoapods.org/pods/IPtProxyUI)
+[![License](https://img.shields.io/cocoapods/l/IPtProxyUI.svg?style=flat)](https://cocoapods.org/pods/IPtProxyUI)
+[![Platform](https://img.shields.io/cocoapods/p/IPtProxyUI.svg?style=flat)](https://cocoapods.org/pods/IPtProxyUI)
 
 ## Requirements
 
