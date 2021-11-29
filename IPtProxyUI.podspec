@@ -35,7 +35,9 @@ Pod::Spec.new do |s|
 
 	s.ios.deployment_target = '11.0'
 
-  s.swift_version = '5.5'
+	s.swift_version = '5.5'
+
+	s.preserve_paths = 'update-bridges.swift', '.bartycrouch.toml'
 
 	s.source_files = 'IPtProxyUI/Classes/**/*'
 
