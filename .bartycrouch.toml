@@ -1,0 +1,21 @@
+[update]
+tasks = ["code", "normalize"]
+
+[update.code]
+codePaths = ["."]
+localizablePaths = ["IPtProxyUI/Assets"]
+defaultToKeys = true
+additive = false
+unstripped = false
+plistArguments = false
+
+[update.normalize]
+paths = ["IPtProxyUI/Assets"]
+sourceLocale = "en"
+harmonizeWithSource = true
+sortByKeys = true
+
+[lint]
+paths = ["IPtProxyUI/Assets"]
+duplicateKeys = true
+emptyValues = true
