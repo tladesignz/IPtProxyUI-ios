@@ -53,16 +53,16 @@ Pod::Spec.new do |s|
 			:script => '"$PODS_TARGET_SRCROOT/update-bridges.swift"',
 			:execution_position => :before_compile
 		},
-		{
-			:name => 'BartyCrouch Automatic Localization',
-			:execution_position => :before_compile,
-			:script => <<-SCRIPT
-			if which bartycrouch > /dev/null; then
-				bartycrouch update -x -p "$PODS_TARGET_SRCROOT"
-				bartycrouch lint -x -p "$PODS_TARGET_SRCROOT"
-			fi
-			SCRIPT
-		}
+#		{
+#			:name => 'BartyCrouch Automatic Localization',
+#			:execution_position => :before_compile,
+#			:script => <<-SCRIPT
+#if which bartycrouch > /dev/null; then
+#	bartycrouch update -x -p "$PODS_TARGET_SRCROOT"
+#	bartycrouch lint -x -p "$PODS_TARGET_SRCROOT"
+#fi
+#SCRIPT
+#		}
 	]
 
 	s.dependency 'IPtProxy', '~> 1.2'
