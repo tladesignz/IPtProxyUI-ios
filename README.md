@@ -4,7 +4,16 @@
 [![License](https://img.shields.io/cocoapods/l/IPtProxyUI.svg?style=flat)](https://cocoapods.org/pods/IPtProxyUI)
 [![Platform](https://img.shields.io/cocoapods/p/IPtProxyUI.svg?style=flat)](https://cocoapods.org/pods/IPtProxyUI)
 
-## Requirements
+IPtProxyUI provides a UI to configure bridges for all Pluggable Transports available in the IPtProxy package.
+
+This package provides some scenes and configuration code which is shared between
+different apps using the `IPtProxy` package together with `Tor.framework`.
+
+The UI is complete for your users to configure all aspects of the Transports,
+including MOAT support to fetch new Obfs4 proxies.
+
+The configuration provided is good for using the PTs together with Tor.
+
 
 ## Installation
 
@@ -14,6 +23,7 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'IPtProxyUI'
 ```
+
 
 ## Localization
 
@@ -25,6 +35,7 @@ automatically show up in [`Localizable.strings`](IPtProxyUI/Assets/en.lproj/Loca
 
 Don't use storyboard and xib file localization. That just messes up everything.
 Localize these by explicit calls in the code.
+
 
 ## Dependencies
 
