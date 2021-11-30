@@ -13,7 +13,7 @@ import MessageUI
 open class CustomBridgesViewController: FixedFormViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDelegate {
 
-	public weak var delegate: BridgeConfDelegate?
+	public weak var delegate: BridgesConfDelegate?
 
 	private static let bridgesUrl = "https://bridges.torproject.org/"
 
@@ -27,7 +27,7 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 	}()
 
 	private let textAreaRow = TextAreaRow() {
-		$0.placeholder = Bridge.builtInObfs4Bridges.first
+		$0.placeholder = Transport.builtInObfs4Bridges.first
 		$0.cell.placeholderLabel?.font = .systemFont(ofSize: 15)
 		$0.cell.textLabel?.font = .systemFont(ofSize: 15)
 	}
@@ -184,6 +184,13 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 				.map({ bridge in bridge.trimmingCharacters(in: .whitespacesAndNewlines) })
 				.filter({ bridge in !bridge.isEmpty && !bridge.hasPrefix("//") && !bridge.hasPrefix("#") })
 
-		delegate?.bridgesType = delegate?.customBridges?.isEmpty ?? true ? .none : .custom
+		if delegate?.customBridges?.isEmpty ?? true {
+			if delegate?.transport == .custom {
+				delegate?.transport = .none
+			}
+		}
+		else {
+			delegate?.transport = .custom
+		}
 	}
 }

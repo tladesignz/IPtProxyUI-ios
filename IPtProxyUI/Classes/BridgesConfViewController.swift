@@ -1,5 +1,5 @@
 //
-//  BridgeConfViewController.swift
+//  BridgesConfViewController.swift
 //  IPtProxyUI
 //
 //  Created by Benjamin Erhart on 2021-11-29.
@@ -9,9 +9,9 @@
 import UIKit
 import Eureka
 
-public protocol BridgeConfDelegate: AnyObject {
+public protocol BridgesConfDelegate: AnyObject {
 
-	var bridgesType: Bridge { get set }
+	var transport: Transport { get set }
 
 	var customBridges: [String]? { get set }
 
@@ -26,7 +26,7 @@ public protocol BridgeConfDelegate: AnyObject {
 	func stopMeek()
 }
 
-public extension BridgeConfDelegate {
+public extension BridgesConfDelegate {
 
 	var saveButtonTitle: String? {
 		nil
@@ -45,13 +45,13 @@ public extension BridgeConfDelegate {
 	}
 }
 
-open class BridgeConfViewController: FixedFormViewController, UINavigationControllerDelegate,
-									 BridgeConfDelegate
+open class BridgesConfViewController: FixedFormViewController, UINavigationControllerDelegate,
+									 BridgesConfDelegate
 {
 
-	open weak var delegate: BridgeConfDelegate?
+	open weak var delegate: BridgesConfDelegate?
 
-	open var bridgesSection: SelectableSection<ListCheckRow<Bridge>> = {
+	open var transportSection: SelectableSection<ListCheckRow<Transport>> = {
 		let description = [
 			NSLocalizedString("If you are in a country or using a connection that censors Tor, you might need to use bridges.",
 							  bundle: Bundle.iPtProxyUI, comment: ""),
@@ -67,15 +67,15 @@ open class BridgeConfViewController: FixedFormViewController, UINavigationContro
 							  bundle: Bundle.iPtProxyUI, comment: "")
 		]
 
-		return SelectableSection<ListCheckRow<Bridge>>(
+		return SelectableSection<ListCheckRow<Transport>>(
 			header: "", footer: description.joined(separator: "\n"),
 			selectionType: .singleSelection(enableDeselection: false))
 	}()
 
-	open var bridgesType: Bridge = .none {
+	open var transport: Transport = .none {
 		didSet {
-			for row in bridgesSection {
-				if (row as? ListCheckRow<Bridge>)?.value == bridgesType {
+			for row in transportSection {
+				if (row as? ListCheckRow<Transport>)?.value == transport {
 					row.select()
 				}
 				else {
@@ -90,7 +90,7 @@ open class BridgeConfViewController: FixedFormViewController, UINavigationContro
 	open override func viewDidLoad() {
 		super.viewDidLoad()
 
-		bridgesType = delegate?.bridgesType ?? .none
+		transport = delegate?.transport ?? .none
 		customBridges = delegate?.customBridges
 
 		navigationController?.delegate = self
@@ -110,7 +110,7 @@ open class BridgeConfViewController: FixedFormViewController, UINavigationContro
 				barButtonSystemItem: .save, target: self, action: #selector(save))
 		}
 
-		let bridges: [Bridge: String] = [
+		let bridges: [Transport: String] = [
 			.none: NSLocalizedString(
 				"No Bridges", bundle: Bundle.iPtProxyUI, comment: ""),
 			.obfs4: String(format: NSLocalizedString(
@@ -121,7 +121,7 @@ open class BridgeConfViewController: FixedFormViewController, UINavigationContro
 				"Custom Bridges", bundle: Bundle.iPtProxyUI, comment: ""),
 		]
 
-		bridgesSection.onSelectSelectableRow = { [weak self] _, row in
+		transportSection.onSelectSelectableRow = { [weak self] _, row in
 			if row.value == .custom {
 				let vc = CustomBridgesViewController()
 				vc.delegate = self
@@ -142,13 +142,13 @@ open class BridgeConfViewController: FixedFormViewController, UINavigationContro
 			self?.navigationController?.pushViewController(vc, animated: true)
 		}
 
-		+++ bridgesSection
+		+++ transportSection
 
 		for option in bridges.sorted(by: { $0.key.rawValue < $1.key.rawValue }) {
-			form.last! <<< ListCheckRow<Bridge>() {
+			form.last! <<< ListCheckRow<Transport>() {
 				$0.title = option.value
 				$0.selectableValue = option.key
-				$0.value = option.key == bridgesType ? bridgesType : nil
+				$0.value = option.key == transport ? transport : nil
 			}
 		}
 	}
@@ -161,13 +161,13 @@ open class BridgeConfViewController: FixedFormViewController, UINavigationContro
 			return
 		}
 
-		for row in bridgesSection.allRows as? [ListCheckRow<Bridge>] ?? [] {
-			row.value = row.selectableValue == bridgesType ? bridgesType : nil
+		for row in transportSection.allRows as? [ListCheckRow<Transport>] ?? [] {
+			row.value = row.selectableValue == transport ? transport : nil
 		}
 	}
 
 
-	// MARK: BridgeConfDelegate
+	// MARK: BridgesConfDelegate
 
 	open var saveButtonTitle: String? {
 		delegate?.saveButtonTitle
@@ -190,8 +190,8 @@ open class BridgeConfViewController: FixedFormViewController, UINavigationContro
 
 	@objc
 	open func save() {
-		bridgesType = bridgesSection.selectedRow()?.value ?? .none
-		delegate?.bridgesType = bridgesType
+		transport = transportSection.selectedRow()?.value ?? .none
+		delegate?.transport = transport
 
 		delegate?.customBridges = customBridges
 

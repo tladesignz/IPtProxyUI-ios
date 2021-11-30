@@ -11,7 +11,7 @@ import Eureka
 import MBProgressHUD
 
 /**
-Implements the MOAT protocol: Fetches OBFS4 bridges via Meek Azure.
+Implements the MOAT protocol: Fetches OBFS4 bridges via Meek.
 
 The bare minimum of the communication is implemented. E.g. no check, if OBFS4 is possible or which
 protocol version the server wants to speak. The first should be always good, as OBFS4 is the most widely
@@ -24,7 +24,7 @@ open class MoatViewController: FixedFormViewController {
 
 	private static let moatBaseUrl = URL(string: "https://bridges.torproject.org/moat")
 
-	public weak var delegate: BridgeConfDelegate?
+	public weak var delegate: BridgesConfDelegate?
 
 	private var challenge: String?
 
@@ -190,7 +190,8 @@ open class MoatViewController: FixedFormViewController {
 				}
 
 				guard let data = payload["data"] as? [[String: Any]],
-					  let bridges = data.first?["bridges"] as? [String]
+					  let bridges = data.first?["bridges"] as? [String],
+					  !bridges.isEmpty
 				else {
 					AlertHelper.present(
 						vc, message: NSLocalizedString("Couldn't understand server response.",
@@ -198,8 +199,8 @@ open class MoatViewController: FixedFormViewController {
 					return
 				}
 
-				vc.delegate?.customBridges = bridges.isEmpty ? nil : bridges
-				vc.delegate?.bridgesType = .custom
+				vc.delegate?.customBridges = bridges
+				vc.delegate?.transport = .custom
 
 				vc.navigationController?.popViewController(animated: true)
 			}

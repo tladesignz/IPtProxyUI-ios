@@ -1,5 +1,5 @@
 //
-//  Bridge.swift
+//  Transport.swift
 //  IPtProxyUI
 //
 //  Created by Benjamin Erhart on 2021-11-29.
@@ -9,7 +9,7 @@
 import Foundation
 import IPtProxy
 
-public enum Bridge: Int, CaseIterable {
+public enum Transport: Int, CaseIterable {
 
 	public static var builtInObfs4BridgesFile: URL? {
 		return Bundle.iPtProxyUI.url(forResource: "obfs4-bridges", withExtension: "plist")
@@ -84,7 +84,7 @@ public enum Bridge: Int, CaseIterable {
 		}
 	}
 
-	public func getConfiguration<T>(_ cv: (String, String) -> T) -> [T] {
+	public func torConf<T>(_ cv: (String, String) -> T) -> [T] {
 		var conf = [T]()
 
 		switch self {
@@ -92,7 +92,7 @@ public enum Bridge: Int, CaseIterable {
 			conf.append(cv("ClientTransportPlugin", "obfs4 socks5 127.0.0.1:\(IPtProxyObfs4Port())"))
 
 			if self == .obfs4 {
-				conf += Bridge.builtInObfs4Bridges.map({ cv("Bridge", $0) })
+				conf += Transport.builtInObfs4Bridges.map({ cv("Bridge", $0) })
 			}
 
 		case .snowflake:
