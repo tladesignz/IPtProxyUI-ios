@@ -1,0 +1,104 @@
+/* BridgeConfViewController; first placeholder is bullet point (\u{2022}), second placeholder is bridge type "obfs4" */
+"%1$@ %2$@ makes your traffic appear \"random\"." = "%1$@ %2$@ 可讓使用者的流量資訊呈現 \"隨機狀態\"。";
+
+/* No comment provided by engineer. */
+"%1$@ %2$@ makes your traffic look like a phone call to a random user on the net." = "%1$@ %2$@ makes your traffic look like a phone call to a random user on the net.";
+
+/* BridgeConfViewController */
+"Bridge Configuration" = "橋接器設定";
+
+/* BridgeConfViewController; placeholder contains bridge type names: "meek-azure" or "obfs4" */
+"Built-in %@" = "內建 %@";
+
+/* ScanQrViewController */
+"Camera access was not granted or QR Code scanning is not supported by your device." = "未授權存取相機或是您的裝置不支援掃描 QR Code。";
+
+/* AlertHelper */
+"Cancel" = "取消";
+
+/* CustomBridgesViewController */
+"Copy URL to Clipboard" = "將 URL 複製到剪貼簿";
+
+/* MoatViewController */
+"Couldn't understand server response." = "無法理解伺服器的回應";
+
+/* BridgeConfViewController */
+"Custom Bridges" = "自訂橋接器";
+
+/* CustomBridgesViewController */
+"E-Mail" = "電子郵件";
+
+/* MoatViewController */
+"Enter characters from image" = "請輸入圖片中的文字符號";
+
+/* AlertHelper */
+"Error" = "錯誤";
+
+/* BridgeConfViewController */
+"If one type of bridge does not work, try using a different one." = "若某種橋接器無法運作，請試試使用另一種。";
+
+/* BridgesViewController, BridgeConfViewController */
+"If you are in a country or using a connection that censors Tor, you might need to use bridges." = "若您所在的國家或使用的網路連線封鎖 Tor，就可能需要使用橋接器。";
+
+/* CustomBridgesViewController; placeholder contains "https://bridges.torproject.org/", please visit that page and copy texts for your language! */
+"In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"" = "在另一個瀏覽器，連上 %@ 並輕觸 \"Get Bridges\" > \"Just Give Me Bridges!\"";
+
+/* BridgeConfViewController */
+"No Bridges" = "無橋接器";
+
+/* ApiError, placeholder is a non-success status from the server. */
+"No success, but \"%@\" instead." = "不成功，已改用\"%@\"替代。";
+
+/* ApiError */
+"No valid HTTP response." = "無有效的 HTTP 回應。";
+
+/* JAHPAuthenticatingHTTPProtocol, AlertHelper */
+"OK" = "確定";
+
+/* CustomBridgesViewController */
+"Paste Bridges" = "貼上橋接器";
+
+/* CustomBridgesViewController; placeholder is "" "https://bridges.torproject.org/" */
+"QR Code could not be decoded! Are you sure you scanned a QR code from %@?" = "無法解析 QR Code！請確認您掃描的 QR Code 是否真的來自 %@ ？";
+
+/* MoatViewController */
+"Request Bridges" = "請求橋接";
+
+/* BridgeConfViewController */
+"Request Bridges from torproject.org" = "向 torproject.org 請求橋接";
+
+/* ApiError */
+"Request could not be formed. Please check host and username/password!" = "請求無法執行，請檢查主機與用戶名及密碼是否正確！";
+
+/* CustomBridgesViewController */
+"Request via E-Mail" = "透過電子郵件請求";
+
+/* ApiError */
+"Response body missing." = "遺失了回應的內容";
+
+/* ApiError */
+"Response is no valid JSON." = "回應為無效的 JSON";
+
+/* CustomBridgesViewController, ScanQrViewController */
+"Scan QR Code" = "掃描 QR Code";
+
+/* MoatViewController */
+"Solve the CAPTCHA to request bridges." = "輸入驗證碼以請求橋接";
+
+/* CustomBridgesViewController */
+"Upload QR Code" = "上傳 QR Code";
+
+/* CustomBridgesViewController */
+"Use Custom Bridges" = "使用自訂橋接器";
+
+/* CustomBridgesViewController */
+"Use QR Code" = "使用 QR Code";
+
+/* No comment provided by engineer. */
+"via custom bridges" = "via custom bridges";
+
+/* No comment provided by engineer. */
+"via Obfs4 bridges" = "via Obfs4 bridges";
+
+/* No comment provided by engineer. */
+"via Snowflake bridge" = "via Snowflake bridge";

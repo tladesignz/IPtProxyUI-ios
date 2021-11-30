@@ -1,0 +1,104 @@
+/* BridgeConfViewController; first placeholder is bullet point (\u{2022}), second placeholder is bridge type "obfs4" */
+"%1$@ %2$@ makes your traffic appear \"random\"." = "%1$@ %2$@ גורם לתעבורה שלך להיראות \"אקראית\".";
+
+/* BridgeConfViewController; first placeholder is bullet point (\u{2022}), second placeholder is bridge type "snowflake" */
+"%1$@ %2$@ makes your traffic look like a phone call to a random user on the net." = "%1$@ %2$@ גורם לתעבודה שלך להיראות כמו שיחת טלפון אל משתמש אקראי ברשת.";
+
+/* BridgeConfViewController */
+"Bridge Configuration" = "תצורת גשר";
+
+/* BridgeConfViewController; placeholder contains bridge type names: "meek-azure" or "obfs4" */
+"Built-in %@" = "%@ מובנה";
+
+/* ScanQrViewController */
+"Camera access was not granted or QR Code scanning is not supported by your device." = "גישת מצלמה לא הוענקה או שסריקת קוד QR אינה נתמכת ע״י המכשיר שלך.";
+
+/* AlertHelper */
+"Cancel" = "בטל";
+
+/* CustomBridgesViewController */
+"Copy URL to Clipboard" = "העתק כתובת אל לוח חיתוך";
+
+/* MoatViewController */
+"Couldn't understand server response." = "לא היה ניתן להבין תגובת שרת.";
+
+/* BridgeConfViewController */
+"Custom Bridges" = "גשרים מותאמים אישית";
+
+/* CustomBridgesViewController */
+"E-Mail" = "דוא״ל";
+
+/* MoatViewController */
+"Enter characters from image" = "הכנס את התווים מהתמונה";
+
+/* AlertHelper */
+"Error" = "שגיאה";
+
+/* BridgeConfViewController */
+"If one type of bridge does not work, try using a different one." = "אם סוג אחד של גשר אינו עובד, נסה להשתמש באחד אחר.";
+
+/* BridgesViewController, BridgeConfViewController */
+"If you are in a country or using a connection that censors Tor, you might need to use bridges." = "אם אתה במדינה או משתמש בחיבור שמצנזר את Tor, ייתכן שתצטרך להשתמש בגשרים.";
+
+/* CustomBridgesViewController; placeholder contains "https://bridges.torproject.org/", please visit that page and copy texts for your language! */
+"In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"" = "בדפדפן נפרד, בקר בכתובת %@ והקש על \"השג גשרים\" > \"תן לי עוד גשרים!\"";
+
+/* BridgeConfViewController */
+"No Bridges" = "ללא גשרים";
+
+/* ApiError, placeholder is a non-success status from the server. */
+"No success, but \"%@\" instead." = "אין הצלחה, אבל \"%@\" במקום.";
+
+/* ApiError */
+"No valid HTTP response." = "תגובת HTTP בלתי תקפה.";
+
+/* JAHPAuthenticatingHTTPProtocol, AlertHelper */
+"OK" = "אשר";
+
+/* CustomBridgesViewController */
+"Paste Bridges" = "הדבק גשרים";
+
+/* CustomBridgesViewController; placeholder is "" "https://bridges.torproject.org/" */
+"QR Code could not be decoded! Are you sure you scanned a QR code from %@?" = "קוד QR לא היה יכול להתפענח! האם אתה בטוח שסרקת קוד QR מתוך %@?";
+
+/* MoatViewController */
+"Request Bridges" = "בקש גשרים";
+
+/* BridgeConfViewController */
+"Request Bridges from torproject.org" = "בקש גשרים מן torproject.org";
+
+/* ApiError */
+"Request could not be formed. Please check host and username/password!" = "הבקשה לא יכלה להתבצע. אנא בדוק מארח ושם משתמש/סיסמה!";
+
+/* CustomBridgesViewController */
+"Request via E-Mail" = "בקש באמצעות דוא״ל";
+
+/* ApiError */
+"Response body missing." = "גוף תגובה חסר.";
+
+/* ApiError */
+"Response is no valid JSON." = "התגובה אינה JSON תקף.";
+
+/* CustomBridgesViewController, ScanQrViewController */
+"Scan QR Code" = "סרוק קוד QR";
+
+/* MoatViewController */
+"Solve the CAPTCHA to request bridges." = "פתור CAPTCHA כדי לבקש גשרים.";
+
+/* CustomBridgesViewController */
+"Upload QR Code" = "העלה קוד QR";
+
+/* CustomBridgesViewController */
+"Use Custom Bridges" = "השתמש בגשרים מותאמים אישית";
+
+/* CustomBridgesViewController */
+"Use QR Code" = "השתמש בקוד QR";
+
+/* No comment provided by engineer. */
+"via custom bridges" = "via custom bridges";
+
+/* No comment provided by engineer. */
+"via Obfs4 bridges" = "via Obfs4 bridges";
+
+/* No comment provided by engineer. */
+"via Snowflake bridge" = "via Snowflake bridge";

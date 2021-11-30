@@ -1,0 +1,104 @@
+/* BridgeConfViewController; first placeholder is bullet point (\u{2022}), second placeholder is bridge type "obfs4" */
+"%1$@ %2$@ makes your traffic appear \"random\"." = "%1$@ Avec %2$@, votre trafic semble « aléatoire ».";
+
+/* BridgeConfViewController; first placeholder is bullet point (\u{2022}), second placeholder is bridge type "snowflake" */
+"%1$@ %2$@ makes your traffic look like a phone call to a random user on the net." = "%1$@ Avec %2$@, votre trafic ressemble à un appel téléphonique vers quelque utilisateur sur Internet.";
+
+/* BridgeConfViewController */
+"Bridge Configuration" = "Configuration des ponts";
+
+/* BridgeConfViewController; placeholder contains bridge type names: "meek-azure" or "obfs4" */
+"Built-in %@" = "%@ intégré";
+
+/* ScanQrViewController */
+"Camera access was not granted or QR Code scanning is not supported by your device." = "L’accès à l’appareil photo n’a pas été accordé ou le balayage de codes QR n’est pas pris en charge par votre appareil.";
+
+/* AlertHelper */
+"Cancel" = "Annuler";
+
+/* CustomBridgesViewController */
+"Copy URL to Clipboard" = "Copier l’URL dans le presse-papiers";
+
+/* MoatViewController */
+"Couldn't understand server response." = "La réponse du serveur est incompréhensible.";
+
+/* BridgeConfViewController */
+"Custom Bridges" = "Ponts personnalisés";
+
+/* CustomBridgesViewController */
+"E-Mail" = "Courriel";
+
+/* MoatViewController */
+"Enter characters from image" = "Saisissez les caractères de l’image";
+
+/* AlertHelper */
+"Error" = "Erreur";
+
+/* BridgeConfViewController */
+"If one type of bridge does not work, try using a different one." = "Si un type de pont ne fonctionne pas, tentez d’en utiliser un autre.";
+
+/* BridgesViewController, BridgeConfViewController */
+"If you are in a country or using a connection that censors Tor, you might need to use bridges." = "Si vous êtes dans un pays qui censure Tor ou que vous utilisez une connexion qui le fait, vous devrez peut-être utiliser des ponts.";
+
+/* CustomBridgesViewController; placeholder contains "https://bridges.torproject.org/", please visit that page and copy texts for your language! */
+"In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"" = "Dans un navigateur séparé, visitez %@ et touchez « Obtenez des ponts » > « Donnez-moi juste des ponts ! ».";
+
+/* BridgeConfViewController */
+"No Bridges" = "Aucun pont";
+
+/* ApiError, placeholder is a non-success status from the server. */
+"No success, but \"%@\" instead." = "Pas de succès, mais plutôt « %@ ».";
+
+/* ApiError */
+"No valid HTTP response." = "Pas de réponse HTTP valide.";
+
+/* JAHPAuthenticatingHTTPProtocol, AlertHelper */
+"OK" = "Valider";
+
+/* CustomBridgesViewController */
+"Paste Bridges" = "Coller des ponts";
+
+/* CustomBridgesViewController; placeholder is "" "https://bridges.torproject.org/" */
+"QR Code could not be decoded! Are you sure you scanned a QR code from %@?" = "Le code QR n’a pas pu être décodé. Avez-vous bien balayé un code QR de %@ ?";
+
+/* MoatViewController */
+"Request Bridges" = "Demander des ponts";
+
+/* BridgeConfViewController */
+"Request Bridges from torproject.org" = "Demander des ponts à torproject.org";
+
+/* ApiError */
+"Request could not be formed. Please check host and username/password!" = "Impossible de créer la demande. Veuillez vérifier l’hôte, le nom d’utilisateur et le mot de passe.";
+
+/* CustomBridgesViewController */
+"Request via E-Mail" = "Demander par courriel";
+
+/* ApiError */
+"Response body missing." = "Le corps de la réponse manque.";
+
+/* ApiError */
+"Response is no valid JSON." = "La réponse n’est pas un JSON valide.";
+
+/* CustomBridgesViewController, ScanQrViewController */
+"Scan QR Code" = "Balayer un code QR";
+
+/* MoatViewController */
+"Solve the CAPTCHA to request bridges." = "Résoudre le captcha pour demander des ponts.";
+
+/* CustomBridgesViewController */
+"Upload QR Code" = "Téléverser un code QR";
+
+/* CustomBridgesViewController */
+"Use Custom Bridges" = "Utiliser des ponts personnalisés";
+
+/* CustomBridgesViewController */
+"Use QR Code" = "Utiliser un code QR";
+
+/* No comment provided by engineer. */
+"via custom bridges" = "via custom bridges";
+
+/* No comment provided by engineer. */
+"via Obfs4 bridges" = "via Obfs4 bridges";
+
+/* No comment provided by engineer. */
+"via Snowflake bridge" = "via Snowflake bridge";

@@ -1,0 +1,104 @@
+/* BridgeConfViewController; first placeholder is bullet point (\u{2022}), second placeholder is bridge type "obfs4" */
+"%1$@ %2$@ makes your traffic appear \"random\"." = "%1$@ %2$@ 는 트래픽을 \"무작위\"로 보이게 합니다.";
+
+/* No comment provided by engineer. */
+"%1$@ %2$@ makes your traffic look like a phone call to a random user on the net." = "%1$@ %2$@ makes your traffic look like a phone call to a random user on the net.";
+
+/* BridgeConfViewController */
+"Bridge Configuration" = "브리지 구성";
+
+/* BridgeConfViewController; placeholder contains bridge type names: "meek-azure" or "obfs4" */
+"Built-in %@" = "내장 %@";
+
+/* ScanQrViewController */
+"Camera access was not granted or QR Code scanning is not supported by your device." = "카메라 접근이 허용되지 않았거나 QR 코드 스케닝은 현재 기기로 작동되지 않습니다.";
+
+/* AlertHelper */
+"Cancel" = "취소";
+
+/* CustomBridgesViewController */
+"Copy URL to Clipboard" = "URL을 클립보드에 복사";
+
+/* MoatViewController */
+"Couldn't understand server response." = "서버 응답을 알 수 없습니다.";
+
+/* BridgeConfViewController */
+"Custom Bridges" = "사용자 지정 브릿지";
+
+/* CustomBridgesViewController */
+"E-Mail" = "이메일";
+
+/* MoatViewController */
+"Enter characters from image" = "이미지의 문자를 입력하십시오.";
+
+/* AlertHelper */
+"Error" = "오류";
+
+/* BridgeConfViewController */
+"If one type of bridge does not work, try using a different one." = "한 유형의 브릿지가 작동하지 않는 경우 다른 브릿지를 사용해 보십시오.";
+
+/* BridgesViewController, BridgeConfViewController */
+"If you are in a country or using a connection that censors Tor, you might need to use bridges." = "Tor를 검열하는 국가에 있거나, 연결을 사용하는 경우 브릿지를 사용해야 할 수 있습니다.";
+
+/* CustomBridgesViewController; placeholder contains "https://bridges.torproject.org/", please visit that page and copy texts for your language! */
+"In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"" = "별도의 브라우저에서 %@ 를 방문하고 \"브릿지를 얻으세요!\" > \"그냥 브릿지 주세요!\" 를 누릅니다.";
+
+/* BridgeConfViewController */
+"No Bridges" = "브릿지 사용 안 함";
+
+/* ApiError, placeholder is a non-success status from the server. */
+"No success, but \"%@\" instead." = "성공이 아니라 \"%@\"입니다.";
+
+/* ApiError */
+"No valid HTTP response." = "올바른 HTTP 응답이 없습니다.";
+
+/* JAHPAuthenticatingHTTPProtocol, AlertHelper */
+"OK" = "예";
+
+/* CustomBridgesViewController */
+"Paste Bridges" = "브릿지 붙여넣기";
+
+/* CustomBridgesViewController; placeholder is "" "https://bridges.torproject.org/" */
+"QR Code could not be decoded! Are you sure you scanned a QR code from %@?" = "QR 코드가 안됩니다! %@에서 스캔한 QR코드가 맞으신가요?";
+
+/* MoatViewController */
+"Request Bridges" = "브릿지 요청";
+
+/* BridgeConfViewController */
+"Request Bridges from torproject.org" = "torproject.org에서 브릿지 요청하기";
+
+/* ApiError */
+"Request could not be formed. Please check host and username/password!" = "요청을 형성할 수 없습니다. 호스트 및 사용자 이름, 비밀번호를 확인하십시오!";
+
+/* CustomBridgesViewController */
+"Request via E-Mail" = "이메일을 통해 요청";
+
+/* ApiError */
+"Response body missing." = "응답 본문이 없습니다.";
+
+/* ApiError */
+"Response is no valid JSON." = "응답이 유효한 JSON이 아닙니다.";
+
+/* CustomBridgesViewController, ScanQrViewController */
+"Scan QR Code" = "QR코드 스캔";
+
+/* MoatViewController */
+"Solve the CAPTCHA to request bridges." = "CAPTCHA를 풀어 브릿지를 요청합니다.";
+
+/* CustomBridgesViewController */
+"Upload QR Code" = "QR 코드 업로드";
+
+/* CustomBridgesViewController */
+"Use Custom Bridges" = "사용자 정의 브릿지 사용";
+
+/* CustomBridgesViewController */
+"Use QR Code" = "QR 코드 사용하기";
+
+/* No comment provided by engineer. */
+"via custom bridges" = "via custom bridges";
+
+/* No comment provided by engineer. */
+"via Obfs4 bridges" = "via Obfs4 bridges";
+
+/* No comment provided by engineer. */
+"via Snowflake bridge" = "via Snowflake bridge";

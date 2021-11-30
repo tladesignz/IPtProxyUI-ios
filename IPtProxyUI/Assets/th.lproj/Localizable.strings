@@ -1,104 +1,104 @@
 /* BridgeConfViewController; first placeholder is bullet point (\u{2022}), second placeholder is bridge type "obfs4" */
-"%1$@ %2$@ makes your traffic appear \"random\"." = "%1$@ %2$@ makes your traffic appear \"random\".";
+"%1$@ %2$@ makes your traffic appear \"random\"." = "%1$@ %2$@ ทำให้การจราจรของคุณดูเหมือน \"สุ่ม\"";
 
-/* BridgeConfViewController; first placeholder is bullet point (\u{2022}), second placeholder is bridge type "snowflake" */
+/* No comment provided by engineer. */
 "%1$@ %2$@ makes your traffic look like a phone call to a random user on the net." = "%1$@ %2$@ makes your traffic look like a phone call to a random user on the net.";
 
-/* BridgeConfViewController */
+/* No comment provided by engineer. */
 "Bridge Configuration" = "Bridge Configuration";
 
 /* BridgeConfViewController; placeholder contains bridge type names: "meek-azure" or "obfs4" */
-"Built-in %@" = "Built-in %@";
+"Built-in %@" = "%@ ที่มีอยู่แล้ว";
 
-/* ScanQrViewController */
+/* No comment provided by engineer. */
 "Camera access was not granted or QR Code scanning is not supported by your device." = "Camera access was not granted or QR Code scanning is not supported by your device.";
 
 /* AlertHelper */
-"Cancel" = "Cancel";
+"Cancel" = "ยกเลิก";
 
 /* CustomBridgesViewController */
-"Copy URL to Clipboard" = "Copy URL to Clipboard";
+"Copy URL to Clipboard" = "คัดลอก URL ไปยังคลิปบอร์ด";
 
-/* MoatViewController */
+/* No comment provided by engineer. */
 "Couldn't understand server response." = "Couldn't understand server response.";
 
-/* BridgeConfViewController */
+/* No comment provided by engineer. */
 "Custom Bridges" = "Custom Bridges";
 
 /* CustomBridgesViewController */
-"E-Mail" = "E-Mail";
+"E-Mail" = "อีเมล";
 
 /* MoatViewController */
-"Enter characters from image" = "Enter characters from image";
+"Enter characters from image" = "ใส่ตัวอักษรจากภาพ";
 
 /* AlertHelper */
-"Error" = "Error";
+"Error" = "ผิดพลาด";
 
-/* BridgeConfViewController */
+/* No comment provided by engineer. */
 "If one type of bridge does not work, try using a different one." = "If one type of bridge does not work, try using a different one.";
 
-/* BridgeConfViewController */
+/* No comment provided by engineer. */
 "If you are in a country or using a connection that censors Tor, you might need to use bridges." = "If you are in a country or using a connection that censors Tor, you might need to use bridges.";
 
-/* CustomBridgesViewController; placeholder contains "https://bridges.torproject.org/", please visit that page and copy texts for your language! */
+/* No comment provided by engineer. */
 "In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"" = "In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"";
 
-/* BridgeConfViewController */
+/* No comment provided by engineer. */
 "No Bridges" = "No Bridges";
 
-/* ApiError, placeholder is a non-success status from the server. */
+/* No comment provided by engineer. */
 "No success, but \"%@\" instead." = "No success, but \"%@\" instead.";
 
-/* ApiError */
+/* No comment provided by engineer. */
 "No valid HTTP response." = "No valid HTTP response.";
 
-/* AlertHelper */
-"OK" = "OK";
+/* JAHPAuthenticatingHTTPProtocol, AlertHelper */
+"OK" = "ตกลง";
 
-/* CustomBridgesViewController */
+/* No comment provided by engineer. */
 "Paste Bridges" = "Paste Bridges";
 
 /* CustomBridgesViewController; placeholder is "" "https://bridges.torproject.org/" */
-"QR Code could not be decoded! Are you sure you scanned a QR code from %@?" = "QR Code could not be decoded! Are you sure you scanned a QR code from %@?";
+"QR Code could not be decoded! Are you sure you scanned a QR code from %@?" = "ไม่สามารถถอดรหัส QR ได้ คุณแน่ใจหรือไม่ว่าได้สแกนรหัส QR จาก %@?";
 
-/* MoatViewController */
+/* No comment provided by engineer. */
 "Request Bridges" = "Request Bridges";
 
-/* BridgeConfViewController */
+/* No comment provided by engineer. */
 "Request Bridges from torproject.org" = "Request Bridges from torproject.org";
 
-/* ApiError */
+/* No comment provided by engineer. */
 "Request could not be formed. Please check host and username/password!" = "Request could not be formed. Please check host and username/password!";
 
 /* CustomBridgesViewController */
-"Request via E-Mail" = "Request via E-Mail";
+"Request via E-Mail" = "ร้องขอทางอีเมล";
 
-/* ApiError */
+/* No comment provided by engineer. */
 "Response body missing." = "Response body missing.";
 
-/* ApiError */
+/* No comment provided by engineer. */
 "Response is no valid JSON." = "Response is no valid JSON.";
 
 /* CustomBridgesViewController, ScanQrViewController */
-"Scan QR Code" = "Scan QR Code";
+"Scan QR Code" = "สแกนรหัส QR";
 
-/* MoatViewController */
+/* No comment provided by engineer. */
 "Solve the CAPTCHA to request bridges." = "Solve the CAPTCHA to request bridges.";
 
 /* CustomBridgesViewController */
-"Upload QR Code" = "Upload QR Code";
+"Upload QR Code" = "อัปโหลดรหัสคิวอาร์";
 
-/* CustomBridgesViewController */
+/* No comment provided by engineer. */
 "Use Custom Bridges" = "Use Custom Bridges";
 
 /* CustomBridgesViewController */
-"Use QR Code" = "Use QR Code";
+"Use QR Code" = "ใช้รหัสคิวอาร์";
 
-/* Bridge */
+/* No comment provided by engineer. */
 "via custom bridges" = "via custom bridges";
 
-/* Bridge */
+/* No comment provided by engineer. */
 "via Obfs4 bridges" = "via Obfs4 bridges";
 
-/* Bridge */
+/* No comment provided by engineer. */
 "via Snowflake bridge" = "via Snowflake bridge";

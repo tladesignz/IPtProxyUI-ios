@@ -1,0 +1,104 @@
+/* BridgeConfViewController; first placeholder is bullet point (\u{2022}), second placeholder is bridge type "obfs4" */
+"%1$@ %2$@ makes your traffic appear \"random\"." = "%1$@ %2$@ заставляет ваш трафик выглядеть \"случайным\".";
+
+/* BridgeConfViewController; first placeholder is bullet point (\u{2022}), second placeholder is bridge type "snowflake" */
+"%1$@ %2$@ makes your traffic look like a phone call to a random user on the net." = "%1$@ %2$@ делает ваш трафик похожим на телефонный разговор со случайным пользователем в интернете.";
+
+/* BridgeConfViewController */
+"Bridge Configuration" = "Настройка мостов";
+
+/* BridgeConfViewController; placeholder contains bridge type names: "meek-azure" or "obfs4" */
+"Built-in %@" = "Встроить %@";
+
+/* ScanQrViewController */
+"Camera access was not granted or QR Code scanning is not supported by your device." = "Доступ к камере не был предоставлен или сканирование QR-кода не поддерживается вашим устройством.";
+
+/* AlertHelper */
+"Cancel" = "Отмена";
+
+/* CustomBridgesViewController */
+"Copy URL to Clipboard" = "Скопировать URL в буфер обмена";
+
+/* MoatViewController */
+"Couldn't understand server response." = "Некорректный ответ сервера.";
+
+/* BridgeConfViewController */
+"Custom Bridges" = "Пользовательские мосты";
+
+/* CustomBridgesViewController */
+"E-Mail" = "Email";
+
+/* MoatViewController */
+"Enter characters from image" = "Введите символы с изображения";
+
+/* AlertHelper */
+"Error" = "Ошибка";
+
+/* BridgeConfViewController */
+"If one type of bridge does not work, try using a different one." = "Если какой-то один тип моста не работает, попробуйте использовать другой.";
+
+/* BridgesViewController, BridgeConfViewController */
+"If you are in a country or using a connection that censors Tor, you might need to use bridges." = "Если вы находитесь в несвободной стране или используете соединение цензурирующее Tor, вам могут пригодиться мосты.";
+
+/* CustomBridgesViewController; placeholder contains "https://bridges.torproject.org/", please visit that page and copy texts for your language! */
+"In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"" = "В другом браузере откройте сайт %@ и нажмите \"Получить мосты\" > \"Просто дайте мне мосты!\".";
+
+/* BridgeConfViewController */
+"No Bridges" = "Без мостов";
+
+/* ApiError, placeholder is a non-success status from the server. */
+"No success, but \"%@\" instead." = "Безуспешно, но вместо этого \"%@\".";
+
+/* ApiError */
+"No valid HTTP response." = "Нет корректного ответа HTTP.";
+
+/* JAHPAuthenticatingHTTPProtocol, AlertHelper */
+"OK" = "OK";
+
+/* CustomBridgesViewController */
+"Paste Bridges" = "Вставьте мосты";
+
+/* CustomBridgesViewController; placeholder is "" "https://bridges.torproject.org/" */
+"QR Code could not be decoded! Are you sure you scanned a QR code from %@?" = "QR-код не может быть расшифрован! Вы уверены, что вы отсканировали QR-код с сайта %@?";
+
+/* MoatViewController */
+"Request Bridges" = "Запросить мосты";
+
+/* BridgeConfViewController */
+"Request Bridges from torproject.org" = "Запрос мостов от torproject.org";
+
+/* ApiError */
+"Request could not be formed. Please check host and username/password!" = "Запрос не может быть сформирован. Пожалуйста, проверьте хост и имя пользователя/пароль!";
+
+/* CustomBridgesViewController */
+"Request via E-Mail" = "Запросить по email";
+
+/* ApiError */
+"Response body missing." = "Тело ответа отсутствует.";
+
+/* ApiError */
+"Response is no valid JSON." = "Ответ не является корректным JSON.";
+
+/* CustomBridgesViewController, ScanQrViewController */
+"Scan QR Code" = "Сканировать QR-код";
+
+/* MoatViewController */
+"Solve the CAPTCHA to request bridges." = "Разрешите CAPTCHA, чтобы запросить мосты.";
+
+/* CustomBridgesViewController */
+"Upload QR Code" = "Выгрузить QR-код";
+
+/* CustomBridgesViewController */
+"Use Custom Bridges" = "Использовать пользовательские мосты";
+
+/* CustomBridgesViewController */
+"Use QR Code" = "Использовать QR-код";
+
+/* No comment provided by engineer. */
+"via custom bridges" = "via custom bridges";
+
+/* No comment provided by engineer. */
+"via Obfs4 bridges" = "via Obfs4 bridges";
+
+/* No comment provided by engineer. */
+"via Snowflake bridge" = "via Snowflake bridge";
