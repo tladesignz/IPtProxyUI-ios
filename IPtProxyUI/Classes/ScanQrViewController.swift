@@ -31,7 +31,7 @@ open class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObject
 			view.backgroundColor = .systemGroupedBackground
 		}
 		else {
-			view.backgroundColor = .init(red: 242, green: 242, blue: 247, alpha: 1)
+			view.backgroundColor = .init(red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
 		}
 	}
 
@@ -116,7 +116,7 @@ open class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObject
 			warning.textColor = .secondaryLabel
 		}
 		else {
-			warning.textColor = .init(red: 60, green: 60, blue: 67, alpha: 0.6)
+            warning.textColor = .init(red: 60/255, green: 60/255, blue: 67/255, alpha: 0.6)
 		}
 
 		view.addSubview(warning)
