@@ -51,7 +51,7 @@ open class BridgeConfViewController: FixedFormViewController, UINavigationContro
 
 	open weak var delegate: BridgeConfDelegate?
 
-	private let bridgesSection: SelectableSection<ListCheckRow<Bridge>> = {
+	open var bridgesSection: SelectableSection<ListCheckRow<Bridge>> = {
 		let description = [
 			NSLocalizedString("If you are in a country or using a connection that censors Tor, you might need to use bridges.",
 							  bundle: Bundle.iPtProxyUI, comment: ""),
@@ -72,7 +72,7 @@ open class BridgeConfViewController: FixedFormViewController, UINavigationContro
 			selectionType: .singleSelection(enableDeselection: false))
 	}()
 
-	public var bridgesType: Bridge = .none {
+	open var bridgesType: Bridge = .none {
 		didSet {
 			for row in bridgesSection {
 				if (row as? ListCheckRow<Bridge>)?.value == bridgesType {
@@ -85,7 +85,7 @@ open class BridgeConfViewController: FixedFormViewController, UINavigationContro
 		}
 	}
 
-	public var customBridges: [String]?
+	open var customBridges: [String]?
 
 	open override func viewDidLoad() {
 		super.viewDidLoad()
@@ -101,8 +101,14 @@ open class BridgeConfViewController: FixedFormViewController, UINavigationContro
 		navigationItem.title = NSLocalizedString("Bridge Configuration",
 												 bundle: Bundle.iPtProxyUI, comment: "")
 
-		navigationItem.rightBarButtonItem = UIBarButtonItem(
-			barButtonSystemItem: .save, target: self, action: #selector(save))
+		if let title = saveButtonTitle, !title.isEmpty {
+			navigationItem.rightBarButtonItem = UIBarButtonItem(
+				title: title, style: .done, target: self, action: #selector(save))
+		}
+		else {
+			navigationItem.rightBarButtonItem = UIBarButtonItem(
+				barButtonSystemItem: .save, target: self, action: #selector(save))
+		}
 
 		let bridges: [Bridge: String] = [
 			.none: NSLocalizedString(
@@ -161,10 +167,29 @@ open class BridgeConfViewController: FixedFormViewController, UINavigationContro
 	}
 
 
+	// MARK: BridgeConfDelegate
+
+	open var saveButtonTitle: String? {
+		delegate?.saveButtonTitle
+	}
+
+	open func startMeek() {
+		delegate?.startMeek()
+	}
+
+	open func stopMeek() {
+		delegate?.stopMeek()
+	}
+
+	open func auth(request: NSMutableURLRequest) {
+		delegate?.auth(request: request)
+	}
+
+
 	// MARK: Actions
 
 	@objc
-	public func save() {
+	open func save() {
 		bridgesType = bridgesSection.selectedRow()?.value ?? .none
 		delegate?.bridgesType = bridgesType
 
