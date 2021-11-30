@@ -44,7 +44,7 @@ public enum Transport: Int, CaseIterable {
 			return NSLocalizedString("via Obfs4 bridges", bundle: Bundle.iPtProxyUI, comment: "")
 
 		case .snowflake:
-			return NSLocalizedString("via Snowflake bridge", bundle: Bundle.iPtProxyUI, comment: "")
+			return NSLocalizedString("via Snowflake bridges", bundle: Bundle.iPtProxyUI, comment: "")
 
 		case .custom:
 			return NSLocalizedString("via custom bridges", bundle: Bundle.iPtProxyUI, comment: "")
