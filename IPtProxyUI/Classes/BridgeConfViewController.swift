@@ -15,7 +15,34 @@ public protocol BridgeConfDelegate: AnyObject {
 
 	var customBridges: [String]? { get set }
 
+	var saveButtonTitle: String? { get }
+
 	func save()
+
+	func startMeek()
+
+	func auth(request: NSMutableURLRequest)
+
+	func stopMeek()
+}
+
+public extension BridgeConfDelegate {
+
+	var saveButtonTitle: String? {
+		nil
+	}
+
+	func startMeek() {
+		MeekURLProtocol.start()
+	}
+
+	func stopMeek() {
+		MeekURLProtocol.stop()
+	}
+
+	func auth(request: NSMutableURLRequest) {
+		// Nothing to do with the default implementation.
+	}
 }
 
 open class BridgeConfViewController: FixedFormViewController, UINavigationControllerDelegate,

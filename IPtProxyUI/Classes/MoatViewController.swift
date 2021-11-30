@@ -24,7 +24,7 @@ open class MoatViewController: FixedFormViewController {
 
 	private static let moatBaseUrl = URL(string: "https://bridges.torproject.org/moat")
 
-	weak var delegate: BridgeConfDelegate?
+	public weak var delegate: BridgeConfDelegate?
 
 	private var challenge: String?
 
@@ -38,7 +38,7 @@ open class MoatViewController: FixedFormViewController {
 	}
 
 
-    open override func viewDidLoad() {
+	open override func viewDidLoad() {
 		super.viewDidLoad()
 
 		navigationItem.title = NSLocalizedString("Request Bridges",
@@ -48,43 +48,43 @@ open class MoatViewController: FixedFormViewController {
 			barButtonSystemItem: .refresh, target: self, action: #selector(fetchCaptcha))
 
 		form
-			+++ Section("to be replaced in #willDisplayHeaderView to avoid capitalization")
-			<<< captchaRow
-			+++ solutionRow
+		+++ Section("to be replaced in #willDisplayHeaderView to avoid capitalization")
+		<<< captchaRow
+		+++ solutionRow
 			.cellSetup{ _, row in
 				row.disabled = Condition.function(["captcha"]) { [weak self] _ in
 					return self?.challenge == nil
 				}
 			}
-			+++ ButtonRow() {
-				$0.title = NSLocalizedString("Request Bridges",
-											 bundle: Bundle.iPtProxyUI, comment: "")
-				$0.disabled = Condition.function(["solution"]) { [weak self] form in
-					return self?.challenge == nil
-						|| (form.rowBy(tag: "solution") as? AccountRow)?.value?.isEmpty ?? true
-				}
+		+++ ButtonRow() {
+			$0.title = NSLocalizedString("Request Bridges",
+										 bundle: Bundle.iPtProxyUI, comment: "")
+			$0.disabled = Condition.function(["solution"]) { [weak self] form in
+				return self?.challenge == nil
+				|| (form.rowBy(tag: "solution") as? AccountRow)?.value?.isEmpty ?? true
+			}
 
+		}
+		.onCellSelection { [weak self] _, row in
+			if !row.isDisabled {
+				self?.requestBridges()
 			}
-			.onCellSelection { [weak self] _, row in
-				if !row.isDisabled {
-					self?.requestBridges()
-				}
-			}
+		}
 	}
 
-    open override func viewWillAppear(_ animated: Bool) {
+	open override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-        MeekURLProtocol.start()
+		delegate?.startMeek()
 
 		fetchCaptcha()
 	}
 
-    open override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+	open override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
 
-        MeekURLProtocol.stop()
-    }
+		delegate?.stopMeek()
+	}
 
 
 	// MARK: UITableViewDelegate
@@ -94,7 +94,7 @@ open class MoatViewController: FixedFormViewController {
 	*/
 	func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
 		if section == 0,
-			let header = view as? UITableViewHeaderFooterView {
+		   let header = view as? UITableViewHeaderFooterView {
 
 			header.textLabel?.text = NSLocalizedString(
 				"Solve the CAPTCHA to request bridges.",
@@ -106,16 +106,17 @@ open class MoatViewController: FixedFormViewController {
 	// MARK: Private Methods
 
 	@objc private func fetchCaptcha() {
-		guard let request = MoatViewController.buildRequest(
-			"fetch", ["type": "client-transports", "supported": ["obfs4"]]) else {
-				return
+		guard let request = buildRequest("fetch", [
+			"type": "client-transports", "supported": ["obfs4"]])
+		else {
+			return
 		}
 
 		navigationItem.rightBarButtonItem?.isEnabled = false
 		let hud = MBProgressHUD.showAdded(to: view, animated: true)
 
 		// Contact Moat service.
-        let task = URLSession.shared.apiTask(with: request) { [weak self] payload, error in
+		let task = URLSession.shared.apiTask(with: request) { [weak self] payload, error in
 			DispatchQueue.main.async {
 				guard let vc = self else {
 					return
@@ -132,14 +133,14 @@ open class MoatViewController: FixedFormViewController {
 				}
 
 				guard let data = payload["data"] as? [[String: Any]],
-					let challenge = data.first?["challenge"] as? String,
-					let image = data.first?["image"] as? String,
-					let captcha = Data(base64Encoded: image, options: .ignoreUnknownCharacters)
-					else {
-						AlertHelper.present(vc, message:
-							NSLocalizedString("Couldn't understand server response.",
-											  bundle: Bundle.iPtProxyUI, comment: ""))
-						return
+					  let challenge = data.first?["challenge"] as? String,
+					  let image = data.first?["image"] as? String,
+					  let captcha = Data(base64Encoded: image, options: .ignoreUnknownCharacters)
+				else {
+					AlertHelper.present(
+						vc, message: NSLocalizedString("Couldn't understand server response.",
+													   bundle: Bundle.iPtProxyUI, comment: ""))
+					return
 				}
 
 				vc.challenge = challenge
@@ -154,18 +155,18 @@ open class MoatViewController: FixedFormViewController {
 	}
 
 	private func requestBridges() {
-		guard let request = MoatViewController.buildRequest("check", [
+		guard let request = buildRequest("check", [
 			"id": "2", "type": "moat-solution", "transport": "obfs4",
 			"challenge": challenge ?? "", "solution": solutionRow.value ?? "",
 			"qrcode": "false"])
-			else {
-				return
+		else {
+			return
 		}
 
 		navigationItem.rightBarButtonItem?.isEnabled = false
 		let hud = MBProgressHUD.showAdded(to: view, animated: true)
 
-        URLSession.shared.apiTask(with: request) { [weak self] payload, error in
+		URLSession.shared.apiTask(with: request) { [weak self] payload, error in
 //			print("[\(String(describing: type(of: self)))] moat request: payload=\(payload), error=\(String(describing: error))")
 
 			DispatchQueue.main.async {
@@ -182,30 +183,30 @@ open class MoatViewController: FixedFormViewController {
 				}
 
 				if let errors = payload["errors"] as? [[String: Any]],
-					let detail = errors.first?["detail"] as? String ?? errors.first?["status"] as? String {
+				   let detail = errors.first?["detail"] as? String ?? errors.first?["status"] as? String {
 
 					AlertHelper.present(vc, message: detail)
 					return
 				}
 
 				guard let data = payload["data"] as? [[String: Any]],
-					let bridges = data.first?["bridges"] as? [String]
-					else {
-						AlertHelper.present(vc, message:
-							NSLocalizedString("Couldn't understand server response.",
-											  bundle: Bundle.iPtProxyUI, comment: ""))
-						return
+					  let bridges = data.first?["bridges"] as? [String]
+				else {
+					AlertHelper.present(
+						vc, message: NSLocalizedString("Couldn't understand server response.",
+													   bundle: Bundle.iPtProxyUI, comment: ""))
+					return
 				}
 
 				vc.delegate?.customBridges = bridges.isEmpty ? nil : bridges
-                vc.delegate?.bridgesType = .custom
+				vc.delegate?.bridgesType = .custom
 
 				vc.navigationController?.popViewController(animated: true)
 			}
 		}.resume()
 	}
 
-	private class func buildRequest(_ endpoint: String, _ payload: [String: Any]) -> URLRequest? {
+	private func buildRequest(_ endpoint: String, _ payload: [String: Any]) -> URLRequest? {
 		guard let url = MoatViewController.moatBaseUrl?.appendingPathComponent(endpoint) else {
 			return nil
 		}
@@ -219,6 +220,8 @@ open class MoatViewController: FixedFormViewController {
 		request.httpMethod = "POST"
 		request.httpBody = try? JSONSerialization.data(withJSONObject: payload, options: [])
 		request.addValue("application/vnd.api+json", forHTTPHeaderField: "Content-Type")
+
+		delegate?.auth(request: request)
 
 		return request as URLRequest
 	}

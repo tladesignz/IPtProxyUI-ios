@@ -13,7 +13,7 @@ import MessageUI
 open class CustomBridgesViewController: FixedFormViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDelegate {
 
-	weak var delegate: BridgeConfDelegate?
+	public weak var delegate: BridgeConfDelegate?
 
 	private static let bridgesUrl = "https://bridges.torproject.org/"
 
@@ -42,8 +42,14 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 		navigationItem.title = NSLocalizedString(
 			"Use Custom Bridges", bundle: Bundle.iPtProxyUI, comment: "")
 
-		navigationItem.rightBarButtonItem = UIBarButtonItem(
-			barButtonSystemItem: .save, target: self, action: #selector(save))
+		if let title = delegate?.saveButtonTitle, !title.isEmpty {
+			navigationItem.rightBarButtonItem = UIBarButtonItem(
+				title: title, style: .done, target: self, action: #selector(save))
+		}
+		else {
+			navigationItem.rightBarButtonItem = UIBarButtonItem(
+				barButtonSystemItem: .save, target: self, action: #selector(save))
+		}
 		navigationItem.rightBarButtonItem?.isEnabled = !(textAreaRow.value?.isEmpty ?? true)
 
 		form
