@@ -24,7 +24,7 @@ public final class CaptchaCell: PushSelectorCell<UIImage> {
 	}
 }
 
-final class CaptchaRow: _ImageRow<CaptchaCell>, RowType {
+public final class CaptchaRow: _ImageRow<CaptchaCell>, RowType {
 
 	required init(tag: String?) {
 		super.init(tag: tag)
