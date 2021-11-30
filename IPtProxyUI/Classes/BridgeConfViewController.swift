@@ -8,7 +8,6 @@
 
 import UIKit
 import Eureka
-import NetworkExtension
 
 public protocol BridgeConfDelegate: AnyObject {
 
