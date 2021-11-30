@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-public protocol ScanQrDelegate {
+public protocol ScanQrDelegate: AnyObject {
 
 	func scanned(value: String?)
 }
@@ -19,7 +19,7 @@ open class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObject
 	private var captureSession: AVCaptureSession?
 	private var videoPreviewLayer: AVCaptureVideoPreviewLayer?
 
-	open var delegate: ScanQrDelegate?
+	open weak var delegate: ScanQrDelegate?
 
 	open override func viewDidLoad() {
 		super.viewDidLoad()
