@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 1.3.0
+- Updated translations.
+- Added a default `Settings` implementation for selected transport and custom bridges.
+
 ## 1.2.0
 - BREAKING CHANGE: Improved naming. 
 
