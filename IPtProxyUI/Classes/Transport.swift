@@ -94,6 +94,9 @@ public enum Transport: Int, CaseIterable {
 			if self == .obfs4 {
 				conf += Transport.builtInObfs4Bridges.map({ cv("Bridge", $0) })
 			}
+			else if let customBridges = Settings.customBridges {
+				conf += customBridges.map({ cv("Bridge", $0) })
+			}
 
 		case .snowflake:
 			conf.append(cv("ClientTransportPlugin", "snowflake socks5 127.0.0.1:\(IPtProxySnowflakePort())"))
