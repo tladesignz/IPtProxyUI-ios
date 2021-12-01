@@ -94,11 +94,11 @@
 /* CustomBridgesViewController */
 "Use QR Code" = "Use QR Code";
 
-/* Bridge */
+/* Transport */
 "via custom bridges" = "via custom bridges";
 
-/* Bridge */
+/* Transport */
 "via Obfs4 bridges" = "via Obfs4 bridges";
 
-/* No comment provided by engineer. */
+/* Transport */
 "via Snowflake bridges" = "via Snowflake bridges";
