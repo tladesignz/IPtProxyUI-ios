@@ -1,0 +1,557 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A08983EA275935BB0078F3E6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A08983B3275935BA0078F3E6 /* Localizable.strings */; };
+		A08983EB275935BB0078F3E6 /* CaptchaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A08983C7275935BB0078F3E6 /* CaptchaCell.xib */; };
+		A08983EC275935BB0078F3E6 /* obfs4-bridges.plist in Resources */ = {isa = PBXBuildFile; fileRef = A08983CD275935BB0078F3E6 /* obfs4-bridges.plist */; };
+		A08983ED275935BB0078F3E6 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983D8275935BB0078F3E6 /* Settings.swift */; };
+		A08983EE275935BB0078F3E6 /* CustomBridgesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983D9275935BB0078F3E6 /* CustomBridgesViewController.swift */; };
+		A08983EF275935BB0078F3E6 /* MoatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983DA275935BB0078F3E6 /* MoatViewController.swift */; };
+		A08983F0275935BB0078F3E6 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983DB275935BB0078F3E6 /* AlertHelper.swift */; };
+		A08983F1275935BB0078F3E6 /* MeekURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983DC275935BB0078F3E6 /* MeekURLProtocol.swift */; };
+		A08983F2275935BB0078F3E6 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983DD275935BB0078F3E6 /* ApiError.swift */; };
+		A08983F3275935BB0078F3E6 /* CaptchaRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983DE275935BB0078F3E6 /* CaptchaRow.swift */; };
+		A08983F4275935BB0078F3E6 /* FixedFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983DF275935BB0078F3E6 /* FixedFormViewController.swift */; };
+		A08983F5275935BB0078F3E6 /* Bundle+IPtProxyUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983E0275935BB0078F3E6 /* Bundle+IPtProxyUI.swift */; };
+		A08983F6275935BB0078F3E6 /* ScanQrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983E1275935BB0078F3E6 /* ScanQrViewController.swift */; };
+		A08983F7275935BB0078F3E6 /* URLSession+IPtProxyUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983E2275935BB0078F3E6 /* URLSession+IPtProxyUI.swift */; };
+		A08983F8275935BB0078F3E6 /* BridgesConfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983E3275935BB0078F3E6 /* BridgesConfViewController.swift */; };
+		A08983F9275935BB0078F3E6 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983E4275935BB0078F3E6 /* Transport.swift */; };
+		A08983FC275935BB0078F3E6 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A08983E7275935BB0078F3E6 /* LICENSE */; };
+		A08983FE275935BB0078F3E6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A08983E9275935BB0078F3E6 /* README.md */; };
+		A08983FF275936630078F3E6 /* update-bridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983E8275935BB0078F3E6 /* update-bridges.swift */; };
+		A0898404275936AD0078F3E6 /* .bartycrouch.toml in Resources */ = {isa = PBXBuildFile; fileRef = A08984012759369A0078F3E6 /* .bartycrouch.toml */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A08983A72759356C0078F3E6 /* IPtProxyUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IPtProxyUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A08983B4275935BA0078F3E6 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983B5275935BA0078F3E6 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983B6275935BA0078F3E6 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983B7275935BA0078F3E6 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983B8275935BA0078F3E6 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983B9275935BA0078F3E6 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983BA275935BA0078F3E6 /* mk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = mk; path = mk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983BB275935BA0078F3E6 /* sq */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sq; path = sq.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983BC275935BB0078F3E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983BD275935BB0078F3E6 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983BE275935BB0078F3E6 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983BF275935BB0078F3E6 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A08983C0275935BB0078F3E6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983C1275935BB0078F3E6 /* is */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = is; path = is.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983C2275935BB0078F3E6 /* tr-TR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "tr-TR"; path = "tr-TR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A08983C3275935BB0078F3E6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A08983C4275935BB0078F3E6 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983C5275935BB0078F3E6 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983C6275935BB0078F3E6 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983C7275935BB0078F3E6 /* CaptchaCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptchaCell.xib; sourceTree = "<group>"; };
+		A08983C8275935BB0078F3E6 /* ga */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ga; path = ga.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983C9275935BB0078F3E6 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983CA275935BB0078F3E6 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983CB275935BB0078F3E6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983CC275935BB0078F3E6 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A08983CD275935BB0078F3E6 /* obfs4-bridges.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "obfs4-bridges.plist"; sourceTree = "<group>"; };
+		A08983CE275935BB0078F3E6 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983CF275935BB0078F3E6 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A08983D0275935BB0078F3E6 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983D1275935BB0078F3E6 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983D2275935BB0078F3E6 /* bn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bn; path = bn.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983D3275935BB0078F3E6 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983D4275935BB0078F3E6 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983D5275935BB0078F3E6 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A08983D6275935BB0078F3E6 /* hu-HU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hu-HU"; path = "hu-HU.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A08983D8275935BB0078F3E6 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		A08983D9275935BB0078F3E6 /* CustomBridgesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBridgesViewController.swift; sourceTree = "<group>"; };
+		A08983DA275935BB0078F3E6 /* MoatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoatViewController.swift; sourceTree = "<group>"; };
+		A08983DB275935BB0078F3E6 /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
+		A08983DC275935BB0078F3E6 /* MeekURLProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeekURLProtocol.swift; sourceTree = "<group>"; };
+		A08983DD275935BB0078F3E6 /* ApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
+		A08983DE275935BB0078F3E6 /* CaptchaRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptchaRow.swift; sourceTree = "<group>"; };
+		A08983DF275935BB0078F3E6 /* FixedFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixedFormViewController.swift; sourceTree = "<group>"; };
+		A08983E0275935BB0078F3E6 /* Bundle+IPtProxyUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+IPtProxyUI.swift"; sourceTree = "<group>"; };
+		A08983E1275935BB0078F3E6 /* ScanQrViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanQrViewController.swift; sourceTree = "<group>"; };
+		A08983E2275935BB0078F3E6 /* URLSession+IPtProxyUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+IPtProxyUI.swift"; sourceTree = "<group>"; };
+		A08983E3275935BB0078F3E6 /* BridgesConfViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgesConfViewController.swift; sourceTree = "<group>"; };
+		A08983E4275935BB0078F3E6 /* Transport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
+		A08983E5275935BB0078F3E6 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		A08983E6275935BB0078F3E6 /* IPtProxyUI.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IPtProxyUI.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A08983E7275935BB0078F3E6 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		A08983E8275935BB0078F3E6 /* update-bridges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "update-bridges.swift"; sourceTree = "<group>"; };
+		A08983E9275935BB0078F3E6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A08984002759369A0078F3E6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		A08984012759369A0078F3E6 /* .bartycrouch.toml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .bartycrouch.toml; sourceTree = "<group>"; };
+		A08984032759369A0078F3E6 /* config */ = {isa = PBXFileReference; lastKnownFileType = text; path = config; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A08983A42759356C0078F3E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A089839D2759356C0078F3E6 = {
+			isa = PBXGroup;
+			children = (
+				A08983E6275935BB0078F3E6 /* IPtProxyUI.podspec */,
+				A08983E9275935BB0078F3E6 /* README.md */,
+				A08983E5275935BB0078F3E6 /* CHANGELOG.md */,
+				A08983E7275935BB0078F3E6 /* LICENSE */,
+				A08983E8275935BB0078F3E6 /* update-bridges.swift */,
+				A08984012759369A0078F3E6 /* .bartycrouch.toml */,
+				A08984002759369A0078F3E6 /* .gitignore */,
+				A08984022759369A0078F3E6 /* .tx */,
+				A08983B1275935BA0078F3E6 /* IPtProxyUI */,
+				A08983A82759356C0078F3E6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A08983A82759356C0078F3E6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A08983A72759356C0078F3E6 /* IPtProxyUI.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A08983B1275935BA0078F3E6 /* IPtProxyUI */ = {
+			isa = PBXGroup;
+			children = (
+				A08983B2275935BA0078F3E6 /* Assets */,
+				A08983D7275935BB0078F3E6 /* Classes */,
+			);
+			path = IPtProxyUI;
+			sourceTree = "<group>";
+		};
+		A08983B2275935BA0078F3E6 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				A08983C7275935BB0078F3E6 /* CaptchaCell.xib */,
+				A08983B3275935BA0078F3E6 /* Localizable.strings */,
+				A08983CD275935BB0078F3E6 /* obfs4-bridges.plist */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		A08983D7275935BB0078F3E6 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A08983DB275935BB0078F3E6 /* AlertHelper.swift */,
+				A08983DD275935BB0078F3E6 /* ApiError.swift */,
+				A08983E3275935BB0078F3E6 /* BridgesConfViewController.swift */,
+				A08983E0275935BB0078F3E6 /* Bundle+IPtProxyUI.swift */,
+				A08983DE275935BB0078F3E6 /* CaptchaRow.swift */,
+				A08983D9275935BB0078F3E6 /* CustomBridgesViewController.swift */,
+				A08983DF275935BB0078F3E6 /* FixedFormViewController.swift */,
+				A08983DC275935BB0078F3E6 /* MeekURLProtocol.swift */,
+				A08983DA275935BB0078F3E6 /* MoatViewController.swift */,
+				A08983E1275935BB0078F3E6 /* ScanQrViewController.swift */,
+				A08983D8275935BB0078F3E6 /* Settings.swift */,
+				A08983E4275935BB0078F3E6 /* Transport.swift */,
+				A08983E2275935BB0078F3E6 /* URLSession+IPtProxyUI.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		A08984022759369A0078F3E6 /* .tx */ = {
+			isa = PBXGroup;
+			children = (
+				A08984032759369A0078F3E6 /* config */,
+			);
+			path = .tx;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A08983A22759356C0078F3E6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		A08983A62759356C0078F3E6 /* IPtProxyUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A08983AE2759356D0078F3E6 /* Build configuration list for PBXNativeTarget "IPtProxyUI" */;
+			buildPhases = (
+				A08983A22759356C0078F3E6 /* Headers */,
+				A08983A32759356C0078F3E6 /* Sources */,
+				A08983A42759356C0078F3E6 /* Frameworks */,
+				A08983A52759356C0078F3E6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IPtProxyUI;
+			productName = IPtProxyUI;
+			productReference = A08983A72759356C0078F3E6 /* IPtProxyUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A089839E2759356C0078F3E6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					A08983A62759356C0078F3E6 = {
+						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1310;
+					};
+				};
+			};
+			buildConfigurationList = A08983A12759356C0078F3E6 /* Build configuration list for PBXProject "IPtProxyUI" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				de,
+				he,
+				ar,
+				el,
+				ja,
+				fa,
+				mk,
+				sq,
+				uk,
+				nb,
+				"zh-Hant",
+				es,
+				is,
+				"tr-TR",
+				"zh-Hans",
+				it,
+				cs,
+				ko,
+				ga,
+				pl,
+				vi,
+				ru,
+				"pt-PT",
+				fr,
+				"pt-BR",
+				nl,
+				th,
+				bn,
+				hr,
+				hi,
+				ca,
+				"hu-HU",
+			);
+			mainGroup = A089839D2759356C0078F3E6;
+			productRefGroup = A08983A82759356C0078F3E6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A08983A62759356C0078F3E6 /* IPtProxyUI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A08983A52759356C0078F3E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A08983FC275935BB0078F3E6 /* LICENSE in Resources */,
+				A08983EC275935BB0078F3E6 /* obfs4-bridges.plist in Resources */,
+				A08983EB275935BB0078F3E6 /* CaptchaCell.xib in Resources */,
+				A08983FE275935BB0078F3E6 /* README.md in Resources */,
+				A08983EA275935BB0078F3E6 /* Localizable.strings in Resources */,
+				A0898404275936AD0078F3E6 /* .bartycrouch.toml in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A08983A32759356C0078F3E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A08983F1275935BB0078F3E6 /* MeekURLProtocol.swift in Sources */,
+				A08983F0275935BB0078F3E6 /* AlertHelper.swift in Sources */,
+				A08983EE275935BB0078F3E6 /* CustomBridgesViewController.swift in Sources */,
+				A08983FF275936630078F3E6 /* update-bridges.swift in Sources */,
+				A08983F8275935BB0078F3E6 /* BridgesConfViewController.swift in Sources */,
+				A08983F5275935BB0078F3E6 /* Bundle+IPtProxyUI.swift in Sources */,
+				A08983F4275935BB0078F3E6 /* FixedFormViewController.swift in Sources */,
+				A08983F3275935BB0078F3E6 /* CaptchaRow.swift in Sources */,
+				A08983ED275935BB0078F3E6 /* Settings.swift in Sources */,
+				A08983F7275935BB0078F3E6 /* URLSession+IPtProxyUI.swift in Sources */,
+				A08983EF275935BB0078F3E6 /* MoatViewController.swift in Sources */,
+				A08983F6275935BB0078F3E6 /* ScanQrViewController.swift in Sources */,
+				A08983F2275935BB0078F3E6 /* ApiError.swift in Sources */,
+				A08983F9275935BB0078F3E6 /* Transport.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A08983B3275935BA0078F3E6 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A08983B4275935BA0078F3E6 /* de */,
+				A08983B5275935BA0078F3E6 /* he */,
+				A08983B6275935BA0078F3E6 /* ar */,
+				A08983B7275935BA0078F3E6 /* el */,
+				A08983B8275935BA0078F3E6 /* ja */,
+				A08983B9275935BA0078F3E6 /* fa */,
+				A08983BA275935BA0078F3E6 /* mk */,
+				A08983BB275935BA0078F3E6 /* sq */,
+				A08983BC275935BB0078F3E6 /* en */,
+				A08983BD275935BB0078F3E6 /* uk */,
+				A08983BE275935BB0078F3E6 /* nb */,
+				A08983BF275935BB0078F3E6 /* zh-Hant */,
+				A08983C0275935BB0078F3E6 /* es */,
+				A08983C1275935BB0078F3E6 /* is */,
+				A08983C2275935BB0078F3E6 /* tr-TR */,
+				A08983C3275935BB0078F3E6 /* zh-Hans */,
+				A08983C4275935BB0078F3E6 /* it */,
+				A08983C5275935BB0078F3E6 /* cs */,
+				A08983C6275935BB0078F3E6 /* ko */,
+				A08983C8275935BB0078F3E6 /* ga */,
+				A08983C9275935BB0078F3E6 /* pl */,
+				A08983CA275935BB0078F3E6 /* vi */,
+				A08983CB275935BB0078F3E6 /* ru */,
+				A08983CC275935BB0078F3E6 /* pt-PT */,
+				A08983CE275935BB0078F3E6 /* fr */,
+				A08983CF275935BB0078F3E6 /* pt-BR */,
+				A08983D0275935BB0078F3E6 /* nl */,
+				A08983D1275935BB0078F3E6 /* th */,
+				A08983D2275935BB0078F3E6 /* bn */,
+				A08983D3275935BB0078F3E6 /* hr */,
+				A08983D4275935BB0078F3E6 /* hi */,
+				A08983D5275935BB0078F3E6 /* ca */,
+				A08983D6275935BB0078F3E6 /* hu-HU */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A08983AC2759356D0078F3E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A08983AD2759356D0078F3E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A08983AF2759356D0078F3E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netzarchitekten.IPtProxyUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A08983B02759356D0078F3E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netzarchitekten.IPtProxyUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A08983A12759356C0078F3E6 /* Build configuration list for PBXProject "IPtProxyUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A08983AC2759356D0078F3E6 /* Debug */,
+				A08983AD2759356D0078F3E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A08983AE2759356D0078F3E6 /* Build configuration list for PBXNativeTarget "IPtProxyUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A08983AF2759356D0078F3E6 /* Debug */,
+				A08983B02759356D0078F3E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A089839E2759356C0078F3E6 /* Project object */;
+}
