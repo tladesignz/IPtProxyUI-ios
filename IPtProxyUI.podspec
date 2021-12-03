@@ -69,5 +69,6 @@ Pod::Spec.new do |s|
 	s.dependency 'Eureka', '~> 5.3'
 	s.dependency 'ImageRow', '~> 4.0'
 	s.dependency 'MBProgressHUD', '~> 1.2'
+	s.dependency 'ReachabilitySwift', '~> 5.0'
 
 end

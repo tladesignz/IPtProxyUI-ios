@@ -27,6 +27,7 @@
 		A08983FE275935BB0078F3E6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A08983E9275935BB0078F3E6 /* README.md */; };
 		A08983FF275936630078F3E6 /* update-bridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983E8275935BB0078F3E6 /* update-bridges.swift */; };
 		A0898404275936AD0078F3E6 /* .bartycrouch.toml in Resources */ = {isa = PBXBuildFile; fileRef = A08984012759369A0078F3E6 /* .bartycrouch.toml */; };
+		A0D070FB275A427800922D70 /* IpSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D070FA275A427800922D70 /* IpSupport.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		A08984002759369A0078F3E6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A08984012759369A0078F3E6 /* .bartycrouch.toml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .bartycrouch.toml; sourceTree = "<group>"; };
 		A08984032759369A0078F3E6 /* config */ = {isa = PBXFileReference; lastKnownFileType = text; path = config; sourceTree = "<group>"; };
+		A0D070FA275A427800922D70 /* IpSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IpSupport.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				A08983A82759356C0078F3E6 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		A08983A82759356C0078F3E6 /* Products */ = {
 			isa = PBXGroup;
@@ -153,6 +156,7 @@
 				A08983DE275935BB0078F3E6 /* CaptchaRow.swift */,
 				A08983D9275935BB0078F3E6 /* CustomBridgesViewController.swift */,
 				A08983DF275935BB0078F3E6 /* FixedFormViewController.swift */,
+				A0D070FA275A427800922D70 /* IpSupport.swift */,
 				A08983DC275935BB0078F3E6 /* MeekURLProtocol.swift */,
 				A08983DA275935BB0078F3E6 /* MoatViewController.swift */,
 				A08983E1275935BB0078F3E6 /* ScanQrViewController.swift */,
@@ -299,6 +303,7 @@
 				A08983ED275935BB0078F3E6 /* Settings.swift in Sources */,
 				A08983F7275935BB0078F3E6 /* URLSession+IPtProxyUI.swift in Sources */,
 				A08983EF275935BB0078F3E6 /* MoatViewController.swift in Sources */,
+				A0D070FB275A427800922D70 /* IpSupport.swift in Sources */,
 				A08983F6275935BB0078F3E6 /* ScanQrViewController.swift in Sources */,
 				A08983F2275935BB0078F3E6 /* ApiError.swift in Sources */,
 				A08983F9275935BB0078F3E6 /* Transport.swift in Sources */,
