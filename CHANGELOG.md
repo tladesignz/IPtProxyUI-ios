@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 1.4.0
+- Updated translations.
+- Added `IpSupport` class to help improve support of IPv6-only networks.
+
 ## 1.3.0
 - Updated translations.
 - Added a default `Settings` implementation for selected transport and custom bridges.

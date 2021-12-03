@@ -14,6 +14,9 @@ including MOAT support to fetch new Obfs4 proxies.
 
 The configuration provided is good for using the PTs together with Tor.
 
+Additionally there's a helper class `IpSupport` which can aid in better supporting
+IPv6-only networks which are common with some mobile network carriers.
+
 
 ## Installation
 
