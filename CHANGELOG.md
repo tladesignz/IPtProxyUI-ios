@@ -1,5 +1,11 @@
 # IPtProxyUI
 
+## 1.5.0
+- Updated translations.
+- Updated to IPtProxy 1.3.0.
+- Added Snowflake AMP rendezvous support.
+- Updated built-in Obfs4 bridges list.
+
 ## 1.4.0
 - Updated translations.
 - Added `IpSupport` class to help improve support of IPv6-only networks.
