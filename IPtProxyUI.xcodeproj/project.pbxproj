@@ -193,6 +193,7 @@
 			buildConfigurationList = A08983AE2759356D0078F3E6 /* Build configuration list for PBXNativeTarget "IPtProxyUI" */;
 			buildPhases = (
 				A08983A22759356C0078F3E6 /* Headers */,
+				A0C5CD2927690B6E00F821C2 /* BartyCrouch */,
 				A08983A32759356C0078F3E6 /* Sources */,
 				A08983A42759356C0078F3E6 /* Frameworks */,
 				A08983A52759356C0078F3E6 /* Resources */,
@@ -286,6 +287,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A0C5CD2927690B6E00F821C2 /* BartyCrouch */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = BartyCrouch;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which bartycrouch > /dev/null; then\n    bartycrouch update -x\n    bartycrouch lint -x\nelse\n    echo \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A08983A32759356C0078F3E6 /* Sources */ = {
