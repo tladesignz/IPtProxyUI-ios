@@ -102,3 +102,6 @@
 
 /* Transport */
 "via Snowflake bridges" = "via Snowflake bridges";
+
+/* Transport */
+"via Snowflake bridges (AMP rendezvous)" = "via Snowflake bridges (AMP rendezvous)";

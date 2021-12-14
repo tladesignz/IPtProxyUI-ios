@@ -65,7 +65,7 @@ Pod::Spec.new do |s|
 #		}
 	]
 
-	s.dependency 'IPtProxy', '~> 1.2'
+	s.dependency 'IPtProxy', '~> 1.3'
 	s.dependency 'Eureka', '~> 5.3'
 	s.dependency 'ImageRow', '~> 4.0'
 	s.dependency 'MBProgressHUD', '~> 1.2'

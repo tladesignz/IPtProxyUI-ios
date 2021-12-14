@@ -110,13 +110,15 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 				barButtonSystemItem: .save, target: self, action: #selector(save))
 		}
 
-		let bridges: [Transport: String] = [
+		let transports: [Transport: String] = [
 			.none: NSLocalizedString(
 				"No Bridges", bundle: Bundle.iPtProxyUI, comment: ""),
 			.obfs4: String(format: NSLocalizedString(
 				"Built-in %@", bundle: Bundle.iPtProxyUI, comment: ""), "obfs4"),
 			.snowflake: String(format: NSLocalizedString(
 				"Built-in %@", bundle: Bundle.iPtProxyUI, comment: ""), "snowflake"),
+            .snowflakeAmp: String(format: NSLocalizedString(
+                "Built-in %@", bundle: Bundle.iPtProxyUI, comment: ""), "snowflake (AMP)"),
 			.custom: NSLocalizedString(
 				"Custom Bridges", bundle: Bundle.iPtProxyUI, comment: ""),
 		]
@@ -144,11 +146,11 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 
 		+++ transportSection
 
-		for option in bridges.sorted(by: { $0.key.rawValue < $1.key.rawValue }) {
+        for t in transports.keys.sorted() {
 			form.last! <<< ListCheckRow<Transport>() {
-				$0.title = option.value
-				$0.selectableValue = option.key
-				$0.value = option.key == transport ? transport : nil
+				$0.title = transports[t]
+				$0.selectableValue = t
+				$0.value = t == transport ? transport : nil
 			}
 		}
 	}
