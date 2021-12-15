@@ -34,7 +34,7 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 
 	private lazy var detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
 
-    open override func viewDidLoad() {
+	open override func viewDidLoad() {
 		super.viewDidLoad()
 
 		textAreaRow.value = delegate?.customBridges?.joined(separator: "\n")
@@ -111,7 +111,7 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 		}
 	}
 
-    open override func viewWillDisappear(_ animated: Bool) {
+	open override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 
 		updateDelegate()
@@ -119,7 +119,9 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 
 	// MARK: UIImagePickerControllerDelegate
 
-    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+	public func imagePickerController(_ picker: UIImagePickerController,
+									  didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
+	{
 		picker.dismiss(animated: true)
 
 		var raw = ""
@@ -137,21 +139,24 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 		scanned(value: raw)
 	}
 
-    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+	public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 		picker.dismiss(animated: true)
 	}
 
 
-    // MARK: MFMailComposeViewControllerDelegate
+	// MARK: MFMailComposeViewControllerDelegate
 
-    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true)
-    }
+	public func mailComposeController(_ controller: MFMailComposeViewController,
+									  didFinishWith result: MFMailComposeResult,
+									  error: Error?)
+	{
+		controller.dismiss(animated: true)
+	}
 
 
 	// MARK: ScanQrDelegate
 
-    public func scanned(value raw: String?) {
+	public func scanned(value raw: String?) {
 		// They really had to use JSON for content encoding but with illegal single quotes instead
 		// of double quotes as per JSON standard. Srsly?
 		if let data = raw?.replacingOccurrences(of: "'", with: "\"").data(using: .utf8),

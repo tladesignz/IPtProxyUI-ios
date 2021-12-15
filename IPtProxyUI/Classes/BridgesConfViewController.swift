@@ -117,8 +117,8 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 				"Built-in %@", bundle: Bundle.iPtProxyUI, comment: ""), "obfs4"),
 			.snowflake: String(format: NSLocalizedString(
 				"Built-in %@", bundle: Bundle.iPtProxyUI, comment: ""), "snowflake"),
-            .snowflakeAmp: String(format: NSLocalizedString(
-                "Built-in %@", bundle: Bundle.iPtProxyUI, comment: ""), "snowflake (AMP)"),
+			.snowflakeAmp: String(format: NSLocalizedString(
+				"Built-in %@", bundle: Bundle.iPtProxyUI, comment: ""), "snowflake (AMP)"),
 			.custom: NSLocalizedString(
 				"Custom Bridges", bundle: Bundle.iPtProxyUI, comment: ""),
 		]
@@ -146,7 +146,7 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 
 		+++ transportSection
 
-        for t in transports.keys.sorted() {
+		for t in transports.keys.sorted() {
 			form.last! <<< ListCheckRow<Transport>() {
 				$0.title = transports[t]
 				$0.selectableValue = t
