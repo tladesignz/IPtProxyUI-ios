@@ -88,6 +88,7 @@
 		A08984002759369A0078F3E6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A08984012759369A0078F3E6 /* .bartycrouch.toml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .bartycrouch.toml; sourceTree = "<group>"; };
 		A08984032759369A0078F3E6 /* config */ = {isa = PBXFileReference; lastKnownFileType = text; path = config; sourceTree = "<group>"; };
+		A0CE4BE3278C6F3900F1890F /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A0D070FA275A427800922D70 /* IpSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IpSupport.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -261,6 +262,7 @@
 				hi,
 				ca,
 				"hu-HU",
+				id,
 			);
 			mainGroup = A089839D2759356C0078F3E6;
 			productRefGroup = A08983A82759356C0078F3E6 /* Products */;
@@ -371,6 +373,7 @@
 				A08983D4275935BB0078F3E6 /* hi */,
 				A08983D5275935BB0078F3E6 /* ca */,
 				A08983D6275935BB0078F3E6 /* hu-HU */,
+				A0CE4BE3278C6F3900F1890F /* id */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
