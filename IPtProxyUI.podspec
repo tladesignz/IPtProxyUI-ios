@@ -11,12 +11,6 @@ Pod::Spec.new do |s|
 	s.version          = '1.5.0'
 	s.summary          = 'IPtProxyUI provides a UI to configure bridges for all Pluggable Transports available in the IPtProxy package.'
 
-	# This description is used to generate tags and improve search results.
-	#   * Think: What does it do? Why did you write it? What is the focus?
-	#   * Try to keep it short, snappy and to the point.
-	#   * Write the description between the DESC delimiters below.
-	#   * Finally, don't worry about the indent, CocoaPods strips it!
-
 	s.description      = <<-DESC
 	This package provides some scenes and configuration code which is shared between
 	different apps using the `IPtProxy` package together with `Tor.framework`.
@@ -56,16 +50,16 @@ Pod::Spec.new do |s|
 #		{
 #			:name => 'BartyCrouch Automatic Localization',
 #			:execution_position => :before_compile,
-#			:script => <<-SCRIPT
+#			:script => <<-ENDSCRIPT
 #if which bartycrouch > /dev/null; then
 #	bartycrouch update -x -p "$PODS_TARGET_SRCROOT"
 #	bartycrouch lint -x -p "$PODS_TARGET_SRCROOT"
 #fi
-#SCRIPT
+#ENDSCRIPT
 #		}
 	]
 
-	s.dependency 'IPtProxy', '~> 1.3'
+	s.dependency 'IPtProxy', '~> 1.4'
 	s.dependency 'Eureka', '~> 5.3'
 	s.dependency 'ImageRow', '~> 4.0'
 	s.dependency 'MBProgressHUD', '~> 1.2'
