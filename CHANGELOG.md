@@ -1,5 +1,10 @@
 # IPtProxyUI
 
+## 1.6.0
+- Updated translations.
+- Updated to IPtProxy 1.4.0.
+- Updated built-in Obfs4 bridges list.
+
 ## 1.5.0
 - Updated translations.
 - Updated to IPtProxy 1.3.0.
