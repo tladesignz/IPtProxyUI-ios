@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 1.7.0
+- Updated to IPtProxy 1.5.0 containing Snowflake 2.1.0 and Obfs4proxy 0.0.13.
+- Updated Chinese translation.
+
 ## 1.6.0
 - Updated translations.
 - Updated to IPtProxy 1.4.0.
