@@ -90,6 +90,7 @@
 		A08984032759369A0078F3E6 /* config */ = {isa = PBXFileReference; lastKnownFileType = text; path = config; sourceTree = "<group>"; };
 		A0CE4BE3278C6F3900F1890F /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A0D070FA275A427800922D70 /* IpSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IpSupport.swift; sourceTree = "<group>"; };
+		A0DDC9F127C3931D001EF090 /* km */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = km; path = km.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +264,7 @@
 				ca,
 				"hu-HU",
 				id,
+				km,
 			);
 			mainGroup = A089839D2759356C0078F3E6;
 			productRefGroup = A08983A82759356C0078F3E6 /* Products */;
@@ -374,6 +376,7 @@
 				A08983D5275935BB0078F3E6 /* ca */,
 				A08983D6275935BB0078F3E6 /* hu-HU */,
 				A0CE4BE3278C6F3900F1890F /* id */,
+				A0DDC9F127C3931D001EF090 /* km */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
