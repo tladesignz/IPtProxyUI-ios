@@ -62,6 +62,9 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 			$0.title = NSLocalizedString("Copy URL to Clipboard",
 										 bundle: Bundle.iPtProxyUI, comment: "")
 		}
+		.cellUpdate({ cell, _ in
+			cell.accessibilityTraits = .button
+		})
 		.onCellSelection({ _, _ in
 			UIPasteboard.general.string = CustomBridgesViewController.bridgesUrl
 		})
@@ -77,6 +80,9 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 				$0.title = NSLocalizedString("Scan QR Code",
 											 bundle: Bundle.iPtProxyUI, comment: "")
 			}
+			.cellUpdate({ cell, _ in
+				cell.accessibilityTraits = .button
+			})
 			.onCellSelection({ [weak self] _, _ in
 				let vc = ScanQrViewController()
 				vc.delegate = self
@@ -86,6 +92,9 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 			<<< ButtonRow() {
 				$0.title = NSLocalizedString("Upload QR Code", bundle: Bundle.iPtProxyUI, comment: "")
 			}
+			.cellUpdate({ cell, _ in
+				cell.accessibilityTraits = .button
+			})
 			.onCellSelection({ [weak self] _, _ in
 				if let self = self {
 					self.present(self.picker, animated: true)
@@ -99,6 +108,9 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 					$0.title = NSLocalizedString("Request via E-Mail",
 												 bundle: Bundle.iPtProxyUI, comment: "")
 				}
+				.cellUpdate({ cell, _ in
+					cell.accessibilityTraits = .button
+				})
 				.onCellSelection({ [weak self] _, _ in
 					let vc = MFMailComposeViewController()
 					vc.mailComposeDelegate = self

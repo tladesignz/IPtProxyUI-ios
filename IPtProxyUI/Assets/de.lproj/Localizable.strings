@@ -16,6 +16,9 @@
 /* AlertHelper */
 "Cancel" = "Abbruch";
 
+/* MoatViewController */
+"CAPTCHA Image" = "CAPTCHA Bild";
+
 /* CustomBridgesViewController */
 "Copy URL to Clipboard" = "URL in die Zwischenablage kopieren";
 

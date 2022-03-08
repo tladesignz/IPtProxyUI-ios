@@ -137,6 +137,9 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			$0.title = NSLocalizedString("Request Bridges from torproject.org",
 										 bundle: Bundle.iPtProxyUI, comment: "")
 		}
+        .cellUpdate({ cell, _ in
+            cell.accessibilityTraits = .button
+        })
 		.onCellSelection { [weak self] _, _ in
 			let vc = MoatViewController()
 			vc.delegate = self
@@ -153,6 +156,12 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 				$0.value = t == transport ? transport : nil
 			}
 		}
+
+        // The "Custom Bridges" selection is actually a button leading to another scene.
+        (form.last?.last as? ListCheckRow<Transport>)?.cellUpdate({ cell, _ in
+            cell.accessibilityTraits = .button
+        })
+
 	}
 
 

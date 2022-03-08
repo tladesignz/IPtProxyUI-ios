@@ -50,6 +50,9 @@ open class MoatViewController: FixedFormViewController {
 		form
 		+++ Section("to be replaced in #willDisplayHeaderView to avoid capitalization")
 		<<< captchaRow
+            .cellUpdate({ cell, row in
+                cell.accessibilityLabel = NSLocalizedString("CAPTCHA Image", bundle: Bundle.iPtProxyUI, comment: "")
+            })
 		+++ solutionRow
 			.cellSetup{ _, row in
 				row.disabled = Condition.function(["captcha"]) { [weak self] _ in
@@ -63,8 +66,10 @@ open class MoatViewController: FixedFormViewController {
 				return self?.challenge == nil
 				|| (form.rowBy(tag: "solution") as? AccountRow)?.value?.isEmpty ?? true
 			}
-
 		}
+        .cellUpdate({ cell, _ in
+            cell.accessibilityTraits = .button
+        })
 		.onCellSelection { [weak self] _, row in
 			if !row.isDisabled {
 				self?.requestBridges()
