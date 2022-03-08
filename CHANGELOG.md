@@ -1,5 +1,10 @@
 # IPtProxyUI
 
+## 1.7.2
+- Improved accessibility.
+- Updated traditional Chinese translation.
+- Updated Korean translation.
+
 ## 1.7.1
 - Updated Chinese translation.
 - Added Khmer translation.
