@@ -154,6 +154,7 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 				$0.title = transports[t]
 				$0.selectableValue = t
 				$0.value = t == transport ? transport : nil
+				$0.cell.accessibilityIdentifier = "transport_\(t.rawValue)"
 			}
 		}
 
