@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 1.7.3
+- Updated Albanian, Farsi, French, Russian, Turkish and Ukrainian translation.
+- Improved screenshot automation.
+
 ## 1.7.2
 - Improved accessibility.
 - Updated traditional Chinese translation.
