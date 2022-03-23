@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 1.7.4
+- Updated Croatian and Hebrew translation.
+- Updated update-bridges script.
+
 ## 1.7.3
 - Updated Albanian, Farsi, French, Russian, Turkish and Ukrainian translation.
 - Improved screenshot automation.
