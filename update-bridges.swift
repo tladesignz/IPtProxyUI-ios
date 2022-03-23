@@ -12,9 +12,7 @@ import Foundation
 
 // MARK: Config
 
-let url = URL(string: "https://gitweb.torproject.org/builders/tor-browser-build.git/plain/projects/tor-browser/Bundle-Data/PTConfigs/bridge_prefs.js")!
-
-let regex = try? NSRegularExpression(pattern: "\"(obfs4.+)\"", options: .caseInsensitive)
+let url = URL(string: "https://gitweb.torproject.org/builders/tor-browser-build.git/plain/projects/common/bridges_list.obfs4.txt")!
 
 let outfile = resolve("IPtProxyUI/Assets/obfs4-bridges.plist")
 
@@ -63,16 +61,7 @@ let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, respon
 	let bridges = NSMutableArray()
 
 	for line in content.split(separator: "\n") {
-		let line = String(line)
-
-		let match = regex?.firstMatch(in: line, options: [], range: NSRange(line.startIndex ..< line.endIndex, in: line))
-
-		if match?.numberOfRanges ?? 0 > 1,
-			let nsrange = match?.range(at: 1),
-			let range = Range(nsrange, in: line) {
-
-			bridges.add(String(line[range]))
-		}
+		bridges.add(String(line.trimmingCharacters(in: .whitespacesAndNewlines)))
 	}
 
 	if !bridges.write(toFile: outfile, atomically: true) {
