@@ -121,6 +121,7 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 				"Built-in %@", bundle: Bundle.iPtProxyUI, comment: ""), "snowflake (AMP)"),
 			.custom: NSLocalizedString(
 				"Custom Bridges", bundle: Bundle.iPtProxyUI, comment: ""),
+            .dnstt: String(format: NSLocalizedString("Built-in %@", bundle: Bundle.iPtProxyUI, comment: ""), "dnstt (experimental)")
 		]
 
 		transportSection.onSelectSelectableRow = { [weak self] _, row in

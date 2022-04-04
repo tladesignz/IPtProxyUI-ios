@@ -49,6 +49,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	case snowflake = 2
 	case custom = 3
 	case snowflakeAmp = 4
+    case dnstt = 5
 
 
 	public var description: String {
@@ -61,6 +62,9 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 		case .snowflakeAmp:
 			return NSLocalizedString("via Snowflake bridges (AMP rendezvous)", bundle: Bundle.iPtProxyUI, comment: "")
+
+        case .dnstt:
+            return NSLocalizedString("via a dnstt bridge (experimental)", comment: "")
 
 		case .custom:
 			return NSLocalizedString("via custom bridges", bundle: Bundle.iPtProxyUI, comment: "")
@@ -88,6 +92,12 @@ public enum Transport: Int, CaseIterable, Comparable {
 				"https://snowflake-broker.torproject.net/",
 				"www.google.com", "https://cdn.ampproject.org/", nil, true, false, false, 1)
 
+        case .dnstt:
+            IPtProxyStartDnstt(
+                "https://cloudflare-dns.com/dns-query", nil,
+                "00458e603fd162507a1fda7ab0df486691d0646bfa10405b3c1225cbaf78ff38",
+                "d.openinternetproject.org")
+
 		default:
 			break
 		}
@@ -100,6 +110,9 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 		case .snowflake, .snowflakeAmp:
 			IPtProxyStopSnowflake()
+
+        case .dnstt:
+            IPtProxyStopDnstt()
 
 		default:
 			break
@@ -123,6 +136,9 @@ public enum Transport: Int, CaseIterable, Comparable {
 		case .snowflake, .snowflakeAmp:
 			conf.append(cv("ClientTransportPlugin", "snowflake socks5 127.0.0.1:\(IPtProxySnowflakePort())"))
 			conf.append(cv("Bridge", "snowflake 192.0.2.3:1 2B280B23E1107BB62ABFC40DDCC8824814F80A72"))
+
+        case .dnstt:
+            conf.append(cv("Bridge", "127.0.0.1:\(IPtProxyDnsttPort()) E5C9F39FE0AD6D7596859BAEC762CFBCDD928229"))
 
 		default:
 			break
