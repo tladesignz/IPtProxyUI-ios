@@ -3,7 +3,7 @@ host = https://www.transifex.com
 
 [onion-browser.iptproxyui]
 file_filter = IPtProxyUI/Assets/<lang>.lproj/Localizable.strings
-minimum_perc = 50
+minimum_perc = 25
 source_file = IPtProxyUI/Assets/en.lproj/Localizable.strings
 source_lang = en_US
 trans.hu_HU = IPtProxyUI/Assets/hu-HU.lproj/Localizable.strings
