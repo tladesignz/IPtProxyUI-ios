@@ -25,17 +25,17 @@ func exit(_ msg: String) {
 	exit(1)
 }
 
-func resolve(_ path: String) -> String {
+func resolve(_ path: String) -> URL {
 	let cwd = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
 	let script = URL(fileURLWithPath: CommandLine.arguments.first ?? "", relativeTo: cwd).deletingLastPathComponent()
 
-	return URL(fileURLWithPath: path, relativeTo: script).path
+	return URL(fileURLWithPath: path, relativeTo: script)
 }
 
 
 // MARK: Main
 
-let modified = (try? FileManager.default.attributesOfItem(atPath: outfile)[.modificationDate] as? Date) ?? Date(timeIntervalSince1970: 0)
+let modified = (try? outfile.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? Date(timeIntervalSince1970: 0)
 
 guard Calendar.current.dateComponents([.day], from: modified, to: Date()).day ?? 2 > 1 else {
 	print("File too young, won't update!")
@@ -58,14 +58,29 @@ let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, respon
 		return exit("Data could not be converted to a UTF-8 string!")
 	}
 
-	let bridges = NSMutableArray()
+	var bridges = [String]()
 
 	for line in content.split(separator: "\n") {
-		bridges.add(String(line.trimmingCharacters(in: .whitespacesAndNewlines)))
+		bridges.append(String(line.trimmingCharacters(in: .whitespacesAndNewlines)))
 	}
 
-	if !bridges.write(toFile: outfile, atomically: true) {
-		exit("Couldn't write bridge file!")
+	let encoder = PropertyListEncoder()
+	encoder.outputFormat = .xml
+
+	let output: Data
+
+	do {
+		output = try encoder.encode(bridges)
+	}
+	catch {
+		return exit("Plist could not be encoded! error=\(error)")
+	}
+
+	do {
+		try output.write(to: outfile, options: .atomic)
+	}
+	catch {
+		exit("Plist file could not be written! error=\(error)")
 	}
 
 	exit(0)
