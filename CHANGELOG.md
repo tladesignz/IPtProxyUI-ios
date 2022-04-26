@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 1.7.5
+- Updated simplified Chinese, Dutch, Icelandic, Macedonian, Spanish, Thai, Ukrainian translation.
+- Added Romanian translation. 
+
 ## 1.7.4
 - Updated Croatian and Hebrew translation.
 - Updated update-bridges script.
