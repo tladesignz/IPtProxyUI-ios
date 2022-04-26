@@ -529,7 +529,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.4;
+				MARKETING_VERSION = 1.7.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.netzarchitekten.IPtProxyUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -558,7 +558,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.4;
+				MARKETING_VERSION = 1.7.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.netzarchitekten.IPtProxyUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
