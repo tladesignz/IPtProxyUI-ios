@@ -1,5 +1,11 @@
 # IPtProxyUI
 
+## 1.8.0
+- Updated Arabic, Czech and Russian translation.
+- Updated built-in bridges list.
+- Fixed UI bug when selected transport changed.
+- Added automatic configuration support via Moat's new "circumvention settings" API.
+
 ## 1.7.5
 - Updated simplified Chinese, Dutch, Icelandic, Macedonian, Spanish, Thai, Ukrainian translation.
 - Added Romanian translation. 
