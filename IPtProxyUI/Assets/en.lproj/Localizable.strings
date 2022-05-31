@@ -4,6 +4,9 @@
 /* BridgeConfViewController; first placeholder is bullet point (\u{2022}), second placeholder is bridge type "snowflake" */
 "%1$@ %2$@ makes your traffic look like a phone call to a random user on the net." = "%1$@ %2$@ makes your traffic look like a phone call to a random user on the net.";
 
+/* BridgesConfViewController */
+"Automatic Configuration" = "Automatic Configuration";
+
 /* BridgeConfViewController */
 "Bridge Configuration" = "Bridge Configuration";
 
@@ -37,6 +40,9 @@
 /* AlertHelper */
 "Error" = "Error";
 
+/* BridgesConfViewController */
+"I'm sure I cannot connect without a bridge." = "I'm sure I cannot connect without a bridge.";
+
 /* BridgeConfViewController */
 "If one type of bridge does not work, try using a different one." = "If one type of bridge does not work, try using a different one.";
 
@@ -45,6 +51,9 @@
 
 /* CustomBridgesViewController; placeholder contains "https://bridges.torproject.org/", please visit that page and copy texts for your language! */
 "In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"" = "In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"";
+
+/* BridgesConfViewController */
+"Manual Configuration" = "Manual Configuration";
 
 /* BridgeConfViewController */
 "No Bridges" = "No Bridges";
@@ -87,6 +96,9 @@
 
 /* MoatViewController */
 "Solve the CAPTCHA to request bridges." = "Solve the CAPTCHA to request bridges.";
+
+/* BridgesConfViewController */
+"Try Auto-Configuration" = "Try Auto-Configuration";
 
 /* CustomBridgesViewController */
 "Upload QR Code" = "Upload QR Code";
