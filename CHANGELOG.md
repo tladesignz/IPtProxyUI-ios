@@ -1,5 +1,8 @@
 # IPtProxyUI
 
+## 1.8.1
+- Fixed copy-paste bug regarding success checkmark icon.
+
 ## 1.8.0
 - Updated Arabic, Czech and Russian translation.
 - Updated built-in bridges list.
