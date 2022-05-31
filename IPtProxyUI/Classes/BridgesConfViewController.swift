@@ -8,6 +8,7 @@
 
 import UIKit
 import Eureka
+import MBProgressHUD
 
 public protocol BridgesConfDelegate: AnyObject {
 
@@ -21,7 +22,7 @@ public protocol BridgesConfDelegate: AnyObject {
 
 	func startMeek()
 
-	func auth(request: NSMutableURLRequest)
+	func auth(request: inout URLRequest)
 
 	func stopMeek()
 }
@@ -40,13 +41,13 @@ public extension BridgesConfDelegate {
 		MeekURLProtocol.stop()
 	}
 
-	func auth(request: NSMutableURLRequest) {
+	func auth(request: inout URLRequest) {
 		// Nothing to do with the default implementation.
 	}
 }
 
 open class BridgesConfViewController: FixedFormViewController, UINavigationControllerDelegate,
-									 BridgesConfDelegate
+									  BridgesConfDelegate
 {
 
 	open weak var delegate: BridgesConfDelegate?
@@ -135,7 +136,41 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 		}
 
 		form
-		+++ ButtonRow() {
+		+++ Section(NSLocalizedString("Automatic Configuration", bundle: Bundle.iPtProxyUI, comment: ""))
+		<<< SwitchRow("cannotConnect") {
+			$0.title = NSLocalizedString("I'm sure I cannot connect without a bridge.", bundle: Bundle.iPtProxyUI, comment: "")
+
+			let font = $0.cell.textLabel?.font ?? UIFont.systemFont(ofSize: UIFont.systemFontSize)
+			$0.cell.textLabel?.font = UIFont(name: font.familyName, size: font.pointSize * 8 / 10)
+			$0.cell.textLabel?.numberOfLines = 0
+		}
+		<<< ButtonRow() {
+			$0.title = NSLocalizedString("Try Auto-Configuration", bundle: Bundle.iPtProxyUI, comment: "")
+		}
+		.cellUpdate({ cell, _ in
+			cell.accessibilityTraits = .button
+		})
+		.onCellSelection({ cell, row in
+			let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+
+			let autoconf = AutoConf(self)
+			autoconf.do(cannotConnectWithoutPt: (self.form.rowBy(tag: "cannotConnect") as? SwitchRow)?.value ?? false) { [weak self] error in
+				DispatchQueue.main.async {
+					hud.mode = .customView
+					hud.customView = UIImageView(image: UIImage(named: "check"))
+					hud.hide(animated: true, afterDelay: 1)
+				}
+
+				if let error = error, let self = self {
+					DispatchQueue.main.async {
+						AlertHelper.present(self, message: error.localizedDescription)
+					}
+				}
+			}
+		})
+
+		+++ Section(NSLocalizedString("Manual Configuration", bundle: Bundle.iPtProxyUI, comment: ""))
+		<<< ButtonRow() {
 			$0.title = NSLocalizedString("Request Bridges from torproject.org",
 										 bundle: Bundle.iPtProxyUI, comment: "")
 		}
@@ -195,8 +230,8 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 		delegate?.stopMeek()
 	}
 
-	open func auth(request: NSMutableURLRequest) {
-		delegate?.auth(request: request)
+	open func auth(request: inout URLRequest) {
+		delegate?.auth(request: &request)
 	}
 
 
