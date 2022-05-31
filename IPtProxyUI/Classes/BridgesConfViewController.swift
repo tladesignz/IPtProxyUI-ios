@@ -74,12 +74,14 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 
 	open var transport: Transport = .none {
 		didSet {
-			for row in transportSection {
-				if (row as? ListCheckRow<Transport>)?.value == transport {
-					row.select()
-				}
-				else {
-					row.deselect()
+			DispatchQueue.main.async {
+				for row in self.transportSection {
+					guard let row = row as? ListCheckRow<Transport> else {
+						continue
+					}
+
+					row.value = row.selectableValue == self.transport ? row.selectableValue : nil
+					row.updateCell()
 				}
 			}
 		}
@@ -137,9 +139,9 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			$0.title = NSLocalizedString("Request Bridges from torproject.org",
 										 bundle: Bundle.iPtProxyUI, comment: "")
 		}
-        .cellUpdate({ cell, _ in
-            cell.accessibilityTraits = .button
-        })
+		.cellUpdate({ cell, _ in
+			cell.accessibilityTraits = .button
+		})
 		.onCellSelection { [weak self] _, _ in
 			let vc = MoatViewController()
 			vc.delegate = self
@@ -158,10 +160,10 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			}
 		}
 
-        // The "Custom Bridges" selection is actually a button leading to another scene.
-        (form.last?.last as? ListCheckRow<Transport>)?.cellUpdate({ cell, _ in
-            cell.accessibilityTraits = .button
-        })
+		// The "Custom Bridges" selection is actually a button leading to another scene.
+		(form.last?.last as? ListCheckRow<Transport>)?.cellUpdate({ cell, _ in
+			cell.accessibilityTraits = .button
+		})
 
 	}
 
