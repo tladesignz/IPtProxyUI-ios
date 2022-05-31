@@ -155,15 +155,28 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 
 			let autoconf = AutoConf(self)
 			autoconf.do(cannotConnectWithoutPt: (self.form.rowBy(tag: "cannotConnect") as? SwitchRow)?.value ?? false) { [weak self] error in
-				DispatchQueue.main.async {
-					hud.mode = .customView
-					hud.customView = UIImageView(image: UIImage(named: "check"))
-					hud.hide(animated: true, afterDelay: 1)
+				guard let self = self else {
+					return
 				}
 
-				if let error = error, let self = self {
-					DispatchQueue.main.async {
+				DispatchQueue.main.async {
+					if let error = error {
+						hud.hide(animated: true)
+
 						AlertHelper.present(self, message: error.localizedDescription)
+					}
+					else {
+						var delay = 0.0
+
+						if #available(iOS 13.0, *) {
+							if let checkmark = UIImage(systemName: "checkmark") {
+								hud.mode = .customView
+								hud.customView = UIImageView(image: checkmark)
+								delay = 1
+							}
+						}
+
+						hud.hide(animated: true, afterDelay: delay)
 					}
 				}
 			}
