@@ -88,9 +88,6 @@
 /* ApiError */
 "Response body missing." = "Response body missing.";
 
-/* ApiError */
-"Response is no valid JSON." = "Response is no valid JSON.";
-
 /* CustomBridgesViewController, ScanQrViewController */
 "Scan QR Code" = "Scan QR Code";
 

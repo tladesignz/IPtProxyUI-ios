@@ -12,7 +12,6 @@ public enum ApiError: LocalizedError {
 	case noHttpResponse
 	case no200Status(status: Int)
 	case noBody
-	case noValidJsonBody
 	case notUnderstandable
 	case notSuccess(status: Any?)
 	case noRequestPossible
@@ -27,9 +26,6 @@ public enum ApiError: LocalizedError {
 
 		case .noBody:
 			return NSLocalizedString("Response body missing.", bundle: Bundle.iPtProxyUI, comment: "")
-
-		case .noValidJsonBody:
-			return NSLocalizedString("Response is no valid JSON.", bundle: Bundle.iPtProxyUI, comment: "")
 
 		case .notUnderstandable:
 			return NSLocalizedString("Couldn't understand server response.", bundle: Bundle.iPtProxyUI, comment: "")
