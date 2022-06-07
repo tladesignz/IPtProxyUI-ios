@@ -54,16 +54,16 @@ public enum Transport: Int, CaseIterable, Comparable {
 	public var description: String {
 		switch self {
 		case .obfs4:
-			return NSLocalizedString("via Obfs4 bridges", bundle: Bundle.iPtProxyUI, comment: "")
+			return NSLocalizedString("Obfs4 bridges", bundle: Bundle.iPtProxyUI, comment: "")
 
 		case .snowflake:
-			return NSLocalizedString("via Snowflake bridges", bundle: Bundle.iPtProxyUI, comment: "")
+			return NSLocalizedString("Snowflake bridges", bundle: Bundle.iPtProxyUI, comment: "")
 
 		case .snowflakeAmp:
-			return NSLocalizedString("via Snowflake bridges (AMP rendezvous)", bundle: Bundle.iPtProxyUI, comment: "")
+			return NSLocalizedString("Snowflake bridges (AMP rendezvous)", bundle: Bundle.iPtProxyUI, comment: "")
 
 		case .custom:
-			return NSLocalizedString("via custom bridges", bundle: Bundle.iPtProxyUI, comment: "")
+			return NSLocalizedString("custom bridges", bundle: Bundle.iPtProxyUI, comment: "")
 
 		default:
 			return ""
