@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 1.8.2
+- Updated Bengali, Farsi, French, Hebrew, Russian and Turkish translation.
+- Removed a translation string, improved wording for some.
+
 ## 1.8.1
 - Fixed copy-paste bug regarding success checkmark icon.
 
