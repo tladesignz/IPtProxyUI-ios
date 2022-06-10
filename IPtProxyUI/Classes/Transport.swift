@@ -138,7 +138,8 @@ public enum Transport: Int, CaseIterable, Comparable {
 			conf.append(cv("Bridge", "snowflake 192.0.2.3:1 2B280B23E1107BB62ABFC40DDCC8824814F80A72"))
 
         case .dnstt:
-            conf.append(cv("Bridge", "127.0.0.1:\(IPtProxyDnsttPort()) E5C9F39FE0AD6D7596859BAEC762CFBCDD928229"))
+			conf.append(cv("ClientTransportPlugin", "dnstt socks5 127.0.0.1:\(IPtProxyDnsttPort())"))
+			conf.append(cv("Bridge", "dnstt 192.0.2.4:1 E5C9F39FE0AD6D7596859BAEC762CFBCDD928229"))
 
 		default:
 			break
