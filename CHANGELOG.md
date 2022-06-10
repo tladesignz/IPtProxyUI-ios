@@ -1,5 +1,8 @@
 # IPtProxyUI
 
+## 1.8.3
+- Updated French, Russian and Spanish translation.
+
 ## 1.8.2
 - Updated Bengali, Farsi, French, Hebrew, Russian and Turkish translation.
 - Removed a translation string, improved wording for some.
