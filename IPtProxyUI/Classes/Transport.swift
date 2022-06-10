@@ -93,7 +93,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 				"www.google.com", "https://cdn.ampproject.org/", nil, true, false, false, 1)
 
         case .dnstt:
-            IPtProxyStartDnstt("https://cloudflare-dns.com/dns-query", nil)
+            IPtProxyStartDnstt("https://cloudflare-dns.com/dns-query", nil, nil)
 
 		default:
 			break
