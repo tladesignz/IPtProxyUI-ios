@@ -93,10 +93,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 				"www.google.com", "https://cdn.ampproject.org/", nil, true, false, false, 1)
 
         case .dnstt:
-            IPtProxyStartDnstt(
-                "https://cloudflare-dns.com/dns-query", nil,
-                "00458e603fd162507a1fda7ab0df486691d0646bfa10405b3c1225cbaf78ff38",
-                "d.openinternetproject.org")
+            IPtProxyStartDnstt("https://cloudflare-dns.com/dns-query", nil)
 
 		default:
 			break
@@ -139,7 +136,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 
         case .dnstt:
 			conf.append(cv("ClientTransportPlugin", "dnstt socks5 127.0.0.1:\(IPtProxyDnsttPort())"))
-			conf.append(cv("Bridge", "dnstt 192.0.2.4:1 E5C9F39FE0AD6D7596859BAEC762CFBCDD928229"))
+			conf.append(cv("Bridge", "dnstt 192.0.2.4:1 E5C9F39FE0AD6D7596859BAEC762CFBCDD928229 pubkey=00458e603fd162507a1fda7ab0df486691d0646bfa10405b3c1225cbaf78ff38 domain=d.openinternetproject.org"))
 
 		default:
 			break
