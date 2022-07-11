@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 1.8.5
+- Fixed crash in `MeekURLProtocol`.
+- Updated Albanian and Japanese translation.  
+
 ## 1.8.4
 - Updated Farsi, Hebrew and Ukrainian translation.
 
