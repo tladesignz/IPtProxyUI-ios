@@ -363,15 +363,15 @@ class HTTPConnection: NSObject, StreamDelegate {
 		// Next course of action depends on what happened to the stream.
 		switch eventCode {
 
-			// Report an error in the stream as the operation failing
-		case Stream.Event.errorOccurred:
+		// Report an error in the stream as the operation failing
+		case .errorOccurred:
 			delegate?.http(connection: self, didCompleteWithError: aStream.streamError)
 
-			// Report the end of the stream to the delegate
-		case Stream.Event.endEncountered:
+		// Report the end of the stream to the delegate
+		case .endEncountered:
 			delegate?.http(connection: self, didCompleteWithError: nil)
 
-		case Stream.Event.hasBytesAvailable:
+		case .hasBytesAvailable:
 			guard let aStream = aStream as? InputStream else {
 				return
 			}
@@ -380,6 +380,11 @@ class HTTPConnection: NSObject, StreamDelegate {
 
 			while aStream.hasBytesAvailable {
 				let count = aStream.read(&buf, maxLength: 1024)
+
+				guard count > 0 else {
+					break
+				}
+
 				data.append(buf, count: count)
 			}
 

@@ -31,6 +31,9 @@
 /* BridgeConfViewController */
 "Custom Bridges" = "Custom Bridges";
 
+/* Transport */
+"custom bridges" = "custom bridges";
+
 /* CustomBridgesViewController */
 "E-Mail" = "E-Mail";
 
@@ -64,6 +67,9 @@
 /* ApiError */
 "No valid HTTP response." = "No valid HTTP response.";
 
+/* Transport */
+"Obfs4 bridges" = "Obfs4 bridges";
+
 /* AlertHelper */
 "OK" = "OK";
 
@@ -91,6 +97,12 @@
 /* CustomBridgesViewController, ScanQrViewController */
 "Scan QR Code" = "Scan QR Code";
 
+/* Transport */
+"Snowflake bridges" = "Snowflake bridges";
+
+/* Transport */
+"Snowflake bridges (AMP rendezvous)" = "Snowflake bridges (AMP rendezvous)";
+
 /* MoatViewController */
 "Solve the CAPTCHA to request bridges." = "Solve the CAPTCHA to request bridges.";
 
@@ -105,15 +117,3 @@
 
 /* CustomBridgesViewController */
 "Use QR Code" = "Use QR Code";
-
-/* Transport */
-"via custom bridges" = "via custom bridges";
-
-/* Transport */
-"via Obfs4 bridges" = "via Obfs4 bridges";
-
-/* Transport */
-"via Snowflake bridges" = "via Snowflake bridges";
-
-/* Transport */
-"via Snowflake bridges (AMP rendezvous)" = "via Snowflake bridges (AMP rendezvous)";
