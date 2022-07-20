@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0172C7628882A47008D42CD /* MoatApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0172C7528882A47008D42CD /* MoatApi.swift */; };
 		A06412E62844F74300136146 /* AutoConf.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06412E52844F74300136146 /* AutoConf.swift */; };
 		A08983EA275935BB0078F3E6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A08983B3275935BA0078F3E6 /* Localizable.strings */; };
 		A08983EB275935BB0078F3E6 /* CaptchaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A08983C7275935BB0078F3E6 /* CaptchaCell.xib */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A0172C7528882A47008D42CD /* MoatApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoatApi.swift; sourceTree = "<group>"; };
 		A06412E52844F74300136146 /* AutoConf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoConf.swift; sourceTree = "<group>"; };
 		A08983A72759356C0078F3E6 /* IPtProxyUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IPtProxyUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A08983B4275935BA0078F3E6 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				A08983DF275935BB0078F3E6 /* FixedFormViewController.swift */,
 				A0D070FA275A427800922D70 /* IpSupport.swift */,
 				A08983DC275935BB0078F3E6 /* MeekURLProtocol.swift */,
+				A0172C7528882A47008D42CD /* MoatApi.swift */,
 				A08983DA275935BB0078F3E6 /* MoatViewController.swift */,
 				A08983E1275935BB0078F3E6 /* ScanQrViewController.swift */,
 				A08983D8275935BB0078F3E6 /* Settings.swift */,
@@ -329,6 +332,7 @@
 				A08983FF275936630078F3E6 /* update-bridges.swift in Sources */,
 				A08983F8275935BB0078F3E6 /* BridgesConfViewController.swift in Sources */,
 				A08983F5275935BB0078F3E6 /* Bundle+IPtProxyUI.swift in Sources */,
+				A0172C7628882A47008D42CD /* MoatApi.swift in Sources */,
 				A08983F4275935BB0078F3E6 /* FixedFormViewController.swift in Sources */,
 				A08983F3275935BB0078F3E6 /* CaptchaRow.swift in Sources */,
 				A06412E62844F74300136146 /* AutoConf.swift in Sources */,
