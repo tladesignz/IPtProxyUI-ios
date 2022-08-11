@@ -28,15 +28,20 @@ Pod::Spec.new do |s|
 	# s.social_media_url = 'https://twitter.com/tladesignz'
 
 	s.ios.deployment_target = '11.0'
+	s.osx.deployment_target = '12'
 
 	s.swift_version = '5.5'
 
 	s.preserve_paths = 'update-bridges.swift', '.bartycrouch.toml'
 
-	s.source_files = 'IPtProxyUI/Classes/**/*'
+	s.ios.source_files = 'IPtProxyUI/Classes/**/*'
+	s.osx.source_files = 'IPtProxyUI/Classes/Shared/**/*'
 
-	s.resource_bundles = {
+	s.ios.resource_bundles = {
 		'IPtProxyUI' => ['IPtProxyUI/Assets/**/*']
+	}
+	s.osx.resource_bundles = {
+		'IPtProxyUI' => ['IPtProxyUI/Assets/Shared/**/*']
 	}
 
 	s.static_framework = true
@@ -59,10 +64,11 @@ Pod::Spec.new do |s|
 #		}
 	]
 
-	s.dependency 'IPtProxy', '~> 1.5'
-	s.dependency 'Eureka', '~> 5.3'
-	s.dependency 'ImageRow', '~> 4.0'
-	s.dependency 'MBProgressHUD', '~> 1.2'
+	s.dependency 'IPtProxy', '~> 1.7'
 	s.dependency 'ReachabilitySwift', '~> 5.0'
+
+	s.ios.dependency 'Eureka', '~> 5.3'
+	s.ios.dependency 'ImageRow', '~> 4.0'
+	s.ios.dependency 'MBProgressHUD', '~> 1.2'
 
 end

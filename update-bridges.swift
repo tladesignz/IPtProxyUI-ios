@@ -14,7 +14,7 @@ import Foundation
 
 let url = URL(string: "https://gitweb.torproject.org/builders/tor-browser-build.git/plain/projects/common/bridges_list.obfs4.txt")!
 
-let outfile = resolve("IPtProxyUI/Assets/obfs4-bridges.plist")
+let outfile = resolve("IPtProxyUI/Assets/Shared/obfs4-bridges.plist")
 
 
 

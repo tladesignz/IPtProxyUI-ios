@@ -67,8 +67,8 @@ open class MeekURLProtocol: URLProtocol, HTTPConnectionDelegate {
 	override open func startLoading() {
 		let conf = URLSessionConfiguration.default
 
-		if #available(iOS 13.0, *) {
-			conf.tlsMinimumSupportedProtocolVersion = .TLSv10
+        if #available(iOS 13.0, macOS 10.15, *) {
+			conf.tlsMinimumSupportedProtocolVersion = .TLSv12
 		}
 
 		conf.connectionProxyDictionary = [
