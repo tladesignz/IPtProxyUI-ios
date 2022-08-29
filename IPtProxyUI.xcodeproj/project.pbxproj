@@ -31,6 +31,8 @@
 		A06D525C28BCEF6D00D64BC7 /* BridgesConfMacViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06D525928BCEF6D00D64BC7 /* BridgesConfMacViewController.swift */; };
 		A06D525D28BCEF6D00D64BC7 /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = A06D525A28BCEF6D00D64BC7 /* MBProgressHUD.h */; };
 		A06D525E28BCEF6D00D64BC7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A06D525B28BCEF6D00D64BC7 /* MBProgressHUD.m */; };
+		A06D526428BD071900D64BC7 /* MoatMacViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06D526328BD071900D64BC7 /* MoatMacViewController.swift */; };
+		A06D526628BD072600D64BC7 /* MoatMacViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A06D526528BD072600D64BC7 /* MoatMacViewController.xib */; };
 		A08983FC275935BB0078F3E6 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A08983E7275935BB0078F3E6 /* LICENSE */; };
 		A08983FE275935BB0078F3E6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A08983E9275935BB0078F3E6 /* README.md */; };
 		A08983FF275936630078F3E6 /* update-bridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983E8275935BB0078F3E6 /* update-bridges.swift */; };
@@ -97,6 +99,8 @@
 		A06D525928BCEF6D00D64BC7 /* BridgesConfMacViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgesConfMacViewController.swift; sourceTree = "<group>"; };
 		A06D525A28BCEF6D00D64BC7 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		A06D525B28BCEF6D00D64BC7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		A06D526328BD071900D64BC7 /* MoatMacViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoatMacViewController.swift; sourceTree = "<group>"; };
+		A06D526528BD072600D64BC7 /* MoatMacViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoatMacViewController.xib; sourceTree = "<group>"; };
 		A08983A72759356C0078F3E6 /* IPtProxyUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IPtProxyUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A08983E5275935BB0078F3E6 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		A08983E6275935BB0078F3E6 /* IPtProxyUI.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IPtProxyUI.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -171,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				A06D525628BCEF6200D64BC7 /* BridgesConfMacViewController.xib */,
+				A06D526528BD072600D64BC7 /* MoatMacViewController.xib */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -179,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				A06D525928BCEF6D00D64BC7 /* BridgesConfMacViewController.swift */,
+				A06D526328BD071900D64BC7 /* MoatMacViewController.swift */,
 				A06D525A28BCEF6D00D64BC7 /* MBProgressHUD.h */,
 				A06D525B28BCEF6D00D64BC7 /* MBProgressHUD.m */,
 			);
@@ -356,6 +362,7 @@
 				A06D525728BCEF6200D64BC7 /* BridgesConfMacViewController.xib in Resources */,
 				A08983FC275935BB0078F3E6 /* LICENSE in Resources */,
 				A01AB69728A5516C008A79EE /* obfs4-bridges.plist in Resources */,
+				A06D526628BD072600D64BC7 /* MoatMacViewController.xib in Resources */,
 				A01AB69828A5516C008A79EE /* CaptchaCell.xib in Resources */,
 				A01AB69628A5516C008A79EE /* Localizable.strings in Resources */,
 				A08983FE275935BB0078F3E6 /* README.md in Resources */,
@@ -402,6 +409,7 @@
 				A01AB66A28A55078008A79EE /* Bundle+IPtProxyUI.swift in Sources */,
 				A01AB66028A55078008A79EE /* FixedFormViewController.swift in Sources */,
 				A01AB66928A55078008A79EE /* AutoConf.swift in Sources */,
+				A06D526428BD071900D64BC7 /* MoatMacViewController.swift in Sources */,
 				A08983FF275936630078F3E6 /* update-bridges.swift in Sources */,
 				A01AB66528A55078008A79EE /* MoatApi.swift in Sources */,
 				A01AB65D28A55078008A79EE /* MoatViewController.swift in Sources */,

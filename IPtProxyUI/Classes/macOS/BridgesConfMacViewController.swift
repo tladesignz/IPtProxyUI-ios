@@ -8,7 +8,7 @@
 
 import Cocoa
 
-open class BridgesConfMacViewController: NSViewController, BridgesConfDelegate {
+open class BridgesConfMacViewController: NSViewController, BridgesConfDelegate, NSWindowDelegate {
 
 	open weak var delegate: BridgesConfDelegate?
 
@@ -153,6 +153,8 @@ open class BridgesConfMacViewController: NSViewController, BridgesConfDelegate {
 			"Bridge Configuration", bundle: Bundle.iPtProxyUI, comment: "")
 
 		saveBt.title = saveButtonTitle ?? NSLocalizedString("Save", bundle: .iPtProxyUI, comment: "")
+
+		view.window?.defaultButtonCell = saveBt.cell as? NSButtonCell
 	}
 
 
@@ -180,6 +182,13 @@ open class BridgesConfMacViewController: NSViewController, BridgesConfDelegate {
 		delegate?.customBridges = customBridges
 
 		delegate?.save()
+	}
+
+
+	// MARK: NSWindowDelegate
+
+	public func windowWillClose(_ notification: Notification) {
+		NSApp.stopModal()
 	}
 
 
@@ -218,7 +227,15 @@ open class BridgesConfMacViewController: NSViewController, BridgesConfDelegate {
 	}
 
 	@IBAction open func manualConf(_ sender: Any) {
+		let vc = MoatMacViewController()
+		vc.delegate = self
 
+		let window = NSWindow(contentViewController: vc)
+		window.delegate = self
+
+		NSApp.runModal(for: window)
+
+		window.close()
 	}
 
 	@IBAction open func selectBridge(_ sender: NSButton) {

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MoatMacViewController" customModule="IPtProxyUI" customModuleProvider="target">
+            <connections>
+                <outlet property="captchaIv" destination="gTd-Gj-Kz0" id="nDJ-CT-mdR"/>
+                <outlet property="explanationLb" destination="VOi-qK-rRD" id="dfk-mS-4q7"/>
+                <outlet property="refreshBt" destination="kxN-yc-I6K" id="TD0-th-1Aq"/>
+                <outlet property="requestBt" destination="S07-nu-RPU" id="MJ6-Mv-5q7"/>
+                <outlet property="solutionTf" destination="Ag1-Ka-f67" id="w3f-W0-LP9"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VOi-qK-rRD">
+                    <rect key="frame" x="18" y="236" width="415" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Solve the CAPTCHA to request bridges." id="aM6-Wx-KAV">
+                        <font key="font" usesAppearanceFont="YES"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="kxN-yc-I6K">
+                    <rect key="frame" x="439" y="228.5" width="21.5" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="I0g-sN-5Ek"/>
+                        <constraint firstAttribute="width" secondItem="kxN-yc-I6K" secondAttribute="height" multiplier="1:1" id="STM-Hu-xR8"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.clockwise" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="q1n-ea-3NX">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="fetchCaptcha:" target="-2" id="bg0-T0-rcv"/>
+                    </connections>
+                </button>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gTd-Gj-Kz0">
+                    <rect key="frame" x="20" y="77" width="440" height="146"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="160" id="9QK-Mk-kfw"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="Fc7-yU-9fl"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="flN-ln-1JQ"/>
+                </imageView>
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ag1-Ka-f67">
+                    <rect key="frame" x="20" y="48" width="440" height="21"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Enter characters from image" drawsBackground="YES" id="72D-8b-Q3v">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S07-nu-RPU">
+                    <rect key="frame" x="333" y="13" width="134" height="32"/>
+                    <buttonCell key="cell" type="push" title="Request Bridges" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uZC-dV-9EE">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="request:" target="-2" id="fYG-Kq-SmH"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="VOi-qK-rRD" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" symbolic="YES" id="2Lr-mv-5PQ"/>
+                <constraint firstItem="S07-nu-RPU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="BoL-ks-aoG"/>
+                <constraint firstItem="kxN-yc-I6K" firstAttribute="leading" secondItem="VOi-qK-rRD" secondAttribute="trailing" constant="8" symbolic="YES" id="FEy-Ql-bDt"/>
+                <constraint firstAttribute="trailing" secondItem="S07-nu-RPU" secondAttribute="trailing" constant="20" symbolic="YES" id="GVF-Ar-jAQ"/>
+                <constraint firstItem="S07-nu-RPU" firstAttribute="top" secondItem="Ag1-Ka-f67" secondAttribute="bottom" constant="8" symbolic="YES" id="Gm2-6L-PL7"/>
+                <constraint firstItem="kxN-yc-I6K" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" symbolic="YES" id="K7L-91-7AF"/>
+                <constraint firstItem="Ag1-Ka-f67" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="Lxu-oy-l6p"/>
+                <constraint firstAttribute="trailing" secondItem="Ag1-Ka-f67" secondAttribute="trailing" constant="20" symbolic="YES" id="SUo-Rs-mSn"/>
+                <constraint firstItem="VOi-qK-rRD" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="TIu-JG-Eao"/>
+                <constraint firstAttribute="trailing" secondItem="gTd-Gj-Kz0" secondAttribute="trailing" constant="20" symbolic="YES" id="a7F-fI-yMQ"/>
+                <constraint firstAttribute="trailing" secondItem="kxN-yc-I6K" secondAttribute="trailing" constant="20" symbolic="YES" id="s6f-9M-xTK"/>
+                <constraint firstAttribute="bottom" secondItem="S07-nu-RPU" secondAttribute="bottom" constant="20" symbolic="YES" id="sH1-3b-XSV"/>
+                <constraint firstItem="Ag1-Ka-f67" firstAttribute="top" secondItem="gTd-Gj-Kz0" secondAttribute="bottom" constant="8" symbolic="YES" id="tgU-Do-T5s"/>
+                <constraint firstItem="gTd-Gj-Kz0" firstAttribute="top" secondItem="kxN-yc-I6K" secondAttribute="bottom" constant="8" symbolic="YES" id="wk1-oN-YUS"/>
+                <constraint firstItem="gTd-Gj-Kz0" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="zUX-97-hSe"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="154"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="arrow.clockwise" catalog="system" width="14" height="16"/>
+    </resources>
+</document>
