@@ -96,7 +96,7 @@ open class MoatApi {
 			request.addValue("application/vnd.api+json", forHTTPHeaderField: "Content-Type")
 		}
 
-//		print("[\(String(describing: self))] request=\(request), body=\(String(describing: endpoint.body))")
+//		print("[\(String(describing: self))] request=\(request), body=\(String(data: (request.httpBody ?? "(nil)".data(using: .utf8)) ?? Data(), encoding: .utf8) ?? "(nil)")")
 
 		return request
 	}

@@ -34,14 +34,14 @@ Pod::Spec.new do |s|
 
 	s.preserve_paths = 'update-bridges.swift', '.bartycrouch.toml'
 
-	s.ios.source_files = 'IPtProxyUI/Classes/**/*'
-	s.osx.source_files = 'IPtProxyUI/Classes/Shared/**/*'
+	s.ios.source_files = 'IPtProxyUI/Classes/{Shared,iOS}/**/*'
+	s.osx.source_files = 'IPtProxyUI/Classes/{Shared,macOS}/**/*'
 
 	s.ios.resource_bundles = {
-		'IPtProxyUI' => ['IPtProxyUI/Assets/**/*']
+		'IPtProxyUI' => ['IPtProxyUI/Assets/{Shared,iOS}/**/*']
 	}
 	s.osx.resource_bundles = {
-		'IPtProxyUI' => ['IPtProxyUI/Assets/Shared/**/*']
+		'IPtProxyUI' => ['IPtProxyUI/Assets/{Shared,macOS}/**/*']
 	}
 
 	s.static_framework = true

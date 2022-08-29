@@ -67,7 +67,7 @@ open class MeekURLProtocol: URLProtocol, HTTPConnectionDelegate {
 	override open func startLoading() {
 		let conf = URLSessionConfiguration.default
 
-        if #available(iOS 13.0, macOS 10.15, *) {
+		if #available(iOS 13.0, macOS 10.15, *) {
 			conf.tlsMinimumSupportedProtocolVersion = .TLSv12
 		}
 
@@ -115,7 +115,8 @@ open class MeekURLProtocol: URLProtocol, HTTPConnectionDelegate {
 
 	func http(connection: HTTPConnection,
 			  willPerformHTTPRedirection response: HTTPURLResponse,
-			  newRequest request: URLRequest) {
+			  newRequest request: URLRequest)
+	{
 		guard let redirectRequest = (request as NSURLRequest).mutableCopy() as? NSMutableURLRequest else {
 			assert(false)
 			client?.urlProtocol(self, didFailWithError: NSError(domain: NSCocoaErrorDomain, code: -1, userInfo: nil))
