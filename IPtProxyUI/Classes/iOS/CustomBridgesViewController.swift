@@ -13,9 +13,8 @@ import MessageUI
 open class CustomBridgesViewController: FixedFormViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDelegate {
 
-	public weak var delegate: BridgesConfDelegate?
+	open weak var delegate: BridgesConfDelegate?
 
-	private static let bridgesUrl = "https://bridges.torproject.org/"
 
 	private lazy var picker: UIImagePickerController = {
 		let picker = UIImagePickerController()
@@ -40,7 +39,7 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 		textAreaRow.value = delegate?.customBridges?.joined(separator: "\n")
 
 		navigationItem.title = NSLocalizedString(
-			"Use Custom Bridges", bundle: Bundle.iPtProxyUI, comment: "")
+			"Use Custom Bridges", bundle: .iPtProxyUI, comment: "")
 
 		if let title = delegate?.saveButtonTitle, !title.isEmpty {
 			navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -53,32 +52,28 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 		navigationItem.rightBarButtonItem?.isEnabled = !(textAreaRow.value?.isEmpty ?? true)
 
 		form
-		+++ Section(footer:
-			String(format: NSLocalizedString(
-				"In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"",
-				bundle: Bundle.iPtProxyUI, comment: ""), CustomBridgesViewController.bridgesUrl))
+		+++ Section(footer: explanationText)
 
 		+++ ButtonRow() {
-			$0.title = NSLocalizedString("Copy URL to Clipboard",
-										 bundle: Bundle.iPtProxyUI, comment: "")
+			$0.title = copyToClipboardText
 		}
 		.cellUpdate({ cell, _ in
 			cell.accessibilityTraits = .button
 		})
 		.onCellSelection({ _, _ in
-			UIPasteboard.general.string = CustomBridgesViewController.bridgesUrl
+			UIPasteboard.general.string = Self.bridgesUrl
 		})
 
-		+++ Section(NSLocalizedString("Paste Bridges", bundle: Bundle.iPtProxyUI, comment: ""))
+		+++ Section(pasteBridgesText)
 			<<< textAreaRow
 			.onChange({ [weak self] row in
 				self?.navigationItem.rightBarButtonItem?.isEnabled = !(row.value?.isEmpty ?? true)
 			})
 
-		+++ Section(NSLocalizedString("Use QR Code", bundle: Bundle.iPtProxyUI, comment: ""))
+		+++ Section(NSLocalizedString("Use QR Code", bundle: .iPtProxyUI, comment: ""))
 			<<< ButtonRow() {
 				$0.title = NSLocalizedString("Scan QR Code",
-											 bundle: Bundle.iPtProxyUI, comment: "")
+											 bundle: .iPtProxyUI, comment: "")
 			}
 			.cellUpdate({ cell, _ in
 				cell.accessibilityTraits = .button
@@ -90,7 +85,7 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 				self?.navigationController?.pushViewController(vc, animated: true)
 			})
 			<<< ButtonRow() {
-				$0.title = NSLocalizedString("Upload QR Code", bundle: Bundle.iPtProxyUI, comment: "")
+				$0.title = NSLocalizedString("Upload QR Code", bundle: .iPtProxyUI, comment: "")
 			}
 			.cellUpdate({ cell, _ in
 				cell.accessibilityTraits = .button
@@ -103,10 +98,9 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 
 		if MFMailComposeViewController.canSendMail() {
 			form
-			+++ Section(NSLocalizedString("E-Mail", bundle: Bundle.iPtProxyUI, comment: ""))
+			+++ Section(NSLocalizedString("E-Mail", bundle: .iPtProxyUI, comment: ""))
 				<<< ButtonRow() {
-					$0.title = NSLocalizedString("Request via E-Mail",
-												 bundle: Bundle.iPtProxyUI, comment: "")
+					$0.title = requestViaEmailText
 				}
 				.cellUpdate({ cell, _ in
 					cell.accessibilityTraits = .button
@@ -114,9 +108,9 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 				.onCellSelection({ [weak self] _, _ in
 					let vc = MFMailComposeViewController()
 					vc.mailComposeDelegate = self
-					vc.setToRecipients(["bridges@torproject.org"])
-					vc.setSubject("get transport")
-					vc.setMessageBody("get transport", isHTML: false)
+					vc.setToRecipients([Self.emailRecipient])
+					vc.setSubject(Self.emailSubjectAndBody)
+					vc.setMessageBody(Self.emailSubjectAndBody, isHTML: false)
 
 					self?.present(vc, animated: true)
 				})
@@ -126,7 +120,7 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 	open override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 
-		updateDelegate()
+		updateDelegate(textAreaRow.value)
 	}
 
 	// MARK: UIImagePickerControllerDelegate
@@ -181,7 +175,7 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 			AlertHelper.present(self, message:
 				String(format: NSLocalizedString(
 					"QR Code could not be decoded! Are you sure you scanned a QR code from %@?",
-					bundle: Bundle.iPtProxyUI, comment: ""), CustomBridgesViewController.bridgesUrl))
+					bundle: .iPtProxyUI, comment: ""), Self.bridgesUrl))
 		}
 	}
 
@@ -190,24 +184,8 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 
 	@objc
 	private func save() {
-		updateDelegate()
+		updateDelegate(textAreaRow.value)
 
 		delegate?.save()
-	}
-
-	private func updateDelegate() {
-		delegate?.customBridges = textAreaRow.value?
-				.components(separatedBy: "\n")
-				.map({ bridge in bridge.trimmingCharacters(in: .whitespacesAndNewlines) })
-				.filter({ bridge in !bridge.isEmpty && !bridge.hasPrefix("//") && !bridge.hasPrefix("#") })
-
-		if delegate?.customBridges?.isEmpty ?? true {
-			if delegate?.transport == .custom {
-				delegate?.transport = .none
-			}
-		}
-		else {
-			delegate?.transport = .custom
-		}
 	}
 }

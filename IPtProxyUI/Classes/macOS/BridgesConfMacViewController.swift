@@ -249,7 +249,20 @@ open class BridgesConfMacViewController: NSViewController, BridgesConfDelegate, 
 			transport = .snowflakeAmp
 		}
 		else if sender == customBridgesRb {
-			transport = .custom
+            let vc = CustomBridgesViewController()
+            vc.delegate = self
+
+            let window = NSWindow(contentViewController: vc)
+            window.delegate = self
+
+            NSApp.runModal(for: window)
+
+            window.close()
+
+			// Trigger reset of selected transport UI, in case
+			// the user never added custom bridges.
+			let t = transport
+			transport = t
 		}
 		else {
 			transport = .none
