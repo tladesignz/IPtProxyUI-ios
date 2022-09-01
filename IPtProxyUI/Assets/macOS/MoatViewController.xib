@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="MoatMacViewController" customModule="IPtProxyUI" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="MoatViewController" customModule="IPtProxyUI" customModuleProvider="target">
             <connections>
                 <outlet property="captchaIv" destination="gTd-Gj-Kz0" id="nDJ-CT-mdR"/>
                 <outlet property="explanationLb" destination="VOi-qK-rRD" id="dfk-mS-4q7"/>
@@ -67,7 +67,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="request:" target="-2" id="fYG-Kq-SmH"/>
+                        <action selector="requestBridges:" target="-2" id="y3L-4w-4uT"/>
                     </connections>
                 </button>
             </subviews>

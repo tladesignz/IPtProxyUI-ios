@@ -227,7 +227,7 @@ open class BridgesConfMacViewController: NSViewController, BridgesConfDelegate, 
 	}
 
 	@IBAction open func manualConf(_ sender: Any) {
-		let vc = MoatMacViewController()
+		let vc = MoatViewController()
 		vc.delegate = self
 
 		let window = NSWindow(contentViewController: vc)
