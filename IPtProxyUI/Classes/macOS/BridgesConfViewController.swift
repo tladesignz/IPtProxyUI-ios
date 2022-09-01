@@ -1,5 +1,5 @@
 //
-//  BridgesConfMacViewController.swift
+//  BridgesConfViewController.swift
 //  IPtProxyUI-macOS
 //
 //  Created by Benjamin Erhart on 26.08.22.
@@ -8,7 +8,7 @@
 
 import Cocoa
 
-open class BridgesConfMacViewController: NSViewController, BridgesConfDelegate, NSWindowDelegate {
+open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSWindowDelegate {
 
 	open weak var delegate: BridgesConfDelegate?
 
@@ -40,16 +40,13 @@ open class BridgesConfMacViewController: NSViewController, BridgesConfDelegate, 
 
 	@IBOutlet weak var autoConfBox: NSBox! {
 		didSet {
-			autoConfBox.title = NSLocalizedString(
-				"Automatic Configuration", bundle: Bundle.iPtProxyUI, comment: "")
+			autoConfBox.title = automaticConfigurationText
 		}
 	}
 
 	@IBOutlet weak var cannotConnectLb: NSTextField! {
 		didSet {
-			cannotConnectLb.stringValue = NSLocalizedString(
-				"I'm sure I cannot connect without a bridge.",
-				bundle: Bundle.iPtProxyUI, comment: "")
+			cannotConnectLb.stringValue = cannotConnectText
 		}
 	}
 
@@ -57,84 +54,61 @@ open class BridgesConfMacViewController: NSViewController, BridgesConfDelegate, 
 
 	@IBOutlet weak var tryAutoConfBt: NSButton! {
 		didSet {
-			tryAutoConfBt.title = NSLocalizedString(
-				"Try Auto-Configuration", bundle: Bundle.iPtProxyUI, comment: "")
+			tryAutoConfBt.title = tryAutoConfigurationText
 		}
 	}
 
 	@IBOutlet weak var manualConfBox: NSBox! {
 		didSet {
-			manualConfBox.title = NSLocalizedString(
-				"Manual Configuration", bundle: Bundle.iPtProxyUI, comment: "")
+			manualConfBox.title = manualConfigurationText
 		}
 	}
 
 	@IBOutlet weak var manualConfBt: NSButton! {
 		didSet {
-			manualConfBt.title = NSLocalizedString(
-				"Request Bridges from torproject.org",
-				bundle: Bundle.iPtProxyUI, comment: "")
+			manualConfBt.title = requestBridgesText
 		}
 	}
 
 	@IBOutlet weak var noBridgesRb: NSButton! {
 		didSet {
-			noBridgesRb.title = NSLocalizedString(
-				"No Bridges", bundle: Bundle.iPtProxyUI, comment: "")
+			noBridgesRb.title = noBridgesText
 		}
 	}
 
 	@IBOutlet weak var obfs4Rb: NSButton! {
 		didSet {
-			obfs4Rb.title = String(format: NSLocalizedString(
-				"Built-in %@", bundle: Bundle.iPtProxyUI, comment: ""), "obfs4")
+			obfs4Rb.title = builtInObfs4Text
 		}
 	}
 
 	@IBOutlet weak var snowflakeRb: NSButton! {
 		didSet {
-			snowflakeRb.title = String(format: NSLocalizedString(
-				"Built-in %@", bundle: Bundle.iPtProxyUI, comment: ""), "snowflake")
+			snowflakeRb.title = builtInSnowflakeText
 		}
 	}
 
 	@IBOutlet weak var snowflakeAmpRb: NSButton! {
 		didSet {
-			snowflakeAmpRb.title = String(format: NSLocalizedString(
-				"Built-in %@", bundle: Bundle.iPtProxyUI, comment: ""), "snowflake (AMP)")
+			snowflakeAmpRb.title = builtInSnowflakeAmpText
 		}
 	}
 
 	@IBOutlet weak var customBridgesRb: NSButton! {
 		didSet {
-			customBridgesRb.title = NSLocalizedString(
-				"Custom Bridges", bundle: Bundle.iPtProxyUI, comment: "")
+			customBridgesRb.title = customBridgesText
 		}
 	}
 
 	@IBOutlet weak var descLb: NSTextField! {
 		didSet {
-			descLb.stringValue = [
-				NSLocalizedString("If you are in a country or using a connection that censors Tor, you might need to use bridges.",
-								  bundle: Bundle.iPtProxyUI, comment: ""),
-				"",
-				String(format: NSLocalizedString(
-					"%1$@ %2$@ makes your traffic appear \"random\".",
-					bundle: Bundle.iPtProxyUI, comment: ""), "\u{2022}", "obfs4"),
-				String(format: NSLocalizedString(
-					"%1$@ %2$@ makes your traffic look like a phone call to a random user on the net.",
-					bundle: Bundle.iPtProxyUI, comment: ""), "\u{2022}", "snowflake"),
-				"",
-				NSLocalizedString("If one type of bridge does not work, try using a different one.",
-								  bundle: Bundle.iPtProxyUI, comment: "")
-			].joined(separator: "\n")
+			descLb.stringValue = explanationText
 		}
 	}
 
 	@IBOutlet weak var cancelBt: NSButton! {
 		didSet {
-			cancelBt.title = NSLocalizedString(
-				"Cancel", bundle: Bundle.iPtProxyUI, comment: "")
+			cancelBt.title = cancelText
 		}
 	}
 
@@ -142,17 +116,16 @@ open class BridgesConfMacViewController: NSViewController, BridgesConfDelegate, 
 
 
 	public convenience init() {
-		self.init(nibName: String(describing: BridgesConfMacViewController.self), bundle: .iPtProxyUI)
+		self.init(nibName: String(describing: BridgesConfViewController.self), bundle: .iPtProxyUI)
 	}
 
 
 	open override func viewWillAppear() {
 		super.viewWillAppear()
 
-		view.window?.title = NSLocalizedString(
-			"Bridge Configuration", bundle: Bundle.iPtProxyUI, comment: "")
+		view.window?.title = bridgeConfigurationText
 
-		saveBt.title = saveButtonTitle ?? NSLocalizedString("Save", bundle: .iPtProxyUI, comment: "")
+		saveBt.title = saveButtonTitle ?? saveText
 
 		view.window?.defaultButtonCell = saveBt.cell as? NSButtonCell
 	}

@@ -17,23 +17,8 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 	open weak var delegate: BridgesConfDelegate?
 
 	open var transportSection: SelectableSection<ListCheckRow<Transport>> = {
-		let description = [
-			NSLocalizedString("If you are in a country or using a connection that censors Tor, you might need to use bridges.",
-							  bundle: Bundle.iPtProxyUI, comment: ""),
-			"",
-			String(format: NSLocalizedString(
-				"%1$@ %2$@ makes your traffic appear \"random\".",
-				bundle: Bundle.iPtProxyUI, comment: ""), "\u{2022}", "obfs4"),
-			String(format: NSLocalizedString(
-				"%1$@ %2$@ makes your traffic look like a phone call to a random user on the net.",
-				bundle: Bundle.iPtProxyUI, comment: ""), "\u{2022}", "snowflake"),
-			"",
-			NSLocalizedString("If one type of bridge does not work, try using a different one.",
-							  bundle: Bundle.iPtProxyUI, comment: "")
-		]
-
 		return SelectableSection<ListCheckRow<Transport>>(
-			header: "", footer: description.joined(separator: "\n"),
+			header: "", footer: "",
 			selectionType: .singleSelection(enableDeselection: false))
 	}()
 
@@ -65,8 +50,7 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 		navigationItem.leftBarButtonItem = UIBarButtonItem(
 			barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
 
-		navigationItem.title = NSLocalizedString("Bridge Configuration",
-												 bundle: Bundle.iPtProxyUI, comment: "")
+		navigationItem.title = bridgeConfigurationText
 
 		if let title = saveButtonTitle, !title.isEmpty {
 			navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -78,16 +62,11 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 		}
 
 		let transports: [Transport: String] = [
-			.none: NSLocalizedString(
-				"No Bridges", bundle: Bundle.iPtProxyUI, comment: ""),
-			.obfs4: String(format: NSLocalizedString(
-				"Built-in %@", bundle: Bundle.iPtProxyUI, comment: ""), "obfs4"),
-			.snowflake: String(format: NSLocalizedString(
-				"Built-in %@", bundle: Bundle.iPtProxyUI, comment: ""), "snowflake"),
-			.snowflakeAmp: String(format: NSLocalizedString(
-				"Built-in %@", bundle: Bundle.iPtProxyUI, comment: ""), "snowflake (AMP)"),
-			.custom: NSLocalizedString(
-				"Custom Bridges", bundle: Bundle.iPtProxyUI, comment: ""),
+			.none: noBridgesText,
+			.obfs4: builtInObfs4Text,
+			.snowflake: builtInSnowflakeText,
+			.snowflakeAmp: builtInSnowflakeAmpText,
+			.custom: customBridgesText,
 		]
 
 		transportSection.onSelectSelectableRow = { [weak self] _, row in
@@ -99,17 +78,19 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			}
 		}
 
+		transportSection.footer = HeaderFooterView(stringLiteral: explanationText)
+
 		form
-		+++ Section(NSLocalizedString("Automatic Configuration", bundle: Bundle.iPtProxyUI, comment: ""))
+		+++ Section(automaticConfigurationText)
 		<<< SwitchRow("cannotConnect") {
-			$0.title = NSLocalizedString("I'm sure I cannot connect without a bridge.", bundle: Bundle.iPtProxyUI, comment: "")
+			$0.title = cannotConnectText
 
 			let font = $0.cell.textLabel?.font ?? UIFont.systemFont(ofSize: UIFont.systemFontSize)
 			$0.cell.textLabel?.font = UIFont(name: font.familyName, size: font.pointSize * 8 / 10)
 			$0.cell.textLabel?.numberOfLines = 0
 		}
 		<<< ButtonRow() {
-			$0.title = NSLocalizedString("Try Auto-Configuration", bundle: Bundle.iPtProxyUI, comment: "")
+			$0.title = tryAutoConfigurationText
 		}
 		.cellUpdate({ cell, _ in
 			cell.accessibilityTraits = .button
@@ -146,10 +127,9 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			}
 		})
 
-		+++ Section(NSLocalizedString("Manual Configuration", bundle: Bundle.iPtProxyUI, comment: ""))
+		+++ Section(manualConfigurationText)
 		<<< ButtonRow() {
-			$0.title = NSLocalizedString("Request Bridges from torproject.org",
-										 bundle: Bundle.iPtProxyUI, comment: "")
+			$0.title = requestBridgesText
 		}
 		.cellUpdate({ cell, _ in
 			cell.accessibilityTraits = .button

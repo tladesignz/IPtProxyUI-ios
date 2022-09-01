@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="BridgesConfMacViewController" customModule="IPtProxyUI" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="BridgesConfViewController" customModule="IPtProxyUI" customModuleProvider="target">
             <connections>
                 <outlet property="autoConfBox" destination="K3y-w5-SZT" id="J95-WY-Q0M"/>
                 <outlet property="cancelBt" destination="WdN-Vi-kt7" id="y4N-rr-edD"/>
