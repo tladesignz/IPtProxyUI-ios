@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 1.9.0
+- Fixed issues with Xcode 14.
+- Added MacOS support. (Domain Fronting not working, yet.)
+
 ## 1.8.5
 - Fixed crash in `MeekURLProtocol`.
 - Updated Albanian and Japanese translation.  
