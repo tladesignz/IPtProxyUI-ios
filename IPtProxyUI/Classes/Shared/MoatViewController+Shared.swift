@@ -29,7 +29,7 @@ extension MoatViewController {
 	}
 
 
-	open func fetchCaptcha(completion: @escaping ((_ challenge: String?, _ captcha: Data?, _ error: Error?) -> Void)) {
+	public func fetchCaptcha(completion: @escaping ((_ challenge: String?, _ captcha: Data?, _ error: Error?) -> Void)) {
 		guard var request = MoatApi.buildRequest(.fetch) else {
 			return completion(nil, nil, nil)
 		}
@@ -56,7 +56,7 @@ extension MoatViewController {
 		}
 	}
 
-	open func requestBridges(_ challenge: String?, _ solution: String?,
+	public func requestBridges(_ challenge: String?, _ solution: String?,
 							 _ completion: @escaping ((_ bridges: [String]?, _ error: Error?) -> Void))
 	{
 		guard var request = MoatApi.buildRequest(.check(challenge: challenge ?? "", solution: solution ?? ""))

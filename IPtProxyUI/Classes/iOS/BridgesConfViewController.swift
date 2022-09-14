@@ -25,7 +25,7 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 	open var transport: Transport = .none {
 		didSet {
 			DispatchQueue.main.async {
-				for row in self.transportSection {
+				for row in self.transportSection as Section {
 					guard let row = row as? ListCheckRow<Transport> else {
 						continue
 					}

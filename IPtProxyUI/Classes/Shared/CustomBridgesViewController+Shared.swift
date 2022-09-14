@@ -40,7 +40,7 @@ extension CustomBridgesViewController {
 	}
 
 
-	open func updateDelegate(_ customBridges: String?) {
+	public func updateDelegate(_ customBridges: String?) {
 		delegate?.customBridges = customBridges?
 				.components(separatedBy: "\n")
 				.map({ $0.trimmingCharacters(in: .whitespacesAndNewlines) })
