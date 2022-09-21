@@ -8,7 +8,7 @@
 
 import Cocoa
 
-open class CustomBridgesViewController: NSViewController, NSTextFieldDelegate {
+open class CustomBridgesViewController: NSViewController {
 
 	@IBOutlet weak var explanationLb: NSTextField! {
 		didSet {
@@ -55,10 +55,9 @@ open class CustomBridgesViewController: NSViewController, NSTextFieldDelegate {
 		view.window?.title = titleText
 	}
 
+	open override func viewWillDisappear() {
+		super.viewWillDisappear()
 
-	// MARK: NSTextFieldDelegate
-
-    public func controlTextDidChange(_ obj: Notification) {
 		updateDelegate(bridgesTf.stringValue)
 	}
 

@@ -42,9 +42,6 @@
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
-                    <connections>
-                        <outlet property="delegate" destination="-2" id="0j8-Gh-3Uo"/>
-                    </connections>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vS5-S2-AnL">
                     <rect key="frame" x="290" y="249" width="173" height="32"/>
