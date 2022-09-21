@@ -51,7 +51,7 @@ Pod::Spec.new do |s|
 			:name => 'Update Built-in Bridges',
 			:script => '"$PODS_TARGET_SRCROOT/update-bridges.swift"',
 			:execution_position => :before_compile,
-			:output_files => ['dummy-always-execute-this-but-supress warning'],
+			:output_files => ['iptproxy-always-execute-this-but-supress-warning'],
 		},
 #		{
 #			:name => 'BartyCrouch Automatic Localization',
