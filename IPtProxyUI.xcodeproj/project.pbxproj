@@ -120,6 +120,7 @@
 		A08984002759369A0078F3E6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A08984012759369A0078F3E6 /* .bartycrouch.toml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .bartycrouch.toml; sourceTree = "<group>"; };
 		A08984032759369A0078F3E6 /* config */ = {isa = PBXFileReference; lastKnownFileType = text; path = config; sourceTree = "<group>"; };
+		A09A099128E468DC00730CA5 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -358,6 +359,7 @@
 				id,
 				km,
 				ro,
+				"km-KH",
 			);
 			mainGroup = A089839D2759356C0078F3E6;
 			productRefGroup = A08983A82759356C0078F3E6 /* Products */;
@@ -484,6 +486,7 @@
 				A01AB69128A5516C008A79EE /* hi */,
 				A01AB69228A5516C008A79EE /* ca */,
 				A01AB69328A5516C008A79EE /* hu-HU */,
+				A09A099128E468DC00730CA5 /* km-KH */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

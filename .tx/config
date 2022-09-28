@@ -2,12 +2,13 @@
 host = https://www.transifex.com
 
 [onion-browser.iptproxyui]
-file_filter = IPtProxyUI/Assets/<lang>.lproj/Localizable.strings
+file_filter = IPtProxyUI/Assets/Shared/<lang>.lproj/Localizable.strings
 minimum_perc = 25
-source_file = IPtProxyUI/Assets/en.lproj/Localizable.strings
+source_file = IPtProxyUI/Assets/Shared/en.lproj/Localizable.strings
 source_lang = en_US
-trans.hu_HU = IPtProxyUI/Assets/hu-HU.lproj/Localizable.strings
-trans.pt_BR = IPtProxyUI/Assets/pt-BR.lproj/Localizable.strings
-trans.pt_PT = IPtProxyUI/Assets/pt-PT.lproj/Localizable.strings
-trans.tr_TR = IPtProxyUI/Assets/tr-TR.lproj/Localizable.strings
+trans.hu_HU = IPtProxyUI/Assets/Shared/hu-HU.lproj/Localizable.strings
+trans.pt_BR = IPtProxyUI/Assets/Shared/pt-BR.lproj/Localizable.strings
+trans.pt_PT = IPtProxyUI/Assets/Shared/pt-PT.lproj/Localizable.strings
+trans.tr_TR = IPtProxyUI/Assets/Shared/tr-TR.lproj/Localizable.strings
+trans.km = IPtProxyUI/Assets/Shared/km-KH.lproj/Localizable.strings
 type = STRINGS
