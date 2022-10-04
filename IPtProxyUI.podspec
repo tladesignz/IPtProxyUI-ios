@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 	s.name             = 'IPtProxyUI'
-	s.version          = '1.9.0'
+	s.version          = '1.10.0'
 	s.summary          = 'IPtProxyUI provides a UI to configure bridges for all Pluggable Transports available in the IPtProxy package.'
 
 	s.description      = <<-DESC
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
 	# s.social_media_url = 'https://twitter.com/tladesignz'
 
 	s.ios.deployment_target = '11.0'
-	s.osx.deployment_target = '12'
+	s.osx.deployment_target = '11'
 
 	s.swift_version = '5.5'
 
@@ -65,7 +65,7 @@ Pod::Spec.new do |s|
 #		}
 	]
 
-	s.dependency 'IPtProxy', '~> 1.7'
+	s.dependency 'IPtProxy', '~> 1.8'
 	s.dependency 'ReachabilitySwift', '~> 5.0'
 
 	s.ios.dependency 'Eureka', '~> 5.3'

@@ -1,8 +1,15 @@
 # IPtProxyUI
 
+## 1.10.0
+- Added Khmer translation.
+- Updated Icelandic, Brazilian Portuguese and Russian translations.
+- Fixed script test dummy file name.
+- Fixed minor issue when custom bridges where selected but not changed in macOS version.
+- Support macOS 11 (Big Sur). 
+
 ## 1.9.0
 - Fixed issues with Xcode 14.
-- Added MacOS support. (Domain Fronting not working, yet.)
+- Added MacOS support.
 
 ## 1.8.5
 - Fixed crash in `MeekURLProtocol`.
