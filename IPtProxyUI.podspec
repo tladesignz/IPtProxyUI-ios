@@ -32,7 +32,7 @@ Pod::Spec.new do |s|
 
 	s.swift_version = '5.5'
 
-	s.preserve_paths = 'update-bridges.swift', '.bartycrouch.toml'
+	s.preserve_paths = 'update-bridges.sh', 'update-bridges.swift', '.bartycrouch.toml'
 
 	s.ios.source_files = 'IPtProxyUI/Classes/{Shared,iOS}/**/*'
 	s.osx.source_files = 'IPtProxyUI/Classes/{Shared,macOS}/**/*'
@@ -49,7 +49,7 @@ Pod::Spec.new do |s|
 	s.script_phases = [
 		{
 			:name => 'Update Built-in Bridges',
-			:script => '"$PODS_TARGET_SRCROOT/update-bridges.swift"',
+			:script => '"$PODS_TARGET_SRCROOT/update-bridges.sh"',
 			:execution_position => :before_compile,
 			:output_files => ['iptproxy-always-execute-this-but-supress-warning'],
 		},

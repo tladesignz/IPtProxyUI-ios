@@ -100,6 +100,7 @@
 		A01AB69228A5516C008A79EE /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A01AB69328A5516C008A79EE /* hu-HU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hu-HU"; path = "hu-HU.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A01AB69528A5516C008A79EE /* CaptchaCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptchaCell.xib; sourceTree = "<group>"; };
+		A06B30AF28EC834400F34C17 /* update-bridges.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "update-bridges.sh"; sourceTree = "<group>"; };
 		A06D525A28BCEF6D00D64BC7 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		A06D525B28BCEF6D00D64BC7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		A072996528C0BF110034BBAB /* CustomBridgesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomBridgesViewController.xib; sourceTree = "<group>"; };
@@ -214,6 +215,7 @@
 				A08983E9275935BB0078F3E6 /* README.md */,
 				A08983E5275935BB0078F3E6 /* CHANGELOG.md */,
 				A08983E7275935BB0078F3E6 /* LICENSE */,
+				A06B30AF28EC834400F34C17 /* update-bridges.sh */,
 				A08983E8275935BB0078F3E6 /* update-bridges.swift */,
 				A08984012759369A0078F3E6 /* .bartycrouch.toml */,
 				A08984002759369A0078F3E6 /* .gitignore */,

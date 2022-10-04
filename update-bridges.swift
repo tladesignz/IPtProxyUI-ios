@@ -1,18 +1,16 @@
-#!/usr/bin/env xcrun --sdk macosx swift
-
 //
 //  update-bridges.swift
-//  Orbot
+//  IPtProxyUI
 //
 //  Created by Benjamin Erhart on 03.12.19.
-//  Copyright © 2019 - 2021 Guardian Project. All rights reserved.
+//  Copyright © 2019 - 2022 Guardian Project. All rights reserved.
 //
 
 import Foundation
 
 // MARK: Config
 
-let url = URL(string: "https://gitweb.torproject.org/builders/tor-browser-build.git/plain/projects/common/bridges_list.obfs4.txt")!
+let request = MoatApi.buildRequest(.builtin)
 
 let outfile = resolve("IPtProxyUI/Assets/Shared/obfs4-bridges.plist")
 
@@ -27,9 +25,9 @@ func exit(_ msg: String) {
 
 func resolve(_ path: String) -> URL {
 	let cwd = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-	let script = URL(fileURLWithPath: CommandLine.arguments.first ?? "", relativeTo: cwd).deletingLastPathComponent()
+	let base = URL(fileURLWithPath: ProcessInfo.processInfo.environment["UPDATE_BRIDGES_BASE"]!, relativeTo: cwd)
 
-	return URL(fileURLWithPath: path, relativeTo: script)
+	return URL(fileURLWithPath: path, relativeTo: base)
 }
 
 
@@ -43,26 +41,14 @@ guard Calendar.current.dateComponents([.day], from: modified, to: Date()).day ??
 }
 
 
-let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, response, error in
-//	print("data=\(String(describing: data)), response=\(String(describing: response)), error=\(String(describing: error))")
+let task = URLSession.shared.apiTask(with: request!) { (response: [String: [String]]?, error) in
+//	print("response=\(String(describing: response)), error=\(String(describing: error))")
 
 	if let error = error {
 		return exit(error.localizedDescription)
 	}
 
-	guard let data = data else {
-		return exit("No data!")
-	}
-
-	guard let content = String(data: data, encoding: .utf8) else {
-		return exit("Data could not be converted to a UTF-8 string!")
-	}
-
-	var bridges = [String]()
-
-	for line in content.split(separator: "\n") {
-		bridges.append(String(line.trimmingCharacters(in: .whitespacesAndNewlines)))
-	}
+	let bridges = response?["obfs4"] ?? []
 
 	let encoder = PropertyListEncoder()
 	encoder.outputFormat = .xml
