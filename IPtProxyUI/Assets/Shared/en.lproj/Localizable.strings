@@ -94,6 +94,9 @@
 /* ApiError */
 "Response body missing." = "Response body missing.";
 
+/* BridgesConfViewController+Shared */
+"Save" = "Save";
+
 /* CustomBridgesViewController, ScanQrViewController */
 "Scan QR Code" = "Scan QR Code";
 
