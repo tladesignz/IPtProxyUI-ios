@@ -1,5 +1,8 @@
 # IPtProxyUI
 
+## 1.10.2
+- Updated locale strings.
+
 ## 1.10.1
 - Updated locale strings.
 
