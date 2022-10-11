@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 	s.name             = 'IPtProxyUI'
-	s.version          = '1.10.2'
+	s.version          = '1.10.3'
 	s.summary          = 'IPtProxyUI provides a UI to configure bridges for all Pluggable Transports available in the IPtProxy package.'
 
 	s.description      = <<-DESC
@@ -65,7 +65,7 @@ Pod::Spec.new do |s|
 #		}
 	]
 
-	s.dependency 'IPtProxy', '~> 1.8'
+	s.dependency 'IPtProxy', '~> 1.8.1'
 	s.dependency 'ReachabilitySwift', '~> 5.0'
 
 	s.ios.dependency 'Eureka', '~> 5.3'

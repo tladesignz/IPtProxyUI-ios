@@ -1,5 +1,11 @@
 # IPtProxyUI
 
+## 1.10.3
+- Updated to IPtProxy 1.8.1.
+- Added logging support.
+- Updated Croatian translation.
+- Updated built-in Obfs4 bridges list.
+
 ## 1.10.2
 - Updated locale strings.
 
