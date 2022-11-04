@@ -395,6 +395,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		A0C5CD2927690B6E00F821C2 /* BartyCrouch */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
