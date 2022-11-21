@@ -95,7 +95,9 @@ open class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObject
 				videoPreviewLayer?.frame = view.layer.bounds
 				view.layer.addSublayer(videoPreviewLayer!)
 
-				captureSession?.startRunning()
+				DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+					self?.captureSession?.startRunning()
+				}
 
 				return
 			}
