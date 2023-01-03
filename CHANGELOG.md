@@ -1,5 +1,11 @@
 # IPtProxyUI
 
+## 1.10.4
+- Updated Icelandic, Macedonian and simplified Chinese translations.
+- Updated STUN server list for Snowflake.
+- Updated default Obfs4 bridges list.
+- Fixed minor warning.
+
 ## 1.10.3
 - Updated to IPtProxy 1.8.1.
 - Added logging support.
