@@ -65,7 +65,7 @@ Pod::Spec.new do |s|
 #		}
 	]
 
-	s.dependency 'IPtProxy', '~> 1.8.1'
+	s.dependency 'IPtProxy', '~> 1.9.0'
 	s.dependency 'ReachabilitySwift', '~> 5.0'
 
 	s.ios.dependency 'Eureka', '~> 5.3'
