@@ -7,25 +7,14 @@
 //
 
 import UIKit
-import AVFoundation
 
-public protocol ScanQrDelegate: AnyObject {
-
-	func scanned(value: String?)
-}
-
-open class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
-
-	private var captureSession: AVCaptureSession?
-	private var videoPreviewLayer: AVCaptureVideoPreviewLayer?
-
-	open weak var delegate: ScanQrDelegate?
+open class ScanQrViewController: BaseScanViewController {
 
 	open override func viewDidLoad() {
 		super.viewDidLoad()
 
 		navigationItem.title = NSLocalizedString(
-			"Scan QR Code", bundle: Bundle.iPtProxyUI, comment: "")
+			"Scan QR Code", bundle: .iPtProxyUI, comment: "")
 
 		if #available(iOS 13.0, *) {
 			view.backgroundColor = .systemGroupedBackground
@@ -38,101 +27,31 @@ open class ScanQrViewController: UIViewController, AVCaptureMetadataOutputObject
 	open override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 
-		startReading()
-	}
+		do {
+			try startReading()
 
-	open override func viewWillDisappear(_ animated: Bool) {
-		super.viewWillDisappear(animated)
+			videoPreviewLayer?.frame = view.layer.bounds
+			view.layer.addSublayer(videoPreviewLayer!)
+		}
+		catch {
+			let warning = UILabel(frame: .zero)
+			warning.text = error.localizedDescription
+			warning.translatesAutoresizingMaskIntoConstraints = false
+			warning.numberOfLines = 0
+			warning.textAlignment = .center
 
-		stopReading()
-	}
-
-
-	// MARK: AVCaptureMetadataOutputObjectsDelegate
-
-	/**
-	 BUGFIX: Signature of method changed in Swift 4, without notifications.
-	 No migration assistance either.
-
-	 See https://stackoverflow.com/questions/46639519/avcapturemetadataoutputobjectsdelegate-not-called-in-swift-4-for-qr-scanner
-	 */
-	public func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput
-							   metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection)
-	{
-		if metadataObjects.count > 0,
-		   let metadata = metadataObjects[0] as? AVMetadataMachineReadableCodeObject,
-		   metadata.type == .qr {
-
-			if let navC = navigationController {
-				navC.popViewController(animated: true)
-
-				delegate?.scanned(value: metadata.stringValue)
+			if #available(iOS 13.0, *) {
+				warning.textColor = .secondaryLabel
 			}
-		}
-	}
-
-
-	// MARK: Private Methods
-
-	private func startReading()
-	{
-		if let captureDevice = AVCaptureDevice.default(for: .video) {
-			do {
-				let input = try AVCaptureDeviceInput(device: captureDevice)
-
-				captureSession = AVCaptureSession()
-
-				captureSession?.addInput(input)
-
-				let captureMetadataOutput = AVCaptureMetadataOutput()
-				captureSession?.addOutput(captureMetadataOutput)
-				captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-				captureMetadataOutput.metadataObjectTypes = [.qr]
-
-				videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
-
-				videoPreviewLayer?.videoGravity = .resizeAspectFill
-				videoPreviewLayer?.frame = view.layer.bounds
-				view.layer.addSublayer(videoPreviewLayer!)
-
-				DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-					self?.captureSession?.startRunning()
-				}
-
-				return
+			else {
+				warning.textColor = .init(red: 60/255, green: 60/255, blue: 67/255, alpha: 0.6)
 			}
-			catch {
-				// Just fall thru to alert.
-			}
+
+			view.addSubview(warning)
+			warning.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+			warning.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+			warning.topAnchor.constraint(equalTo: view.topAnchor, constant: 16).isActive = true
+			warning.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
 		}
-
-		let warning = UILabel(frame: .zero)
-		warning.text = NSLocalizedString(
-			"Camera access was not granted or QR Code scanning is not supported by your device.",
-			bundle: Bundle.iPtProxyUI, comment: "")
-		warning.translatesAutoresizingMaskIntoConstraints = false
-		warning.numberOfLines = 0
-		warning.textAlignment = .center
-
-		if #available(iOS 13.0, *) {
-			warning.textColor = .secondaryLabel
-		}
-		else {
-			warning.textColor = .init(red: 60/255, green: 60/255, blue: 67/255, alpha: 0.6)
-		}
-
-		view.addSubview(warning)
-		warning.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
-		warning.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
-		warning.topAnchor.constraint(equalTo: view.topAnchor, constant: 16).isActive = true
-		warning.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
-	}
-
-	private func stopReading() {
-		captureSession?.stopRunning()
-		captureSession = nil
-
-		videoPreviewLayer?.removeFromSuperlayer()
-		videoPreviewLayer = nil
 	}
 }

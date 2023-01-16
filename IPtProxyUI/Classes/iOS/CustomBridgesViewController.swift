@@ -11,7 +11,9 @@ import Eureka
 import MessageUI
 
 open class CustomBridgesViewController: FixedFormViewController, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDelegate {
+										UINavigationControllerDelegate, MFMailComposeViewControllerDelegate,
+										ScanQrDelegate
+{
 
 	open weak var delegate: BridgesConfDelegate?
 
@@ -32,6 +34,7 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 	}
 
 	private lazy var detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
+
 
 	open override func viewDidLoad() {
 		super.viewDidLoad()
@@ -123,6 +126,7 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 		updateDelegate(textAreaRow.value)
 	}
 
+
 	// MARK: UIImagePickerControllerDelegate
 
 	public func imagePickerController(_ picker: UIImagePickerController,
@@ -133,8 +137,8 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 		var raw = ""
 
 		if let image = (info[.editedImage] ?? info[.originalImage]) as? UIImage,
-			let ciImage = image.ciImage ?? (image.cgImage != nil ? CIImage(cgImage: image.cgImage!) : nil) {
-
+			let ciImage = image.ciImage ?? (image.cgImage != nil ? CIImage(cgImage: image.cgImage!) : nil)
+		{
 			let features = detector?.features(in: ciImage)
 
 			for feature in features as? [CIQRCodeFeature] ?? [] {
@@ -142,7 +146,13 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 			}
 		}
 
-		scanned(value: raw)
+		if let bridges = BaseScanViewController.extractBridges(from: raw) {
+			textAreaRow.value = bridges.joined(separator: "\n")
+			textAreaRow.updateCell()
+		}
+		else {
+			AlertHelper.present(self, message: ScanError.notBridges.localizedDescription)
+		}
 	}
 
 	public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -162,21 +172,17 @@ UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, ScanQrDeleg
 
 	// MARK: ScanQrDelegate
 
-	public func scanned(value raw: String?) {
-		// They really had to use JSON for content encoding but with illegal single quotes instead
-		// of double quotes as per JSON standard. Srsly?
-		if let data = raw?.replacingOccurrences(of: "'", with: "\"").data(using: .utf8),
-			let newBridges = try? JSONSerialization.jsonObject(with: data, options: []) as? [String] {
+	public func scanned(bridges: [String]) {
+		navigationController?.popViewController(animated: true)
 
-			textAreaRow.value = newBridges.joined(separator: "\n")
-			textAreaRow.updateCell()
-		}
-		else {
-			AlertHelper.present(self, message:
-				String(format: NSLocalizedString(
-					"QR Code could not be decoded! Are you sure you scanned a QR code from %@?",
-					bundle: .iPtProxyUI, comment: ""), Self.bridgesUrl))
-		}
+		textAreaRow.value = bridges.joined(separator: "\n")
+		textAreaRow.updateCell()
+	}
+
+	public func scanned(error: Error) {
+		navigationController?.popViewController(animated: true)
+
+		AlertHelper.present(self, message: error.localizedDescription)
 	}
 
 
