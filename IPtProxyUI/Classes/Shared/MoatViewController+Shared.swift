@@ -1,6 +1,6 @@
 //
 //  MoatViewController+Shared.swift
-//  Pods
+//  IPtProxyUI
 //
 //  Created by Benjamin Erhart on 01.09.22.
 //
@@ -9,27 +9,30 @@ import Foundation
 
 extension MoatViewController {
 
-	public var explanationText: String {
+	public static var explanationText: String {
 		NSLocalizedString("Solve the CAPTCHA to request bridges.",
 						  bundle: .iPtProxyUI, comment: "")
 	}
 
-	public var captchaImageText: String {
+	public static var captchaImageText: String {
 		NSLocalizedString("CAPTCHA Image", bundle: .iPtProxyUI, comment: "")
 	}
 
-	public var enterCharactersText: String {
+	public static var enterCharactersText: String {
 		NSLocalizedString("Enter characters from image",
 						  bundle: .iPtProxyUI, comment: "")
 	}
 
-	public var requestBridgesText: String {
+
+	public static var requestBridgesText: String {
 		NSLocalizedString(
 			"Request Bridges", bundle: .iPtProxyUI, comment: "")
 	}
 
 
-	public func fetchCaptcha(completion: @escaping ((_ challenge: String?, _ captcha: Data?, _ error: Error?) -> Void)) {
+	public class func fetchCaptcha(_ delegate: BridgesConfDelegate?,
+								   completion: @escaping ((_ challenge: String?, _ captcha: Data?, _ error: Error?) -> Void))
+	{
 		guard var request = MoatApi.buildRequest(.fetch) else {
 			return completion(nil, nil, nil)
 		}
@@ -56,8 +59,10 @@ extension MoatViewController {
 		}
 	}
 
-	public func requestBridges(_ challenge: String?, _ solution: String?,
-							 _ completion: @escaping ((_ bridges: [String]?, _ error: Error?) -> Void))
+	public class func requestBridges(_ delegate: BridgesConfDelegate?,
+									 _ challenge: String?,
+									 _ solution: String?,
+									 completion: @escaping ((_ bridges: [String]?, _ error: Error?) -> Void))
 	{
 		guard var request = MoatApi.buildRequest(.check(challenge: challenge ?? "", solution: solution ?? ""))
 		else {

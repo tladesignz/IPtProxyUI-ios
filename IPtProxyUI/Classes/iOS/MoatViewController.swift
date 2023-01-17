@@ -36,7 +36,7 @@ open class MoatViewController: FixedFormViewController {
 	open override func viewDidLoad() {
 		super.viewDidLoad()
 
-		navigationItem.title = requestBridgesText
+		navigationItem.title = Self.requestBridgesText
 
 		navigationItem.rightBarButtonItem = UIBarButtonItem(
 			barButtonSystemItem: .refresh, target: self, action: #selector(fetchCaptcha(_:)))
@@ -44,19 +44,19 @@ open class MoatViewController: FixedFormViewController {
 		form
 		+++ Section("to be replaced in #willDisplayHeaderView to avoid capitalization")
 		<<< captchaRow
-			.cellUpdate({ [weak self] cell, row in
-				cell.accessibilityLabel = self?.captchaImageText
+			.cellUpdate({ cell, row in
+				cell.accessibilityLabel = Self.captchaImageText
 			})
 		+++ solutionRow
 			.cellSetup{ [weak self] _, row in
-				row.placeholder = self?.enterCharactersText
+				row.placeholder = Self.enterCharactersText
 
 				row.disabled = Condition.function(["captcha"]) { [weak self] _ in
 					return self?.challenge == nil
 				}
 			}
 		+++ ButtonRow() {
-			$0.title = requestBridgesText
+			$0.title = Self.requestBridgesText
 			$0.disabled = Condition.function(["solution"]) { [weak self] form in
 				return self?.challenge == nil
 				|| (form.rowBy(tag: "solution") as? AccountRow)?.value?.isEmpty ?? true
@@ -96,7 +96,7 @@ open class MoatViewController: FixedFormViewController {
 		if section == 0,
 		   let header = view as? UITableViewHeaderFooterView {
 
-			header.textLabel?.text = explanationText
+			header.textLabel?.text = Self.explanationText
 		}
 	}
 
@@ -107,7 +107,7 @@ open class MoatViewController: FixedFormViewController {
 		navigationItem.rightBarButtonItem?.isEnabled = false
 		let hud = MBProgressHUD.showAdded(to: view, animated: true)
 
-		fetchCaptcha { [weak self] challenge, captcha, error in
+		Self.fetchCaptcha(delegate) { [weak self] challenge, captcha, error in
 			DispatchQueue.main.async {
 				guard let self = self else {
 					return
@@ -135,7 +135,7 @@ open class MoatViewController: FixedFormViewController {
 		navigationItem.rightBarButtonItem?.isEnabled = false
 		let hud = MBProgressHUD.showAdded(to: view, animated: true)
 
-		requestBridges(challenge, solutionRow.value) { [weak self] bridges, error in
+		Self.requestBridges(delegate, challenge, solutionRow.value) { [weak self] bridges, error in
 			DispatchQueue.main.async {
 				guard let self = self else {
 					return

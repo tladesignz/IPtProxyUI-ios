@@ -15,7 +15,7 @@ class MoatViewController: NSViewController, NSTextFieldDelegate {
 
 	@IBOutlet weak var explanationLb: NSTextField! {
 		didSet {
-			explanationLb.stringValue = explanationText
+			explanationLb.stringValue = Self.explanationText
 		}
 	}
 
@@ -23,12 +23,12 @@ class MoatViewController: NSViewController, NSTextFieldDelegate {
 
 	@IBOutlet weak var captchaIv: NSImageView! {
 		didSet {
-			captchaIv.setAccessibilityLabel(captchaImageText)
+			captchaIv.setAccessibilityLabel(Self.captchaImageText)
 		}
 	}
 	@IBOutlet weak var solutionTf: NSTextField! {
 		didSet {
-			solutionTf.placeholderString = enterCharactersText
+			solutionTf.placeholderString = Self.enterCharactersText
 
 			solutionTf.delegate = self
 		}
@@ -36,7 +36,7 @@ class MoatViewController: NSViewController, NSTextFieldDelegate {
 
 	@IBOutlet weak var requestBt: NSButton! {
 		didSet {
-			requestBt.title = requestBridgesText
+			requestBt.title = Self.requestBridgesText
 
 			requestBt.isEnabled = false
 		}
@@ -53,7 +53,7 @@ class MoatViewController: NSViewController, NSTextFieldDelegate {
 	open override func viewWillAppear() {
 		super.viewWillAppear()
 
-		view.window?.title = requestBridgesText
+		view.window?.title = Self.requestBridgesText
 
 		view.window?.defaultButtonCell = requestBt.cell as? NSButtonCell
 
@@ -82,7 +82,7 @@ class MoatViewController: NSViewController, NSTextFieldDelegate {
 		refreshBt.isEnabled = false
 		let hud = MBProgressHUD.showAdded(to: view, animated: true)
 
-		fetchCaptcha() { [weak self] challenge, captcha, error in
+		Self.fetchCaptcha(delegate) { [weak self] challenge, captcha, error in
 			DispatchQueue.main.async {
 				hud?.hide(true)
 				self?.refreshBt.isEnabled = true
@@ -106,7 +106,7 @@ class MoatViewController: NSViewController, NSTextFieldDelegate {
 		refreshBt.isEnabled = false
 		let hud = MBProgressHUD.showAdded(to: view, animated: true)
 
-		requestBridges(challenge, solutionTf.stringValue) { [weak self] bridges, error in
+		Self.requestBridges(delegate, challenge, solutionTf.stringValue) { [weak self] bridges, error in
 			DispatchQueue.main.async {
 				hud?.hide(true)
 				self?.refreshBt.isEnabled = true
