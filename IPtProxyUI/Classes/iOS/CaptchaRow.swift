@@ -30,6 +30,6 @@ public final class CaptchaRow: _ImageRow<CaptchaCell>, RowType {
 		super.init(tag: tag)
 
 		cellProvider = CellProvider<CaptchaCell>(nibName: String(describing: CaptchaCell.self),
-												 bundle: Bundle.iPtProxyUI)
+												 bundle: .iPtProxyUI)
 	}
 }

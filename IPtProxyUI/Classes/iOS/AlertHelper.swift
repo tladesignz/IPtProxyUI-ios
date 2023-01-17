@@ -26,7 +26,7 @@ public class AlertHelper {
 	 */
 	public class func present(_ controller: UIViewController,
 							  message: String? = nil,
-							  title: String? = NSLocalizedString("Error", bundle: Bundle.iPtProxyUI, comment: ""),
+							  title: String? = NSLocalizedString("Error", bundle: .iPtProxyUI, comment: ""),
 							  style: UIAlertController.Style = .alert,
 							  actions: [UIAlertAction]? = [defaultAction()])
 	{
@@ -45,7 +45,7 @@ public class AlertHelper {
 	 - parameter actions: A list of actions. Optional, defaults to one localized "OK" default action.
 	 */
 	public class func build(message: String? = nil,
-							title: String? = NSLocalizedString("Error", bundle: Bundle.iPtProxyUI, comment: ""),
+							title: String? = NSLocalizedString("Error", bundle: .iPtProxyUI, comment: ""),
 							style: UIAlertController.Style = .alert,
 							actions: [UIAlertAction]? = [defaultAction()]) -> UIAlertController
 	{
@@ -65,7 +65,7 @@ public class AlertHelper {
 	 - parameter handler: The callback when the user tapped the action.
 	 - returns: A default `UIAlertAction`.
 	 */
-	public class func defaultAction(_ title: String? = NSLocalizedString("OK", bundle: Bundle.iPtProxyUI, comment: ""),
+	public class func defaultAction(_ title: String? = NSLocalizedString("OK", bundle: .iPtProxyUI, comment: ""),
 									handler: ActionHandler? = nil) -> UIAlertAction
 	{
 		return UIAlertAction(title: title, style: .default, handler: handler)
@@ -76,7 +76,7 @@ public class AlertHelper {
 	 - parameter handler: The callback when the user tapped the action. Optional.
 	 - returns: A cancel `UIAlertAction`.
 	 */
-	public class func cancelAction(_ title: String? = NSLocalizedString("Cancel", bundle: Bundle.iPtProxyUI, comment: ""),
+	public class func cancelAction(_ title: String? = NSLocalizedString("Cancel", bundle: .iPtProxyUI, comment: ""),
 								   handler: ActionHandler? = nil) -> UIAlertAction
 	{
 		return UIAlertAction(title: title, style: .cancel, handler: handler)

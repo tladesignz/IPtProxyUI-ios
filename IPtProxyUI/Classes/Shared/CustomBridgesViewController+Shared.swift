@@ -36,7 +36,7 @@ extension CustomBridgesViewController {
 	}
 
 	public var titleText: String {
-		NSLocalizedString("Use Custom Bridges", bundle: Bundle.iPtProxyUI, comment: "")
+		NSLocalizedString("Use Custom Bridges", bundle: .iPtProxyUI, comment: "")
 	}
 
 
