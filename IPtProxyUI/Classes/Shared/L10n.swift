@@ -127,4 +127,12 @@ public class L10n {
 		NSLocalizedString(
 			"Request Bridges", bundle: .iPtProxyUI, comment: "")
 	}
+
+	public static var error: String {
+		NSLocalizedString("Error", bundle: .iPtProxyUI, comment: "")
+	}
+
+	public static var ok: String {
+		NSLocalizedString("OK", bundle: .iPtProxyUI, comment: "")
+	}
 }
