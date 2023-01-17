@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
 	s.license          = { :type => 'MIT', :file => 'LICENSE' }
 	s.author           = { 'Benjamin Erhart' => 'berhart@netzarchitekten.com' }
 	s.source           = { :git => 'https://github.com/tladesignz/IPtProxyUI-ios.git', :tag => s.version.to_s }
-	# s.social_media_url = 'https://twitter.com/tladesignz'
+	s.social_media_url = 'https://twitter.com/tladesignz'
 
 	s.ios.deployment_target = '11.0'
 	s.osx.deployment_target = '11'
@@ -72,4 +72,14 @@ Pod::Spec.new do |s|
 	s.ios.dependency 'ImageRow', '~> 4.0'
 	s.ios.dependency 'MBProgressHUD', '~> 1.2'
 
+	s.subspec 'AppEx' do |ss|
+		ss.ios.source_files = 'IPtProxyUI/Classes/{Shared,iOS}/**/*'
+		ss.osx.source_files = 'IPtProxyUI/Classes/{Shared,macOS}/**/*'
+
+		ss.ios.exclude_files = [
+			'IPtProxyUI/Classes/iOS/BridgesConfViewController.swift',
+			'IPtProxyUI/Classes/iOS/CustomBridgesViewController.swift',
+			'IPtProxyUI/Classes/Shared/CustomBridgesViewController+Shared.swift'
+		]
+	end
 end

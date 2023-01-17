@@ -74,49 +74,67 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 			})
 
 		+++ Section(NSLocalizedString("Use QR Code", bundle: .iPtProxyUI, comment: ""))
-			<<< ButtonRow() {
-				$0.title = NSLocalizedString("Scan QR Code",
-											 bundle: .iPtProxyUI, comment: "")
-			}
-			.cellUpdate({ cell, _ in
-				cell.accessibilityTraits = .button
-			})
-			.onCellSelection({ [weak self] _, _ in
-				let vc = ScanQrViewController()
-				vc.delegate = self
+		<<< ButtonRow() {
+			$0.title = NSLocalizedString("Scan QR Code",
+										 bundle: .iPtProxyUI, comment: "")
+		}
+		.cellUpdate({ cell, _ in
+			cell.accessibilityTraits = .button
+		})
+		.onCellSelection({ [weak self] _, _ in
+			let vc = ScanQrViewController()
+			vc.delegate = self
 
-				self?.navigationController?.pushViewController(vc, animated: true)
-			})
-			<<< ButtonRow() {
-				$0.title = NSLocalizedString("Upload QR Code", bundle: .iPtProxyUI, comment: "")
+			self?.navigationController?.pushViewController(vc, animated: true)
+		})
+		<<< ButtonRow() {
+			$0.title = NSLocalizedString("Upload QR Code", bundle: .iPtProxyUI, comment: "")
+		}
+		.cellUpdate({ cell, _ in
+			cell.accessibilityTraits = .button
+		})
+		.onCellSelection({ [weak self] _, _ in
+			if let self = self {
+				self.present(self.picker, animated: true)
 			}
-			.cellUpdate({ cell, _ in
-				cell.accessibilityTraits = .button
-			})
-			.onCellSelection({ [weak self] _, _ in
-				if let self = self {
-					self.present(self.picker, animated: true)
-				}
-			})
+		})
+
+
+		if MFMailComposeViewController.canSendMail() || UIApplication.shared.canOpenURL(Constants.telegramBot) {
+			form
+			+++ Section(NSLocalizedString("Other", bundle: .iPtProxyUI, comment: ""))
+		}
 
 		if MFMailComposeViewController.canSendMail() {
-			form
-			+++ Section(NSLocalizedString("E-Mail", bundle: .iPtProxyUI, comment: ""))
-				<<< ButtonRow() {
-					$0.title = requestViaEmailText
-				}
-				.cellUpdate({ cell, _ in
-					cell.accessibilityTraits = .button
-				})
-				.onCellSelection({ [weak self] _, _ in
-					let vc = MFMailComposeViewController()
-					vc.mailComposeDelegate = self
-					vc.setToRecipients([Self.emailRecipient])
-					vc.setSubject(Self.emailSubjectAndBody)
-					vc.setMessageBody(Self.emailSubjectAndBody, isHTML: false)
+			form.last!
+			<<< ButtonRow() {
+                $0.title = L10n.requestViaEmail
+			}
+			.cellUpdate({ cell, _ in
+				cell.accessibilityTraits = .button
+			})
+			.onCellSelection({ [weak self] _, _ in
+				let vc = MFMailComposeViewController()
+				vc.mailComposeDelegate = self
+				vc.setToRecipients([Constants.emailRecipient])
+				vc.setSubject(Constants.emailSubjectAndBody)
+				vc.setMessageBody(Constants.emailSubjectAndBody, isHTML: false)
 
-					self?.present(vc, animated: true)
-				})
+				self?.present(vc, animated: true)
+			})
+		}
+
+		if UIApplication.shared.canOpenURL(Constants.telegramBot) {
+			form.last!
+			<<< ButtonRow() {
+                $0.title = L10n.requestViaTelegram
+			}
+			.cellUpdate({ cell, _ in
+				cell.accessibilityTraits = .button
+			})
+			.onCellSelection({ _, _ in
+				UIApplication.shared.open(Constants.telegramBot)
+			})
 		}
 	}
 

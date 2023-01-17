@@ -12,25 +12,31 @@ open class CustomBridgesViewController: NSViewController {
 
 	@IBOutlet weak var explanationLb: NSTextField! {
 		didSet {
-            explanationLb.stringValue = L10n.customBridgesExplanation
+			explanationLb.stringValue = L10n.customBridgesExplanation
 		}
 	}
 
 	@IBOutlet weak var pasteboardBt: NSButton! {
 		didSet {
-            pasteboardBt.title = L10n.copyToClipboard
+			pasteboardBt.title = L10n.copyToClipboard
 		}
 	}
 
 	@IBOutlet weak var emailBt: NSButton! {
 		didSet {
-            emailBt.title = L10n.requestViaEmail
+			emailBt.title = L10n.requestViaEmail
+		}
+	}
+
+	@IBOutlet weak var telegramBt: NSButton! {
+		didSet {
+			telegramBt.title = L10n.requestViaTelegram
 		}
 	}
 
 	@IBOutlet weak var headerLb: NSTextField! {
 		didSet {
-            headerLb.stringValue = L10n.pasteBridges
+			headerLb.stringValue = L10n.pasteBridges
 		}
 	}
 
@@ -52,7 +58,7 @@ open class CustomBridgesViewController: NSViewController {
 	open override func viewWillAppear() {
 		super.viewWillAppear()
 
-        view.window?.title = L10n.title
+		view.window?.title = L10n.title
 	}
 
 	open override func viewWillDisappear() {
@@ -66,7 +72,7 @@ open class CustomBridgesViewController: NSViewController {
 
 	@IBAction func copyToPasteboard(_ sender: Any) {
 		NSPasteboard.general.declareTypes([.URL], owner: nil)
-        NSPasteboard.general.setString(Constants.bridgesUrl.absoluteString, forType: .URL)
+		NSPasteboard.general.setString(Constants.bridgesUrl.absoluteString, forType: .URL)
 	}
 
 	@IBAction func requestViaEmail(_ sender: Any) {
@@ -74,5 +80,9 @@ open class CustomBridgesViewController: NSViewController {
 		service?.recipients = [Constants.emailRecipient]
 		service?.subject = Constants.emailSubjectAndBody
 		service?.perform(withItems: [Constants.emailSubjectAndBody])
+	}
+
+	@IBAction func requestViaTelegram(_ sender: Any) {
+		NSWorkspace.shared.open(Constants.telegramBot)
 	}
 }

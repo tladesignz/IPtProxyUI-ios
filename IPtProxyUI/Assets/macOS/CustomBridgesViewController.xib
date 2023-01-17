@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,17 +12,36 @@
                 <outlet property="explanationLb" destination="FWG-kW-QYs" id="xUg-M6-Jg6"/>
                 <outlet property="headerLb" destination="g0o-Ed-Ir7" id="jeI-XR-xVx"/>
                 <outlet property="pasteboardBt" destination="vS5-S2-AnL" id="dg9-Aq-6NB"/>
+                <outlet property="telegramBt" destination="scI-wj-Vw8" id="1Or-aJ-utw"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="476" height="296"/>
+            <rect key="frame" x="0.0" y="0.0" width="476" height="328"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="FWG-kW-QYs">
+                    <rect key="frame" x="18" y="260" width="272" height="48"/>
+                    <textFieldCell key="cell" selectable="YES" title="In a separate browser, visit https://bridges.torproject.org/ and tap &quot;Get Bridges&quot; &gt; &quot;Just Give Me Bridges!&quot;" id="770-q3-odo">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vS5-S2-AnL">
+                    <rect key="frame" x="289" y="281" width="174" height="32"/>
+                    <buttonCell key="cell" type="push" title="Copy URL to Clipboard" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2cN-qN-B9h">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="copyToPasteboard:" target="-2" id="oZA-E4-Qnf"/>
+                    </connections>
+                </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JdX-r2-hzF">
-                    <rect key="frame" x="316" y="193" width="147" height="32"/>
+                    <rect key="frame" x="315" y="225" width="148" height="32"/>
                     <buttonCell key="cell" type="push" title="Request via E-Mail" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Qdi-dS-8AQ">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -32,6 +50,24 @@
                         <action selector="requestViaEmail:" target="-2" id="9Jy-9a-6yP"/>
                     </connections>
                 </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="scI-wj-Vw8">
+                    <rect key="frame" x="299" y="193" width="164" height="32"/>
+                    <buttonCell key="cell" type="push" title="Request via Telegram" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vFd-hE-pIx">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="requestViaTelegram:" target="-2" id="fEW-jq-6DB"/>
+                    </connections>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g0o-Ed-Ir7">
+                    <rect key="frame" x="18" y="176" width="440" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Paste Bridges" id="Hc6-4I-a3f">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="xYa-AK-Xkn">
                     <rect key="frame" x="20" y="20" width="436" height="148"/>
                     <constraints>
@@ -43,32 +79,6 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vS5-S2-AnL">
-                    <rect key="frame" x="290" y="249" width="173" height="32"/>
-                    <buttonCell key="cell" type="push" title="Copy URL to Clipboard" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2cN-qN-B9h">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="copyToPasteboard:" target="-2" id="oZA-E4-Qnf"/>
-                    </connections>
-                </button>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="FWG-kW-QYs">
-                    <rect key="frame" x="18" y="228" width="273" height="48"/>
-                    <textFieldCell key="cell" selectable="YES" title="In a separate browser, visit https://bridges.torproject.org/ and tap &quot;Get Bridges&quot; &gt; &quot;Just Give Me Bridges!&quot;" id="770-q3-odo">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g0o-Ed-Ir7">
-                    <rect key="frame" x="18" y="176" width="440" height="16"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Paste Bridges" id="Hc6-4I-a3f">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="vS5-S2-AnL" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" symbolic="YES" id="0Eb-GV-fbK"/>
@@ -77,16 +87,18 @@
                 <constraint firstItem="g0o-Ed-Ir7" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="IrJ-p9-KIX"/>
                 <constraint firstAttribute="bottom" secondItem="xYa-AK-Xkn" secondAttribute="bottom" constant="20" symbolic="YES" id="KVR-Q0-DDD"/>
                 <constraint firstItem="vS5-S2-AnL" firstAttribute="leading" secondItem="FWG-kW-QYs" secondAttribute="trailing" constant="8" symbolic="YES" id="TCH-Gi-sas"/>
-                <constraint firstItem="g0o-Ed-Ir7" firstAttribute="top" secondItem="JdX-r2-hzF" secondAttribute="bottom" constant="8" symbolic="YES" id="YuA-76-LWR"/>
                 <constraint firstItem="JdX-r2-hzF" firstAttribute="top" secondItem="FWG-kW-QYs" secondAttribute="bottom" constant="8" symbolic="YES" id="ajs-YZ-SQJ"/>
+                <constraint firstAttribute="trailing" secondItem="scI-wj-Vw8" secondAttribute="trailing" constant="20" symbolic="YES" id="bQz-Vt-ZPh"/>
                 <constraint firstItem="FWG-kW-QYs" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="fU0-c2-0e5"/>
                 <constraint firstItem="xYa-AK-Xkn" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="loD-ak-fbt"/>
                 <constraint firstAttribute="trailing" secondItem="g0o-Ed-Ir7" secondAttribute="trailing" constant="20" symbolic="YES" id="mSG-bl-IEh"/>
                 <constraint firstAttribute="trailing" secondItem="JdX-r2-hzF" secondAttribute="trailing" constant="20" symbolic="YES" id="o7t-EQ-Vef"/>
+                <constraint firstItem="g0o-Ed-Ir7" firstAttribute="top" secondItem="scI-wj-Vw8" secondAttribute="bottom" constant="8" symbolic="YES" id="qUR-sT-kDB"/>
                 <constraint firstAttribute="trailing" secondItem="vS5-S2-AnL" secondAttribute="trailing" constant="20" symbolic="YES" id="t6p-8O-g8a"/>
                 <constraint firstAttribute="trailing" secondItem="xYa-AK-Xkn" secondAttribute="trailing" constant="20" symbolic="YES" id="uGw-Ci-4D6"/>
+                <constraint firstItem="scI-wj-Vw8" firstAttribute="top" secondItem="JdX-r2-hzF" secondAttribute="bottom" constant="12" symbolic="YES" id="vdf-Ua-dfV"/>
             </constraints>
-            <point key="canvasLocation" x="17" y="205.5"/>
+            <point key="canvasLocation" x="17" y="269"/>
         </customView>
     </objects>
 </document>

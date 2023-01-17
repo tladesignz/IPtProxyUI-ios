@@ -34,9 +34,6 @@
 /* Transport */
 "custom bridges" = "custom bridges";
 
-/* CustomBridgesViewController */
-"E-Mail" = "E-Mail";
-
 /* MoatViewController */
 "Enter characters from image" = "Enter characters from image";
 
@@ -74,6 +71,9 @@
 "OK" = "OK";
 
 /* CustomBridgesViewController */
+"Other" = "Other";
+
+/* CustomBridgesViewController */
 "Paste Bridges" = "Paste Bridges";
 
 /* CustomBridgesViewController; placeholder is "" "https://bridges.torproject.org/" */
@@ -90,6 +90,9 @@
 
 /* CustomBridgesViewController */
 "Request via E-Mail" = "Request via E-Mail";
+
+/* CustomBridgesViewController */
+"Request via Telegram" = "Request via Telegram";
 
 /* ApiError */
 "Response body missing." = "Response body missing.";
