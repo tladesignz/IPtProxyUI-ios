@@ -36,7 +36,7 @@ open class MoatViewController: FixedFormViewController {
 	open override func viewDidLoad() {
 		super.viewDidLoad()
 
-		navigationItem.title = Self.requestBridgesText
+		navigationItem.title = L10n.requestBridges
 
 		navigationItem.rightBarButtonItem = UIBarButtonItem(
 			barButtonSystemItem: .refresh, target: self, action: #selector(fetchCaptcha(_:)))
@@ -45,18 +45,18 @@ open class MoatViewController: FixedFormViewController {
 		+++ Section("to be replaced in #willDisplayHeaderView to avoid capitalization")
 		<<< captchaRow
 			.cellUpdate({ cell, row in
-				cell.accessibilityLabel = Self.captchaImageText
+				cell.accessibilityLabel = L10n.captchaImage
 			})
 		+++ solutionRow
 			.cellSetup{ [weak self] _, row in
-				row.placeholder = Self.enterCharactersText
+				row.placeholder = L10n.enterCharacters
 
 				row.disabled = Condition.function(["captcha"]) { [weak self] _ in
 					return self?.challenge == nil
 				}
 			}
 		+++ ButtonRow() {
-			$0.title = Self.requestBridgesText
+			$0.title = L10n.requestBridges
 			$0.disabled = Condition.function(["solution"]) { [weak self] form in
 				return self?.challenge == nil
 				|| (form.rowBy(tag: "solution") as? AccountRow)?.value?.isEmpty ?? true
@@ -96,7 +96,7 @@ open class MoatViewController: FixedFormViewController {
 		if section == 0,
 		   let header = view as? UITableViewHeaderFooterView {
 
-			header.textLabel?.text = Self.explanationText
+			header.textLabel?.text = L10n.solveCaptcha
 		}
 	}
 

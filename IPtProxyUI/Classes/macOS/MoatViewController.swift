@@ -15,7 +15,7 @@ class MoatViewController: NSViewController, NSTextFieldDelegate {
 
 	@IBOutlet weak var explanationLb: NSTextField! {
 		didSet {
-			explanationLb.stringValue = Self.explanationText
+            explanationLb.stringValue = L10n.solveCaptcha
 		}
 	}
 
@@ -23,12 +23,12 @@ class MoatViewController: NSViewController, NSTextFieldDelegate {
 
 	@IBOutlet weak var captchaIv: NSImageView! {
 		didSet {
-			captchaIv.setAccessibilityLabel(Self.captchaImageText)
+			captchaIv.setAccessibilityLabel(L10n.captchaImage)
 		}
 	}
 	@IBOutlet weak var solutionTf: NSTextField! {
 		didSet {
-			solutionTf.placeholderString = Self.enterCharactersText
+			solutionTf.placeholderString = L10n.enterCharacters
 
 			solutionTf.delegate = self
 		}
@@ -36,7 +36,7 @@ class MoatViewController: NSViewController, NSTextFieldDelegate {
 
 	@IBOutlet weak var requestBt: NSButton! {
 		didSet {
-			requestBt.title = Self.requestBridgesText
+			requestBt.title = L10n.requestBridges
 
 			requestBt.isEnabled = false
 		}
@@ -53,7 +53,7 @@ class MoatViewController: NSViewController, NSTextFieldDelegate {
 	open override func viewWillAppear() {
 		super.viewWillAppear()
 
-		view.window?.title = Self.requestBridgesText
+		view.window?.title = L10n.requestBridges
 
 		view.window?.defaultButtonCell = requestBt.cell as? NSButtonCell
 

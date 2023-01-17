@@ -55,20 +55,20 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 		navigationItem.rightBarButtonItem?.isEnabled = !(textAreaRow.value?.isEmpty ?? true)
 
 		form
-		+++ Section(footer: explanationText)
+        +++ Section(footer: L10n.customBridgesExplanation)
 
 		+++ ButtonRow() {
-			$0.title = copyToClipboardText
+            $0.title = L10n.copyToClipboard
 		}
 		.cellUpdate({ cell, _ in
 			cell.accessibilityTraits = .button
 		})
 		.onCellSelection({ _, _ in
-			UIPasteboard.general.string = Self.bridgesUrl
+            UIPasteboard.general.string = Constants.bridgesUrl.absoluteString
 		})
 
-		+++ Section(pasteBridgesText)
-			<<< textAreaRow
+        +++ Section(L10n.pasteBridges)
+		<<< textAreaRow
 			.onChange({ [weak self] row in
 				self?.navigationItem.rightBarButtonItem?.isEnabled = !(row.value?.isEmpty ?? true)
 			})
@@ -137,7 +137,7 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 		var raw = ""
 
 		if let image = (info[.editedImage] ?? info[.originalImage]) as? UIImage,
-			let ciImage = image.ciImage ?? (image.cgImage != nil ? CIImage(cgImage: image.cgImage!) : nil)
+		   let ciImage = image.ciImage ?? (image.cgImage != nil ? CIImage(cgImage: image.cgImage!) : nil)
 		{
 			let features = detector?.features(in: ciImage)
 

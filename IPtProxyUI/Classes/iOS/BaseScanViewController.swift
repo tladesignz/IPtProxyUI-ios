@@ -38,7 +38,7 @@ enum ScanError: Error, LocalizedError {
 		case .notBridges:
 			return String(format: NSLocalizedString(
 				"QR Code could not be decoded! Are you sure you scanned a QR code from %@?",
-				bundle: .iPtProxyUI, comment: ""), IPtProxyUI.CustomBridgesViewController.bridgesUrl)
+                bundle: .iPtProxyUI, comment: ""), Constants.bridgesUrl.absoluteString)
 		}
 	}
 }

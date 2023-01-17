@@ -40,13 +40,13 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 
 	@IBOutlet weak var autoConfBox: NSBox! {
 		didSet {
-			autoConfBox.title = automaticConfigurationText
+            autoConfBox.title = L10n.automaticConfiguration
 		}
 	}
 
 	@IBOutlet weak var cannotConnectLb: NSTextField! {
 		didSet {
-			cannotConnectLb.stringValue = cannotConnectText
+            cannotConnectLb.stringValue = L10n.cannotConnect
 		}
 	}
 
@@ -54,61 +54,61 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 
 	@IBOutlet weak var tryAutoConfBt: NSButton! {
 		didSet {
-			tryAutoConfBt.title = tryAutoConfigurationText
+            tryAutoConfBt.title = L10n.tryAutoConfiguration
 		}
 	}
 
 	@IBOutlet weak var manualConfBox: NSBox! {
 		didSet {
-			manualConfBox.title = manualConfigurationText
+            manualConfBox.title = L10n.manualConfiguration
 		}
 	}
 
 	@IBOutlet weak var manualConfBt: NSButton! {
 		didSet {
-			manualConfBt.title = requestBridgesText
+            manualConfBt.title = L10n.requestBridges
 		}
 	}
 
 	@IBOutlet weak var noBridgesRb: NSButton! {
 		didSet {
-			noBridgesRb.title = noBridgesText
+            noBridgesRb.title = L10n.noBridges
 		}
 	}
 
 	@IBOutlet weak var obfs4Rb: NSButton! {
 		didSet {
-			obfs4Rb.title = builtInObfs4Text
+            obfs4Rb.title = L10n.builtInObfs4
 		}
 	}
 
 	@IBOutlet weak var snowflakeRb: NSButton! {
 		didSet {
-			snowflakeRb.title = builtInSnowflakeText
+            snowflakeRb.title = L10n.builtInSnowflake
 		}
 	}
 
 	@IBOutlet weak var snowflakeAmpRb: NSButton! {
 		didSet {
-			snowflakeAmpRb.title = builtInSnowflakeAmpText
+            snowflakeAmpRb.title = L10n.builtInSnowflakeAmp
 		}
 	}
 
 	@IBOutlet weak var customBridgesRb: NSButton! {
 		didSet {
-			customBridgesRb.title = customBridgesText
+            customBridgesRb.title = L10n.customBridges
 		}
 	}
 
 	@IBOutlet weak var descLb: NSTextField! {
 		didSet {
-			descLb.stringValue = explanationText
+            descLb.stringValue = L10n.bridgeTypeExplanation
 		}
 	}
 
 	@IBOutlet weak var cancelBt: NSButton! {
 		didSet {
-			cancelBt.title = cancelText
+            cancelBt.title = L10n.cancel
 		}
 	}
 
@@ -123,9 +123,9 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 	open override func viewWillAppear() {
 		super.viewWillAppear()
 
-		view.window?.title = bridgeConfigurationText
+        view.window?.title = L10n.bridgeConfiguration
 
-		saveBt.title = saveButtonTitle ?? saveText
+        saveBt.title = saveButtonTitle ?? L10n.save
 
 		view.window?.defaultButtonCell = saveBt.cell as? NSButtonCell
 	}

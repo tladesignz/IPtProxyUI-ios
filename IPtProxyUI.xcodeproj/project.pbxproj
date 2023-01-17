@@ -37,12 +37,13 @@
 		A072997328C0C97A0034BBAB /* MoatViewController+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072997228C0C97A0034BBAB /* MoatViewController+Shared.swift */; };
 		A072997828C0CE8A0034BBAB /* BridgesConfViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A072997728C0CE8A0034BBAB /* BridgesConfViewController.xib */; };
 		A072997A28C0CE910034BBAB /* BridgesConfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072997928C0CE910034BBAB /* BridgesConfViewController.swift */; };
-		A072997C28C0CE9B0034BBAB /* BridgesConfViewController+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072997B28C0CE9B0034BBAB /* BridgesConfViewController+Shared.swift */; };
+		A072997C28C0CE9B0034BBAB /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072997B28C0CE9B0034BBAB /* L10n.swift */; };
 		A08688192975ACC90032B141 /* BaseScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08688182975ACC90032B141 /* BaseScanViewController.swift */; };
 		A08983FC275935BB0078F3E6 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A08983E7275935BB0078F3E6 /* LICENSE */; };
 		A08983FE275935BB0078F3E6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A08983E9275935BB0078F3E6 /* README.md */; };
 		A08983FF275936630078F3E6 /* update-bridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983E8275935BB0078F3E6 /* update-bridges.swift */; };
 		A0898404275936AD0078F3E6 /* .bartycrouch.toml in Resources */ = {isa = PBXBuildFile; fileRef = A08984012759369A0078F3E6 /* .bartycrouch.toml */; };
+		A0A875BF2976F466007D4C4E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A875BE2976F466007D4C4E /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,7 +113,7 @@
 		A072997228C0C97A0034BBAB /* MoatViewController+Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MoatViewController+Shared.swift"; sourceTree = "<group>"; };
 		A072997728C0CE8A0034BBAB /* BridgesConfViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BridgesConfViewController.xib; sourceTree = "<group>"; };
 		A072997928C0CE910034BBAB /* BridgesConfViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgesConfViewController.swift; sourceTree = "<group>"; };
-		A072997B28C0CE9B0034BBAB /* BridgesConfViewController+Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BridgesConfViewController+Shared.swift"; sourceTree = "<group>"; };
+		A072997B28C0CE9B0034BBAB /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		A08688182975ACC90032B141 /* BaseScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScanViewController.swift; sourceTree = "<group>"; };
 		A08983A72759356C0078F3E6 /* IPtProxyUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IPtProxyUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A08983E5275935BB0078F3E6 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -124,6 +125,7 @@
 		A08984012759369A0078F3E6 /* .bartycrouch.toml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .bartycrouch.toml; sourceTree = "<group>"; };
 		A08984032759369A0078F3E6 /* config */ = {isa = PBXFileReference; lastKnownFileType = text; path = config; sourceTree = "<group>"; };
 		A09A099128E468DC00730CA5 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A0A875BE2976F466007D4C4E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,10 +160,11 @@
 				A01AB65628A55077008A79EE /* ApiError.swift */,
 				A01AB65828A55077008A79EE /* AutoConf.swift */,
 				A01AB65328A55077008A79EE /* BridgesConfDelegate.swift */,
-				A072997B28C0CE9B0034BBAB /* BridgesConfViewController+Shared.swift */,
 				A01AB65928A55077008A79EE /* Bundle+IPtProxyUI.swift */,
+				A0A875BE2976F466007D4C4E /* Constants.swift */,
 				A072996928C0BF2C0034BBAB /* CustomBridgesViewController+Shared.swift */,
 				A01AB65728A55077008A79EE /* IpSupport.swift */,
+				A072997B28C0CE9B0034BBAB /* L10n.swift */,
 				A01AB65528A55077008A79EE /* MeekURLProtocol.swift */,
 				A072997228C0C97A0034BBAB /* MoatViewController+Shared.swift */,
 				A01AB65428A55077008A79EE /* MoatApi.swift */,
@@ -429,7 +432,7 @@
 				A01AB65E28A55078008A79EE /* AlertHelper.swift in Sources */,
 				A072996828C0BF1C0034BBAB /* CustomBridgesViewController.swift in Sources */,
 				A072996A28C0BF2C0034BBAB /* CustomBridgesViewController+Shared.swift in Sources */,
-				A072997C28C0CE9B0034BBAB /* BridgesConfViewController+Shared.swift in Sources */,
+				A072997C28C0CE9B0034BBAB /* L10n.swift in Sources */,
 				A01AB65C28A55078008A79EE /* CustomBridgesViewController.swift in Sources */,
 				A01AB66428A55078008A79EE /* BridgesConfDelegate.swift in Sources */,
 				A06D525E28BCEF6D00D64BC7 /* MBProgressHUD.m in Sources */,
@@ -448,6 +451,7 @@
 				A01AB66728A55078008A79EE /* ApiError.swift in Sources */,
 				A01AB66628A55078008A79EE /* MeekURLProtocol.swift in Sources */,
 				A072997128C0C9560034BBAB /* MoatViewController.swift in Sources */,
+				A0A875BF2976F466007D4C4E /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

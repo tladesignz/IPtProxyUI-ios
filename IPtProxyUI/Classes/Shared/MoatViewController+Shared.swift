@@ -9,27 +9,6 @@ import Foundation
 
 extension MoatViewController {
 
-	public static var explanationText: String {
-		NSLocalizedString("Solve the CAPTCHA to request bridges.",
-						  bundle: .iPtProxyUI, comment: "")
-	}
-
-	public static var captchaImageText: String {
-		NSLocalizedString("CAPTCHA Image", bundle: .iPtProxyUI, comment: "")
-	}
-
-	public static var enterCharactersText: String {
-		NSLocalizedString("Enter characters from image",
-						  bundle: .iPtProxyUI, comment: "")
-	}
-
-
-	public static var requestBridgesText: String {
-		NSLocalizedString(
-			"Request Bridges", bundle: .iPtProxyUI, comment: "")
-	}
-
-
 	public class func fetchCaptcha(_ delegate: BridgesConfDelegate?,
 								   completion: @escaping ((_ challenge: String?, _ captcha: Data?, _ error: Error?) -> Void))
 	{
