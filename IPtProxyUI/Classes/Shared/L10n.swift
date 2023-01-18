@@ -135,4 +135,12 @@ public class L10n {
 	public static var ok: String {
 		NSLocalizedString("OK", bundle: .iPtProxyUI, comment: "")
 	}
+
+	public static var scanQrCode: String {
+		NSLocalizedString("Scan QR Code", bundle: .iPtProxyUI, comment: "")
+	}
+
+	public static var uploadQrCode: String {
+		NSLocalizedString("Upload QR Code", bundle: .iPtProxyUI, comment: "")
+	}
 }

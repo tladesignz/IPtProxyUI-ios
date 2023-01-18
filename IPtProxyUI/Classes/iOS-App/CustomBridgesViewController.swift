@@ -67,8 +67,7 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 
 		+++ Section(NSLocalizedString("Use QR Code", bundle: .iPtProxyUI, comment: ""))
 		<<< ButtonRow() {
-			$0.title = NSLocalizedString("Scan QR Code",
-										 bundle: .iPtProxyUI, comment: "")
+			$0.title = L10n.scanQrCode
 		}
 		.cellUpdate({ cell, _ in
 			cell.accessibilityTraits = .button
@@ -80,7 +79,7 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 			self?.navigationController?.pushViewController(vc, animated: true)
 		})
 		<<< ButtonRow() {
-			$0.title = NSLocalizedString("Upload QR Code", bundle: .iPtProxyUI, comment: "")
+			$0.title = L10n.uploadQrCode
 		}
 		.cellUpdate({ cell, _ in
 			cell.accessibilityTraits = .button

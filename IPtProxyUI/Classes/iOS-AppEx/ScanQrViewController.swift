@@ -13,8 +13,7 @@ open class ScanQrViewController: BaseScanViewController {
 	open override func viewDidLoad() {
 		super.viewDidLoad()
 
-		navigationItem.title = NSLocalizedString(
-			"Scan QR Code", bundle: .iPtProxyUI, comment: "")
+		navigationItem.title = L10n.scanQrCode
 
 		if #available(iOS 13.0, *) {
 			view.backgroundColor = .systemGroupedBackground
