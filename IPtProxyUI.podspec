@@ -32,8 +32,6 @@ Pod::Spec.new do |s|
 
 	s.swift_version = '5.5'
 
-	s.preserve_paths = 'update-bridges.sh', 'update-bridges.swift', '.bartycrouch.toml'
-
 	s.static_framework = true
 
 	s.dependency 'IPtProxy', '~> 1.9.0'
@@ -44,6 +42,8 @@ Pod::Spec.new do |s|
 	s.ios.dependency 'MBProgressHUD', '~> 1.2'
 
 	s.subspec 'AppEx' do |a|
+		a.preserve_paths = 'update-bridges.sh', 'update-bridges.swift', '.bartycrouch.toml'
+
 		a.ios.source_files = 'IPtProxyUI/Classes/{Shared,iOS-AppEx}/**/*'
 		a.osx.source_files = 'IPtProxyUI/Classes/{Shared,macOS}/**/*'
 
@@ -75,6 +75,8 @@ Pod::Spec.new do |s|
 	end
 
 	s.subspec 'App' do |a|
+		a.preserve_paths = 'update-bridges.sh', 'update-bridges.swift', '.bartycrouch.toml'
+
 		a.ios.source_files = 'IPtProxyUI/Classes/{Shared,iOS-App,iOS-AppEx}/**/*'
 		a.osx.source_files = 'IPtProxyUI/Classes/{Shared,macOS}/**/*'
 
