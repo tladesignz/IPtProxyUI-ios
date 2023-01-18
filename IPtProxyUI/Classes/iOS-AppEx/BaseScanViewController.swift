@@ -23,12 +23,12 @@ public protocol ScanQrDelegate: AnyObject {
 }
 
 
-enum ScanError: Error, LocalizedError {
+public enum ScanError: Error, LocalizedError {
 
 	case notSupported
 	case notBridges
 
-	var errorDescription: String? {
+	public var errorDescription: String? {
 		switch self {
 		case .notSupported:
 			return NSLocalizedString(
@@ -115,6 +115,24 @@ open class BaseScanViewController: UIViewController, AVCaptureMetadataOutputObje
 		else {
 			return nil
 		}
+	}
+
+	open class func extractBridges(from image: UIImage?) -> [String]? {
+		guard let ciImage = image?.ciImage ?? (image?.cgImage != nil ? CIImage(cgImage: image!.cgImage!) : nil),
+			  let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
+		else {
+			return nil
+		}
+
+		let features = detector.features(in: ciImage)
+
+		var raw = ""
+
+		for feature in features as? [CIQRCodeFeature] ?? [] {
+			raw += feature.messageString ?? ""
+		}
+
+		return Self.extractBridges(from: raw)
 	}
 
 

@@ -9,23 +9,15 @@
 import UIKit
 import Eureka
 import MessageUI
+import PhotosUI
 
 open class CustomBridgesViewController: FixedFormViewController, UIImagePickerControllerDelegate,
-										UINavigationControllerDelegate, MFMailComposeViewControllerDelegate,
-										ScanQrDelegate
+										PHPickerViewControllerDelegate, UINavigationControllerDelegate,
+										MFMailComposeViewControllerDelegate, ScanQrDelegate
 {
 
 	open weak var delegate: BridgesConfDelegate?
 
-
-	private lazy var picker: UIImagePickerController = {
-		let picker = UIImagePickerController()
-
-		picker.sourceType = .photoLibrary
-		picker.delegate = self
-
-		return picker
-	}()
 
 	private let textAreaRow = TextAreaRow() {
 		$0.placeholder = Transport.builtInObfs4Bridges.first
@@ -94,9 +86,30 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 			cell.accessibilityTraits = .button
 		})
 		.onCellSelection({ [weak self] _, _ in
-			if let self = self {
-				self.present(self.picker, animated: true)
+			guard let self = self else {
+				return
 			}
+
+			let picker: UIViewController
+
+			if #available(iOS 14.0, *) {
+				var conf = PHPickerConfiguration()
+				conf.filter = PHPickerFilter.images
+
+				let vc = PHPickerViewController(configuration: conf)
+				vc.delegate = self
+
+				picker = vc
+			}
+			else {
+				let vc = UIImagePickerController()
+				vc.sourceType = .photoLibrary
+				vc.delegate = self
+
+				picker = vc
+			}
+
+			self.present(picker, animated: true)
 		})
 
 
@@ -152,29 +165,23 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 	{
 		picker.dismiss(animated: true)
 
-		var raw = ""
-
-		if let image = (info[.editedImage] ?? info[.originalImage]) as? UIImage,
-		   let ciImage = image.ciImage ?? (image.cgImage != nil ? CIImage(cgImage: image.cgImage!) : nil)
-		{
-			let features = detector?.features(in: ciImage)
-
-			for feature in features as? [CIQRCodeFeature] ?? [] {
-				raw += feature.messageString ?? ""
-			}
-		}
-
-		if let bridges = BaseScanViewController.extractBridges(from: raw) {
-			textAreaRow.value = bridges.joined(separator: "\n")
-			textAreaRow.updateCell()
-		}
-		else {
-			AlertHelper.present(self, message: ScanError.notBridges.localizedDescription)
-		}
+		extract(from: (info[.editedImage] ?? info[.originalImage]) as? UIImage)
 	}
 
 	public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 		picker.dismiss(animated: true)
+	}
+
+
+	// MARK: PHPickerViewControllerDelegate
+
+	@available(iOS 14.0, *)
+	public func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+		picker.dismiss(animated: true)
+
+		results.first?.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
+			self?.extract(from: object as? UIImage)
+		}
 	}
 
 
@@ -211,5 +218,19 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 		Helpers.update(delegate: delegate, textAreaRow.value)
 
 		delegate?.save()
+	}
+
+	private func extract(from image: UIImage?) {
+		let bridges = BaseScanViewController.extractBridges(from: image)
+
+		DispatchQueue.main.async {
+			if let bridges = bridges {
+				self.textAreaRow.value = bridges.joined(separator: "\n")
+				self.textAreaRow.updateCell()
+			}
+			else {
+				AlertHelper.present(self, message: ScanError.notBridges.localizedDescription)
+			}
+		}
 	}
 }
