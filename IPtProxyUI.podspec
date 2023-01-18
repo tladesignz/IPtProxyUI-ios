@@ -34,24 +34,32 @@ Pod::Spec.new do |s|
 
 	s.preserve_paths = 'update-bridges.sh', 'update-bridges.swift', '.bartycrouch.toml'
 
-	s.ios.source_files = 'IPtProxyUI/Classes/{Shared,iOS}/**/*'
-	s.osx.source_files = 'IPtProxyUI/Classes/{Shared,macOS}/**/*'
-
-	s.ios.resource_bundles = {
-		'IPtProxyUI' => ['IPtProxyUI/Assets/{Shared,iOS}/**/*']
-	}
-	s.osx.resource_bundles = {
-		'IPtProxyUI' => ['IPtProxyUI/Assets/{Shared,macOS}/**/*']
-	}
-
 	s.static_framework = true
 
-	s.script_phases = [
+	s.dependency 'IPtProxy', '~> 1.9.0'
+	s.dependency 'ReachabilitySwift', '~> 5.0'
+
+	s.ios.dependency 'Eureka', '~> 5.3'
+	s.ios.dependency 'ImageRow', '~> 4.0'
+	s.ios.dependency 'MBProgressHUD', '~> 1.2'
+
+	s.subspec 'AppEx' do |a|
+		a.ios.source_files = 'IPtProxyUI/Classes/{Shared,iOS-AppEx}/**/*'
+		a.osx.source_files = 'IPtProxyUI/Classes/{Shared,macOS}/**/*'
+
+		a.ios.resource_bundles = {
+			'IPtProxyUI' => ['IPtProxyUI/Assets/{Shared,iOS}/**/*']
+		}
+		a.osx.resource_bundles = {
+			'IPtProxyUI' => ['IPtProxyUI/Assets/{Shared,macOS}/**/*']
+		}
+
+		a.script_phases = [
 		{
 			:name => 'Update Built-in Bridges',
 			:script => '"$PODS_TARGET_SRCROOT/update-bridges.sh"',
 			:execution_position => :before_compile,
-			:output_files => ['iptproxy-always-execute-this-but-supress-warning'],
+			:output_files => ['iptproxy-appex-always-execute-this-but-supress-warning'],
 		},
 #		{
 #			:name => 'BartyCrouch Automatic Localization',
@@ -63,23 +71,29 @@ Pod::Spec.new do |s|
 #fi
 #ENDSCRIPT
 #		}
-	]
-
-	s.dependency 'IPtProxy', '~> 1.9.0'
-	s.dependency 'ReachabilitySwift', '~> 5.0'
-
-	s.ios.dependency 'Eureka', '~> 5.3'
-	s.ios.dependency 'ImageRow', '~> 4.0'
-	s.ios.dependency 'MBProgressHUD', '~> 1.2'
-
-	s.subspec 'AppEx' do |ss|
-		ss.ios.source_files = 'IPtProxyUI/Classes/{Shared,iOS}/**/*'
-		ss.osx.source_files = 'IPtProxyUI/Classes/{Shared,macOS}/**/*'
-
-		ss.ios.exclude_files = [
-			'IPtProxyUI/Classes/iOS/BridgesConfViewController.swift',
-			'IPtProxyUI/Classes/iOS/CustomBridgesViewController.swift',
-			'IPtProxyUI/Classes/Shared/CustomBridgesViewController+Shared.swift'
 		]
 	end
+
+	s.subspec 'App' do |a|
+		a.ios.source_files = 'IPtProxyUI/Classes/{Shared,iOS-App,iOS-AppEx}/**/*'
+		a.osx.source_files = 'IPtProxyUI/Classes/{Shared,macOS}/**/*'
+
+		a.ios.resource_bundles = {
+			'IPtProxyUI' => ['IPtProxyUI/Assets/{Shared,iOS}/**/*']
+		}
+		a.osx.resource_bundles = {
+			'IPtProxyUI' => ['IPtProxyUI/Assets/{Shared,macOS}/**/*']
+		}
+
+		a.script_phases = [
+		{
+			:name => 'Update Built-in Bridges',
+			:script => '"$PODS_TARGET_SRCROOT/update-bridges.sh"',
+			:execution_position => :before_compile,
+			:output_files => ['iptproxy-app-always-execute-this-but-supress-warning'],
+		}
+		]
+	end
+
+	s.default_subspec = 'App'
 end

@@ -7,13 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A01AB65C28A55078008A79EE /* CustomBridgesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AB64A28A55077008A79EE /* CustomBridgesViewController.swift */; };
-		A01AB65D28A55078008A79EE /* MoatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AB64B28A55077008A79EE /* MoatViewController.swift */; };
-		A01AB65E28A55078008A79EE /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AB64C28A55077008A79EE /* AlertHelper.swift */; };
-		A01AB65F28A55078008A79EE /* CaptchaRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AB64D28A55077008A79EE /* CaptchaRow.swift */; };
-		A01AB66028A55078008A79EE /* FixedFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AB64E28A55077008A79EE /* FixedFormViewController.swift */; };
-		A01AB66128A55078008A79EE /* ScanQrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AB64F28A55077008A79EE /* ScanQrViewController.swift */; };
-		A01AB66228A55078008A79EE /* BridgesConfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AB65028A55077008A79EE /* BridgesConfViewController.swift */; };
 		A01AB66328A55078008A79EE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AB65228A55077008A79EE /* Settings.swift */; };
 		A01AB66428A55078008A79EE /* BridgesConfDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AB65328A55077008A79EE /* BridgesConfDelegate.swift */; };
 		A01AB66528A55078008A79EE /* MoatApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AB65428A55077008A79EE /* MoatApi.swift */; };
@@ -27,18 +20,25 @@
 		A01AB69628A5516C008A79EE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A01AB66E28A5516C008A79EE /* Localizable.strings */; };
 		A01AB69728A5516C008A79EE /* obfs4-bridges.plist in Resources */ = {isa = PBXBuildFile; fileRef = A01AB68828A5516C008A79EE /* obfs4-bridges.plist */; };
 		A01AB69828A5516C008A79EE /* CaptchaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A01AB69528A5516C008A79EE /* CaptchaCell.xib */; };
+		A05F55A429780E0F00D6B184 /* MoatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F559B29780E0F00D6B184 /* MoatViewController.swift */; };
+		A05F55A529780E0F00D6B184 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F559C29780E0F00D6B184 /* AlertHelper.swift */; };
+		A05F55A629780E0F00D6B184 /* BaseScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F559D29780E0F00D6B184 /* BaseScanViewController.swift */; };
+		A05F55A729780E0F00D6B184 /* CaptchaRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F559E29780E0F00D6B184 /* CaptchaRow.swift */; };
+		A05F55A829780E0F00D6B184 /* FixedFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F559F29780E0F00D6B184 /* FixedFormViewController.swift */; };
+		A05F55A929780E0F00D6B184 /* ScanQrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F55A029780E0F00D6B184 /* ScanQrViewController.swift */; };
+		A05F55AA29780E0F00D6B184 /* CustomBridgesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F55A229780E0F00D6B184 /* CustomBridgesViewController.swift */; };
+		A05F55AB29780E0F00D6B184 /* BridgesConfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F55A329780E0F00D6B184 /* BridgesConfViewController.swift */; };
 		A06D525D28BCEF6D00D64BC7 /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = A06D525A28BCEF6D00D64BC7 /* MBProgressHUD.h */; };
 		A06D525E28BCEF6D00D64BC7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A06D525B28BCEF6D00D64BC7 /* MBProgressHUD.m */; };
 		A072996628C0BF110034BBAB /* CustomBridgesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A072996528C0BF110034BBAB /* CustomBridgesViewController.xib */; };
 		A072996828C0BF1C0034BBAB /* CustomBridgesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072996728C0BF1C0034BBAB /* CustomBridgesViewController.swift */; };
-		A072996A28C0BF2C0034BBAB /* CustomBridgesViewController+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072996928C0BF2C0034BBAB /* CustomBridgesViewController+Shared.swift */; };
+		A072996A28C0BF2C0034BBAB /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072996928C0BF2C0034BBAB /* Helpers.swift */; };
 		A072996F28C0C94B0034BBAB /* MoatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A072996E28C0C94B0034BBAB /* MoatViewController.xib */; };
 		A072997128C0C9560034BBAB /* MoatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072997028C0C9560034BBAB /* MoatViewController.swift */; };
 		A072997328C0C97A0034BBAB /* MoatViewController+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072997228C0C97A0034BBAB /* MoatViewController+Shared.swift */; };
 		A072997828C0CE8A0034BBAB /* BridgesConfViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A072997728C0CE8A0034BBAB /* BridgesConfViewController.xib */; };
 		A072997A28C0CE910034BBAB /* BridgesConfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072997928C0CE910034BBAB /* BridgesConfViewController.swift */; };
 		A072997C28C0CE9B0034BBAB /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072997B28C0CE9B0034BBAB /* L10n.swift */; };
-		A08688192975ACC90032B141 /* BaseScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08688182975ACC90032B141 /* BaseScanViewController.swift */; };
 		A08983FC275935BB0078F3E6 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A08983E7275935BB0078F3E6 /* LICENSE */; };
 		A08983FE275935BB0078F3E6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A08983E9275935BB0078F3E6 /* README.md */; };
 		A08983FF275936630078F3E6 /* update-bridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983E8275935BB0078F3E6 /* update-bridges.swift */; };
@@ -47,13 +47,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A01AB64A28A55077008A79EE /* CustomBridgesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBridgesViewController.swift; sourceTree = "<group>"; };
-		A01AB64B28A55077008A79EE /* MoatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoatViewController.swift; sourceTree = "<group>"; };
-		A01AB64C28A55077008A79EE /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
-		A01AB64D28A55077008A79EE /* CaptchaRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptchaRow.swift; sourceTree = "<group>"; };
-		A01AB64E28A55077008A79EE /* FixedFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixedFormViewController.swift; sourceTree = "<group>"; };
-		A01AB64F28A55077008A79EE /* ScanQrViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanQrViewController.swift; sourceTree = "<group>"; };
-		A01AB65028A55077008A79EE /* BridgesConfViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgesConfViewController.swift; sourceTree = "<group>"; };
 		A01AB65228A55077008A79EE /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		A01AB65328A55077008A79EE /* BridgesConfDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgesConfDelegate.swift; sourceTree = "<group>"; };
 		A01AB65428A55077008A79EE /* MoatApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoatApi.swift; sourceTree = "<group>"; };
@@ -102,19 +95,26 @@
 		A01AB69228A5516C008A79EE /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A01AB69328A5516C008A79EE /* hu-HU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hu-HU"; path = "hu-HU.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A01AB69528A5516C008A79EE /* CaptchaCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptchaCell.xib; sourceTree = "<group>"; };
+		A05F559B29780E0F00D6B184 /* MoatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoatViewController.swift; sourceTree = "<group>"; };
+		A05F559C29780E0F00D6B184 /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
+		A05F559D29780E0F00D6B184 /* BaseScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScanViewController.swift; sourceTree = "<group>"; };
+		A05F559E29780E0F00D6B184 /* CaptchaRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptchaRow.swift; sourceTree = "<group>"; };
+		A05F559F29780E0F00D6B184 /* FixedFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixedFormViewController.swift; sourceTree = "<group>"; };
+		A05F55A029780E0F00D6B184 /* ScanQrViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanQrViewController.swift; sourceTree = "<group>"; };
+		A05F55A229780E0F00D6B184 /* CustomBridgesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBridgesViewController.swift; sourceTree = "<group>"; };
+		A05F55A329780E0F00D6B184 /* BridgesConfViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgesConfViewController.swift; sourceTree = "<group>"; };
 		A06B30AF28EC834400F34C17 /* update-bridges.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "update-bridges.sh"; sourceTree = "<group>"; };
 		A06D525A28BCEF6D00D64BC7 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		A06D525B28BCEF6D00D64BC7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		A072996528C0BF110034BBAB /* CustomBridgesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomBridgesViewController.xib; sourceTree = "<group>"; };
 		A072996728C0BF1C0034BBAB /* CustomBridgesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBridgesViewController.swift; sourceTree = "<group>"; };
-		A072996928C0BF2C0034BBAB /* CustomBridgesViewController+Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CustomBridgesViewController+Shared.swift"; sourceTree = "<group>"; };
+		A072996928C0BF2C0034BBAB /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		A072996E28C0C94B0034BBAB /* MoatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoatViewController.xib; sourceTree = "<group>"; };
 		A072997028C0C9560034BBAB /* MoatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoatViewController.swift; sourceTree = "<group>"; };
 		A072997228C0C97A0034BBAB /* MoatViewController+Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MoatViewController+Shared.swift"; sourceTree = "<group>"; };
 		A072997728C0CE8A0034BBAB /* BridgesConfViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BridgesConfViewController.xib; sourceTree = "<group>"; };
 		A072997928C0CE910034BBAB /* BridgesConfViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgesConfViewController.swift; sourceTree = "<group>"; };
 		A072997B28C0CE9B0034BBAB /* L10n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
-		A08688182975ACC90032B141 /* BaseScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScanViewController.swift; sourceTree = "<group>"; };
 		A08983A72759356C0078F3E6 /* IPtProxyUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IPtProxyUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A08983E5275935BB0078F3E6 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		A08983E6275935BB0078F3E6 /* IPtProxyUI.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IPtProxyUI.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -139,21 +139,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A01AB64928A55077008A79EE /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				A01AB64C28A55077008A79EE /* AlertHelper.swift */,
-				A01AB65028A55077008A79EE /* BridgesConfViewController.swift */,
-				A01AB64D28A55077008A79EE /* CaptchaRow.swift */,
-				A01AB64A28A55077008A79EE /* CustomBridgesViewController.swift */,
-				A01AB64E28A55077008A79EE /* FixedFormViewController.swift */,
-				A01AB64B28A55077008A79EE /* MoatViewController.swift */,
-				A08688182975ACC90032B141 /* BaseScanViewController.swift */,
-				A01AB64F28A55077008A79EE /* ScanQrViewController.swift */,
-			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
 		A01AB65128A55077008A79EE /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,7 +147,7 @@
 				A01AB65328A55077008A79EE /* BridgesConfDelegate.swift */,
 				A01AB65928A55077008A79EE /* Bundle+IPtProxyUI.swift */,
 				A0A875BE2976F466007D4C4E /* Constants.swift */,
-				A072996928C0BF2C0034BBAB /* CustomBridgesViewController+Shared.swift */,
+				A072996928C0BF2C0034BBAB /* Helpers.swift */,
 				A01AB65728A55077008A79EE /* IpSupport.swift */,
 				A072997B28C0CE9B0034BBAB /* L10n.swift */,
 				A01AB65528A55077008A79EE /* MeekURLProtocol.swift */,
@@ -190,6 +175,28 @@
 				A01AB69528A5516C008A79EE /* CaptchaCell.xib */,
 			);
 			path = iOS;
+			sourceTree = "<group>";
+		};
+		A05F559A29780E0F00D6B184 /* iOS-AppEx */ = {
+			isa = PBXGroup;
+			children = (
+				A05F559B29780E0F00D6B184 /* MoatViewController.swift */,
+				A05F559C29780E0F00D6B184 /* AlertHelper.swift */,
+				A05F559D29780E0F00D6B184 /* BaseScanViewController.swift */,
+				A05F559E29780E0F00D6B184 /* CaptchaRow.swift */,
+				A05F559F29780E0F00D6B184 /* FixedFormViewController.swift */,
+				A05F55A029780E0F00D6B184 /* ScanQrViewController.swift */,
+			);
+			path = "iOS-AppEx";
+			sourceTree = "<group>";
+		};
+		A05F55A129780E0F00D6B184 /* iOS-App */ = {
+			isa = PBXGroup;
+			children = (
+				A05F55A229780E0F00D6B184 /* CustomBridgesViewController.swift */,
+				A05F55A329780E0F00D6B184 /* BridgesConfViewController.swift */,
+			);
+			path = "iOS-App";
 			sourceTree = "<group>";
 		};
 		A06D525528BCEF6200D64BC7 /* macOS */ = {
@@ -262,8 +269,9 @@
 		A08983D7275935BB0078F3E6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A05F55A129780E0F00D6B184 /* iOS-App */,
+				A05F559A29780E0F00D6B184 /* iOS-AppEx */,
 				A06D525828BCEF6D00D64BC7 /* macOS */,
-				A01AB64928A55077008A79EE /* iOS */,
 				A01AB65128A55077008A79EE /* Shared */,
 			);
 			path = Classes;
@@ -427,29 +435,29 @@
 			files = (
 				A01AB66B28A55078008A79EE /* URLSession+IPtProxyUI.swift in Sources */,
 				A01AB66C28A55078008A79EE /* Transport.swift in Sources */,
-				A01AB65F28A55078008A79EE /* CaptchaRow.swift in Sources */,
+				A05F55AA29780E0F00D6B184 /* CustomBridgesViewController.swift in Sources */,
+				A05F55AB29780E0F00D6B184 /* BridgesConfViewController.swift in Sources */,
 				A072997328C0C97A0034BBAB /* MoatViewController+Shared.swift in Sources */,
-				A01AB65E28A55078008A79EE /* AlertHelper.swift in Sources */,
+				A05F55A929780E0F00D6B184 /* ScanQrViewController.swift in Sources */,
+				A05F55A829780E0F00D6B184 /* FixedFormViewController.swift in Sources */,
+				A05F55A429780E0F00D6B184 /* MoatViewController.swift in Sources */,
+				A05F55A629780E0F00D6B184 /* BaseScanViewController.swift in Sources */,
 				A072996828C0BF1C0034BBAB /* CustomBridgesViewController.swift in Sources */,
-				A072996A28C0BF2C0034BBAB /* CustomBridgesViewController+Shared.swift in Sources */,
+				A072996A28C0BF2C0034BBAB /* Helpers.swift in Sources */,
 				A072997C28C0CE9B0034BBAB /* L10n.swift in Sources */,
-				A01AB65C28A55078008A79EE /* CustomBridgesViewController.swift in Sources */,
 				A01AB66428A55078008A79EE /* BridgesConfDelegate.swift in Sources */,
 				A06D525E28BCEF6D00D64BC7 /* MBProgressHUD.m in Sources */,
 				A01AB66A28A55078008A79EE /* Bundle+IPtProxyUI.swift in Sources */,
-				A01AB66028A55078008A79EE /* FixedFormViewController.swift in Sources */,
 				A01AB66928A55078008A79EE /* AutoConf.swift in Sources */,
 				A08983FF275936630078F3E6 /* update-bridges.swift in Sources */,
 				A01AB66528A55078008A79EE /* MoatApi.swift in Sources */,
 				A072997A28C0CE910034BBAB /* BridgesConfViewController.swift in Sources */,
-				A01AB65D28A55078008A79EE /* MoatViewController.swift in Sources */,
+				A05F55A729780E0F00D6B184 /* CaptchaRow.swift in Sources */,
 				A01AB66828A55078008A79EE /* IpSupport.swift in Sources */,
 				A01AB66328A55078008A79EE /* Settings.swift in Sources */,
-				A08688192975ACC90032B141 /* BaseScanViewController.swift in Sources */,
-				A01AB66128A55078008A79EE /* ScanQrViewController.swift in Sources */,
-				A01AB66228A55078008A79EE /* BridgesConfViewController.swift in Sources */,
 				A01AB66728A55078008A79EE /* ApiError.swift in Sources */,
 				A01AB66628A55078008A79EE /* MeekURLProtocol.swift in Sources */,
+				A05F55A529780E0F00D6B184 /* AlertHelper.swift in Sources */,
 				A072997128C0C9560034BBAB /* MoatViewController.swift in Sources */,
 				A0A875BF2976F466007D4C4E /* Constants.swift in Sources */,
 			);

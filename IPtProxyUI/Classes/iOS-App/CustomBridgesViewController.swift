@@ -55,19 +55,19 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 		navigationItem.rightBarButtonItem?.isEnabled = !(textAreaRow.value?.isEmpty ?? true)
 
 		form
-        +++ Section(footer: L10n.customBridgesExplanation)
+		+++ Section(footer: L10n.customBridgesExplanation)
 
 		+++ ButtonRow() {
-            $0.title = L10n.copyToClipboard
+			$0.title = L10n.copyToClipboard
 		}
 		.cellUpdate({ cell, _ in
 			cell.accessibilityTraits = .button
 		})
 		.onCellSelection({ _, _ in
-            UIPasteboard.general.string = Constants.bridgesUrl.absoluteString
+			UIPasteboard.general.string = Constants.bridgesUrl.absoluteString
 		})
 
-        +++ Section(L10n.pasteBridges)
+		+++ Section(L10n.pasteBridges)
 		<<< textAreaRow
 			.onChange({ [weak self] row in
 				self?.navigationItem.rightBarButtonItem?.isEnabled = !(row.value?.isEmpty ?? true)
@@ -108,7 +108,7 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 		if MFMailComposeViewController.canSendMail() {
 			form.last!
 			<<< ButtonRow() {
-                $0.title = L10n.requestViaEmail
+				$0.title = L10n.requestViaEmail
 			}
 			.cellUpdate({ cell, _ in
 				cell.accessibilityTraits = .button
@@ -127,7 +127,7 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 		if UIApplication.shared.canOpenURL(Constants.telegramBot) {
 			form.last!
 			<<< ButtonRow() {
-                $0.title = L10n.requestViaTelegram
+				$0.title = L10n.requestViaTelegram
 			}
 			.cellUpdate({ cell, _ in
 				cell.accessibilityTraits = .button
@@ -141,7 +141,7 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 	open override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 
-		updateDelegate(textAreaRow.value)
+		Helpers.update(delegate: delegate, textAreaRow.value)
 	}
 
 
@@ -208,7 +208,7 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 
 	@objc
 	private func save() {
-		updateDelegate(textAreaRow.value)
+		Helpers.update(delegate: delegate, textAreaRow.value)
 
 		delegate?.save()
 	}

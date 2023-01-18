@@ -1,5 +1,5 @@
 //
-//  CustomBridgesViewController+Shared.swift
+//  Helpers.swift
 //  IPtProxyUI
 //
 //  Created by Benjamin Erhart on 01.09.22.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension CustomBridgesViewController {
+public class Helpers {
 	
-	public func updateDelegate(_ customBridges: String?) {
+	public class func update(delegate: BridgesConfDelegate?, _ customBridges: String?) {
 		delegate?.customBridges = customBridges?
 				.components(separatedBy: "\n")
 				.map({ $0.trimmingCharacters(in: .whitespacesAndNewlines) })

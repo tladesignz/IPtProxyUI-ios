@@ -64,7 +64,7 @@ open class CustomBridgesViewController: NSViewController {
 	open override func viewWillDisappear() {
 		super.viewWillDisappear()
 
-		updateDelegate(bridgesTf.stringValue)
+		Helpers.update(delegate: delegate, bridgesTf.stringValue)
 	}
 
 
