@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 	s.name             = 'IPtProxyUI'
-	s.version          = '1.10.5'
+	s.version          = '1.11.0'
 	s.summary          = 'IPtProxyUI provides a UI to configure bridges for all Pluggable Transports available in the IPtProxy package.'
 
 	s.description      = <<-DESC

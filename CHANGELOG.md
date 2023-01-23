@@ -1,5 +1,12 @@
 # IPtProxyUI
 
+## 1.11.0
+- Added Telegram Bot support.
+- Updated default Obfs4 bridges list.
+- Updated translations.
+- Reorganized code for easier reuse.
+Contains minimal breaking changes!
+
 ## 1.10.5
 - Updated to IPtProxy 1.9.0.
 - Updated default Obfs4 bridges list.
