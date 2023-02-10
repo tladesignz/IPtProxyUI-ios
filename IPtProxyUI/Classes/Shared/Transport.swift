@@ -23,7 +23,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 		return NSArray(contentsOf: file) as? [String] ?? []
 	}()
 
-	public static let stunServers = "stun:stun.l.google.com:19302,stun:stun.voip.blackberry.com:3478,stun:stun.antisip.com:3478,stun:stun.bluesip.net:3478,stun:stun.dus.net:3478,stun:stun.epygi.com:3478,stun:stun.sonetel.com:3478,stun:stun.uls.co.za:3478,stun:stun.voipgate.com:3478,stun:stun.voys.nl:3478"
+	public static let stunServers = "stun:stun.l.google.com:19302,stun:stun.antisip.com:3478,stun:stun.bluesip.net:3478,stun:stun.dus.net:3478,stun:stun.epygi.com:3478,stun:stun.sonetel.net:3478,stun:stun.uls.co.za:3478,stun:stun.voipgate.com:3478,stun:stun.voys.nl:3478"
 
 	public static let order: [Transport] = [.none, .obfs4, .snowflake, .snowflakeAmp, .custom]
 
