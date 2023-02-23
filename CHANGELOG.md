@@ -1,5 +1,13 @@
 # IPtProxyUI
 
+## 2.0.0
+- Updated to IPtProxy 2.0.0 which has it's API changed. You will now need to 
+  define a `TOR_PT_STATE_LOCATION` directory voluntarily before using any transport, 
+  either through `IPtProxy.setStateLocation()` or through 
+  `IPtProxyUI.Settings.stateLocation`!
+- Updated default Obfs4 bridges list.
+- Updated Snowflake STUN server list.
+
 ## 1.11.0
 - Added Telegram Bot support.
 - Updated default Obfs4 bridges list.

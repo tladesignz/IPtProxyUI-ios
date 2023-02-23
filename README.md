@@ -10,7 +10,7 @@ This package provides some scenes and configuration code which is shared between
 different apps using the `IPtProxy` package together with `Tor.framework`.
 
 The UI is complete for your users to configure all aspects of the Transports,
-including MOAT support to fetch new Obfs4 proxies.
+including MOAT/rdsys support to fetch new Obfs4 proxies.
 
 The configuration provided is good for using the PTs together with Tor.
 
@@ -25,6 +25,21 @@ it, simply add the following line to your Podfile:
 
 ```ruby
 pod 'IPtProxyUI'
+```
+
+## Getting Started
+
+```swift
+use IPtProxyUI
+
+// ATTENTION: Since IPtProxy 2.0.0 this needs to be set explicitly before starting a transport!
+Settings.stateLocation = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("pt_state")
+
+Transport.obfs4.start(log: true)
+
+print((try? String(contentsOf: Transport.obfs4.logFile!)) ?? "throwed")
+
+Transport.obfs4.stop()
 ```
 
 
