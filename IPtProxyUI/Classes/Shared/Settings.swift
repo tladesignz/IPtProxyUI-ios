@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import IPtProxy
 
 open class Settings {
 
@@ -29,6 +30,15 @@ open class Settings {
 		}
 		set {
 			defaults?.set(newValue, forKey: "customBridges")
+		}
+	}
+
+	open class var stateLocation: URL {
+		get {
+			URL(fileURLWithPath: IPtProxy.stateLocation())
+		}
+		set {
+			IPtProxy.setStateLocation(newValue.path)
 		}
 	}
 }

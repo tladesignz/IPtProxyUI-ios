@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
 
 	s.static_framework = true
 
-	s.dependency 'IPtProxy', '~> 1.9.0'
+	s.dependency 'IPtProxy', '~> 2.0.0'
 	s.dependency 'ReachabilitySwift', '~> 5.0'
 
 	s.ios.dependency 'Eureka', '~> 5.3'

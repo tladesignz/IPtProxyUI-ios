@@ -35,7 +35,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 		return ["key": key, "value": "\"\(value)\""]
 	}
 
-    private static let snowflakeLogFileName = "snowflake.log"
+	private static let snowflakeLogFileName = "snowflake.log"
 
 
 	// MARK: Comparable
@@ -71,18 +71,24 @@ public enum Transport: Int, CaseIterable, Comparable {
 		}
 	}
 
-    public var logFile: URL? {
-        switch self {
-        case .obfs4, .custom:
-            return URL(fileURLWithPath: IPtProxy.stateLocation()).appendingPathComponent(IPtProxyObfs4proxyLogFile())
+	/**
+	 Returns the location of the log file of the transport, if it can provide any.
 
-        case .snowflake, .snowflakeAmp:
-            return URL(fileURLWithPath: IPtProxy.stateLocation()).appendingPathComponent(Self.snowflakeLogFileName)
+	 ATTENTION: You will need to have set `Settings.stateLocation` to a writable directory before calling this!
+	 Otherwise this will return nonsense.
+	 */
+	public var logFile: URL? {
+		switch self {
+		case .obfs4, .custom:
+			return Settings.stateLocation.appendingPathComponent(IPtProxyObfs4proxyLogFile())
 
-        default:
-            return nil
-        }
-    }
+		case .snowflake, .snowflakeAmp:
+			return Settings.stateLocation.appendingPathComponent(Self.snowflakeLogFileName)
+
+		default:
+			return nil
+		}
+	}
 
 	/**
 	 Start the transport, if it is startable.
@@ -98,15 +104,15 @@ public enum Transport: Int, CaseIterable, Comparable {
 			IPtProxyStartSnowflake(
 				Self.stunServers,
 				"https://snowflake-broker.torproject.net.global.prod.fastly.net/",
-                "cdn.sstatic.net", nil,
-                log ? Self.snowflakeLogFileName : nil, true, false, false, 1)
+				"cdn.sstatic.net", nil,
+				log ? Self.snowflakeLogFileName : nil, true, false, false, 1)
 
 		case .snowflakeAmp:
 			IPtProxyStartSnowflake(
 				Self.stunServers,
 				"https://snowflake-broker.torproject.net/",
 				"www.google.com", "https://cdn.ampproject.org/",
-                log ? Self.snowflakeLogFileName : nil, true, false, false, 1)
+				log ? Self.snowflakeLogFileName : nil, true, false, false, 1)
 
 		default:
 			break
