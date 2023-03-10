@@ -11,20 +11,6 @@ import IPtProxy
 
 public enum Transport: Int, CaseIterable, Comparable {
 
-	public static var builtInObfs4BridgesFile: URL? {
-		return Bundle.iPtProxyUI.url(forResource: "obfs4-bridges", withExtension: "plist")
-	}
-
-	public static var builtInObfs4Bridges: [String] = {
-		guard let file = builtInObfs4BridgesFile else {
-			return []
-		}
-
-		return NSArray(contentsOf: file) as? [String] ?? []
-	}()
-
-	public static let stunServers = "stun:stun.l.google.com:19302,stun:stun.antisip.com:3478,stun:stun.bluesip.net:3478,stun:stun.dus.net:3478,stun:stun.epygi.com:3478,stun:stun.sonetel.net:3478,stun:stun.uls.co.za:3478,stun:stun.voipgate.com:3478,stun:stun.voys.nl:3478"
-
 	public static let order: [Transport] = [.none, .obfs4, .snowflake, .snowflakeAmp, .custom]
 
 	public static func asArguments(key: String, value: String) -> [String] {
@@ -101,15 +87,17 @@ public enum Transport: Int, CaseIterable, Comparable {
 			IPtProxyStartObfs4Proxy("WARN", log, false, nil)
 
 		case .snowflake:
+			let snowflake = BuiltInBridges.shared?.snowflake?.first
+
 			IPtProxyStartSnowflake(
-				Self.stunServers,
-				"https://snowflake-broker.torproject.net.global.prod.fastly.net/",
-				"cdn.sstatic.net", nil,
+				snowflake?.ice,
+				snowflake?.url?.absoluteString,
+				snowflake?.front, nil,
 				log ? Self.snowflakeLogFileName : nil, true, false, false, 1)
 
 		case .snowflakeAmp:
 			IPtProxyStartSnowflake(
-				Self.stunServers,
+				BuiltInBridges.shared?.snowflake?.first?.ice,
 				"https://snowflake-broker.torproject.net/",
 				"www.google.com", "https://cdn.ampproject.org/",
 				log ? Self.snowflakeLogFileName : nil, true, false, false, 1)
@@ -140,7 +128,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 			conf.append(cv("ClientTransportPlugin", "obfs4 socks5 127.0.0.1:\(IPtProxyObfs4Port())"))
 
 			if self == .obfs4 {
-				conf += Self.builtInObfs4Bridges.map({ cv("Bridge", $0) })
+				conf += BuiltInBridges.shared?.obfs4?.map({ cv("Bridge", $0.raw) }) ?? []
 			}
 			else if let customBridges = Settings.customBridges {
 				conf += customBridges.map({ cv("Bridge", $0) })
@@ -148,7 +136,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 		case .snowflake, .snowflakeAmp:
 			conf.append(cv("ClientTransportPlugin", "snowflake socks5 127.0.0.1:\(IPtProxySnowflakePort())"))
-			conf.append(cv("Bridge", "snowflake 192.0.2.3:1 2B280B23E1107BB62ABFC40DDCC8824814F80A72"))
+			conf += BuiltInBridges.shared?.snowflake?.map({ cv("Bridge", $0.raw) }) ?? []
 
 		default:
 			break

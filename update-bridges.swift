@@ -12,7 +12,7 @@ import Foundation
 
 let request = MoatApi.buildRequest(.builtin)
 
-let outfile = resolve("IPtProxyUI/Assets/Shared/obfs4-bridges.plist")
+let outfile = resolve("IPtProxyUI/Assets/Shared/builtin-bridges.json")
 
 
 
@@ -41,32 +41,22 @@ guard Calendar.current.dateComponents([.day], from: modified, to: Date()).day ??
 }
 
 
-let task = URLSession.shared.apiTask(with: request!) { (response: [String: [String]]?, error) in
+let task = URLSession.shared.apiTask(with: request!) { (response: Data?, error) in
 //	print("response=\(String(describing: response)), error=\(String(describing: error))")
 
 	if let error = error {
 		return exit(error.localizedDescription)
 	}
 
-	let bridges = response?["obfs4"] ?? []
-
-	let encoder = PropertyListEncoder()
-	encoder.outputFormat = .xml
-
-	let output: Data
-
-	do {
-		output = try encoder.encode(bridges)
-	}
-	catch {
-		return exit("Plist could not be encoded! error=\(error)")
+	guard let response = response else {
+		return exit("Empty response!")
 	}
 
 	do {
-		try output.write(to: outfile, options: .atomic)
+		try response.write(to: outfile, options: .atomic)
 	}
 	catch {
-		exit("Plist file could not be written! error=\(error)")
+		exit("JSON file could not be written! error=\(error)")
 	}
 
 	exit(0)

@@ -18,7 +18,6 @@
 		A01AB66B28A55078008A79EE /* URLSession+IPtProxyUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AB65A28A55077008A79EE /* URLSession+IPtProxyUI.swift */; };
 		A01AB66C28A55078008A79EE /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01AB65B28A55078008A79EE /* Transport.swift */; };
 		A01AB69628A5516C008A79EE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A01AB66E28A5516C008A79EE /* Localizable.strings */; };
-		A01AB69728A5516C008A79EE /* obfs4-bridges.plist in Resources */ = {isa = PBXBuildFile; fileRef = A01AB68828A5516C008A79EE /* obfs4-bridges.plist */; };
 		A01AB69828A5516C008A79EE /* CaptchaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A01AB69528A5516C008A79EE /* CaptchaCell.xib */; };
 		A05F55A429780E0F00D6B184 /* MoatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F559B29780E0F00D6B184 /* MoatViewController.swift */; };
 		A05F55A529780E0F00D6B184 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F559C29780E0F00D6B184 /* AlertHelper.swift */; };
@@ -43,6 +42,8 @@
 		A08983FE275935BB0078F3E6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A08983E9275935BB0078F3E6 /* README.md */; };
 		A08983FF275936630078F3E6 /* update-bridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08983E8275935BB0078F3E6 /* update-bridges.swift */; };
 		A0898404275936AD0078F3E6 /* .bartycrouch.toml in Resources */ = {isa = PBXBuildFile; fileRef = A08984012759369A0078F3E6 /* .bartycrouch.toml */; };
+		A0A15D0D29BB5F810084B046 /* BuiltInBridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A15D0C29BB5F810084B046 /* BuiltInBridges.swift */; };
+		A0A15D0F29BB62690084B046 /* builtin-bridges.json in Resources */ = {isa = PBXBuildFile; fileRef = A0A15D0E29BB62690084B046 /* builtin-bridges.json */; };
 		A0A875BF2976F466007D4C4E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A875BE2976F466007D4C4E /* Constants.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,7 +83,6 @@
 		A01AB68528A5516C008A79EE /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A01AB68628A5516C008A79EE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A01AB68728A5516C008A79EE /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		A01AB68828A5516C008A79EE /* obfs4-bridges.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "obfs4-bridges.plist"; sourceTree = "<group>"; };
 		A01AB68928A5516C008A79EE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A01AB68A28A5516C008A79EE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A01AB68B28A5516C008A79EE /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -125,6 +125,8 @@
 		A08984012759369A0078F3E6 /* .bartycrouch.toml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .bartycrouch.toml; sourceTree = "<group>"; };
 		A08984032759369A0078F3E6 /* config */ = {isa = PBXFileReference; lastKnownFileType = text; path = config; sourceTree = "<group>"; };
 		A09A099128E468DC00730CA5 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A0A15D0C29BB5F810084B046 /* BuiltInBridges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuiltInBridges.swift; sourceTree = "<group>"; };
+		A0A15D0E29BB62690084B046 /* builtin-bridges.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "builtin-bridges.json"; sourceTree = "<group>"; };
 		A0A875BE2976F466007D4C4E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,6 +147,7 @@
 				A01AB65628A55077008A79EE /* ApiError.swift */,
 				A01AB65828A55077008A79EE /* AutoConf.swift */,
 				A01AB65328A55077008A79EE /* BridgesConfDelegate.swift */,
+				A0A15D0C29BB5F810084B046 /* BuiltInBridges.swift */,
 				A01AB65928A55077008A79EE /* Bundle+IPtProxyUI.swift */,
 				A0A875BE2976F466007D4C4E /* Constants.swift */,
 				A072996928C0BF2C0034BBAB /* Helpers.swift */,
@@ -163,7 +166,7 @@
 		A01AB66D28A5516C008A79EE /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				A01AB68828A5516C008A79EE /* obfs4-bridges.plist */,
+				A0A15D0E29BB62690084B046 /* builtin-bridges.json */,
 				A01AB66E28A5516C008A79EE /* Localizable.strings */,
 			);
 			path = Shared;
@@ -393,7 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A08983FC275935BB0078F3E6 /* LICENSE in Resources */,
-				A01AB69728A5516C008A79EE /* obfs4-bridges.plist in Resources */,
+				A0A15D0F29BB62690084B046 /* builtin-bridges.json in Resources */,
 				A01AB69828A5516C008A79EE /* CaptchaCell.xib in Resources */,
 				A072996628C0BF110034BBAB /* CustomBridgesViewController.xib in Resources */,
 				A01AB69628A5516C008A79EE /* Localizable.strings in Resources */,
@@ -447,6 +450,7 @@
 				A072997C28C0CE9B0034BBAB /* L10n.swift in Sources */,
 				A01AB66428A55078008A79EE /* BridgesConfDelegate.swift in Sources */,
 				A06D525E28BCEF6D00D64BC7 /* MBProgressHUD.m in Sources */,
+				A0A15D0D29BB5F810084B046 /* BuiltInBridges.swift in Sources */,
 				A01AB66A28A55078008A79EE /* Bundle+IPtProxyUI.swift in Sources */,
 				A01AB66928A55078008A79EE /* AutoConf.swift in Sources */,
 				A08983FF275936630078F3E6 /* update-bridges.swift in Sources */,

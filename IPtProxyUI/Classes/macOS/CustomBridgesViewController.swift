@@ -42,7 +42,7 @@ open class CustomBridgesViewController: NSViewController {
 
 	@IBOutlet weak var bridgesTf: NSTextField! {
 		didSet {
-			bridgesTf.placeholderString = Transport.builtInObfs4Bridges.prefix(2).joined(separator: "\n")
+			bridgesTf.placeholderString = BuiltInBridges.shared?.obfs4?.prefix(2).map({ $0.raw }).joined(separator: "\n")
 			bridgesTf.stringValue = delegate?.customBridges?.joined(separator: "\n") ?? ""
 		}
 	}

@@ -39,6 +39,11 @@ public extension URLSession {
 				completion?(nil, error)
 				return
 			}
+
+			if String(describing: T.self) == "Data" {
+				completion?(data as? T, nil)
+				return
+			}
 			
 			do {
 				completion?(try MoatApi.decoder.decode(T.self, from: data), nil)

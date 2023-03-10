@@ -20,7 +20,8 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 
 
 	private let textAreaRow = TextAreaRow() {
-		$0.placeholder = Transport.builtInObfs4Bridges.first
+		$0.placeholder = BuiltInBridges.shared?.obfs4?.first?.raw
+		$0.cell.clipsToBounds = true
 		$0.cell.placeholderLabel?.font = .systemFont(ofSize: 15)
 		$0.cell.textLabel?.font = .systemFont(ofSize: 15)
 	}
