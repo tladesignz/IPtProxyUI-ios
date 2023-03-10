@@ -1,0 +1,17 @@
+use_frameworks!
+
+target 'IPtProxyUI_Example' do
+  platform :ios, '11.0'
+
+  pod 'IPtProxyUI', :path => '../'
+
+  target 'IPtProxyUI_Tests' do
+    inherit! :search_paths
+  end
+end
+
+target 'IPtProxyUI_Mac_Example' do
+  platform :osx, '11'
+
+  pod 'IPtProxyUI', :path => '../'
+end

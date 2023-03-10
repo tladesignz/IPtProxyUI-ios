@@ -1,0 +1,47 @@
+PODS:
+  - Eureka (5.3.6)
+  - ImageRow (4.1.0):
+    - Eureka (~> 5.3.5)
+  - IPtProxy (2.0.0)
+  - IPtProxyUI (2.1.0):
+    - Eureka (~> 5.3)
+    - ImageRow (~> 4.0)
+    - IPtProxy (~> 2.0.0)
+    - IPtProxyUI/App (= 2.1.0)
+    - MBProgressHUD (~> 1.2)
+    - ReachabilitySwift (~> 5.0)
+  - IPtProxyUI/App (2.1.0):
+    - Eureka (~> 5.3)
+    - ImageRow (~> 4.0)
+    - IPtProxy (~> 2.0.0)
+    - MBProgressHUD (~> 1.2)
+    - ReachabilitySwift (~> 5.0)
+  - MBProgressHUD (1.2.0)
+  - ReachabilitySwift (5.0.0)
+
+DEPENDENCIES:
+  - IPtProxyUI (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Eureka
+    - ImageRow
+    - IPtProxy
+    - MBProgressHUD
+    - ReachabilitySwift
+
+EXTERNAL SOURCES:
+  IPtProxyUI:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Eureka: 28ad9dec6286cd7cd601fdf8e8df39bb7356a8f4
+  ImageRow: 880c0f052c5a89c80521b485c86ccf723a124e99
+  IPtProxy: d33e998c68686b1e706612c310d246187c06c907
+  IPtProxyUI: 60965d112972248e468d457c69eabdfb0747d7ed
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+
+PODFILE CHECKSUM: 26058ff7186d83a70e40e44adb28d670c3f0e3f4
+
+COCOAPODS: 1.12.0
