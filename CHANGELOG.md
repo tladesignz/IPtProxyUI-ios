@@ -1,5 +1,11 @@
 # IPtProxyUI
 
+## 2.1.0
+- Replaced hardcoded Snowflake configuration with configuration from Tor Project's
+  bridge configuration API, which now contains 2(!) Snowflake bridges.
+- Updated default bridges list.
+- Updated translations.
+
 ## 2.0.0
 - Updated to IPtProxy 2.0.0 which has it's API changed. You will now need to 
   define a `TOR_PT_STATE_LOCATION` directory voluntarily before using any transport, 
