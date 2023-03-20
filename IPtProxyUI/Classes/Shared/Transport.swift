@@ -36,6 +36,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	case snowflake = 2
 	case custom = 3
 	case snowflakeAmp = 4
+	case onDemand = 5
 
 
 	public var description: String {
@@ -52,6 +53,9 @@ public enum Transport: Int, CaseIterable, Comparable {
 		case .custom:
 			return NSLocalizedString("custom bridges", bundle: .iPtProxyUI, comment: "")
 
+		case .onDemand:
+			return NSLocalizedString("On-demand bridges", comment: "")
+
 		default:
 			return ""
 		}
@@ -65,7 +69,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	 */
 	public var logFile: URL? {
 		switch self {
-		case .obfs4, .custom:
+		case .obfs4, .custom, .onDemand:
 			return Settings.stateLocation.appendingPathComponent(IPtProxyObfs4proxyLogFile())
 
 		case .snowflake, .snowflakeAmp:
@@ -83,7 +87,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	 */
 	public func start(log: Bool = false) {
 		switch self {
-		case .obfs4, .custom:
+		case .obfs4, .custom, .onDemand:
 			IPtProxyStartObfs4Proxy("WARN", log, false, nil)
 
 		case .snowflake:
@@ -109,7 +113,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 	public func stop() {
 		switch self {
-		case .obfs4, .custom:
+		case .obfs4, .custom, .onDemand:
 			IPtProxyStopObfs4Proxy()
 
 		case .snowflake, .snowflakeAmp:
@@ -124,14 +128,17 @@ public enum Transport: Int, CaseIterable, Comparable {
 		var conf = [T]()
 
 		switch self {
-		case .obfs4, .custom:
+		case .obfs4, .custom, .onDemand:
 			conf.append(cv("ClientTransportPlugin", "obfs4 socks5 127.0.0.1:\(IPtProxyObfs4Port())"))
 
-			if self == .obfs4 {
-				conf += BuiltInBridges.shared?.obfs4?.map({ cv("Bridge", $0.raw) }) ?? []
+			if self == .onDemand, let onDemandBridges = Settings.onDemandBridges, !onDemandBridges.isEmpty {
+				conf += onDemandBridges.map({ cv("Bridge", $0) })
 			}
-			else if let customBridges = Settings.customBridges {
+			else if self == .custom, let customBridges = Settings.customBridges, !customBridges.isEmpty {
 				conf += customBridges.map({ cv("Bridge", $0) })
+			}
+			else {
+				conf += BuiltInBridges.shared?.obfs4?.map({ cv("Bridge", $0.raw) }) ?? []
 			}
 
 		case .snowflake, .snowflakeAmp:

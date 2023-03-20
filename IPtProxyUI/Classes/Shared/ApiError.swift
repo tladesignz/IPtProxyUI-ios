@@ -10,7 +10,7 @@ import Foundation
 
 public enum ApiError: LocalizedError {
 	case noHttpResponse
-	case no200Status(status: Int)
+	case no200Status(response: HTTPURLResponse, body: Data?)
 	case noBody
 	case notUnderstandable
 	case notSuccess(status: Any?)
@@ -21,8 +21,16 @@ public enum ApiError: LocalizedError {
 		case .noHttpResponse:
 			return NSLocalizedString("No valid HTTP response.", bundle: .iPtProxyUI, comment: "")
 
-		case .no200Status(let status):
-			return "\(status) \(HTTPURLResponse.localizedString(forStatusCode: status))"
+		case .no200Status(let response, let body):
+			var content = ""
+
+			if let body = body,
+			   let body = String(data: body, encoding: .utf8)
+			{
+				content = "\n\(body)"
+			}
+
+			return "\(response.statusCode) \(HTTPURLResponse.localizedString(forStatusCode: response.statusCode))\(content)"
 
 		case .noBody:
 			return NSLocalizedString("Response body missing.", bundle: .iPtProxyUI, comment: "")

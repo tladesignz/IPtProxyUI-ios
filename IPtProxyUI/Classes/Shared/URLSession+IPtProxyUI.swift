@@ -26,7 +26,13 @@ public extension URLSession {
 			}
 
 			guard response.statusCode == 200 else {
-				completion?(nil, ApiError.no200Status(status: response.statusCode))
+				if let data = data, let error = (try? MoatApi.decoder.decode(AwsError.self, from: data)) {
+					completion?(nil, error)
+				}
+				else {
+					completion?(nil, ApiError.no200Status(response: response, body: data))
+				}
+
 				return
 			}
 

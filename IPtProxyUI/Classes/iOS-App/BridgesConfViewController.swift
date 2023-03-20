@@ -50,7 +50,7 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 		navigationItem.leftBarButtonItem = UIBarButtonItem(
 			barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
 
-        navigationItem.title = L10n.bridgeConfiguration
+		navigationItem.title = L10n.bridgeConfiguration
 
 		if let title = saveButtonTitle, !title.isEmpty {
 			navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -62,11 +62,11 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 		}
 
 		let transports: [Transport: String] = [
-            .none: L10n.noBridges,
-            .obfs4: L10n.builtInObfs4,
-            .snowflake: L10n.builtInSnowflake,
-            .snowflakeAmp: L10n.builtInSnowflakeAmp,
-            .custom: L10n.customBridges,
+			.none: L10n.noBridges,
+			.obfs4: L10n.builtInObfs4,
+			.snowflake: L10n.builtInSnowflake,
+			.snowflakeAmp: L10n.builtInSnowflakeAmp,
+			.custom: L10n.customBridges,
 		]
 
 		transportSection.onSelectSelectableRow = { [weak self] _, row in
@@ -78,19 +78,19 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			}
 		}
 
-        transportSection.footer = HeaderFooterView(stringLiteral: L10n.bridgeTypeExplanation)
+		transportSection.footer = HeaderFooterView(stringLiteral: L10n.bridgeTypeExplanation)
 
 		form
-        +++ Section(L10n.automaticConfiguration)
+		+++ Section(L10n.automaticConfiguration)
 		<<< SwitchRow("cannotConnect") {
-            $0.title = L10n.cannotConnect
+			$0.title = L10n.cannotConnect
 
 			let font = $0.cell.textLabel?.font ?? UIFont.systemFont(ofSize: UIFont.systemFontSize)
 			$0.cell.textLabel?.font = UIFont(name: font.familyName, size: font.pointSize * 8 / 10)
 			$0.cell.textLabel?.numberOfLines = 0
 		}
 		<<< ButtonRow() {
-            $0.title = L10n.tryAutoConfiguration
+			$0.title = L10n.tryAutoConfiguration
 		}
 		.cellUpdate({ cell, _ in
 			cell.accessibilityTraits = .button
@@ -127,9 +127,9 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			}
 		})
 
-        +++ Section(L10n.manualConfiguration)
+		+++ Section(L10n.manualConfiguration)
 		<<< ButtonRow() {
-            $0.title = L10n.requestBridges
+			$0.title = L10n.requestBridges
 		}
 		.cellUpdate({ cell, _ in
 			cell.accessibilityTraits = .button
@@ -153,7 +153,7 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 		}
 
 		// The "Custom Bridges" selection is actually a button leading to another scene.
-		(form.last?.last as? ListCheckRow<Transport>)?.cellUpdate({ cell, _ in
+		(form.last?.first(where: { ($0 as? ListCheckRow<Transport>)?.selectableValue == .custom }) as? ListCheckRow<Transport>)?.cellUpdate({ cell, _ in
 			cell.accessibilityTraits = .button
 		})
 

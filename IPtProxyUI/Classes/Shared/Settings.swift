@@ -33,6 +33,15 @@ open class Settings {
 		}
 	}
 
+	open class var onDemandBridges: [String]? {
+		get {
+			defaults?.stringArray(forKey: "onDemandBridges")
+		}
+		set {
+			defaults?.set(newValue, forKey: "onDemandBridges")
+		}
+	}
+
 	open class var stateLocation: URL {
 		get {
 			URL(fileURLWithPath: IPtProxy.stateLocation())
