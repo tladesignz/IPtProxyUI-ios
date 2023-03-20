@@ -16,6 +16,8 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 
 	open weak var delegate: BridgesConfDelegate?
 
+	open var onDemandConf: OnDemand.Configuration?
+
 	open var transportSection: SelectableSection<ListCheckRow<Transport>> = {
 		return SelectableSection<ListCheckRow<Transport>>(
 			header: "", footer: "",
@@ -61,7 +63,7 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 				barButtonSystemItem: .save, target: self, action: #selector(save))
 		}
 
-		let transports: [Transport: String] = [
+		var transports: [Transport: String] = [
 			.none: L10n.noBridges,
 			.obfs4: L10n.builtInObfs4,
 			.snowflake: L10n.builtInSnowflake,
@@ -69,12 +71,50 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			.custom: L10n.customBridges,
 		]
 
+		if onDemandConf != nil {
+			transports[.onDemand] = Transport.onDemand.description
+		}
+
 		transportSection.onSelectSelectableRow = { [weak self] _, row in
 			if row.value == .custom {
 				let vc = CustomBridgesViewController()
 				vc.delegate = self
 
 				self?.navigationController?.pushViewController(vc, animated: true)
+			}
+			else if row.value == .onDemand, let self = self {
+				let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+
+				DispatchQueue.global(qos: .userInitiated).async {
+					OnDemand.shared.delegate = self
+
+					OnDemand.shared.fetch(self.onDemandConf!) { bridge, error in
+						if let bridge = bridge {
+							Settings.onDemandBridges = [bridge]
+						}
+
+						DispatchQueue.main.async {
+							if let error = error {
+								hud.hide(animated: true)
+
+								AlertHelper.present(self, message: error.localizedDescription)
+							}
+							else {
+								var delay = 0.0
+
+								if #available(iOS 13.0, *) {
+									if let checkmark = UIImage(systemName: "checkmark") {
+										hud.mode = .customView
+										hud.customView = UIImageView(image: checkmark)
+										delay = 1
+									}
+								}
+
+								hud.hide(animated: true, afterDelay: delay)
+							}
+						}
+					}
+				}
 			}
 		}
 

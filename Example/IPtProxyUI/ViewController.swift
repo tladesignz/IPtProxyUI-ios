@@ -11,36 +11,35 @@ import IPtProxyUI
 
 class ViewController: UIViewController, BridgesConfDelegate {
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
 
-        bridgeSettings()
-    }
-
-
-    // MARK: BridgesConfDelegate
-
-    var transport = Settings.transport
-
-    var customBridges = Settings.customBridges
-
-    var saveButtonTitle: String?
-
-    func save() {
-        Settings.transport = transport
-        Settings.customBridges = customBridges
-    }
+		bridgeSettings()
+	}
 
 
-    // MARK: Actions
+	// MARK: BridgesConfDelegate
 
-    @IBAction func bridgeSettings() {
-        let vc = BridgesConfViewController()
-        vc.delegate = self
-        vc.transport = transport
-        vc.customBridges = customBridges
+	var transport = Settings.transport
 
-        present(UINavigationController(rootViewController: vc), animated: true)
-    }
+	var customBridges = Settings.customBridges
+
+	var saveButtonTitle: String?
+
+	func save() {
+		Settings.transport = transport
+		Settings.customBridges = customBridges
+	}
+
+
+	// MARK: Actions
+
+	@IBAction func bridgeSettings() {
+		let vc = BridgesConfViewController()
+		vc.delegate = self
+		vc.transport = transport
+		vc.customBridges = customBridges
+
+		present(UINavigationController(rootViewController: vc), animated: true)
+	}
 }
-

@@ -11,47 +11,46 @@ import IPtProxyUI
 
 class ViewController: NSViewController, NSWindowDelegate, BridgesConfDelegate {
 
-    override func viewDidAppear() {
-        super.viewDidAppear()
+	override func viewDidAppear() {
+		super.viewDidAppear()
 
-        bridgeSettings(self)
-    }
+		bridgeSettings(self)
+	}
 
-    // MARK: NSWindowDelegate
+	// MARK: NSWindowDelegate
 
-    public func windowWillClose(_ notification: Notification) {
-        NSApp.stopModal()
-    }
-
-
-    // MARK: BridgesConfDelegate
-
-    var transport = Settings.transport
-
-    var customBridges: [String]? = Settings.customBridges
-
-    var saveButtonTitle: String? = nil
-
-    func save() {
-        Settings.transport = transport
-        Settings.customBridges = customBridges
-    }
+	public func windowWillClose(_ notification: Notification) {
+		NSApp.stopModal()
+	}
 
 
-    // MARK: Actions
+	// MARK: BridgesConfDelegate
 
-    @IBAction func bridgeSettings(_ sender: Any) {
-        let vc = BridgesConfViewController()
-        vc.delegate = self
-        vc.transport = transport
-        vc.customBridges = customBridges
+	var transport = Settings.transport
 
-        let window = NSWindow(contentViewController: vc)
-        window.delegate = self
+	var customBridges: [String]? = Settings.customBridges
 
-        NSApp.runModal(for: window)
+	var saveButtonTitle: String? = nil
 
-        window.close()
-    }
+	func save() {
+		Settings.transport = transport
+		Settings.customBridges = customBridges
+	}
+
+
+	// MARK: Actions
+
+	@IBAction func bridgeSettings(_ sender: Any) {
+		let vc = BridgesConfViewController()
+		vc.delegate = self
+		vc.transport = transport
+		vc.customBridges = customBridges
+
+		let window = NSWindow(contentViewController: vc)
+		window.delegate = self
+
+		NSApp.runModal(for: window)
+
+		window.close()
+	}
 }
-

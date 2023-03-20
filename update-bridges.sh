@@ -13,7 +13,6 @@ SHARED="$BASE/IPtProxyUI/Classes/Shared"
 export UPDATE_BRIDGES_BASE=$BASE
 
 cat "$SHARED/MoatApi.swift" \
-    "$SHARED/OnDemand.swift" \
 	"$SHARED/URLSession+IPtProxyUI.swift" \
 	"$SHARED/ApiError.swift" \
 	"$SHARED/Bundle+IPtProxyUI.swift" \

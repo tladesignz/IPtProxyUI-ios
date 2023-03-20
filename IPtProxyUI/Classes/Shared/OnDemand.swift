@@ -10,6 +10,20 @@ import CommonCrypto
 
 open class OnDemand {
 
+	public struct Configuration {
+		public let accessKey: String
+		public let secretKey: String
+		public let region: String
+		public let groupName: String
+
+		public init(accessKey: String, secretKey: String, region: String, groupName: String) {
+			self.accessKey = accessKey
+			self.secretKey = secretKey
+			self.region = region
+			self.groupName = groupName
+		}
+	}
+
 	public static let shared = OnDemand()
 
 
@@ -18,8 +32,8 @@ open class OnDemand {
 	public weak var delegate: BridgesConfDelegate?
 
 
-	open func fetch(accessKey: String, secretKey: String, region: String, groupName: String, _ completed: ((_ bridge: String?, _ error: Error?) -> Void)?) {
-		let conf = AwsConfiguration(accessKey, secretKey, region, "gamelift", groupName)
+	open func fetch(_ conf: Configuration, _ completed: ((_ bridge: String?, _ error: Error?) -> Void)?) {
+		let conf = AwsConfiguration(conf.accessKey, conf.secretKey, conf.region, "gamelift", conf.groupName)
 
 		guard let url = conf.url else {
 			completed?(nil, ApiError.noRequestPossible)
@@ -45,18 +59,32 @@ open class OnDemand {
 		delegate?.auth(request: &request)
 
 		let task = URLSession.shared.apiTask(with: request) { (response: ClaimGameServerResponse?, error: Error?) in
-			if let response = response {
-				print(response)
-			}
-
-			if let error = error {
-				print(error)
-			}
+//			if let response = response {
+//				print(response)
+//			}
+//
+//			if let error = error {
+//				print(error)
+//			}
 
 			var bridge = response?.gameServer?.payload?.bridge
 
 			if bridge?.hasPrefix("Bridge ") ?? false {
 				bridge = String(bridge!.dropFirst(7))
+			}
+
+			var error = error
+
+			switch error as? ApiError {
+			case .no200Status(_, let body):
+				if let body = body,
+					let awsError = (try? MoatApi.decoder.decode(AwsError.self, from: body))
+				{
+					error = awsError
+				}
+
+			default:
+				break
 			}
 
 			completed?(bridge, error)
