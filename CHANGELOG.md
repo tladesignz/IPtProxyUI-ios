@@ -1,5 +1,10 @@
 # IPtProxyUI
 
+## 2.1.1
+- Added example project for easier development.
+- Updated default bridges list.
+- Updated translations.
+
 ## 2.1.0
 - Replaced hardcoded Snowflake configuration with configuration from Tor Project's
   bridge configuration API, which now contains 2(!) Snowflake bridges.
