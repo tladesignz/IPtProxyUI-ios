@@ -215,7 +215,7 @@ public struct AwsConfiguration {
 
 	public let dateFormatter: DateFormatter = {
 		let df = DateFormatter()
-		df.timeZone = TimeZone.init(abbreviation: "GMT")
+		df.timeZone = TimeZone(abbreviation: "GMT")
 		df.locale = Locale(identifier: "en_US_POSIX")
 
 		return df
