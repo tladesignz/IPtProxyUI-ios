@@ -3,6 +3,8 @@ use_frameworks!
 target 'IPtProxyUI_Example' do
   platform :ios, '11.0'
 
+  pod 'ReachabilitySwift', :git => 'https://github.com/tladesignz/Reachability.swift'
+  pod 'MBProgressHUD', :git => 'https://github.com/threema-jarem/MBProgressHUD.git'
   pod 'IPtProxyUI', :path => '../'
 
   target 'IPtProxyUI_Tests' do
