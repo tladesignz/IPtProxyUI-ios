@@ -82,7 +82,7 @@ class MoatViewController: NSViewController, NSTextFieldDelegate {
 		refreshBt.isEnabled = false
 		let hud = MBProgressHUD.showAdded(to: view, animated: true)
 
-		Self.fetchCaptcha(delegate) { [weak self] challenge, captcha, error in
+		MoatViewControllerHelper.fetchCaptcha(delegate) { [weak self] challenge, captcha, error in
 			DispatchQueue.main.async {
 				hud?.hide(true)
 				self?.refreshBt.isEnabled = true
@@ -106,7 +106,7 @@ class MoatViewController: NSViewController, NSTextFieldDelegate {
 		refreshBt.isEnabled = false
 		let hud = MBProgressHUD.showAdded(to: view, animated: true)
 
-		Self.requestBridges(delegate, challenge, solutionTf.stringValue) { [weak self] bridges, error in
+		MoatViewControllerHelper.requestBridges(delegate, challenge, solutionTf.stringValue) { [weak self] bridges, error in
 			DispatchQueue.main.async {
 				hud?.hide(true)
 				self?.refreshBt.isEnabled = true

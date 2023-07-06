@@ -107,7 +107,7 @@ open class MoatViewController: FixedFormViewController {
 		navigationItem.rightBarButtonItem?.isEnabled = false
         ProgressHUD.show()
 
-		Self.fetchCaptcha(delegate) { [weak self] challenge, captcha, error in
+		MoatViewControllerHelper.fetchCaptcha(delegate) { [weak self] challenge, captcha, error in
 			DispatchQueue.main.async {
 				guard let self = self else {
 					return
@@ -135,7 +135,7 @@ open class MoatViewController: FixedFormViewController {
 		navigationItem.rightBarButtonItem?.isEnabled = false
 		ProgressHUD.show()
 
-		Self.requestBridges(delegate, challenge, solutionRow.value) { [weak self] bridges, error in
+        MoatViewControllerHelper.requestBridges(delegate, challenge, solutionRow.value) { [weak self] bridges, error in
 			DispatchQueue.main.async {
 				guard let self = self else {
 					return

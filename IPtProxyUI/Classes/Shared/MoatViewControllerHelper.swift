@@ -1,5 +1,5 @@
 //
-//  MoatViewController+Shared.swift
+//  MoatViewControllerHelper.swift
 //  IPtProxyUI
 //
 //  Created by Benjamin Erhart on 01.09.22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension MoatViewController {
+public class MoatViewControllerHelper {
 
 	public class func fetchCaptcha(_ delegate: BridgesConfDelegate?,
 								   completion: @escaping ((_ challenge: String?, _ captcha: Data?, _ error: Error?) -> Void))
