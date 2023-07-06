@@ -15,12 +15,7 @@ open class ScanQrViewController: BaseScanViewController {
 
 		navigationItem.title = L10n.scanQrCode
 
-		if #available(iOS 13.0, *) {
-			view.backgroundColor = .systemGroupedBackground
-		}
-		else {
-			view.backgroundColor = .init(red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
-		}
+		view.backgroundColor = .systemGroupedBackground
 	}
 
 	open override func viewDidAppear(_ animated: Bool) {
@@ -39,12 +34,7 @@ open class ScanQrViewController: BaseScanViewController {
 			warning.numberOfLines = 0
 			warning.textAlignment = .center
 
-			if #available(iOS 13.0, *) {
-				warning.textColor = .secondaryLabel
-			}
-			else {
-				warning.textColor = .init(red: 60/255, green: 60/255, blue: 67/255, alpha: 0.6)
-			}
+			warning.textColor = .secondaryLabel
 
 			view.addSubview(warning)
 			warning.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true

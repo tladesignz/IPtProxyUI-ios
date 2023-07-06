@@ -8,7 +8,7 @@
 
 import UIKit
 import Eureka
-import MBProgressHUD
+import ProgressHUD
 
 open class BridgesConfViewController: FixedFormViewController, UINavigationControllerDelegate,
 									  BridgesConfDelegate
@@ -83,7 +83,7 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 				self?.navigationController?.pushViewController(vc, animated: true)
 			}
 			else if row.value == .onDemand, let self = self {
-				let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+				ProgressHUD.show()
 
 				DispatchQueue.global(qos: .userInitiated).async {
 					OnDemand.shared.delegate = self
@@ -95,22 +95,12 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 
 						DispatchQueue.main.async {
 							if let error = error {
-								hud.hide(animated: true)
+								ProgressHUD.showFailed()
 
 								AlertHelper.present(self, message: error.localizedDescription)
 							}
 							else {
-								var delay = 0.0
-
-								if #available(iOS 13.0, *) {
-									if let checkmark = UIImage(systemName: "checkmark") {
-										hud.mode = .customView
-										hud.customView = UIImageView(image: checkmark)
-										delay = 1
-									}
-								}
-
-								hud.hide(animated: true, afterDelay: delay)
+								ProgressHUD.showSucceed()
 							}
 						}
 					}
@@ -136,32 +126,20 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			cell.accessibilityTraits = .button
 		})
 		.onCellSelection({ cell, row in
-			let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+			ProgressHUD.show()
 
 			let autoconf = AutoConf(self)
 			autoconf.do(cannotConnectWithoutPt: (self.form.rowBy(tag: "cannotConnect") as? SwitchRow)?.value ?? false) { [weak self] error in
-				guard let self = self else {
-					return
-				}
-
 				DispatchQueue.main.async {
 					if let error = error {
-						hud.hide(animated: true)
+						ProgressHUD.showFailed()
 
-						AlertHelper.present(self, message: error.localizedDescription)
+						if let self = self {
+							AlertHelper.present(self, message: error.localizedDescription)
+						}
 					}
 					else {
-						var delay = 0.0
-
-						if #available(iOS 13.0, *) {
-							if let checkmark = UIImage(systemName: "checkmark") {
-								hud.mode = .customView
-								hud.customView = UIImageView(image: checkmark)
-								delay = 1
-							}
-						}
-
-						hud.hide(animated: true, afterDelay: delay)
+						ProgressHUD.showSucceed()
 					}
 				}
 			}

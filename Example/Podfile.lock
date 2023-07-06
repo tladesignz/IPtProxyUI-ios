@@ -8,52 +8,35 @@ PODS:
     - ImageRow (~> 4.0)
     - IPtProxy (~> 3.1.1)
     - IPtProxyUI/App (= 2.2.0)
-    - MBProgressHUD (~> 1.2)
-    - ReachabilitySwift (~> 5.0)
+    - ProgressHUD (~> 13.6)
   - IPtProxyUI/App (2.2.0):
     - Eureka (~> 5.3)
     - ImageRow (~> 4.0)
     - IPtProxy (~> 3.1.1)
-    - MBProgressHUD (~> 1.2)
-    - ReachabilitySwift (~> 5.0)
-  - MBProgressHUD (1.2.0)
-  - ReachabilitySwift (5.0.0)
+    - ProgressHUD (~> 13.6)
+  - ProgressHUD (13.6.2)
 
 DEPENDENCIES:
   - IPtProxyUI (from `../`)
-  - MBProgressHUD (from `https://github.com/threema-jarem/MBProgressHUD.git`)
-  - ReachabilitySwift (from `https://github.com/tladesignz/Reachability.swift`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Eureka
     - ImageRow
     - IPtProxy
+    - ProgressHUD
 
 EXTERNAL SOURCES:
   IPtProxyUI:
     :path: "../"
-  MBProgressHUD:
-    :git: https://github.com/threema-jarem/MBProgressHUD.git
-  ReachabilitySwift:
-    :git: https://github.com/tladesignz/Reachability.swift
-
-CHECKOUT OPTIONS:
-  MBProgressHUD:
-    :commit: 4f7142b877ae71e83837a5620230aef5bf390e4d
-    :git: https://github.com/threema-jarem/MBProgressHUD.git
-  ReachabilitySwift:
-    :commit: 277210cb6c9d1e2ded24c0729fcb77dd62e1e30c
-    :git: https://github.com/tladesignz/Reachability.swift
 
 SPEC CHECKSUMS:
   Eureka: 28ad9dec6286cd7cd601fdf8e8df39bb7356a8f4
   ImageRow: 880c0f052c5a89c80521b485c86ccf723a124e99
   IPtProxy: 264799227d5d83a4a583e66bd4ea846510554025
-  IPtProxyUI: bc61ce9b68ac23343d7c1face6eebeb385ffffff
-  MBProgressHUD: aa49d7fb178a3b76bf26c5e0731d3682cca63d01
-  ReachabilitySwift: 639a14aabcad9d368f9bb0e29903840de36c90d9
+  IPtProxyUI: 98b7109ba3fdf0c1c6cdac52d8cb3691e0d61afc
+  ProgressHUD: 355915c8f033e626788fa9b0d99d06e8691595ab
 
-PODFILE CHECKSUM: bb553c512651f922196bb1fe92f85d5b75782cd2
+PODFILE CHECKSUM: 4a10692db46697ee1dc105a35ce9a1254ab024d2
 
 COCOAPODS: 1.12.1

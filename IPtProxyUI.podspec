@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
 	s.source           = { :git => 'https://github.com/tladesignz/IPtProxyUI-ios.git', :tag => s.version.to_s }
 	s.social_media_url = 'https://twitter.com/tladesignz'
 
-	s.ios.deployment_target = '11.0'
+	s.ios.deployment_target = '13.0'
 	s.osx.deployment_target = '11'
 
 	s.swift_version = '5.5'
@@ -38,7 +38,7 @@ Pod::Spec.new do |s|
 
 	s.ios.dependency 'Eureka', '~> 5.3'
 	s.ios.dependency 'ImageRow', '~> 4.0'
-	s.ios.dependency 'MBProgressHUD', '~> 1.2'
+	s.ios.dependency 'ProgressHUD', '~> 13.6'
 
 	s.subspec 'AppEx' do |a|
 		a.preserve_paths = 'update-bridges.sh', 'update-bridges.swift', '.bartycrouch.toml'

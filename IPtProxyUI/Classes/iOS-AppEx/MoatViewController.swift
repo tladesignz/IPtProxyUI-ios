@@ -8,7 +8,7 @@
 
 import UIKit
 import Eureka
-import MBProgressHUD
+import ProgressHUD
 
 /**
  Implements the MOAT protocol: Fetches OBFS4 bridges via Meek.
@@ -105,7 +105,7 @@ open class MoatViewController: FixedFormViewController {
 
 	@objc private func fetchCaptcha(_ sender: Any?) {
 		navigationItem.rightBarButtonItem?.isEnabled = false
-		let hud = MBProgressHUD.showAdded(to: view, animated: true)
+        ProgressHUD.show()
 
 		Self.fetchCaptcha(delegate) { [weak self] challenge, captcha, error in
 			DispatchQueue.main.async {
@@ -113,7 +113,7 @@ open class MoatViewController: FixedFormViewController {
 					return
 				}
 
-				hud.hide(animated: true)
+				ProgressHUD.dismiss()
 				self.navigationItem.rightBarButtonItem?.isEnabled = true
 
 				if let error = error {
@@ -133,7 +133,7 @@ open class MoatViewController: FixedFormViewController {
 
 	private func requestBridges() {
 		navigationItem.rightBarButtonItem?.isEnabled = false
-		let hud = MBProgressHUD.showAdded(to: view, animated: true)
+		ProgressHUD.show()
 
 		Self.requestBridges(delegate, challenge, solutionRow.value) { [weak self] bridges, error in
 			DispatchQueue.main.async {
@@ -141,7 +141,7 @@ open class MoatViewController: FixedFormViewController {
 					return
 				}
 
-				hud.hide(animated: true)
+				ProgressHUD.dismiss()
 				self.navigationItem.rightBarButtonItem?.isEnabled = true
 
 				if let error = error {

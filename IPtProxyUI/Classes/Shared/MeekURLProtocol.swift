@@ -268,7 +268,7 @@ class HTTPConnection: NSObject, StreamDelegate {
 			// Enforce TLS version
 			// https://developer.apple.com/library/ios/technotes/tn2287/_index.html#//apple_ref/doc/uid/DTS40011309
 
-			if #available(iOS 13.0, *) {
+			if #available(iOS 13.0, macOS 10.15, *) {
 				switch configuration.tlsMinimumSupportedProtocolVersion {
 
 				case .TLSv10, .TLSv11, .TLSv12, .TLSv13:
