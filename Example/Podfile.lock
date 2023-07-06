@@ -3,12 +3,12 @@ PODS:
   - ImageRow (4.1.0):
     - Eureka (~> 5.3.5)
   - IPtProxy (3.1.1)
-  - IPtProxyUI (3.0.0):
+  - IPtProxyUI (3.0.1):
     - Eureka (~> 5.3)
     - ImageRow (~> 4.0)
     - IPtProxy (~> 3.1.1)
-    - IPtProxyUI/App (= 3.0.0)
-  - IPtProxyUI/App (3.0.0):
+    - IPtProxyUI/App (= 3.0.1)
+  - IPtProxyUI/App (3.0.1):
     - Eureka (~> 5.3)
     - ImageRow (~> 4.0)
     - IPtProxy (~> 3.1.1)
@@ -33,7 +33,7 @@ SPEC CHECKSUMS:
   Eureka: 28ad9dec6286cd7cd601fdf8e8df39bb7356a8f4
   ImageRow: 880c0f052c5a89c80521b485c86ccf723a124e99
   IPtProxy: 264799227d5d83a4a583e66bd4ea846510554025
-  IPtProxyUI: 9b0aff1e959ba49742938caa0b731143383f978e
+  IPtProxyUI: a52edf104d5f4e42b111d07dd7d0f682c321347c
   ProgressHUD: 355915c8f033e626788fa9b0d99d06e8691595ab
 
 PODFILE CHECKSUM: 4a10692db46697ee1dc105a35ce9a1254ab024d2

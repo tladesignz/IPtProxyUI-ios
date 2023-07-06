@@ -1,5 +1,8 @@
 # IPtProxyUI
 
+## 3.0.1
+- Fixed `AppEx` subspec. `ProgressHUD` cannot be used in app extensions.
+
 ## 3.0.0
 - Updated to latest IPtProxy containing Lyrebird 0.1.0 (Tor fork of Obfs4proxy) and Snowflake 2.6.0.
 - Updated default bridges list.
