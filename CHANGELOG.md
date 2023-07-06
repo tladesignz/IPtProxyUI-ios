@@ -1,5 +1,14 @@
 # IPtProxyUI
 
+## 3.0.0
+- Updated to latest IPtProxy containing Lyrebird 0.1.0 (Tor fork of Obfs4proxy) and Snowflake 2.6.0.
+- Updated default bridges list.
+- Updated translations.
+- Fixed dependencies which inhibited release with latest Xcode 14.3:
+  - Inlined `ReachabilitySwift` dependency.
+  - Replaced `MBProgressHUD` with `ProgressHUD`.
+- Updated minimum iOS version to 13.0 due to new `ProgressHUD` dependency.
+
 ## 2.1.1
 - Added example project for easier development.
 - Updated default bridges list.
