@@ -14,6 +14,10 @@ class ViewController: NSViewController, NSWindowDelegate, BridgesConfDelegate {
 	override func viewDidAppear() {
 		super.viewDidAppear()
 
+		if let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first {
+			Settings.stateLocation = url
+		}
+
 		bridgeSettings(self)
 	}
 
