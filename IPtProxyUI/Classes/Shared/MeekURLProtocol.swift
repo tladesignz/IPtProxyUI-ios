@@ -32,13 +32,13 @@ open class MeekURLProtocol: URLProtocol, HTTPConnectionDelegate {
 	private var httpConnection: HTTPConnection?
 
 	open class func start() {
-		IPtProxyStartObfs4Proxy("DEBUG", false, false, nil)
+        IPtProxyStartLyrebird("DEBUG", false, false, nil)
 		URLProtocol.registerClass(self)
 	}
 
 	open class func stop() {
 		URLProtocol.unregisterClass(self)
-		IPtProxyStopObfs4Proxy()
+        IPtProxyStopLyrebird()
 	}
 
 

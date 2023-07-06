@@ -70,7 +70,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	public var logFile: URL? {
 		switch self {
 		case .obfs4, .custom, .onDemand:
-			return Settings.stateLocation.appendingPathComponent(IPtProxyObfs4proxyLogFile())
+			return Settings.stateLocation.appendingPathComponent(IPtProxyLyrebirdLogFile())
 
 		case .snowflake, .snowflakeAmp:
 			return Settings.stateLocation.appendingPathComponent(Self.snowflakeLogFileName)
@@ -88,7 +88,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	public func start(log: Bool = false) {
 		switch self {
 		case .obfs4, .custom, .onDemand:
-			IPtProxyStartObfs4Proxy("WARN", log, false, nil)
+            IPtProxyStartLyrebird("WARN", log, false, nil)
 
 		case .snowflake:
 			let snowflake = BuiltInBridges.shared?.snowflake?.first
@@ -114,7 +114,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	public func stop() {
 		switch self {
 		case .obfs4, .custom, .onDemand:
-			IPtProxyStopObfs4Proxy()
+            IPtProxyStopLyrebird()
 
 		case .snowflake, .snowflakeAmp:
 			IPtProxyStopSnowflake()
