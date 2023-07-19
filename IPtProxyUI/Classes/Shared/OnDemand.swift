@@ -112,7 +112,7 @@ public struct AwsError: LocalizedError, Codable {
 	enum CodingKeys: String, CodingKey {
 		case type = "__type"
 
-		case message = "Message"
+		case message = "message"
 	}
 
 	public var errorDescription: String? {
