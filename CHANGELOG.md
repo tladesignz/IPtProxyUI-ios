@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 3.0.2
+- Updated translations.
+- Updated default bridges list.
+
 ## 3.0.1
 - Fixed `AppEx` subspec. `ProgressHUD` cannot be used in app extensions.
 
