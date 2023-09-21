@@ -11,5 +11,4 @@ trans.hu_HU  = IPtProxyUI/Assets/Shared/hu-HU.lproj/Localizable.strings
 trans.pt_BR  = IPtProxyUI/Assets/Shared/pt-BR.lproj/Localizable.strings
 trans.pt_PT  = IPtProxyUI/Assets/Shared/pt-PT.lproj/Localizable.strings
 trans.tr_TR  = IPtProxyUI/Assets/Shared/tr-TR.lproj/Localizable.strings
-trans.km     = IPtProxyUI/Assets/Shared/km-KH.lproj/Localizable.strings
 
