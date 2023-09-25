@@ -11,7 +11,7 @@ import IPtProxy
 
 public enum Transport: Int, CaseIterable, Comparable {
 
-	public static let order: [Transport] = [.none, .obfs4, .snowflake, .snowflakeAmp, .custom]
+	public static let order: [Transport] = [.none, .obfs4, .snowflake, .snowflakeAmp, .meekAzure, .custom, .onDemand]
 
 	public static func asArguments(key: String, value: String) -> [String] {
 		return ["--\(key)", value]
@@ -37,6 +37,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	case custom = 3
 	case snowflakeAmp = 4
 	case onDemand = 5
+	case meekAzure = 6
 
 
 	public var description: String {
@@ -54,7 +55,10 @@ public enum Transport: Int, CaseIterable, Comparable {
 			return NSLocalizedString("custom bridges", bundle: .iPtProxyUI, comment: "")
 
 		case .onDemand:
-			return NSLocalizedString("On-demand bridges", comment: "")
+			return NSLocalizedString("On-demand bridges", bundle: .iPtProxyUI, comment: "")
+
+		case .meekAzure:
+			return NSLocalizedString("Meek azure bridge", bundle: .iPtProxyUI, comment: "")
 
 		default:
 			return ""
@@ -69,7 +73,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	 */
 	public var logFile: URL? {
 		switch self {
-		case .obfs4, .custom, .onDemand:
+		case .obfs4, .custom, .onDemand, .meekAzure:
 			return Settings.stateLocation.appendingPathComponent(IPtProxyLyrebirdLogFile())
 
 		case .snowflake, .snowflakeAmp:
@@ -87,8 +91,8 @@ public enum Transport: Int, CaseIterable, Comparable {
 	 */
 	public func start(log: Bool = false) {
 		switch self {
-		case .obfs4, .custom, .onDemand:
-            IPtProxyStartLyrebird("WARN", log, false, nil)
+		case .obfs4, .custom, .onDemand, .meekAzure:
+			IPtProxyStartLyrebird("WARN", log, false, nil)
 
 		case .snowflake:
 			let snowflake = BuiltInBridges.shared?.snowflake?.first
@@ -113,8 +117,8 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 	public func stop() {
 		switch self {
-		case .obfs4, .custom, .onDemand:
-            IPtProxyStopLyrebird()
+		case .obfs4, .custom, .onDemand, .meekAzure:
+			IPtProxyStopLyrebird()
 
 		case .snowflake, .snowflakeAmp:
 			IPtProxyStopSnowflake()
@@ -144,6 +148,11 @@ public enum Transport: Int, CaseIterable, Comparable {
 		case .snowflake, .snowflakeAmp:
 			conf.append(cv("ClientTransportPlugin", "snowflake socks5 127.0.0.1:\(IPtProxySnowflakePort())"))
 			conf += BuiltInBridges.shared?.snowflake?.map({ cv("Bridge", $0.raw) }) ?? []
+
+		case .meekAzure:
+			conf.append(cv("ClientTransportPlugin", "meek_lite socks5 127.0.0.1:\(IPtProxyMeekPort())"))
+			conf += BuiltInBridges.shared?.meekAzure?.map({ cv("Bridge", $0.raw) }) ?? []
+
 
 		default:
 			break

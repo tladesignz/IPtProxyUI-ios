@@ -71,6 +71,10 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			.custom: L10n.customBridges,
 		]
 
+		if !(BuiltInBridges.shared?.meekAzure?.isEmpty ?? true) {
+			transports[.meekAzure] = L10n.builtInMeekAzure
+		}
+
 		if onDemandConf != nil {
 			transports[.onDemand] = Transport.onDemand.description
 		}

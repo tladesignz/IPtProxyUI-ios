@@ -94,6 +94,12 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 		}
 	}
 
+	@IBOutlet weak var meekAzureRb: NSButton! {
+		didSet {
+			meekAzureRb.title = L10n.builtInMeekAzure
+		}
+	}
+
 	@IBOutlet weak var customBridgesRb: NSButton! {
 		didSet {
             customBridgesRb.title = L10n.customBridges
@@ -220,6 +226,9 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 		}
 		else if sender == snowflakeAmpRb {
 			transport = .snowflakeAmp
+		}
+		else if sender == meekAzureRb {
+			transport = .meekAzure
 		}
 		else if sender == customBridgesRb {
             let vc = CustomBridgesViewController()
