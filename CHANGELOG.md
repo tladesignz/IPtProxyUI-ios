@@ -1,5 +1,14 @@
 # IPtProxyUI
 
+## 4.0.0
+- Removed manual configuration with CAPTCHA, as that was recently deprecated by Tor Project.
+- Improved automatic configuration:
+  - Update built-in bridges automatically.
+  - Store custom Obfs4 bridges, when provided, even when recommendation is to use something else.
+- Re-added Meek Azure, as specific people have a lot of trouble on other bridge types and it still didn't get removed. 
+- Updated translations.
+- Updated default bridges list.
+
 ## 3.0.2
 - Updated translations.
 - Updated default bridges list.
