@@ -19,9 +19,6 @@
 /* AlertHelper */
 "Cancel" = "Cancel";
 
-/* MoatViewController */
-"CAPTCHA Image" = "CAPTCHA Image";
-
 /* CustomBridgesViewController */
 "Copy URL to Clipboard" = "Copy URL to Clipboard";
 
@@ -33,9 +30,6 @@
 
 /* Transport */
 "custom bridges" = "custom bridges";
-
-/* MoatViewController */
-"Enter characters from image" = "Enter characters from image";
 
 /* AlertHelper */
 "Error" = "Error";
@@ -52,8 +46,8 @@
 /* CustomBridgesViewController; placeholder contains "https://bridges.torproject.org/", please visit that page and copy texts for your language! */
 "In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"" = "In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"";
 
-/* BridgesConfViewController */
-"Manual Configuration" = "Manual Configuration";
+/* No comment provided by engineer. */
+"Meek azure bridge" = "Meek azure bridge";
 
 /* BridgeConfViewController */
 "No Bridges" = "No Bridges";
@@ -70,6 +64,9 @@
 /* AlertHelper */
 "OK" = "OK";
 
+/* No comment provided by engineer. */
+"On-demand bridges" = "On-demand bridges";
+
 /* CustomBridgesViewController */
 "Other" = "Other";
 
@@ -78,9 +75,6 @@
 
 /* CustomBridgesViewController; placeholder is "" "https://bridges.torproject.org/" */
 "QR Code could not be decoded! Are you sure you scanned a QR code from %@?" = "QR Code could not be decoded! Are you sure you scanned a QR code from %@?";
-
-/* MoatViewController */
-"Request Bridges" = "Request Bridges";
 
 /* BridgeConfViewController */
 "Request Bridges from torproject.org" = "Request Bridges from torproject.org";
@@ -108,9 +102,6 @@
 
 /* Transport */
 "Snowflake bridges (AMP rendezvous)" = "Snowflake bridges (AMP rendezvous)";
-
-/* MoatViewController */
-"Solve the CAPTCHA to request bridges." = "Solve the CAPTCHA to request bridges.";
 
 /* BridgesConfViewController */
 "Try Auto-Configuration" = "Try Auto-Configuration";
