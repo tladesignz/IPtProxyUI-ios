@@ -10,31 +10,52 @@ import Foundation
 
 open class BuiltInBridges: Codable {
 
-	public static var file: URL? {
-		return Bundle.iPtProxyUI.url(forResource: "builtin-bridges", withExtension: "json")
+	public class var file: URL? {
+		Bundle.iPtProxyUI.url(forResource: "builtin-bridges", withExtension: "json")
+	}
+
+	public class var updateFile: URL? {
+		FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent("updated-bridges.json")
+	}
+
+	public class var outdated: Bool {
+		let modified = (try? updateFile?.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate)
+			?? Date(timeIntervalSince1970: 0)
+
+		return Calendar.current.dateComponents([.day], from: modified, to: Date()).day ?? 2 > 1
 	}
 
 	private static var _shared: BuiltInBridges?
-	public static var shared: BuiltInBridges? {
-		if _shared == nil,
-		   let file = file,
-		   let data = try? Data(contentsOf: file)
-		{
-			do {
-				_shared = try MoatApi.decoder.decode(Self.self, from: data)
-			}
-			catch {
-				print(error)
-			}
+	public class var shared: BuiltInBridges? {
+		if _shared == nil {
+			_shared = read(updateFile)
+		}
+
+		if _shared == nil {
+			_shared = read(file)
 		}
 
 		return _shared
 	}
 
 
-	open var meekAzure: [Bridge]?
-	open var obfs4: [Bridge]?
-	open var snowflake: [Bridge]?
+	open var meekAzure: [Bridge]? {
+		didSet {
+			store()
+		}
+	}
+
+	open var obfs4: [Bridge]? {
+		didSet {
+			store()
+		}
+	}
+
+	open var snowflake: [Bridge]? {
+		didSet {
+			store()
+		}
+	}
 
 
 	// MARK: Codable
@@ -43,6 +64,48 @@ open class BuiltInBridges: Codable {
 		case meekAzure = "meek-azure"
 		case obfs4
 		case snowflake
+	}
+
+
+	open class func reload() {
+		_shared = nil
+		_ = shared
+	}
+
+
+	open class func read(_ file: URL?) -> BuiltInBridges? {
+		guard let file = file,
+			  let data = try? Data(contentsOf: file)
+		else {
+			return nil
+		}
+
+		do {
+			return try MoatApi.decoder.decode(Self.self, from: data)
+		}
+		catch {
+			print("[\(String(describing: type(of: self)))] \(error)")
+		}
+
+		return nil
+	}
+
+
+	open func store() {
+		guard let file = Self.updateFile else {
+			print("[\(String(describing: type(of: self)))] No caching directory available to store to!")
+
+			return
+		}
+
+		do {
+			let data = try MoatApi.encoder.encode(self)
+
+			try data.write(to: file, options: .atomic)
+		}
+		catch {
+			print("[\(String(describing: type(of: self)))] \(error)")
+		}
 	}
 }
 
@@ -148,6 +211,11 @@ open class Bridge: Codable, CustomStringConvertible {
 		}
 
 		return nil
+	}
+
+
+	public init(_ raw: String) {
+		self.raw = raw
 	}
 
 

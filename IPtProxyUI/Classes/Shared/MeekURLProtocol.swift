@@ -77,7 +77,7 @@ open class MeekURLProtocol: URLProtocol, HTTPConnectionDelegate {
 			kCFStreamPropertySOCKSProxyHost: "127.0.0.1",
 			kCFStreamPropertySOCKSProxyPort: IPtProxyMeekPort(),
 			kCFStreamPropertySOCKSUser: "url=https://moat.torproject.org.global.prod.fastly.net/;",
-			kCFStreamPropertySOCKSPassword: "front=cdn.sstatic.net",
+			kCFStreamPropertySOCKSPassword: "front=foursquare.com",
 		]
 
 		httpConnection = HTTPConnection(request: request, configuration: conf)
