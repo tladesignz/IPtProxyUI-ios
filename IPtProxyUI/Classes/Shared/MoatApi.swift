@@ -17,8 +17,10 @@ open class MoatApi {
 
 	public enum Endpoint {
 
+		@available(*, deprecated, message: "CAPTCHA use is now deprecated by Tor Project and can be replaced by using the obfs4/bridgedb piece of a `.defaults` response.")
 		case fetch
 
+		@available(*, deprecated, message: "CAPTCHA use is now deprecated by Tor Project and can be replaced by using the obfs4/bridgedb piece of a `.defaults` response.")
 		case check(challenge: String, solution: String)
 
 		case settings(country: String? = nil)
@@ -198,6 +200,7 @@ open class MoatApi {
 		}
 	}
 
+	@available(*, deprecated, message: "CAPTCHA use is now deprecated by Tor Project and can be replaced by using the obfs4/bridgedb piece of a `.defaults` response.")
 	open class FetchResponse: Codable {
 
 		public let id: String?
@@ -252,6 +255,7 @@ open class MoatApi {
 		}
 	}
 
+	@available(*, deprecated, message: "CAPTCHA use is now deprecated by Tor Project and can be replaced by using the obfs4/bridgedb piece of a `.defaults` response.")
 	open class CheckResponse: Codable {
 
 		public let id: String

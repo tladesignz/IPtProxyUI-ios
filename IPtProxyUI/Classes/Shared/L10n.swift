@@ -22,10 +22,6 @@ public class L10n {
 		NSLocalizedString("Try Auto-Configuration", bundle: .iPtProxyUI, comment: "")
 	}
 
-	public static var manualConfiguration: String {
-		NSLocalizedString("Manual Configuration", bundle: .iPtProxyUI, comment: "")
-	}
-
 	public static var requestBridgesFrom: String {
 		NSLocalizedString("Request Bridges from torproject.org",
 						  bundle: .iPtProxyUI, comment: "")
@@ -111,25 +107,6 @@ public class L10n {
 
 	public static var title: String {
 		NSLocalizedString("Use Custom Bridges", bundle: .iPtProxyUI, comment: "")
-	}
-
-	public static var solveCaptcha: String {
-		NSLocalizedString("Solve the CAPTCHA to request bridges.",
-						  bundle: .iPtProxyUI, comment: "")
-	}
-
-	public static var captchaImage: String {
-		NSLocalizedString("CAPTCHA Image", bundle: .iPtProxyUI, comment: "")
-	}
-
-	public static var enterCharacters: String {
-		NSLocalizedString("Enter characters from image",
-						  bundle: .iPtProxyUI, comment: "")
-	}
-
-	public static var requestBridges: String {
-		NSLocalizedString(
-			"Request Bridges", bundle: .iPtProxyUI, comment: "")
 	}
 
 	public static var error: String {

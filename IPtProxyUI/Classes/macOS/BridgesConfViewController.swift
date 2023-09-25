@@ -25,6 +25,9 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 				case .snowflakeAmp:
 					self.snowflakeAmpRb.state = .on
 
+				case .meekAzure:
+					self.meekAzureRb.state = .on
+
 				case .custom:
 					self.customBridgesRb.state = .on
 
@@ -55,18 +58,6 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 	@IBOutlet weak var tryAutoConfBt: NSButton! {
 		didSet {
             tryAutoConfBt.title = L10n.tryAutoConfiguration
-		}
-	}
-
-	@IBOutlet weak var manualConfBox: NSBox! {
-		didSet {
-            manualConfBox.title = L10n.manualConfiguration
-		}
-	}
-
-	@IBOutlet weak var manualConfBt: NSButton! {
-		didSet {
-            manualConfBt.title = L10n.requestBridges
 		}
 	}
 
@@ -203,18 +194,6 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 				}
 			}
 		}
-	}
-
-	@IBAction open func manualConf(_ sender: Any) {
-		let vc = MoatViewController()
-		vc.delegate = self
-
-		let window = NSWindow(contentViewController: vc)
-		window.delegate = self
-
-		NSApp.runModal(for: window)
-
-		window.close()
 	}
 
 	@IBAction open func selectBridge(_ sender: NSButton) {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22154"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,8 +14,7 @@
                 <outlet property="cannotConnectSw" destination="78l-BB-4mq" id="UU5-fO-XwL"/>
                 <outlet property="customBridgesRb" destination="jKP-bE-B38" id="dGo-KD-4R6"/>
                 <outlet property="descLb" destination="H2l-LN-gF6" id="oog-gC-0t4"/>
-                <outlet property="manualConfBox" destination="Ilq-Th-bqp" id="4lA-Bz-EbE"/>
-                <outlet property="manualConfBt" destination="xoG-3n-9ti" id="sWA-6f-G9E"/>
+                <outlet property="meekAzureRb" destination="Aw8-zq-1vH" id="WRe-6C-cVG"/>
                 <outlet property="noBridgesRb" destination="4Cx-7M-5G4" id="0fb-NV-AxB"/>
                 <outlet property="obfs4Rb" destination="wGy-jc-Jv6" id="zQm-le-hgV"/>
                 <outlet property="saveBt" destination="JMo-RB-mfk" id="QRJ-pr-X9C"/>
@@ -28,17 +27,17 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="444"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="386"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <box title="Automatic Configuration" translatesAutoresizingMaskIntoConstraints="NO" id="K3y-w5-SZT">
-                    <rect key="frame" x="17" y="326" width="446" height="98"/>
+                    <rect key="frame" x="17" y="266" width="446" height="100"/>
                     <view key="contentView" id="coF-8h-8V3">
-                        <rect key="frame" x="3" y="3" width="440" height="80"/>
+                        <rect key="frame" x="4" y="5" width="438" height="80"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Rr-5c-piQ">
-                                <rect key="frame" x="18" y="56" width="358" height="16"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Rr-5c-piQ">
+                                <rect key="frame" x="18" y="56" width="356" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="I'm sure I cannot connect without a bridge." id="ciI-9j-Z6Q">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -46,10 +45,10 @@
                                 </textFieldCell>
                             </textField>
                             <switch horizontalHuggingPriority="750" verticalHuggingPriority="750" baseWritingDirection="leftToRight" alignment="left" translatesAutoresizingMaskIntoConstraints="NO" id="78l-BB-4mq">
-                                <rect key="frame" x="380" y="51" width="42" height="25"/>
+                                <rect key="frame" x="378" y="51" width="42" height="25"/>
                             </switch>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4bb-fF-DH3">
-                                <rect key="frame" x="253" y="13" width="174" height="32"/>
+                                <rect key="frame" x="251" y="13" width="174" height="32"/>
                                 <buttonCell key="cell" type="push" title="Try Auto-Configuration" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WhF-nG-1GQ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -72,33 +71,8 @@
                         </constraints>
                     </view>
                 </box>
-                <box title="Manual Configuration" translatesAutoresizingMaskIntoConstraints="NO" id="Ilq-Th-bqp">
-                    <rect key="frame" x="17" y="244" width="446" height="78"/>
-                    <view key="contentView" id="Nnc-il-ybh">
-                        <rect key="frame" x="3" y="3" width="440" height="60"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xoG-3n-9ti">
-                                <rect key="frame" x="174" y="13" width="253" height="32"/>
-                                <buttonCell key="cell" type="push" title="Request Bridges from torproject.org" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rH8-PO-Lbl">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="manualConf:" target="-2" id="nP7-9p-xA9"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="xoG-3n-9ti" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Nnc-il-ybh" secondAttribute="leading" constant="20" symbolic="YES" id="K5V-Sn-dJS"/>
-                            <constraint firstItem="xoG-3n-9ti" firstAttribute="top" secondItem="Nnc-il-ybh" secondAttribute="top" constant="20" symbolic="YES" id="RFc-cF-qpi"/>
-                            <constraint firstAttribute="trailing" secondItem="xoG-3n-9ti" secondAttribute="trailing" constant="20" symbolic="YES" id="RnD-71-SiC"/>
-                            <constraint firstAttribute="bottom" secondItem="xoG-3n-9ti" secondAttribute="bottom" constant="20" symbolic="YES" id="nqG-lK-oFY"/>
-                        </constraints>
-                    </view>
-                </box>
-                <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="4Cx-7M-5G4">
-                    <rect key="frame" x="18" y="191" width="442" height="18"/>
+                <button tag="1" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Cx-7M-5G4">
+                    <rect key="frame" x="18" y="213" width="442" height="18"/>
                     <buttonCell key="cell" type="radio" title="No Bridges" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="prn-im-k2C">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -107,8 +81,8 @@
                         <action selector="selectBridge:" target="-2" id="8GS-jH-kJh"/>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="wGy-jc-Jv6">
-                    <rect key="frame" x="18" y="169" width="442" height="18"/>
+                <button tag="2" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wGy-jc-Jv6">
+                    <rect key="frame" x="18" y="191" width="442" height="18"/>
                     <buttonCell key="cell" type="radio" title="Built-in Obfs4" bezelStyle="regularSquare" imagePosition="left" inset="2" id="zOC-tj-Td7">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -117,8 +91,8 @@
                         <action selector="selectBridge:" target="-2" id="rj6-hi-BT1"/>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="FEd-ce-WHv">
-                    <rect key="frame" x="18" y="147" width="442" height="18"/>
+                <button tag="3" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FEd-ce-WHv">
+                    <rect key="frame" x="18" y="169" width="442" height="18"/>
                     <buttonCell key="cell" type="radio" title="Built-in Snowflake" bezelStyle="regularSquare" imagePosition="left" inset="2" id="I7v-hW-HSa">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -127,8 +101,8 @@
                         <action selector="selectBridge:" target="-2" id="UhX-1s-U4N"/>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="Lwo-c6-cqZ">
-                    <rect key="frame" x="18" y="125" width="442" height="18"/>
+                <button tag="4" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lwo-c6-cqZ">
+                    <rect key="frame" x="18" y="147" width="442" height="18"/>
                     <buttonCell key="cell" type="radio" title="Built-in Snowflake (AMP)" bezelStyle="regularSquare" imagePosition="left" inset="2" id="4Qh-9X-Nph">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -137,7 +111,17 @@
                         <action selector="selectBridge:" target="-2" id="iZ1-nK-s5w"/>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="jKP-bE-B38">
+                <button tag="5" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Aw8-zq-1vH">
+                    <rect key="frame" x="18" y="125" width="442" height="18"/>
+                    <buttonCell key="cell" type="radio" title="Built-in Meek Azure" bezelStyle="regularSquare" imagePosition="left" inset="2" id="yK4-J4-h9j">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="selectBridge:" target="-2" id="rCZ-HQ-LoJ"/>
+                    </connections>
+                </button>
+                <button tag="5" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jKP-bE-B38">
                     <rect key="frame" x="18" y="103" width="442" height="18"/>
                     <buttonCell key="cell" type="radio" title="Custom Bridges" bezelStyle="regularSquare" imagePosition="left" inset="2" id="uGe-L6-sdV">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -147,7 +131,7 @@
                         <action selector="selectBridge:" target="-2" id="TrC-mj-u9H"/>
                     </connections>
                 </button>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="H2l-LN-gF6">
+                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="H2l-LN-gF6">
                     <rect key="frame" x="18" y="48" width="444" height="32"/>
                     <textFieldCell key="cell" selectable="YES" title="If you are in a country or using a connection that censors Tor, you might need to use bridges." id="z2N-Z0-alT">
                         <font key="font" metaFont="system"/>
@@ -180,23 +164,24 @@ Gw
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="jKP-bE-B38" firstAttribute="top" secondItem="Lwo-c6-cqZ" secondAttribute="bottom" constant="6" symbolic="YES" id="0nu-Vo-ETc"/>
                 <constraint firstAttribute="trailing" secondItem="JMo-RB-mfk" secondAttribute="trailing" constant="20" symbolic="YES" id="1Qs-dE-HuQ"/>
+                <constraint firstItem="4Cx-7M-5G4" firstAttribute="top" secondItem="K3y-w5-SZT" secondAttribute="bottom" constant="40" id="3vT-SA-UWx"/>
                 <constraint firstAttribute="bottom" secondItem="WdN-Vi-kt7" secondAttribute="bottom" constant="20" symbolic="YES" id="4EP-HN-XQL"/>
                 <constraint firstItem="K3y-w5-SZT" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" symbolic="YES" id="4OH-cU-jmi"/>
                 <constraint firstAttribute="trailing" secondItem="K3y-w5-SZT" secondAttribute="trailing" constant="20" symbolic="YES" id="51Q-L0-N1G"/>
+                <constraint firstItem="Aw8-zq-1vH" firstAttribute="top" secondItem="Lwo-c6-cqZ" secondAttribute="bottom" constant="6" symbolic="YES" id="6Oy-C5-WTc"/>
                 <constraint firstAttribute="trailing" secondItem="FEd-ce-WHv" secondAttribute="trailing" constant="20" symbolic="YES" id="7vj-RM-6Oh"/>
+                <constraint firstItem="Aw8-zq-1vH" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="93V-rD-Ffb"/>
                 <constraint firstItem="H2l-LN-gF6" firstAttribute="top" secondItem="jKP-bE-B38" secondAttribute="bottom" constant="24" id="B5J-kt-tqA"/>
                 <constraint firstItem="K3y-w5-SZT" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="CfP-Qz-IeT"/>
                 <constraint firstItem="jKP-bE-B38" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="Gbz-VR-RnJ"/>
                 <constraint firstItem="JMo-RB-mfk" firstAttribute="leading" secondItem="WdN-Vi-kt7" secondAttribute="trailing" constant="12" symbolic="YES" id="Hk5-tB-TEE"/>
-                <constraint firstItem="Ilq-Th-bqp" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="Q6A-Ev-7Nn"/>
                 <constraint firstItem="JMo-RB-mfk" firstAttribute="top" secondItem="H2l-LN-gF6" secondAttribute="bottom" constant="8" symbolic="YES" id="QpS-wE-vNB"/>
-                <constraint firstItem="Ilq-Th-bqp" firstAttribute="top" secondItem="K3y-w5-SZT" secondAttribute="bottom" constant="8" symbolic="YES" id="SfW-Wk-Siq"/>
-                <constraint firstItem="4Cx-7M-5G4" firstAttribute="top" secondItem="Ilq-Th-bqp" secondAttribute="bottom" constant="40" id="TsY-1X-jjH"/>
+                <constraint firstItem="jKP-bE-B38" firstAttribute="top" secondItem="Aw8-zq-1vH" secondAttribute="bottom" constant="6" symbolic="YES" id="Ueh-hj-k1F"/>
                 <constraint firstAttribute="trailing" secondItem="Lwo-c6-cqZ" secondAttribute="trailing" constant="20" symbolic="YES" id="aT1-II-43f"/>
                 <constraint firstItem="Lwo-c6-cqZ" firstAttribute="top" secondItem="FEd-ce-WHv" secondAttribute="bottom" constant="6" symbolic="YES" id="aiP-1T-Vej"/>
                 <constraint firstItem="wGy-jc-Jv6" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="dFn-gA-uZY"/>
+                <constraint firstAttribute="trailing" secondItem="Aw8-zq-1vH" secondAttribute="trailing" constant="20" symbolic="YES" id="dZh-fU-fk2"/>
                 <constraint firstItem="Lwo-c6-cqZ" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="f3S-Qe-pbT"/>
                 <constraint firstAttribute="trailing" secondItem="wGy-jc-Jv6" secondAttribute="trailing" constant="20" symbolic="YES" id="fI7-ta-CIX"/>
                 <constraint firstItem="H2l-LN-gF6" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="gfz-zk-gU0"/>
@@ -206,7 +191,6 @@ Gw
                 <constraint firstItem="WdN-Vi-kt7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="oJy-xr-Cli"/>
                 <constraint firstAttribute="trailing" secondItem="jKP-bE-B38" secondAttribute="trailing" constant="20" symbolic="YES" id="qmq-WT-Vo8"/>
                 <constraint firstItem="FEd-ce-WHv" firstAttribute="top" secondItem="wGy-jc-Jv6" secondAttribute="bottom" constant="6" symbolic="YES" id="rPd-WA-qCx"/>
-                <constraint firstAttribute="trailing" secondItem="Ilq-Th-bqp" secondAttribute="trailing" constant="20" symbolic="YES" id="sha-1c-Nkw"/>
                 <constraint firstAttribute="trailing" secondItem="4Cx-7M-5G4" secondAttribute="trailing" constant="20" symbolic="YES" id="taX-rl-Y5O"/>
                 <constraint firstAttribute="trailing" secondItem="H2l-LN-gF6" secondAttribute="trailing" constant="20" symbolic="YES" id="u7R-lh-YcR"/>
                 <constraint firstItem="FEd-ce-WHv" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="uBZ-mu-7ho"/>

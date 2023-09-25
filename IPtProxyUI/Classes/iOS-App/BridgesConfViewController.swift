@@ -149,20 +149,6 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			}
 		})
 
-		+++ Section(L10n.manualConfiguration)
-		<<< ButtonRow() {
-			$0.title = L10n.requestBridges
-		}
-		.cellUpdate({ cell, _ in
-			cell.accessibilityTraits = .button
-		})
-		.onCellSelection { [weak self] _, _ in
-			let vc = MoatViewController()
-			vc.delegate = self
-
-			self?.navigationController?.pushViewController(vc, animated: true)
-		}
-
 		+++ transportSection
 
 		for t in transports.keys.sorted() {
