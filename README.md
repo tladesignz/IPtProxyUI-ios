@@ -59,7 +59,6 @@ Localize these by explicit calls in the code.
 
 - [IPtProxy](https://github.com/tladesignz/IPtProxy), licensed under [MIT](https://github.com/tladesignz/IPtProxy/blob/master/LICENSE)
 - [Eureka](https://github.com/xmartlabs/Eureka), licensed under [MIT](https://github.com/xmartlabs/Eureka/blob/master/LICENSE)
-- [ImageRow] (https://github.com/EurekaCommunity/ImageRow), licensed under [MIT](https://github.com/EurekaCommunity/ImageRow/blob/master/LICENSE)
 - [ProgressHUD](https://github.com/relatedcode/ProgressHUD), licensed under [MIT](https://github.com/relatedcode/ProgressHUD/blob/master/LICENSE)
 - [MBProgressHUD-OSX](https://github.com/Foxnolds/MBProgressHUD-OSX), licensed under [MIT](https://github.com/Foxnolds/MBProgressHUD-OSX/blob/master/LICENSE)
 - [ReachabilitySwift](https://github.com/ashleymills/Reachability.swift), licensed under [MIT] (https://github.com/ashleymills/Reachability.swift/blob/master/LICENSE))

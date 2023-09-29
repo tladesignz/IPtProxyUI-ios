@@ -1,19 +1,15 @@
 PODS:
-  - Eureka (5.3.6)
-  - ImageRow (4.1.0):
-    - Eureka (~> 5.3.5)
+  - Eureka (5.4.0)
   - IPtProxy (3.1.1)
   - IPtProxyUI (4.0.0):
-    - Eureka (~> 5.3)
-    - ImageRow (~> 4.0)
+    - Eureka (~> 5.4)
     - IPtProxy (~> 3.1.1)
     - IPtProxyUI/App (= 4.0.0)
   - IPtProxyUI/App (4.0.0):
-    - Eureka (~> 5.3)
-    - ImageRow (~> 4.0)
+    - Eureka (~> 5.4)
     - IPtProxy (~> 3.1.1)
-    - ProgressHUD (~> 13.6)
-  - ProgressHUD (13.7.2)
+    - ProgressHUD (~> 13.8)
+  - ProgressHUD (13.8.2)
 
 DEPENDENCIES:
   - IPtProxyUI (from `../`)
@@ -21,7 +17,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Eureka
-    - ImageRow
     - IPtProxy
     - ProgressHUD
 
@@ -30,11 +25,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Eureka: 28ad9dec6286cd7cd601fdf8e8df39bb7356a8f4
-  ImageRow: 880c0f052c5a89c80521b485c86ccf723a124e99
+  Eureka: fadaa9fa3d6e402d3c60f78f24edf3d7bafc9c29
   IPtProxy: 264799227d5d83a4a583e66bd4ea846510554025
-  IPtProxyUI: c606e88ec4d7e8ffda4eea8640dcdde909489374
-  ProgressHUD: 093d24ca970f191744017bee2649e37d0cd1c5b9
+  IPtProxyUI: 315b05911a81292f63a16600698617aabf2ad02c
+  ProgressHUD: 68d53be14b14eb3ae391a2ab03f4df1f0340b5d4
 
 PODFILE CHECKSUM: a28e91622341edaa77fe8db0347c3ce225da7654
 

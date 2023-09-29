@@ -36,8 +36,7 @@ Pod::Spec.new do |s|
 
 	s.dependency 'IPtProxy', '~> 3.1.1'
 
-	s.ios.dependency 'Eureka', '~> 5.3'
-	s.ios.dependency 'ImageRow', '~> 4.0'
+	s.ios.dependency 'Eureka', '~> 5.4'
 
 	s.subspec 'AppEx' do |a|
 		a.preserve_paths = 'update-bridges.sh', 'update-bridges.swift', '.bartycrouch.toml'
@@ -73,7 +72,7 @@ Pod::Spec.new do |s|
 	end
 
 	s.subspec 'App' do |a|
-		a.ios.dependency 'ProgressHUD', '~> 13.6'
+		a.ios.dependency 'ProgressHUD', '~> 13.8'
 
 		a.preserve_paths = 'update-bridges.sh', 'update-bridges.swift', '.bartycrouch.toml'
 

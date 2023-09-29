@@ -451,13 +451,11 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-IPtProxyUI_Example/Pods-IPtProxyUI_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
-				"${BUILT_PRODUCTS_DIR}/ImageRow/ImageRow.framework",
 				"${BUILT_PRODUCTS_DIR}/ProgressHUD/ProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageRow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
