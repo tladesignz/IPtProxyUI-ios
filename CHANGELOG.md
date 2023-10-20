@@ -1,5 +1,8 @@
 # IPtProxyUI
 
+## 4.1.1
+- Fixed mixed-up Snowflake arguments.
+
 ## 4.1.0
 - Updated to IPtProxy version 3.2.1 containing Snowflake 2.7.0
 - Updated translations.
