@@ -1,5 +1,12 @@
 # IPtProxyUI
 
+## 4.1.0
+- Updated to IPtProxy version 3.2.1 containing Snowflake 2.7.0
+- Updated translations.
+- Minor cleanup.
+- Added another front domain which might work better in certain countries using Snowflake's 
+  new support for multiple front domains.
+
 ## 4.0.0
 - Removed manual configuration with CAPTCHA, as that was recently deprecated by Tor Project.
 - Improved automatic configuration:
