@@ -97,18 +97,28 @@ public enum Transport: Int, CaseIterable, Comparable {
 		case .snowflake:
 			let snowflake = BuiltInBridges.shared?.snowflake?.first
 
+			// Seems more reliable in certain countries than the currently advertised one.
+			var fronts = Set(["github.githubassets.com"])
+			if let front = snowflake?.front {
+				fronts.insert(front)
+			}
+
 			IPtProxyStartSnowflake(
 				snowflake?.ice,
 				snowflake?.url?.absoluteString,
-				snowflake?.front, nil,
-				log ? Self.snowflakeLogFileName : nil, true, false, false, 1)
+				nil,
+				fronts.joined(separator: ","),
+				log ? Self.snowflakeLogFileName : nil,
+				true, false, false, 1)
 
 		case .snowflakeAmp:
 			IPtProxyStartSnowflake(
 				BuiltInBridges.shared?.snowflake?.first?.ice,
 				"https://snowflake-broker.torproject.net/",
-				"www.google.com", "https://cdn.ampproject.org/",
-				log ? Self.snowflakeLogFileName : nil, true, false, false, 1)
+				"www.google.com",
+				"https://cdn.ampproject.org/",
+				log ? Self.snowflakeLogFileName : nil,
+				true, false, false, 1)
 
 		default:
 			break
