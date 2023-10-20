@@ -106,8 +106,8 @@ public enum Transport: Int, CaseIterable, Comparable {
 			IPtProxyStartSnowflake(
 				snowflake?.ice,
 				snowflake?.url?.absoluteString,
-				nil,
 				fronts.joined(separator: ","),
+				nil,
 				log ? Self.snowflakeLogFileName : nil,
 				true, false, false, 1)
 
