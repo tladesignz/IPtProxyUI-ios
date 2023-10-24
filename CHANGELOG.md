@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 4.1.2
+- Fixed Snowflake AMP support. Snowflake now honors configuration from the bridge line, so we need to modify that.
+- Improved Snowflake support in certain countries.
+
 ## 4.1.1
 - Fixed mixed-up Snowflake arguments.
 
