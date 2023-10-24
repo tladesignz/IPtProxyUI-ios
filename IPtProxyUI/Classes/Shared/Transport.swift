@@ -23,6 +23,12 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 	private static let snowflakeLogFileName = "snowflake.log"
 
+    // Seems more reliable in certain countries than the currently advertised one.
+    private static let addFronts = ["github.githubassets.com"]
+
+    private static let ampBroker = "https://snowflake-broker.torproject.net/"
+    private static let ampFronts = ["www.google.com"]
+
 
 	// MARK: Comparable
 
@@ -98,10 +104,13 @@ public enum Transport: Int, CaseIterable, Comparable {
 			let snowflake = BuiltInBridges.shared?.snowflake?.first
 
 			// Seems more reliable in certain countries than the currently advertised one.
-			var fronts = Set(["github.githubassets.com"])
-			if let front = snowflake?.front {
-				fronts.insert(front)
+            var fronts = Set(Self.addFronts)
+            if let f = snowflake?.front {
+				fronts.insert(f)
 			}
+            if let f = snowflake?.fronts {
+                fronts.formUnion(f)
+            }
 
 			IPtProxyStartSnowflake(
 				snowflake?.ice,
@@ -114,8 +123,8 @@ public enum Transport: Int, CaseIterable, Comparable {
 		case .snowflakeAmp:
 			IPtProxyStartSnowflake(
 				BuiltInBridges.shared?.snowflake?.first?.ice,
-				"https://snowflake-broker.torproject.net/",
-				"www.google.com",
+                Self.ampBroker,
+                Self.ampFronts.joined(separator: ","),
 				"https://cdn.ampproject.org/",
 				log ? Self.snowflakeLogFileName : nil,
 				true, false, false, 1)
@@ -161,8 +170,7 @@ public enum Transport: Int, CaseIterable, Comparable {
                 .compactMap({ 
                     let builder = Bridge.Builder(from: $0)
 
-                    // Seems more reliable in certain countries than the currently advertised one.
-                    builder?.fronts.insert("github.githubassets.com")
+                    builder?.fronts.formUnion(Self.addFronts)
 
                     return builder?.build().raw
                 })
@@ -174,8 +182,8 @@ public enum Transport: Int, CaseIterable, Comparable {
                 .compactMap({
                     let builder = Bridge.Builder(from: $0)
 
-                    builder?.url = URL(string: "https://snowflake-broker.torproject.net/")
-                    builder?.fronts = Set(["www.google.com"])
+                    builder?.url = URL(string: Self.ampBroker)
+                    builder?.fronts = Set(Self.ampFronts)
 
                     return builder?.build().raw
                 })
