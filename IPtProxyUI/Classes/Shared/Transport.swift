@@ -155,9 +155,31 @@ public enum Transport: Int, CaseIterable, Comparable {
 				conf += BuiltInBridges.shared?.obfs4?.map({ cv("Bridge", $0.raw) }) ?? []
 			}
 
-		case .snowflake, .snowflakeAmp:
+        case .snowflake:
+            conf.append(cv("ClientTransportPlugin", "snowflake socks5 127.0.0.1:\(IPtProxySnowflakePort())"))
+            conf += BuiltInBridges.shared?.snowflake?
+                .compactMap({ 
+                    let builder = Bridge.Builder(from: $0)
+
+                    // Seems more reliable in certain countries than the currently advertised one.
+                    builder?.fronts.insert("github.githubassets.com")
+
+                    return builder?.build().raw
+                })
+                .map({ cv("Bridge", $0) }) ?? []
+
+		case .snowflakeAmp:
 			conf.append(cv("ClientTransportPlugin", "snowflake socks5 127.0.0.1:\(IPtProxySnowflakePort())"))
-			conf += BuiltInBridges.shared?.snowflake?.map({ cv("Bridge", $0.raw) }) ?? []
+            conf += BuiltInBridges.shared?.snowflake?
+                .compactMap({
+                    let builder = Bridge.Builder(from: $0)
+
+                    builder?.url = URL(string: "https://snowflake-broker.torproject.net/")
+                    builder?.fronts = Set(["www.google.com"])
+
+                    return builder?.build().raw
+                })
+                .map({ cv("Bridge", $0) }) ?? []
 
 		case .meekAzure:
 			conf.append(cv("ClientTransportPlugin", "meek_lite socks5 127.0.0.1:\(IPtProxyMeekPort())"))

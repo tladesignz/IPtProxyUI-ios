@@ -111,6 +111,82 @@ open class BuiltInBridges: Codable {
 
 open class Bridge: Codable, CustomStringConvertible {
 
+    open class Builder {
+
+        public private(set) var pieces: [String]
+        open var url: URL? = nil
+        open var fronts = Set<String>()
+        open var cert: String? = nil
+        open var iatMode: Int? = nil
+        open var ice: String? = nil
+        open var utlsImitate: String? = nil
+
+        public init(transport: String, ip: String, port: Int, fingerprint: String) {
+            pieces = [transport, "\(ip):\(port)", fingerprint]
+        }
+
+        convenience init?(from bridge: Bridge) {
+            guard let transport = bridge.transport,
+                  let ip = bridge.ip,
+                  let port = bridge.port,
+                  let fingerprint = bridge.fingerprint
+            else {
+                return nil
+            }
+
+            self.init(transport: transport, ip: ip, port: port, fingerprint: fingerprint)
+
+            url = bridge.url
+
+            if let front = bridge.front, !front.isEmpty {
+                fronts.insert(front)
+            }
+
+            if let oldFronts = bridge.fronts, !oldFronts.isEmpty {
+                fronts.formUnion(oldFronts)
+            }
+
+            cert = bridge.cert
+            iatMode = bridge.iatMode
+            ice = bridge.ice
+            utlsImitate = bridge.utlsImitate
+        }
+
+        open func build() -> Bridge {
+            var params = [String]()
+
+            if let url = url, !url.absoluteString.isEmpty {
+                params.append("url=\(url.absoluteString)")
+            }
+
+            let fronts = fronts.filter { !$0.isEmpty }
+
+            if !fronts.isEmpty {
+                params.append("fronts=\(fronts.joined(separator: ","))")
+            }
+
+            if let cert = cert, !cert.isEmpty {
+                params.append("cert=\(cert)")
+            }
+
+            if let iatMode = iatMode {
+                params.append("iat-mode=\(iatMode)")
+            }
+
+            if let ice = ice, !ice.isEmpty {
+                params.append("ice=\(ice)")
+            }
+
+            if let utlsImitate = utlsImitate, !utlsImitate.isEmpty {
+                params.append("utls-imitate=\(utlsImitate)")
+            }
+
+            params.insert(contentsOf: pieces, at: 0)
+
+            return Bridge(params.joined(separator: " "))
+        }
+    }
+
 	open var raw: String
 
 	open var rawPieces: [Substring] {
@@ -155,7 +231,7 @@ open class Bridge: Codable, CustomStringConvertible {
 
 	open var url: URL? {
 		if let piece = rawPieces.first(where: { $0.hasPrefix("url=") }),
-			let url = piece.split(separator: "=").last
+           let url = piece.split(separator: "=").last
 		{
 			return URL(string: String(url))
 		}
@@ -163,19 +239,31 @@ open class Bridge: Codable, CustomStringConvertible {
 		return nil
 	}
 
-	open var front: String? {
-		if let piece = rawPieces.first(where: { $0.hasPrefix("front=") }),
-			let front = piece.split(separator: "=").last
-		{
-			return String(front)
-		}
+    open var front: String? {
+        if let piece = rawPieces.first(where: { $0.hasPrefix("front=") }),
+           let front = piece.split(separator: "=").last
+        {
+            return String(front)
+        }
 
-		return nil
-	}
+        return nil
+    }
+
+    open var fronts: [String]? {
+        if let piece = rawPieces.first(where: { $0.hasPrefix("fronts=") }),
+           let fronts = piece.split(separator: "=").last
+        {
+            return fronts.split(separator: ",")
+                .filter({ !$0.isEmpty })
+                .map({ String($0) })
+        }
+
+        return nil
+    }
 
 	open var cert: String? {
 		if let piece = rawPieces.first(where: { $0.hasPrefix("cert=") }),
-			let cert = piece.split(separator: "=").last
+           let cert = piece.split(separator: "=").last
 		{
 			return String(cert)
 		}
@@ -185,7 +273,7 @@ open class Bridge: Codable, CustomStringConvertible {
 
 	open var iatMode: Int? {
 		if let piece = rawPieces.first(where: { $0.hasPrefix("iat-mode=") }),
-			let iatMode = piece.split(separator: "=").last
+           let iatMode = piece.split(separator: "=").last
 		{
 			return Int(iatMode)
 		}
@@ -195,7 +283,7 @@ open class Bridge: Codable, CustomStringConvertible {
 
 	open var ice: String? {
 		if let piece = rawPieces.first(where: { $0.hasPrefix("ice=") }),
-			let ice = piece.split(separator: "=").last
+           let ice = piece.split(separator: "=").last
 		{
 			return String(ice)
 		}
@@ -205,7 +293,7 @@ open class Bridge: Codable, CustomStringConvertible {
 
 	open var utlsImitate: String? {
 		if let piece = rawPieces.first(where: { $0.hasPrefix("utls-imitate=") }),
-			let utlsImitate = piece.split(separator: "=").last
+           let utlsImitate = piece.split(separator: "=").last
 		{
 			return String(utlsImitate)
 		}
