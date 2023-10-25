@@ -1,5 +1,8 @@
 # IPtProxyUI
 
+## 4.1.3
+- Downgraded Eureka dependency to 5.3, since 5.4 isn't really needed, and other projects still need to stick to 5.3.
+
 ## 4.1.2
 - Fixed Snowflake AMP support. Snowflake now honors configuration from the bridge line, so we need to modify that.
 - Improved Snowflake support in certain countries.
