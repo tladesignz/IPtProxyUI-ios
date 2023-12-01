@@ -1,18 +1,22 @@
 # IPtProxyUI
 
+Tor + Pluggable Transports on iOS and macOS
+
 [![Version](https://img.shields.io/cocoapods/v/IPtProxyUI.svg?style=flat)](https://cocoapods.org/pods/IPtProxyUI)
 [![License](https://img.shields.io/cocoapods/l/IPtProxyUI.svg?style=flat)](https://cocoapods.org/pods/IPtProxyUI)
 [![Platform](https://img.shields.io/cocoapods/p/IPtProxyUI.svg?style=flat)](https://cocoapods.org/pods/IPtProxyUI)
 
-IPtProxyUI provides a UI to configure bridges for all Pluggable Transports available in the IPtProxy package.
+IPtProxyUI provides all things necessary to use the Pluggable Transports from the 
+[IPtProxy](https://github.com/tladesignz/IPtProxy) library with Tor,
+preferrably via [Tor.framework](https://github.com/iCepa/Tor.framework). 
 
-This package provides some scenes and configuration code which is shared between
-different apps using the `IPtProxy` package together with `Tor.framework`.
+It includes all necessary configuration, code to interact with Tor Project's MOAT/rdsys 
+service to update the user's configuration and fetch lesser-known bridges and, of course, a 
+ready-made UI to show to your users which can handle all of the above.
 
-The UI is complete for your users to configure all aspects of the Transports,
-including MOAT/rdsys support to fetch new Obfs4 proxies.
-
-The configuration provided is good for using the PTs together with Tor.
+The UI is complete for your users to configure all aspects of the Transports.
+However, you're not obliged to use it. You can create your own and use the lower-level code
+only.
 
 Additionally there's a helper class `IpSupport` which can aid in better supporting
 IPv6-only networks which are common with some mobile network carriers.
