@@ -67,10 +67,17 @@ Localize these by explicit calls in the code.
 - [MBProgressHUD-OSX](https://github.com/Foxnolds/MBProgressHUD-OSX), licensed under [MIT](https://github.com/Foxnolds/MBProgressHUD-OSX/blob/master/LICENSE)
 - [ReachabilitySwift](https://github.com/ashleymills/Reachability.swift), licensed under [MIT] (https://github.com/ashleymills/Reachability.swift/blob/master/LICENSE))
 
+
+## Further reading
+
+https://tordev.guardianproject.info
+
+
 ## Author
 
 Benjamin Erhart, berhart@netzarchitekten.com
 for the [Guardian Project](https://guardianproject.info)
+
 
 ## License
 
