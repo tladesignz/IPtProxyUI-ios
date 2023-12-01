@@ -72,7 +72,7 @@ Pod::Spec.new do |s|
 	end
 
 	s.subspec 'App' do |a|
-		a.ios.dependency 'ProgressHUD', '~> 13.8'
+		a.ios.dependency 'ProgressHUD', '~> 14.1'
 
 		a.preserve_paths = 'update-bridges.sh', 'update-bridges.swift', '.bartycrouch.toml'
 

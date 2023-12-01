@@ -8,8 +8,8 @@ PODS:
   - IPtProxyUI/App (4.1.3):
     - Eureka (~> 5.3)
     - IPtProxy (~> 3.2.1)
-    - ProgressHUD (~> 13.8)
-  - ProgressHUD (13.8.6)
+    - ProgressHUD (~> 14.1)
+  - ProgressHUD (14.1.0)
 
 DEPENDENCIES:
   - IPtProxyUI (from `../`)
@@ -27,9 +27,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Eureka: fadaa9fa3d6e402d3c60f78f24edf3d7bafc9c29
   IPtProxy: 95d2d173b15f84a9d61c7482f8ec5dfdf5d94247
-  IPtProxyUI: bb766cc69e30dfdf55dcb9fcc4da173c496f4e0c
-  ProgressHUD: ee8924300accca88bfa39f6350f757c1c869a69c
+  IPtProxyUI: e78e1f2325188258fe0d00a90284a54f24dd1c1e
+  ProgressHUD: c4a55f108815c46a6bf082407d2f806840b7a869
 
 PODFILE CHECKSUM: 4a10692db46697ee1dc105a35ce9a1254ab024d2
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.14.3

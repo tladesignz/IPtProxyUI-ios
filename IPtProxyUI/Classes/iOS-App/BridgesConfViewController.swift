@@ -87,7 +87,7 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 				self?.navigationController?.pushViewController(vc, animated: true)
 			}
 			else if row.value == .onDemand, let self = self {
-				ProgressHUD.show()
+				ProgressHUD.animate()
 
 				DispatchQueue.global(qos: .userInitiated).async {
 					OnDemand.shared.delegate = self
@@ -99,12 +99,12 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 
 						DispatchQueue.main.async {
 							if let error = error {
-								ProgressHUD.showFailed()
+								ProgressHUD.failed()
 
 								AlertHelper.present(self, message: error.localizedDescription)
 							}
 							else {
-								ProgressHUD.showSucceed()
+								ProgressHUD.succeed()
 							}
 						}
 					}
@@ -130,20 +130,20 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			cell.accessibilityTraits = .button
 		})
 		.onCellSelection({ cell, row in
-			ProgressHUD.show()
+			ProgressHUD.animate()
 
 			let autoconf = AutoConf(self)
 			autoconf.do(cannotConnectWithoutPt: (self.form.rowBy(tag: "cannotConnect") as? SwitchRow)?.value ?? false) { [weak self] error in
 				DispatchQueue.main.async {
 					if let error = error {
-						ProgressHUD.showFailed()
+						ProgressHUD.failed()
 
 						if let self = self {
 							AlertHelper.present(self, message: error.localizedDescription)
 						}
 					}
 					else {
-						ProgressHUD.showSucceed()
+						ProgressHUD.succeed()
 					}
 				}
 			}
