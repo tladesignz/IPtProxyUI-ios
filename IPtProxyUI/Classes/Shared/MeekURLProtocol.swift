@@ -32,13 +32,13 @@ open class MeekURLProtocol: URLProtocol, HTTPConnectionDelegate {
 	private var httpConnection: HTTPConnection?
 
 	open class func start() {
-        IPtProxyStartLyrebird("DEBUG", false, false, nil)
+		IPtProxyStartLyrebird("DEBUG", false, false, nil)
 		URLProtocol.registerClass(self)
 	}
 
 	open class func stop() {
 		URLProtocol.unregisterClass(self)
-        IPtProxyStopLyrebird()
+		IPtProxyStopLyrebird()
 	}
 
 
@@ -209,7 +209,8 @@ class HTTPConnection: NSObject, StreamDelegate {
 
 	var haveReceivedResponse = false
 
-	var runLoop = RunLoop.main
+	// FIXED: Do NOT use `.main`. This leads to a block under macOS!
+	var runLoop = RunLoop.current
 
 	var runLoopMode = RunLoop.Mode.default
 
