@@ -1,5 +1,8 @@
 # IPtProxyUI
 
+## 4.2.1
+- Added handling of doubled fingerprint in bridge lines. Seems important for Snowflake.
+
 ## 4.2.0
 - Updated to IPtProxy version 3.3.0 containing Snowflake 2.8.0.
 - Fixed auto-config under macOS.

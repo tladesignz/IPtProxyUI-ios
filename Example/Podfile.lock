@@ -1,11 +1,11 @@
 PODS:
   - Eureka (5.4.0)
   - IPtProxy (3.3.0)
-  - IPtProxyUI (4.2.0):
+  - IPtProxyUI (4.2.1):
     - Eureka (~> 5.3)
     - IPtProxy (~> 3.3.0)
-    - IPtProxyUI/App (= 4.2.0)
-  - IPtProxyUI/App (4.2.0):
+    - IPtProxyUI/App (= 4.2.1)
+  - IPtProxyUI/App (4.2.1):
     - Eureka (~> 5.3)
     - IPtProxy (~> 3.3.0)
     - ProgressHUD (~> 14.1)
@@ -27,7 +27,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Eureka: fadaa9fa3d6e402d3c60f78f24edf3d7bafc9c29
   IPtProxy: 2136e276560ffd3a1d017683259f52552fc7c2e5
-  IPtProxyUI: 6cd830a8b1cba283b49d5978a6da610548e8ac97
+  IPtProxyUI: 1814ff18e9ce2d94eabc84dd0233a17f8953e791
   ProgressHUD: c4a55f108815c46a6bf082407d2f806840b7a869
 
 PODFILE CHECKSUM: 4a10692db46697ee1dc105a35ce9a1254ab024d2
