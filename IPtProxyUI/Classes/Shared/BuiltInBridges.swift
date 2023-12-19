@@ -114,6 +114,7 @@ open class Bridge: Codable, CustomStringConvertible {
     open class Builder {
 
         public private(set) var pieces: [String]
+        open var fingerprint2: String? = nil
         open var url: URL? = nil
         open var fronts = Set<String>()
         open var cert: String? = nil
@@ -121,20 +122,22 @@ open class Bridge: Codable, CustomStringConvertible {
         open var ice: String? = nil
         open var utlsImitate: String? = nil
 
-        public init(transport: String, ip: String, port: Int, fingerprint: String) {
-            pieces = [transport, "\(ip):\(port)", fingerprint]
+        public init(transport: String, ip: String, port: Int, fingerprint1: String) {
+            pieces = [transport, "\(ip):\(port)", fingerprint1]
         }
 
         convenience init?(from bridge: Bridge) {
             guard let transport = bridge.transport,
                   let ip = bridge.ip,
                   let port = bridge.port,
-                  let fingerprint = bridge.fingerprint
+                  let fingerprint1 = bridge.fingerprint1
             else {
                 return nil
             }
 
-            self.init(transport: transport, ip: ip, port: port, fingerprint: fingerprint)
+            self.init(transport: transport, ip: ip, port: port, fingerprint1: fingerprint1)
+
+            fingerprint2 = bridge.fingerprint2
 
             url = bridge.url
 
@@ -154,6 +157,10 @@ open class Bridge: Codable, CustomStringConvertible {
 
         open func build() -> Bridge {
             var params = [String]()
+
+            if let fingerprint2 = fingerprint2, !fingerprint2.isEmpty {
+                params.append("fingerprint=\(fingerprint2)")
+            }
 
             if let url = url, !url.absoluteString.isEmpty {
                 params.append("url=\(url.absoluteString)")
@@ -223,11 +230,21 @@ open class Bridge: Codable, CustomStringConvertible {
 		return nil
 	}
 
-	open var fingerprint: String? {
-		let rawPieces = rawPieces
+    open var fingerprint1: String? {
+        let rawPieces = rawPieces
 
-		return rawPieces.count > 2 ? String(rawPieces[2]) : nil
-	}
+        return rawPieces.count > 2 ? String(rawPieces[2]) : nil
+    }
+
+    open var fingerprint2: String? {
+        if let piece = rawPieces.first(where: { $0.hasPrefix("fingerprint=") }),
+           let fingerprint2 = piece.split(separator: "=").last
+        {
+            return String(fingerprint2)
+        }
+
+        return nil
+    }
 
 	open var url: URL? {
 		if let piece = rawPieces.first(where: { $0.hasPrefix("url=") }),
@@ -329,9 +346,10 @@ open class Bridge: Codable, CustomStringConvertible {
 
 	public var description: String {
 		"[\(String(describing: type(of: self)))] raw=\(raw), transport=\(transport ?? "(nil)"), "
-		+ "ip=\(ip ?? "(nil)"), port=\(port ?? -1), fingerprint=\(fingerprint ?? "(nil)"), "
-		+ "url=\(url?.absoluteString ?? "(nil)"), front=\(front ?? "(nil)"), cert=\(cert ?? "(nil)"), "
-		+ "iatMode=\(iatMode ?? -1), ice=\(ice ?? "(nil)"), utlsImitate=\(utlsImitate ?? "(nil)")"
+		+ "ip=\(ip ?? "(nil)"), port=\(port ?? -1), fingerprint1=\(fingerprint1 ?? "(nil)"), "
+        + "fingerprint2=\(fingerprint2 ?? "(nil)"), url=\(url?.absoluteString ?? "(nil)"), "
+        + "front=\(front ?? "(nil)"), cert=\(cert ?? "(nil)"), iatMode=\(iatMode ?? -1), "
+        + "ice=\(ice ?? "(nil)"), utlsImitate=\(utlsImitate ?? "(nil)")"
 	}
 
 }
