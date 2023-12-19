@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 4.2.0
+- Updated to IPtProxy version 3.3.0 containing Snowflake 2.8.0.
+- Fixed auto-config under macOS.
+
 ## 4.1.3
 - Downgraded Eureka dependency to 5.3, since 5.4 isn't really needed, and other projects still need to stick to 5.3.
 
