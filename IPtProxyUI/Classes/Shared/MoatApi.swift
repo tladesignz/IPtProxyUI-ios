@@ -93,10 +93,13 @@ open class MoatApi {
 
 		var request = URLRequest(url: url)
 
-		if let body = endpoint.body {
+		if let body = endpoint.body,
+		   let body = try? encoder.encode(body)
+        {
 			request.httpMethod = "POST"
-			request.httpBody = try? encoder.encode(body)
+			request.httpBody = body
 			request.addValue("application/vnd.api+json", forHTTPHeaderField: "Content-Type")
+			request.addValue(String(body.count), forHTTPHeaderField: "Content-Length")
 		}
 
 //		print("[\(String(describing: self))] request=\(request), body=\(String(data: (request.httpBody ?? "(nil)".data(using: .utf8)) ?? Data(), encoding: .utf8) ?? "(nil)")")
