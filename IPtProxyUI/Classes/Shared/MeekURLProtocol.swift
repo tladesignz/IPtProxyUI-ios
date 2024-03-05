@@ -76,8 +76,8 @@ open class MeekURLProtocol: URLProtocol, HTTPConnectionDelegate {
 			kCFStreamPropertySOCKSVersion: kCFStreamSocketSOCKSVersion5,
 			kCFStreamPropertySOCKSProxyHost: "127.0.0.1",
 			kCFStreamPropertySOCKSProxyPort: IPtProxyMeekPort(),
-			kCFStreamPropertySOCKSUser: "url=https://moat.torproject.org.global.prod.fastly.net/;",
-			kCFStreamPropertySOCKSPassword: "front=github.githubassets.com",
+			kCFStreamPropertySOCKSUser: "url=https://1723079976.rsc.cdn77.org;",
+			kCFStreamPropertySOCKSPassword: "front=www.phpmyadmin.net",
 		]
 
 		httpConnection = HTTPConnection(request: request, configuration: conf)
