@@ -1,5 +1,8 @@
 # IPtProxyUI
 
+## 4.3.1
+- Replaced fastly.net as domain front. Updated built-in bridges list.
+
 ## 4.3.0
 - Updated to IPtProxy version 3.4.0 containing Snowflake 2.8.1.
 - Updated translations.
