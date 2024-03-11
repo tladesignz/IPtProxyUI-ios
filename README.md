@@ -33,6 +33,13 @@ pod 'IPtProxyUI'
 
 ## Getting Started
 
+### All-in-one `TorManager`
+
+For a headache-free start into the world of Tor on iOS and macOS, check out
+the new [`TorManager` project](https://github.com/tladesignz/TorManager)!
+
+### Do-it-yourself
+
 ```swift
 use IPtProxyUI
 
