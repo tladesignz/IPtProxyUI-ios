@@ -116,7 +116,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 				snowflake?.ice,
 				snowflake?.url?.absoluteString,
 				fronts.joined(separator: ","),
-				nil, nil, nil, nil,
+				nil, nil, nil,
 				log ? Self.snowflakeLogFileName : nil,
 				true, false, false, 1)
 
@@ -126,7 +126,7 @@ public enum Transport: Int, CaseIterable, Comparable {
                 Self.ampBroker,
                 Self.ampFronts.joined(separator: ","),
 				"https://cdn.ampproject.org/",
-                nil, nil, nil,
+                nil, nil,
 				log ? Self.snowflakeLogFileName : nil,
 				true, false, false, 1)
 
