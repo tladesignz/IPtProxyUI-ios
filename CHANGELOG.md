@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 4.5.0
+- Updated to IPtProxy version 3.7.0 containing Snowflake 2.9.2.
+- Updated Indonesian translation.
+
 ## 4.4.0
 - Updated to IPtProxy version 3.6.0 containing Snowflake 2.9.1.
 
