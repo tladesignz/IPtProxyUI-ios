@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 4.6.0
+- Updated to IPtProxy version 3.8.1 containing Lyrebird 0.2.0.
+- Added Webtunnel support.
+
 ## 4.5.0
 - Updated to IPtProxy version 3.7.0 containing Snowflake 2.9.2.
 - Updated Indonesian translation.
