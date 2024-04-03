@@ -23,11 +23,11 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 	private static let snowflakeLogFileName = "snowflake.log"
 
-    // Seems more reliable in certain countries than the currently advertised one.
-    private static let addFronts = ["github.githubassets.com"]
+	// Seems more reliable in certain countries than the currently advertised one.
+	private static let addFronts = ["github.githubassets.com"]
 
-    private static let ampBroker = "https://snowflake-broker.torproject.net/"
-    private static let ampFronts = ["www.google.com"]
+	private static let ampBroker = "https://snowflake-broker.torproject.net/"
+	private static let ampFronts = ["www.google.com"]
 
 
 	// MARK: Comparable
@@ -104,13 +104,13 @@ public enum Transport: Int, CaseIterable, Comparable {
 			let snowflake = BuiltInBridges.shared?.snowflake?.first
 
 			// Seems more reliable in certain countries than the currently advertised one.
-            var fronts = Set(Self.addFronts)
-            if let f = snowflake?.front {
+			var fronts = Set(Self.addFronts)
+			if let f = snowflake?.front {
 				fronts.insert(f)
 			}
-            if let f = snowflake?.fronts {
-                fronts.formUnion(f)
-            }
+			if let f = snowflake?.fronts {
+				fronts.formUnion(f)
+			}
 
 			IPtProxyStartSnowflake(
 				snowflake?.ice,
@@ -123,10 +123,10 @@ public enum Transport: Int, CaseIterable, Comparable {
 		case .snowflakeAmp:
 			IPtProxyStartSnowflake(
 				BuiltInBridges.shared?.snowflake?.first?.ice,
-                Self.ampBroker,
-                Self.ampFronts.joined(separator: ","),
+				Self.ampBroker,
+				Self.ampFronts.joined(separator: ","),
 				"https://cdn.ampproject.org/",
-                nil, nil,
+				nil, nil,
 				log ? Self.snowflakeLogFileName : nil,
 				true, false, false, 1)
 
@@ -153,52 +153,73 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 		switch self {
 		case .obfs4, .custom, .onDemand:
-			conf.append(cv("ClientTransportPlugin", "obfs4 socks5 127.0.0.1:\(IPtProxyObfs4Port())"))
-
-			if self == .onDemand, let onDemandBridges = Settings.onDemandBridges, !onDemandBridges.isEmpty {
+			if self == .onDemand,
+			   let onDemandBridges = Settings.onDemandBridges,
+			   onDemandBridges.isEmpty
+			{
+				conf.append(ctp("obfs4", IPtProxyObfs4Port(), cv))
 				conf += onDemandBridges.map({ cv("Bridge", $0) })
 			}
-			else if self == .custom, let customBridges = Settings.customBridges, !customBridges.isEmpty {
+			else if self == .custom,
+					let customBridges = Settings.customBridges,
+					let first = customBridges.first
+			{
+				// Try supporting other bridges than Obfs4 with custom bridges. First bridge decides, which one to use!
+				switch Bridge(first).transport {
+				case "meek_lite":
+					conf.append(ctp("meek_lite", IPtProxyMeekPort(), cv))
+
+				case "webtunnel":
+					conf.append(ctp("webtunnel", IPtProxyWebtunnelPort(), cv))
+
+				default:
+					conf.append(ctp("obfs4", IPtProxyObfs4Port(), cv))
+				}
+
 				conf += customBridges.map({ cv("Bridge", $0) })
 			}
 			else {
+				conf.append(ctp("obfs4", IPtProxyObfs4Port(), cv))
 				conf += BuiltInBridges.shared?.obfs4?.map({ cv("Bridge", $0.raw) }) ?? []
 			}
 
-        case .snowflake:
-            conf.append(cv("ClientTransportPlugin", "snowflake socks5 127.0.0.1:\(IPtProxySnowflakePort())"))
-            conf += BuiltInBridges.shared?.snowflake?
-                .compactMap({ 
-                    let builder = Bridge.Builder(from: $0)
+		case .snowflake:
+			conf.append(ctp("snowflake", IPtProxySnowflakePort(), cv))
+			conf += BuiltInBridges.shared?.snowflake?
+				.compactMap({
+					let builder = Bridge.Builder(from: $0)
 
-                    builder?.fronts.formUnion(Self.addFronts)
+					builder?.fronts.formUnion(Self.addFronts)
 
-                    return builder?.build().raw
-                })
-                .map({ cv("Bridge", $0) }) ?? []
+					return builder?.build().raw
+				})
+				.map({ cv("Bridge", $0) }) ?? []
 
 		case .snowflakeAmp:
-			conf.append(cv("ClientTransportPlugin", "snowflake socks5 127.0.0.1:\(IPtProxySnowflakePort())"))
-            conf += BuiltInBridges.shared?.snowflake?
-                .compactMap({
-                    let builder = Bridge.Builder(from: $0)
+			conf.append(ctp("snowflake", IPtProxySnowflakePort(), cv))
+			conf += BuiltInBridges.shared?.snowflake?
+				.compactMap({
+					let builder = Bridge.Builder(from: $0)
 
-                    builder?.url = URL(string: Self.ampBroker)
-                    builder?.fronts = Set(Self.ampFronts)
+					builder?.url = URL(string: Self.ampBroker)
+					builder?.fronts = Set(Self.ampFronts)
 
-                    return builder?.build().raw
-                })
-                .map({ cv("Bridge", $0) }) ?? []
+					return builder?.build().raw
+				})
+				.map({ cv("Bridge", $0) }) ?? []
 
 		case .meekAzure:
-			conf.append(cv("ClientTransportPlugin", "meek_lite socks5 127.0.0.1:\(IPtProxyMeekPort())"))
+			conf.append(ctp("meek_lite", IPtProxyMeekPort(), cv))
 			conf += BuiltInBridges.shared?.meekAzure?.map({ cv("Bridge", $0.raw) }) ?? []
-
 
 		default:
 			break
 		}
 
 		return conf
+	}
+
+	private func ctp<T>(_ transport: String, _ port: Int, _ cv: (String, String) -> T) -> T {
+		return cv("ClientTransportPlugin", "\(transport) socks5 127.0.0.1:\(port)")
 	}
 }
