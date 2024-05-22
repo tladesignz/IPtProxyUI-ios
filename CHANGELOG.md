@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 4.6.1
+- Updated translations.
+- Added support for mixed custom bridges.
+
 ## 4.6.0
 - Updated to IPtProxy version 3.8.1 containing Lyrebird 0.2.0.
 - Added Webtunnel support.
