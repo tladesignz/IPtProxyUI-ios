@@ -155,25 +155,29 @@ public enum Transport: Int, CaseIterable, Comparable {
 		case .obfs4, .custom, .onDemand:
 			if self == .onDemand,
 			   let onDemandBridges = Settings.onDemandBridges,
-			   onDemandBridges.isEmpty
+			   !onDemandBridges.isEmpty
 			{
 				conf.append(ctp("obfs4", IPtProxyObfs4Port(), cv))
 				conf += onDemandBridges.map({ cv("Bridge", $0) })
 			}
 			else if self == .custom,
 					let customBridges = Settings.customBridges,
-					let first = customBridges.first
+					!customBridges.isEmpty
 			{
-				// Try supporting other bridges than Obfs4 with custom bridges. First bridge decides, which one to use!
-				switch Bridge(first).transport {
-				case "meek_lite":
-					conf.append(ctp("meek_lite", IPtProxyMeekPort(), cv))
+				let transports = Set(customBridges.compactMap({ Bridge($0).transport }))
 
-				case "webtunnel":
-					conf.append(ctp("webtunnel", IPtProxyWebtunnelPort(), cv))
+				// Try supporting other bridges than Obfs4 with custom bridges.
+				for transport in transports {
+					switch transport {
+					case "meek_lite":
+						conf.append(ctp("meek_lite", IPtProxyMeekPort(), cv))
 
-				default:
-					conf.append(ctp("obfs4", IPtProxyObfs4Port(), cv))
+					case "webtunnel":
+						conf.append(ctp("webtunnel", IPtProxyWebtunnelPort(), cv))
+
+					default:
+						conf.append(ctp("obfs4", IPtProxyObfs4Port(), cv))
+					}
 				}
 
 				conf += customBridges.map({ cv("Bridge", $0) })
