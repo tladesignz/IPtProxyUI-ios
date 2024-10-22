@@ -32,13 +32,13 @@ open class MeekURLProtocol: URLProtocol, HTTPConnectionDelegate {
 	private var httpConnection: HTTPConnection?
 
 	open class func start() {
-		IPtProxyStartLyrebird("DEBUG", false, false, nil)
+        Transport.meekAzure.start(log: false)
 		URLProtocol.registerClass(self)
 	}
 
 	open class func stop() {
 		URLProtocol.unregisterClass(self)
-		IPtProxyStopLyrebird()
+        Transport.meekAzure.stop()
 	}
 
 
@@ -75,7 +75,7 @@ open class MeekURLProtocol: URLProtocol, HTTPConnectionDelegate {
 			kCFProxyTypeKey as AnyHashable: kCFProxyTypeSOCKS,
 			kCFStreamPropertySOCKSVersion: kCFStreamSocketSOCKSVersion5,
 			kCFStreamPropertySOCKSProxyHost: "127.0.0.1",
-			kCFStreamPropertySOCKSProxyPort: IPtProxyMeekPort(),
+            kCFStreamPropertySOCKSProxyPort: Transport.meekAzure.port,
 			kCFStreamPropertySOCKSUser: "url=https://1723079976.rsc.cdn77.org;",
 			kCFStreamPropertySOCKSPassword: "front=www.phpmyadmin.net",
 		]

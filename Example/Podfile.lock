@@ -12,15 +12,17 @@ PODS:
   - ProgressHUD (14.1.1)
 
 DEPENDENCIES:
+  - IPtProxy (from `../../IPtProxy-cohosh`)
   - IPtProxyUI (from `../`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Eureka
-    - IPtProxy
     - ProgressHUD
 
 EXTERNAL SOURCES:
+  IPtProxy:
+    :path: "../../IPtProxy-cohosh"
   IPtProxyUI:
     :path: "../"
 
@@ -30,6 +32,6 @@ SPEC CHECKSUMS:
   IPtProxyUI: 20e0a6a51bc203f34a35f281a902e4e1ceded86a
   ProgressHUD: abb9136ae23c85204236828562cb9a8ec98efb44
 
-PODFILE CHECKSUM: 4a10692db46697ee1dc105a35ce9a1254ab024d2
+PODFILE CHECKSUM: 00bf6506036106f3333f0c45c63ced85f0dfbf2a
 
 COCOAPODS: 1.16.1
