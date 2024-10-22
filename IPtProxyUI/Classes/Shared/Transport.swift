@@ -148,20 +148,20 @@ public enum Transport: Int, CaseIterable, Comparable {
 		}
 	}
 
-	public func torConf<T>(_ cv: (String, String) -> T) -> [T] {
+    public func torConf<T>(_ cv: (String, String) -> T, onDemandBridges: [String]? = nil, customBridges: [String]? = nil) -> [T] {
 		var conf = [T]()
 
 		switch self {
 		case .obfs4, .custom, .onDemand:
 			if self == .onDemand,
-			   let onDemandBridges = Settings.onDemandBridges,
+               let onDemandBridges = onDemandBridges ?? Settings.onDemandBridges,
 			   !onDemandBridges.isEmpty
 			{
 				conf.append(ctp("obfs4", IPtProxyObfs4Port(), cv))
 				conf += onDemandBridges.map({ cv("Bridge", $0) })
 			}
 			else if self == .custom,
-					let customBridges = Settings.customBridges,
+					let customBridges = customBridges ?? Settings.customBridges,
 					!customBridges.isEmpty
 			{
 				let transports = Set(customBridges.compactMap({ Bridge($0).transport }))
