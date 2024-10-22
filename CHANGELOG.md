@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 4.6.2
+- Allow injection of `onDemandBridges` and `customBridges` lists when creating the Tor configuration.
+  IPtProxyUI might be unable to read them with its own `Settings` implementation.
+
 ## 4.6.1
 - Updated translations.
 - Added support for mixed custom bridges.
