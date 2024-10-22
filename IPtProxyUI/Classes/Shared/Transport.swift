@@ -21,13 +21,23 @@ public enum Transport: Int, CaseIterable, Comparable {
 		return ["key": key, "value": "\"\(value)\""]
 	}
 
-	private static let snowflakeLogFileName = "snowflake.log"
+	public static var stateLocation = URL(fileURLWithPath: "")
+
+	private static let logFileName = "ipt.log"
 
 	// Seems more reliable in certain countries than the currently advertised one.
 	private static let addFronts = ["github.githubassets.com"]
 
 	private static let ampBroker = "https://snowflake-broker.torproject.net/"
 	private static let ampFronts = ["www.google.com"]
+
+	private static let iPtProxy: IPtProxyIPtProxy? = {
+		let p = IPtProxyIPtProxy(stateLocation.path)
+		p?.logLevel = "WARN"
+		p?.init_()
+
+		return p
+	}()
 
 
 	// MARK: Comparable
@@ -79,15 +89,32 @@ public enum Transport: Int, CaseIterable, Comparable {
 	 */
 	public var logFile: URL? {
 		switch self {
-		case .obfs4, .custom, .onDemand, .meekAzure:
-			return Settings.stateLocation.appendingPathComponent(IPtProxyLyrebirdLogFile())
-
-		case .snowflake, .snowflakeAmp:
-			return Settings.stateLocation.appendingPathComponent(Self.snowflakeLogFileName)
+		case .obfs4, .custom, .onDemand, .meekAzure, .snowflake, .snowflakeAmp:
+			return Settings.stateLocation.appendingPathComponent(Self.logFileName)
 
 		default:
 			return nil
 		}
+	}
+
+	public var port: Int {
+		let method: String?
+
+		switch self {
+		case .none:
+			method = nil
+
+		case .obfs4, .custom, .onDemand:
+			method = "obfs4"
+
+		case .snowflake, .snowflakeAmp:
+			method = "snowflake"
+
+		case .meekAzure:
+			method = "meek_lite"
+		}
+
+		return Self.iPtProxy?.getPort(method) ?? 0
 	}
 
 	/**
@@ -96,9 +123,14 @@ public enum Transport: Int, CaseIterable, Comparable {
 	 - parameter log: OPTIONAL. A file URL to write the log to (for Snowflake) or just anything non-nil to enable Obfs4proxy logging.
 	 */
 	public func start(log: Bool = false) {
+		Self.iPtProxy?.enableLogging = log
+
 		switch self {
-		case .obfs4, .custom, .onDemand, .meekAzure:
-			IPtProxyStartLyrebird("WARN", log, false, nil)
+		case .obfs4, .custom, .onDemand:
+			Self.iPtProxy?.start("obfs4", proxy: nil)
+
+		case .meekAzure:
+			Self.iPtProxy?.start("meek_lite", proxy: nil)
 
 		case .snowflake:
 			let snowflake = BuiltInBridges.shared?.snowflake?.first
@@ -112,23 +144,20 @@ public enum Transport: Int, CaseIterable, Comparable {
 				fronts.formUnion(f)
 			}
 
-			IPtProxyStartSnowflake(
-				snowflake?.ice,
-				snowflake?.url?.absoluteString,
-				fronts.joined(separator: ","),
-				nil, nil, nil,
-				log ? Self.snowflakeLogFileName : nil,
-				true, false, false, 1)
+			Self.iPtProxy?.snowflakeIceServers = snowflake?.ice ?? ""
+			Self.iPtProxy?.snowflakeBrokerUrl = snowflake?.url?.absoluteString ?? ""
+			Self.iPtProxy?.snowflakeFrontDomains = fronts.joined(separator: ",")
+			Self.iPtProxy?.snowflakeAmpCacheUrl = ""
+
+			Self.iPtProxy?.start("snowflake", proxy: nil)
 
 		case .snowflakeAmp:
-			IPtProxyStartSnowflake(
-				BuiltInBridges.shared?.snowflake?.first?.ice,
-				Self.ampBroker,
-				Self.ampFronts.joined(separator: ","),
-				"https://cdn.ampproject.org/",
-				nil, nil,
-				log ? Self.snowflakeLogFileName : nil,
-				true, false, false, 1)
+			Self.iPtProxy?.snowflakeIceServers = BuiltInBridges.shared?.snowflake?.first?.ice ?? ""
+			Self.iPtProxy?.snowflakeBrokerUrl = Self.ampBroker
+			Self.iPtProxy?.snowflakeFrontDomains = Self.ampFronts.joined(separator: ",")
+			Self.iPtProxy?.snowflakeAmpCacheUrl = "https://cdn.ampproject.org/"
+
+			Self.iPtProxy?.start("snowflake", proxy: nil)
 
 		default:
 			break
@@ -137,11 +166,14 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 	public func stop() {
 		switch self {
-		case .obfs4, .custom, .onDemand, .meekAzure:
-			IPtProxyStopLyrebird()
+		case .obfs4, .custom, .onDemand:
+			Self.iPtProxy?.stop("obfs4")
+
+		case .meekAzure:
+			Self.iPtProxy?.stop("meek_lite")
 
 		case .snowflake, .snowflakeAmp:
-			IPtProxyStopSnowflake()
+			Self.iPtProxy?.stop("snowflake")
 
 		default:
 			break
@@ -157,7 +189,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 			   let onDemandBridges = Settings.onDemandBridges,
 			   !onDemandBridges.isEmpty
 			{
-				conf.append(ctp("obfs4", IPtProxyObfs4Port(), cv))
+				conf.append(ctp("obfs4", port, cv))
 				conf += onDemandBridges.map({ cv("Bridge", $0) })
 			}
 			else if self == .custom,
@@ -170,25 +202,25 @@ public enum Transport: Int, CaseIterable, Comparable {
 				for transport in transports {
 					switch transport {
 					case "meek_lite":
-						conf.append(ctp("meek_lite", IPtProxyMeekPort(), cv))
+						conf.append(ctp("meek_lite", port, cv))
 
 					case "webtunnel":
-						conf.append(ctp("webtunnel", IPtProxyWebtunnelPort(), cv))
+						conf.append(ctp("webtunnel", Self.iPtProxy?.getPort("webtunnel") ?? 0, cv))
 
 					default:
-						conf.append(ctp("obfs4", IPtProxyObfs4Port(), cv))
+						conf.append(ctp("obfs4", port, cv))
 					}
 				}
 
 				conf += customBridges.map({ cv("Bridge", $0) })
 			}
 			else {
-				conf.append(ctp("obfs4", IPtProxyObfs4Port(), cv))
+				conf.append(ctp("obfs4", port, cv))
 				conf += BuiltInBridges.shared?.obfs4?.map({ cv("Bridge", $0.raw) }) ?? []
 			}
 
 		case .snowflake:
-			conf.append(ctp("snowflake", IPtProxySnowflakePort(), cv))
+			conf.append(ctp("snowflake", port, cv))
 			conf += BuiltInBridges.shared?.snowflake?
 				.compactMap({
 					let builder = Bridge.Builder(from: $0)
@@ -200,7 +232,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 				.map({ cv("Bridge", $0) }) ?? []
 
 		case .snowflakeAmp:
-			conf.append(ctp("snowflake", IPtProxySnowflakePort(), cv))
+			conf.append(ctp("snowflake", port, cv))
 			conf += BuiltInBridges.shared?.snowflake?
 				.compactMap({
 					let builder = Bridge.Builder(from: $0)
@@ -213,7 +245,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 				.map({ cv("Bridge", $0) }) ?? []
 
 		case .meekAzure:
-			conf.append(ctp("meek_lite", IPtProxyMeekPort(), cv))
+			conf.append(ctp("meek_lite", port, cv))
 			conf += BuiltInBridges.shared?.meekAzure?.map({ cv("Bridge", $0.raw) }) ?? []
 
 		default:

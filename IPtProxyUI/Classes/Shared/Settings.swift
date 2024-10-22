@@ -44,10 +44,10 @@ open class Settings {
 
 	open class var stateLocation: URL {
 		get {
-			URL(fileURLWithPath: IPtProxy.stateLocation())
+            Transport.stateLocation
 		}
 		set {
-			IPtProxy.setStateLocation(newValue.path)
+            Transport.stateLocation = newValue
 		}
 	}
 }
