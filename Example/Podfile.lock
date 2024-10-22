@@ -1,5 +1,5 @@
 PODS:
-  - Eureka (5.4.0)
+  - Eureka (5.5.0)
   - IPtProxy (3.8.1)
   - IPtProxyUI (4.6.1):
     - Eureka (~> 5.3)
@@ -25,7 +25,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Eureka: fadaa9fa3d6e402d3c60f78f24edf3d7bafc9c29
+  Eureka: 1c18c7fcd8f772cc2ca42d6be36292dffa77eecb
   IPtProxy: d7e37d1faa9b2608b8b5b2743b1a4ae3eb723c5e
   IPtProxyUI: b30db38039f283bdb92ef39c9911ffe64f0f4067
   ProgressHUD: abb9136ae23c85204236828562cb9a8ec98efb44
