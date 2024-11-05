@@ -16,6 +16,7 @@ class ViewController: NSViewController, NSWindowDelegate, BridgesConfDelegate {
 
 		if let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first {
 			Settings.stateLocation = url
+			print("[\(String(describing: type(of: self)))] stateLocation=\(url)")
 		}
 
 		bridgeSettings(self)

@@ -32,8 +32,14 @@ open class MeekURLProtocol: URLProtocol, HTTPConnectionDelegate {
 	private var httpConnection: HTTPConnection?
 
 	open class func start() {
-        Transport.meekAzure.start(log: false)
-		URLProtocol.registerClass(self)
+        do {
+            try Transport.meekAzure.start()
+        }
+        catch {
+            print("[\(String(describing: self))] error starting Meek Azure transport: \(error)")
+        }
+
+        URLProtocol.registerClass(self)
 	}
 
 	open class func stop() {

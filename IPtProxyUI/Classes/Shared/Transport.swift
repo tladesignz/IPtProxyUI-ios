@@ -23,7 +23,15 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 	public static var stateLocation = URL(fileURLWithPath: "")
 
-	private static let logFileName = "ipt.log"
+	/**
+	 Your custom bridges, in case these cannot be found in `Settings.customBridges`.
+	 */
+	public static var customBridges: [String]?
+
+
+	private static var customTransports: [String] {
+		(customBridges ?? Settings.customBridges)?.compactMap({ Bridge($0).transport }) ?? []
+	}
 
 	// Seems more reliable in certain countries than the currently advertised one.
 	private static let addFronts = ["github.githubassets.com"]
@@ -31,12 +39,8 @@ public enum Transport: Int, CaseIterable, Comparable {
 	private static let ampBroker = "https://snowflake-broker.torproject.net/"
 	private static let ampFronts = ["www.google.com"]
 
-	private static let iPtProxy: IPtProxyIPtProxy? = {
-		let p = IPtProxyIPtProxy(stateLocation.path)
-		p?.logLevel = "WARN"
-		p?.init_()
-
-		return p
+	private static let controller: IPtProxyController? = {
+		return IPtProxyController(stateLocation.path, enableLogging: true, unsafeLogging: false, logLevel: "DEBUG")
 	}()
 
 
@@ -90,7 +94,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	public var logFile: URL? {
 		switch self {
 		case .obfs4, .custom, .onDemand, .meekAzure, .snowflake, .snowflakeAmp:
-			return Settings.stateLocation.appendingPathComponent(Self.logFileName)
+			return Settings.stateLocation.appendingPathComponent(IPtProxyLogFileName)
 
 		default:
 			return nil
@@ -104,33 +108,37 @@ public enum Transport: Int, CaseIterable, Comparable {
 		case .none:
 			method = nil
 
-		case .obfs4, .custom, .onDemand:
-			method = "obfs4"
+		case .obfs4, .onDemand:
+			method = IPtProxyObfs4
+
+		case .custom:
+			method = Self.customTransports.first
 
 		case .snowflake, .snowflakeAmp:
-			method = "snowflake"
+			method = IPtProxySnowflake
 
 		case .meekAzure:
-			method = "meek_lite"
+			method = IPtProxyMeekLite
 		}
 
-		return Self.iPtProxy?.getPort(method) ?? 0
+		return Self.controller?.port(method) ?? 0
 	}
 
 	/**
 	 Start the transport, if it is startable.
-
-	 - parameter log: OPTIONAL. A file URL to write the log to (for Snowflake) or just anything non-nil to enable Obfs4proxy logging.
 	 */
-	public func start(log: Bool = false) {
-		Self.iPtProxy?.enableLogging = log
-
+	public func start() throws {
 		switch self {
-		case .obfs4, .custom, .onDemand:
-			Self.iPtProxy?.start("obfs4", proxy: nil)
+		case .obfs4, .onDemand:
+			try Self.controller?.start(IPtProxyObfs4, proxy: nil)
+
+		case .custom:
+			for transport in Self.customTransports {
+				try Self.controller?.start(transport, proxy: nil)
+			}
 
 		case .meekAzure:
-			Self.iPtProxy?.start("meek_lite", proxy: nil)
+			try Self.controller?.start(IPtProxyMeekLite, proxy: nil)
 
 		case .snowflake:
 			let snowflake = BuiltInBridges.shared?.snowflake?.first
@@ -144,20 +152,20 @@ public enum Transport: Int, CaseIterable, Comparable {
 				fronts.formUnion(f)
 			}
 
-			Self.iPtProxy?.snowflakeIceServers = snowflake?.ice ?? ""
-			Self.iPtProxy?.snowflakeBrokerUrl = snowflake?.url?.absoluteString ?? ""
-			Self.iPtProxy?.snowflakeFrontDomains = fronts.joined(separator: ",")
-			Self.iPtProxy?.snowflakeAmpCacheUrl = ""
+			Self.controller?.snowflakeIceServers = snowflake?.ice ?? ""
+			Self.controller?.snowflakeBrokerUrl = snowflake?.url?.absoluteString ?? ""
+			Self.controller?.snowflakeFrontDomains = fronts.joined(separator: ",")
+			Self.controller?.snowflakeAmpCacheUrl = ""
 
-			Self.iPtProxy?.start("snowflake", proxy: nil)
+			try Self.controller?.start(IPtProxySnowflake, proxy: nil)
 
 		case .snowflakeAmp:
-			Self.iPtProxy?.snowflakeIceServers = BuiltInBridges.shared?.snowflake?.first?.ice ?? ""
-			Self.iPtProxy?.snowflakeBrokerUrl = Self.ampBroker
-			Self.iPtProxy?.snowflakeFrontDomains = Self.ampFronts.joined(separator: ",")
-			Self.iPtProxy?.snowflakeAmpCacheUrl = "https://cdn.ampproject.org/"
+			Self.controller?.snowflakeIceServers = BuiltInBridges.shared?.snowflake?.first?.ice ?? ""
+			Self.controller?.snowflakeBrokerUrl = Self.ampBroker
+			Self.controller?.snowflakeFrontDomains = Self.ampFronts.joined(separator: ",")
+			Self.controller?.snowflakeAmpCacheUrl = "https://cdn.ampproject.org/"
 
-			Self.iPtProxy?.start("snowflake", proxy: nil)
+			try Self.controller?.start(IPtProxySnowflake, proxy: nil)
 
 		default:
 			break
@@ -166,61 +174,55 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 	public func stop() {
 		switch self {
-		case .obfs4, .custom, .onDemand:
-			Self.iPtProxy?.stop("obfs4")
+		case .obfs4, .onDemand:
+			Self.controller?.stop(IPtProxyObfs4)
+
+		case .custom:
+			for transport in Self.customTransports {
+				Self.controller?.stop(transport)
+			}
 
 		case .meekAzure:
-			Self.iPtProxy?.stop("meek_lite")
+			Self.controller?.stop(IPtProxyMeekLite)
 
 		case .snowflake, .snowflakeAmp:
-			Self.iPtProxy?.stop("snowflake")
+			Self.controller?.stop(IPtProxySnowflake)
 
 		default:
 			break
 		}
 	}
 
-    public func torConf<T>(_ cv: (String, String) -> T, onDemandBridges: [String]? = nil, customBridges: [String]? = nil) -> [T] {
+	public func torConf<T>(_ cv: (String, String) -> T, onDemandBridges: [String]? = nil) -> [T] {
 		var conf = [T]()
 
 		switch self {
 		case .obfs4, .custom, .onDemand:
 			if self == .onDemand,
-               let onDemandBridges = onDemandBridges ?? Settings.onDemandBridges,
+			   let onDemandBridges = onDemandBridges ?? Settings.onDemandBridges,
 			   !onDemandBridges.isEmpty
 			{
-				conf.append(ctp("obfs4", port, cv))
+				conf.append(ctp(IPtProxyObfs4, port, cv))
 				conf += onDemandBridges.map({ cv("Bridge", $0) })
 			}
 			else if self == .custom,
-					let customBridges = customBridges ?? Settings.customBridges,
+					let customBridges = Self.customBridges ?? Settings.customBridges,
 					!customBridges.isEmpty
 			{
-				let transports = Set(customBridges.compactMap({ Bridge($0).transport }))
-
 				// Try supporting other bridges than Obfs4 with custom bridges.
-				for transport in transports {
-					switch transport {
-					case "meek_lite":
-						conf.append(ctp("meek_lite", port, cv))
-
-					case "webtunnel":
-						conf.append(ctp("webtunnel", Self.iPtProxy?.getPort("webtunnel") ?? 0, cv))
-
-					default:
-						conf.append(ctp("obfs4", port, cv))
-					}
+				for transport in Self.customTransports {
+					conf.append(ctp(transport, Self.controller?.port(transport) ?? 0, cv))
 				}
 
 				conf += customBridges.map({ cv("Bridge", $0) })
 			}
 			else {
-				conf.append(ctp("obfs4", port, cv))
+				conf.append(ctp(IPtProxyObfs4, port, cv))
 				conf += BuiltInBridges.shared?.obfs4?.map({ cv("Bridge", $0.raw) }) ?? []
 			}
 
 		case .snowflake:
-			conf.append(ctp("snowflake", port, cv))
+			conf.append(ctp(IPtProxySnowflake, port, cv))
 			conf += BuiltInBridges.shared?.snowflake?
 				.compactMap({
 					let builder = Bridge.Builder(from: $0)
@@ -232,7 +234,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 				.map({ cv("Bridge", $0) }) ?? []
 
 		case .snowflakeAmp:
-			conf.append(ctp("snowflake", port, cv))
+			conf.append(ctp(IPtProxySnowflake, port, cv))
 			conf += BuiltInBridges.shared?.snowflake?
 				.compactMap({
 					let builder = Bridge.Builder(from: $0)
@@ -245,7 +247,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 				.map({ cv("Bridge", $0) }) ?? []
 
 		case .meekAzure:
-			conf.append(ctp("meek_lite", port, cv))
+			conf.append(ctp(IPtProxyMeekLite, port, cv))
 			conf += BuiltInBridges.shared?.meekAzure?.map({ cv("Bridge", $0.raw) }) ?? []
 
 		default:

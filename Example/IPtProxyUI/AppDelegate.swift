@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		if let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first {
 			Settings.stateLocation = url
+			print("[\(String(describing: type(of: self)))] stateLocation=\(url)")
 		}
 
 		return true

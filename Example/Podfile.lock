@@ -12,7 +12,7 @@ PODS:
   - ProgressHUD (14.1.1)
 
 DEPENDENCIES:
-  - IPtProxy (from `../../IPtProxy-cohosh`)
+  - IPtProxy (from `../../IPtProxy`)
   - IPtProxyUI (from `../`)
 
 SPEC REPOS:
@@ -22,7 +22,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   IPtProxy:
-    :path: "../../IPtProxy-cohosh"
+    :path: "../../IPtProxy"
   IPtProxyUI:
     :path: "../"
 
@@ -32,6 +32,6 @@ SPEC CHECKSUMS:
   IPtProxyUI: 20e0a6a51bc203f34a35f281a902e4e1ceded86a
   ProgressHUD: abb9136ae23c85204236828562cb9a8ec98efb44
 
-PODFILE CHECKSUM: 00bf6506036106f3333f0c45c63ced85f0dfbf2a
+PODFILE CHECKSUM: 47aefb720e63c812315f951fb7c958ff52fc16cc
 
 COCOAPODS: 1.16.1
