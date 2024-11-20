@@ -11,6 +11,30 @@ import IPtProxy
 
 public enum Transport: Int, CaseIterable, Comparable {
 
+	private class StatusCollector: NSObject, IPtProxyOnTransportStoppedProtocol {
+
+		var started = [String: Bool]()
+		var errors = [String: Error]()
+
+		func stopped(_ name: String?, error: (any Error)?) {
+            guard let name = name else {
+                return
+            }
+
+            DispatchQueue.global(qos: .userInitiated).sync {
+                started[name] = false
+                errors[name] = error
+            }
+		}
+
+		func started(name: String) {
+            DispatchQueue.global(qos: .userInitiated).sync {
+                started[name] = true
+                errors[name] = nil
+            }
+		}
+	}
+
 	public static let order: [Transport] = [.none, .obfs4, .snowflake, .snowflakeAmp, .meekAzure, .custom, .onDemand]
 
 	public static func asArguments(key: String, value: String) -> [String] {
@@ -29,8 +53,8 @@ public enum Transport: Int, CaseIterable, Comparable {
 	public static var customBridges: [String]?
 
 
-	private static var customTransports: [String] {
-		(customBridges ?? Settings.customBridges)?.compactMap({ Bridge($0).transport }) ?? []
+	private static var customTransports: Set<String> {
+		Set((customBridges ?? Settings.customBridges)?.compactMap({ Bridge($0).transport }) ?? [])
 	}
 
 	// Seems more reliable in certain countries than the currently advertised one.
@@ -40,8 +64,12 @@ public enum Transport: Int, CaseIterable, Comparable {
 	private static let ampFronts = ["www.google.com"]
 
 	private static let controller: IPtProxyController? = {
-		return IPtProxyController(stateLocation.path, enableLogging: true, unsafeLogging: false, logLevel: "DEBUG")
+		return IPtProxyController(
+            stateLocation.path, enableLogging: true, unsafeLogging: false,
+            logLevel: "INFO", transportStopped: collector)
 	}()
+
+	private static let collector = StatusCollector()
 
 
 	// MARK: Comparable
@@ -102,26 +130,47 @@ public enum Transport: Int, CaseIterable, Comparable {
 	}
 
 	public var port: Int {
-		let method: String?
-
-		switch self {
-		case .none:
-			method = nil
-
-		case .obfs4, .onDemand:
-			method = IPtProxyObfs4
-
-		case .custom:
-			method = Self.customTransports.first
-
-		case .snowflake, .snowflakeAmp:
-			method = IPtProxySnowflake
-
-		case .meekAzure:
-			method = IPtProxyMeekLite
+		guard let name = transportNames.first else {
+			return 0
 		}
 
-		return Self.controller?.port(method) ?? 0
+		return Self.controller?.port(name) ?? 0
+	}
+
+	public var connected: Bool {
+		guard let name = transportNames.first else {
+			return false
+		}
+
+		return Self.collector.started[name] ?? false
+	}
+
+	public var error: Error? {
+		guard let name = transportNames.first else {
+			return nil
+		}
+
+		return Self.collector.errors[name]
+	}
+
+
+	private var transportNames: Set<String> {
+		switch self {
+		case .none:
+			return []
+
+		case .obfs4, .onDemand:
+			return [IPtProxyObfs4]
+
+		case .snowflake, .snowflakeAmp:
+			return [IPtProxySnowflake]
+
+		case .custom:
+			return Self.customTransports
+
+		case .meekAzure:
+			return [IPtProxyMeekLite]
+		}
 	}
 
 	/**
@@ -129,17 +178,6 @@ public enum Transport: Int, CaseIterable, Comparable {
 	 */
 	public func start() throws {
 		switch self {
-		case .obfs4, .onDemand:
-			try Self.controller?.start(IPtProxyObfs4, proxy: nil)
-
-		case .custom:
-			for transport in Self.customTransports {
-				try Self.controller?.start(transport, proxy: nil)
-			}
-
-		case .meekAzure:
-			try Self.controller?.start(IPtProxyMeekLite, proxy: nil)
-
 		case .snowflake:
 			let snowflake = BuiltInBridges.shared?.snowflake?.first
 
@@ -157,39 +195,31 @@ public enum Transport: Int, CaseIterable, Comparable {
 			Self.controller?.snowflakeFrontDomains = fronts.joined(separator: ",")
 			Self.controller?.snowflakeAmpCacheUrl = ""
 
-			try Self.controller?.start(IPtProxySnowflake, proxy: nil)
-
 		case .snowflakeAmp:
 			Self.controller?.snowflakeIceServers = BuiltInBridges.shared?.snowflake?.first?.ice ?? ""
 			Self.controller?.snowflakeBrokerUrl = Self.ampBroker
 			Self.controller?.snowflakeFrontDomains = Self.ampFronts.joined(separator: ",")
 			Self.controller?.snowflakeAmpCacheUrl = "https://cdn.ampproject.org/"
 
-			try Self.controller?.start(IPtProxySnowflake, proxy: nil)
-
 		default:
 			break
+		}
+
+		for name in transportNames {
+			do {
+				try Self.controller?.start(name, proxy: nil)
+				Self.collector.started(name: name)
+			}
+			catch {
+				Self.collector.stopped(name, error: error)
+				throw error
+			}
 		}
 	}
 
 	public func stop() {
-		switch self {
-		case .obfs4, .onDemand:
-			Self.controller?.stop(IPtProxyObfs4)
-
-		case .custom:
-			for transport in Self.customTransports {
-				Self.controller?.stop(transport)
-			}
-
-		case .meekAzure:
-			Self.controller?.stop(IPtProxyMeekLite)
-
-		case .snowflake, .snowflakeAmp:
-			Self.controller?.stop(IPtProxySnowflake)
-
-		default:
-			break
+		for name in transportNames {
+			Self.controller?.stop(name)
 		}
 	}
 
@@ -256,6 +286,9 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 		return conf
 	}
+
+
+	// MARK: Private Methods
 
 	private func ctp<T>(_ transport: String, _ port: Int, _ cv: (String, String) -> T) -> T {
 		return cv("ClientTransportPlugin", "\(transport) socks5 127.0.0.1:\(port)")
