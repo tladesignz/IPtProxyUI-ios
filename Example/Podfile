@@ -7,7 +7,7 @@ target 'IPtProxyUI_Example' do
 
   pod 'IPtProxyUI', :path => '../'
 
-  pod 'IPtProxy', :path => '../../IPtProxy'
+#  pod 'IPtProxy', :path => '../../IPtProxy'
 
   target 'IPtProxyUI_Tests' do
     inherit! :search_paths
@@ -19,5 +19,5 @@ target 'IPtProxyUI_Mac_Example' do
 
   pod 'IPtProxyUI', :path => '../'
 
-  pod 'IPtProxy', :path => '../../IPtProxy'
+#  pod 'IPtProxy', :path => '../../IPtProxy'
 end

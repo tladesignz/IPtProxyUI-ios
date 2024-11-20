@@ -1,37 +1,35 @@
 PODS:
   - Eureka (5.5.0)
-  - IPtProxy (3.8.1)
-  - IPtProxyUI (4.6.2):
+  - IPtProxy (4.0.0)
+  - IPtProxyUI (4.7.0):
     - Eureka (~> 5.3)
-    - IPtProxy (~> 3.8.1)
-    - IPtProxyUI/App (= 4.6.2)
-  - IPtProxyUI/App (4.6.2):
+    - IPtProxy (~> 4.0.0)
+    - IPtProxyUI/App (= 4.7.0)
+  - IPtProxyUI/App (4.7.0):
     - Eureka (~> 5.3)
-    - IPtProxy (~> 3.8.1)
+    - IPtProxy (~> 4.0.0)
     - ProgressHUD (~> 14.1)
   - ProgressHUD (14.1.1)
 
 DEPENDENCIES:
-  - IPtProxy (from `../../IPtProxy`)
   - IPtProxyUI (from `../`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Eureka
+    - IPtProxy
     - ProgressHUD
 
 EXTERNAL SOURCES:
-  IPtProxy:
-    :path: "../../IPtProxy"
   IPtProxyUI:
     :path: "../"
 
 SPEC CHECKSUMS:
   Eureka: 1c18c7fcd8f772cc2ca42d6be36292dffa77eecb
-  IPtProxy: d7e37d1faa9b2608b8b5b2743b1a4ae3eb723c5e
-  IPtProxyUI: 20e0a6a51bc203f34a35f281a902e4e1ceded86a
+  IPtProxy: 4bbf3509dce679e8770128edb49edcd6ccb3b67f
+  IPtProxyUI: c48cc8e57cca9aba1c0776e285a16c201b78a96a
   ProgressHUD: abb9136ae23c85204236828562cb9a8ec98efb44
 
-PODFILE CHECKSUM: 47aefb720e63c812315f951fb7c958ff52fc16cc
+PODFILE CHECKSUM: 69cd15ecf33176a9daa9b36f46bd431f80fbcf45
 
-COCOAPODS: 1.16.1
+COCOAPODS: 1.16.2

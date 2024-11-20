@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 4.7.0
+- Updated to IPtProxy version 4.0.0 containing Lyrebird 0.5.0 and Snowflake 2.10.1.
+- Updated translations.
+
 ## 4.6.2
 - Allow injection of `onDemandBridges` and `customBridges` lists when creating the Tor configuration.
   IPtProxyUI might be unable to read them with its own `Settings` implementation.
