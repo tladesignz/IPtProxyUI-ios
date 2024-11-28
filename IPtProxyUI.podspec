@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
 	s.license          = { :type => 'MIT', :file => 'LICENSE' }
 	s.author           = { 'Benjamin Erhart' => 'berhart@netzarchitekten.com' }
 	s.source           = { :git => 'https://github.com/tladesignz/IPtProxyUI-ios.git', :tag => s.version.to_s }
-	s.social_media_url = 'https://twitter.com/tladesignz'
+	s.social_media_url = 'https://chaos.social/@tla'
 
 	s.ios.deployment_target = '13.0'
 	s.osx.deployment_target = '11'
