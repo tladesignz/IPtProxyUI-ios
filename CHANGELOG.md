@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 4.8.0
+- Updated to IPtProxy version 4.2.0 containing Lyrebird 0.6.1 and Snowflake 2.11.0.
+- Updated translations.
+
 ## 4.7.0
 - Updated to IPtProxy version 4.0.0 containing Lyrebird 0.5.0 and Snowflake 2.10.1.
 - Updated translations.
