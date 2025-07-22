@@ -127,6 +127,7 @@ open class Bridge: Codable, CustomStringConvertible {
 		open var cert: String? = nil
 		open var iatMode: Int? = nil
 		open var ice: String? = nil
+		open var utls: String? = nil
 		open var utlsImitate: String? = nil
 		open var ver: String? = nil
 
@@ -160,6 +161,7 @@ open class Bridge: Codable, CustomStringConvertible {
 			cert = bridge.cert
 			iatMode = bridge.iatMode
 			ice = bridge.ice
+			utls = bridge.utls
 			utlsImitate = bridge.utlsImitate
 			ver = bridge.ver
 		}
@@ -191,6 +193,10 @@ open class Bridge: Codable, CustomStringConvertible {
 
 			if let ice = ice, !ice.isEmpty {
 				params.append("ice=\(ice)")
+			}
+
+			if let utls = utls, !utls.isEmpty {
+				params.append("utls=\(utls)")
 			}
 
 			if let utlsImitate = utlsImitate, !utlsImitate.isEmpty {
@@ -316,6 +322,16 @@ open class Bridge: Codable, CustomStringConvertible {
 		   let ice = piece.split(separator: "=").last
 		{
 			return String(ice)
+		}
+
+		return nil
+	}
+
+	open var utls: String? {
+		if let piece = rawPieces.first(where: { $0.hasPrefix("utls=") }),
+		   let utls = piece.split(separator: "=").last
+		{
+			return String(utls)
 		}
 
 		return nil
