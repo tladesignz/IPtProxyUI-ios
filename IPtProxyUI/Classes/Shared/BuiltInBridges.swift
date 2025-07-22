@@ -120,7 +120,10 @@ open class Bridge: Codable, CustomStringConvertible {
 
 	open class Builder {
 
-		public private(set) var pieces: [String]
+		open var transport: String
+		open var ip: String
+		open var port: Int
+		open var fingerprint1: String
 		open var fingerprint2: String? = nil
 		open var url: URL? = nil
 		open var fronts = Set<String>()
@@ -132,7 +135,10 @@ open class Bridge: Codable, CustomStringConvertible {
 		open var ver: String? = nil
 
 		public init(transport: String, ip: String, port: Int, fingerprint1: String) {
-			pieces = [transport, "\(ip):\(port)", fingerprint1]
+			self.transport = transport
+			self.ip = ip
+			self.port = port
+			self.fingerprint1 = fingerprint1
 		}
 
 		convenience init?(from bridge: Bridge) {
@@ -207,7 +213,7 @@ open class Bridge: Codable, CustomStringConvertible {
 				params.append("ver=\(ver)")
 			}
 
-			params.insert(contentsOf: pieces, at: 0)
+			params.insert(contentsOf: [transport, "\(ip):\(port)", fingerprint1], at: 0)
 
 			return Bridge(params.joined(separator: " "))
 		}

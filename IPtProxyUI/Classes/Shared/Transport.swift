@@ -273,13 +273,17 @@ public enum Transport: Int, CaseIterable, Comparable {
 				.map({ cv("Bridge", $0) }) ?? []
 
 		case .snowflakeAmp:
+			var idx = 0
+
 			conf.append(ctp(IPtProxySnowflake, port, cv))
 			conf += BuiltInBridges.shared?.snowflake?
 				.compactMap({
 					let builder = Bridge.Builder(from: $0)
-
+					builder?.ip = "192.0.2.\(5 + idx)"
 					builder?.url = URL(string: Self.ampBroker)
 					builder?.fronts = Set(Self.ampFronts)
+
+					idx += 1
 
 					return builder?.build().raw
 				})
