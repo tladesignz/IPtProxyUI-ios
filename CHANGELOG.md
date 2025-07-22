@@ -1,5 +1,12 @@
 # IPtProxyUI
 
+## 4.8.1
+- Updated translations.
+- Added a `Transport.stopAllOthers()` method.
+- Added support for a `Bridge.utls` property.
+- Make sure, pseudo-IP addresses of Snowflake AMP bridges are, as they are expected.
+- Added support for eventually existing default webtunnel bridges.
+
 ## 4.8.0
 - Updated to IPtProxy version 4.2.0 containing Lyrebird 0.6.1 and Snowflake 2.11.0.
 - Updated translations.
