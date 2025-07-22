@@ -69,12 +69,12 @@ open class AutoConf {
 					return completion(nil)
 				}
 
-				// Otherwise, use the first advertised setting which is useable with IPtProxy.
+				// Otherwise, use the first advertised setting which is usable with IPtProxy.
 				if let conf = self.extract(from: response?.settings) {
 					self.delegate?.transport = conf.transport
 
-					if let customBridges = conf.customBridges {
-						self.delegate?.customBridges = customBridges
+					if !conf.customBridges.isEmpty {
+						self.delegate?.customBridges = conf.customBridges
 					}
 
 					return completion(nil)
@@ -96,8 +96,8 @@ open class AutoConf {
 					if let conf = self.extract(from: response?.settings) {
 						self.delegate?.transport = conf.transport
 
-						if let customBridges = conf.customBridges {
-							self.delegate?.customBridges = customBridges
+						if !conf.customBridges.isEmpty {
+							self.delegate?.customBridges = conf.customBridges
 						}
 
 						return completion(nil)
@@ -111,8 +111,8 @@ open class AutoConf {
 
 		// First update built-ins.
 		if let updateFile = BuiltInBridges.updateFile,
-			BuiltInBridges.outdated,
-			var request = MoatApi.buildRequest(.builtin)
+		   BuiltInBridges.outdated,
+		   var request = MoatApi.buildRequest(.builtin)
 		{
 			delegate?.auth(request: &request)
 
@@ -147,7 +147,7 @@ open class AutoConf {
 
 		let task = URLSession.shared.apiTask(with: request) { (response: [String: MoatApi.SettingsResponse]?, error) in
 			self.delegate?.stopMeek()
-			
+
 			completion(response, error)
 		}
 		task.resume()
@@ -206,13 +206,13 @@ open class AutoConf {
 	 - If there are Snowflake bridge lines given, we update the built-in list of Snowflake bridges.
 	 - If there are Obfs4 built-in bridge lines given, we update the built-in list of Obfs4 bridges.
 	 - If there are custom Obfs4 bridge lines given, we return these too, regardless of the actually selected transport,
-		so the user can later try these out, too, if the selected transport doesn't work.
+	 so the user can later try these out, too, if the selected transport doesn't work.
 
 	 - parameter settings: The settings from the MOAT server.
 	 */
-	private func extract(from settings: [MoatApi.Setting]?) -> (transport: Transport, customBridges: [String]?)? {
+	private func extract(from settings: [MoatApi.Setting]?) -> (transport: Transport, customBridges: [String])? {
 		var transport: Transport?
-		var customBridges: [String]?
+		var customBridges = [String]()
 
 		for setting in settings ?? [] {
 			if setting.bridge.type == "snowflake" {
@@ -228,7 +228,7 @@ open class AutoConf {
 			}
 			else if setting.bridge.type == "obfs4" {
 				if setting.bridge.source == "builtin" {
-					// if there are Obfs4 bridge line updates, update our built-in ones!
+					// If there are Obfs4 bridge line updates, update our built-in ones!
 					if let bridges = setting.bridge.bridges, !bridges.isEmpty {
 						BuiltInBridges.shared?.obfs4 = bridges.map({ Bridge($0) })
 					}
@@ -237,8 +237,28 @@ open class AutoConf {
 						transport = .obfs4
 					}
 				}
-				else if !(setting.bridge.bridges?.isEmpty ?? true) {
-					customBridges = setting.bridge.bridges
+				else if let bridges = setting.bridge.bridges, !bridges.isEmpty {
+					customBridges.append(contentsOf: bridges)
+
+					if transport == nil {
+						transport = .custom
+					}
+				}
+			}
+			else if setting.bridge.type == "webtunnel" {
+				if setting.bridge.source == "builtin" {
+					// If there are Webtunnel bridge line updates, update our built-in ones!
+					if let bridges = setting.bridge.bridges, !bridges.isEmpty {
+						BuiltInBridges.shared?.webtunnel = bridges.map({ Bridge($0) })
+						customBridges.append(contentsOf: bridges)
+					}
+
+					if transport == nil {
+						transport = .custom
+					}
+				}
+				else if let bridges = setting.bridge.bridges, !bridges.isEmpty {
+					customBridges.append(contentsOf: bridges)
 
 					if transport == nil {
 						transport = .custom

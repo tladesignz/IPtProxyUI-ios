@@ -289,7 +289,7 @@ open class MoatApi {
 
 		public init(country: String? = nil) {
 			self.country = country
-			transports = ["obfs4", "snowflake"]
+			transports = ["obfs4", "snowflake", "webtunnel"]
 
 			super.init()
 		}
