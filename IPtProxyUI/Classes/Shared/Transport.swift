@@ -223,6 +223,15 @@ public enum Transport: Int, CaseIterable, Comparable {
 		}
 	}
 
+	public func stopAllOthers() {
+		var transportNames = Set(Self.allCases.flatMap({ $0.transportNames }))
+		transportNames.subtract(self.transportNames)
+
+		for name in transportNames {
+			Self.controller?.stop(name)
+		}
+	}
+
 	public func torConf<T>(_ cv: (String, String) -> T, onDemandBridges: [String]? = nil) -> [T] {
 		var conf = [T]()
 
