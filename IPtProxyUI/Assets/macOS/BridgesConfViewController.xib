@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,7 +14,7 @@
                 <outlet property="cannotConnectSw" destination="78l-BB-4mq" id="UU5-fO-XwL"/>
                 <outlet property="customBridgesRb" destination="jKP-bE-B38" id="dGo-KD-4R6"/>
                 <outlet property="descLb" destination="H2l-LN-gF6" id="oog-gC-0t4"/>
-                <outlet property="meekAzureRb" destination="Aw8-zq-1vH" id="WRe-6C-cVG"/>
+                <outlet property="meekRb" destination="Aw8-zq-1vH" id="WRe-6C-cVG"/>
                 <outlet property="noBridgesRb" destination="4Cx-7M-5G4" id="0fb-NV-AxB"/>
                 <outlet property="obfs4Rb" destination="wGy-jc-Jv6" id="zQm-le-hgV"/>
                 <outlet property="saveBt" destination="JMo-RB-mfk" id="QRJ-pr-X9C"/>
@@ -113,7 +113,7 @@
                 </button>
                 <button tag="5" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Aw8-zq-1vH">
                     <rect key="frame" x="18" y="125" width="442" height="18"/>
-                    <buttonCell key="cell" type="radio" title="Built-in Meek Azure" bezelStyle="regularSquare" imagePosition="left" inset="2" id="yK4-J4-h9j">
+                    <buttonCell key="cell" type="radio" title="Built-in Meek" bezelStyle="regularSquare" imagePosition="left" inset="2" id="yK4-J4-h9j">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

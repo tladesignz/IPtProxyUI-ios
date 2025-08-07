@@ -33,10 +33,10 @@ open class MeekURLProtocol: URLProtocol, HTTPConnectionDelegate {
 
 	open class func start() {
         do {
-            try Transport.meekAzure.start()
+            try Transport.meek.start()
         }
         catch {
-            print("[\(String(describing: self))] error starting Meek Azure transport: \(error)")
+            print("[\(String(describing: self))] error starting Meek transport: \(error)")
         }
 
         URLProtocol.registerClass(self)
@@ -44,7 +44,7 @@ open class MeekURLProtocol: URLProtocol, HTTPConnectionDelegate {
 
 	open class func stop() {
 		URLProtocol.unregisterClass(self)
-        Transport.meekAzure.stop()
+        Transport.meek.stop()
 	}
 
 
@@ -81,7 +81,7 @@ open class MeekURLProtocol: URLProtocol, HTTPConnectionDelegate {
 			kCFProxyTypeKey as AnyHashable: kCFProxyTypeSOCKS,
 			kCFStreamPropertySOCKSVersion: kCFStreamSocketSOCKSVersion5,
 			kCFStreamPropertySOCKSProxyHost: "127.0.0.1",
-            kCFStreamPropertySOCKSProxyPort: Transport.meekAzure.port,
+            kCFStreamPropertySOCKSProxyPort: Transport.meek.port,
 			kCFStreamPropertySOCKSUser: "url=https://1723079976.rsc.cdn77.org;",
 			kCFStreamPropertySOCKSPassword: "front=www.phpmyadmin.net",
 		]

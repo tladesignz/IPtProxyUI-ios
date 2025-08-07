@@ -39,7 +39,7 @@ open class BuiltInBridges: Codable {
 	}
 
 
-	open var meekAzure: [Bridge]? {
+	open var meek: [Bridge]? {
 		didSet {
 			store()
 		}
@@ -67,7 +67,7 @@ open class BuiltInBridges: Codable {
 	// MARK: Codable
 
 	enum CodingKeys: String, CodingKey {
-		case meekAzure = "meek-azure"
+		case meek = "meek-azure"
 		case obfs4
 		case snowflake
 		case webtunnel

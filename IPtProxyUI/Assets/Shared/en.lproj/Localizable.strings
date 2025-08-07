@@ -10,7 +10,7 @@
 /* BridgeConfViewController */
 "Bridge Configuration" = "Bridge Configuration";
 
-/* BridgeConfViewController; placeholder contains bridge type names: "meek-azure" or "obfs4" */
+/* BridgeConfViewController; placeholder contains bridge type names: "meek" or "obfs4" */
 "Built-in %@" = "Built-in %@";
 
 /* ScanQrViewController */
@@ -47,7 +47,7 @@
 "In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"" = "In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"";
 
 /* No comment provided by engineer. */
-"Meek azure bridge" = "Meek azure bridge";
+"Meek bridge" = "Meek bridge";
 
 /* BridgeConfViewController */
 "No Bridges" = "No Bridges";

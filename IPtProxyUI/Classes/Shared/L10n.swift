@@ -46,8 +46,8 @@ public class L10n {
 			"Built-in %@", bundle: .iPtProxyUI, comment: ""), "snowflake (AMP)")
 	}
 
-	public static var builtInMeekAzure: String {
-		String(format: NSLocalizedString("Built-in %@", bundle: .iPtProxyUI, comment: ""), "meek azure")
+	public static var builtInMeek: String {
+		String(format: NSLocalizedString("Built-in %@", bundle: .iPtProxyUI, comment: ""), "meek")
 	}
 
 	public static var customBridges: String {

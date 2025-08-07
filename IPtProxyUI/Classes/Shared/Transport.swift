@@ -35,7 +35,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 		}
 	}
 
-	public static let order: [Transport] = [.none, .obfs4, .snowflake, .snowflakeAmp, .meekAzure, .custom, .onDemand]
+	public static let order: [Transport] = [.none, .obfs4, .snowflake, .snowflakeAmp, .meek, .custom, .onDemand]
 
 	public static func asArguments(key: String, value: String) -> [String] {
 		return ["--\(key)", value]
@@ -85,7 +85,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	case custom = 3
 	case snowflakeAmp = 4
 	case onDemand = 5
-	case meekAzure = 6
+	case meek = 6
 
 
 	public var description: String {
@@ -105,8 +105,8 @@ public enum Transport: Int, CaseIterable, Comparable {
 		case .onDemand:
 			return NSLocalizedString("On-demand bridges", bundle: .iPtProxyUI, comment: "")
 
-		case .meekAzure:
-			return NSLocalizedString("Meek azure bridge", bundle: .iPtProxyUI, comment: "")
+		case .meek:
+			return NSLocalizedString("Meek bridge", bundle: .iPtProxyUI, comment: "")
 
 		default:
 			return ""
@@ -121,7 +121,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	 */
 	public var logFile: URL? {
 		switch self {
-		case .obfs4, .custom, .onDemand, .meekAzure, .snowflake, .snowflakeAmp:
+		case .obfs4, .custom, .onDemand, .meek, .snowflake, .snowflakeAmp:
 			return Settings.stateLocation.appendingPathComponent(IPtProxyLogFileName)
 
 		default:
@@ -168,7 +168,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 		case .custom:
 			return Self.customTransports
 
-		case .meekAzure:
+		case .meek:
 			return [IPtProxyMeekLite]
 		}
 	}
@@ -289,9 +289,9 @@ public enum Transport: Int, CaseIterable, Comparable {
 				})
 				.map({ cv("Bridge", $0) }) ?? []
 
-		case .meekAzure:
+		case .meek:
 			conf.append(ctp(IPtProxyMeekLite, port, cv))
-			conf += BuiltInBridges.shared?.meekAzure?.map({ cv("Bridge", $0.raw) }) ?? []
+			conf += BuiltInBridges.shared?.meek?.map({ cv("Bridge", $0.raw) }) ?? []
 
 		default:
 			break
