@@ -120,12 +120,13 @@ open class Bridge: Codable, CustomStringConvertible {
 
 	open class Builder {
 
-		open var transport: String
+		open var transport: String?
 		open var ip: String
 		open var port: Int
-		open var fingerprint1: String
+		open var fingerprint1: String? = nil
 		open var fingerprint2: String? = nil
 		open var url: URL? = nil
+		open var front: String? = nil
 		open var fronts = Set<String>()
 		open var cert: String? = nil
 		open var iatMode: Int? = nil
@@ -134,7 +135,7 @@ open class Bridge: Codable, CustomStringConvertible {
 		open var utlsImitate: String? = nil
 		open var ver: String? = nil
 
-		public init(transport: String, ip: String, port: Int, fingerprint1: String) {
+		public init(transport: String? = nil, ip: String, port: Int, fingerprint1: String? = nil) {
 			self.transport = transport
 			self.ip = ip
 			self.port = port
@@ -156,13 +157,8 @@ open class Bridge: Codable, CustomStringConvertible {
 
 			url = bridge.url
 
-			if let front = bridge.front, !front.isEmpty {
-				fronts.insert(front)
-			}
-
-			if let oldFronts = bridge.fronts, !oldFronts.isEmpty {
-				fronts.formUnion(oldFronts)
-			}
+			front = bridge.front
+			fronts = Set(bridge.fronts ?? [])
 
 			cert = bridge.cert
 			iatMode = bridge.iatMode
@@ -175,12 +171,26 @@ open class Bridge: Codable, CustomStringConvertible {
 		open func build() -> Bridge {
 			var params = [String]()
 
+			if let transport = transport, !transport.isEmpty {
+				params.append(transport)
+			}
+
+			params.append("\(ip):\(port)")
+
+			if let fingerprint1 = fingerprint1, !fingerprint1.isEmpty {
+				params.append(fingerprint1)
+			}
+
 			if let fingerprint2 = fingerprint2, !fingerprint2.isEmpty {
 				params.append("fingerprint=\(fingerprint2)")
 			}
 
 			if let url = url, !url.absoluteString.isEmpty {
 				params.append("url=\(url.absoluteString)")
+			}
+
+			if let front = front, !front.isEmpty {
+				params.append("front=\(front)")
 			}
 
 			let fronts = fronts.filter { !$0.isEmpty }
@@ -213,20 +223,30 @@ open class Bridge: Codable, CustomStringConvertible {
 				params.append("ver=\(ver)")
 			}
 
-			params.insert(contentsOf: [transport, "\(ip):\(port)", fingerprint1], at: 0)
-
 			return Bridge(params.joined(separator: " "))
 		}
 	}
 
+	public static let fingerprintRegex = try? NSRegularExpression(pattern: "^[a-f0-9]{40}$", options: .caseInsensitive)
+
 	open var raw: String
 
 	open var rawPieces: [Substring] {
-		raw.split(separator: " ")
+		var pieces = raw.split(separator: " ")
+
+		// "Vanilla" bridges (conventional relays without obfuscation) don't have a transport.
+		// Add an empty one, so parsing works.
+		if pieces.count < 3 {
+			pieces.insert("", at: 0)
+
+			return pieces
+		}
+
+		return pieces
 	}
 
 	open var transport: String? {
-		if let transport = rawPieces.first {
+		if let transport = rawPieces.first, !transport.isEmpty {
 			return String(transport)
 		}
 
@@ -240,11 +260,17 @@ open class Bridge: Codable, CustomStringConvertible {
 	}
 
 	open var ip: String? {
-		if let ip = address?.split(separator: ":").first {
-			return String(ip)
+		guard var pieces = address?.split(separator: ":"),
+			  !pieces.isEmpty
+		else {
+			return nil
 		}
 
-		return nil
+		// Remove port.
+		pieces = pieces.dropLast()
+
+		// Join IPv6 again.
+		return pieces.joined(separator: ":")
 	}
 
 	open var port: Int? {
@@ -258,7 +284,20 @@ open class Bridge: Codable, CustomStringConvertible {
 	open var fingerprint1: String? {
 		let rawPieces = rawPieces
 
-		return rawPieces.count > 2 ? String(rawPieces[2]) : nil
+		guard rawPieces.count > 2 else {
+			return nil
+		}
+
+		let piece = String(rawPieces[2])
+		let range = NSRange(piece.startIndex ..< piece.endIndex, in: piece)
+
+		guard let match = Self.fingerprintRegex?.firstMatch(in: piece, range: range),
+			  match.range == range
+		else {
+			return nil
+		}
+
+		return piece
 	}
 
 	open var fingerprint2: String? {
@@ -393,7 +432,8 @@ open class Bridge: Codable, CustomStringConvertible {
 		"[\(String(describing: type(of: self)))] raw=\(raw), transport=\(transport ?? "(nil)"), "
 		+ "ip=\(ip ?? "(nil)"), port=\(port ?? -1), fingerprint1=\(fingerprint1 ?? "(nil)"), "
 		+ "fingerprint2=\(fingerprint2 ?? "(nil)"), url=\(url?.absoluteString ?? "(nil)"), "
-		+ "front=\(front ?? "(nil)"), cert=\(cert ?? "(nil)"), iatMode=\(iatMode ?? -1), "
-		+ "ice=\(ice ?? "(nil)"), utlsImitate=\(utlsImitate ?? "(nil)"), ver=\(ver ?? "(nil)")"
+		+ "front=\(front ?? "(nil)"), fronts=\(fronts ?? []), cert=\(cert ?? "(nil)"), "
+		+ "iatMode=\(iatMode ?? -1), ice=\(ice ?? "(nil)"), utls=\(utls ?? "(nil)"), "
+		+ "utlsImitate=\(utlsImitate ?? "(nil)"), ver=\(ver ?? "(nil)")"
 	}
 }
