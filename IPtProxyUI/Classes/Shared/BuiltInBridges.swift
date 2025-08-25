@@ -67,7 +67,7 @@ open class BuiltInBridges: Codable {
 	// MARK: Codable
 
 	enum CodingKeys: String, CodingKey {
-		case meek = "meek-azure"
+		case meek = "meek"
 		case obfs4
 		case snowflake
 		case webtunnel
