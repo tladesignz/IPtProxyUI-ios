@@ -1,5 +1,10 @@
 # IPtProxyUI
 
+## 4.9.0
+- Followed Tor Project's switch from "meek-azure" to "meek"
+- Improved bridge parsing and construction. Added support for vanilla bridges.
+- Updated translations.
+
 ## 4.8.1
 - Updated translations.
 - Added a `Transport.stopAllOthers()` method.
