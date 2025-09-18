@@ -35,11 +35,22 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 					row.value = row.selectableValue == self.transport ? row.selectableValue : nil
 					row.updateCell()
 				}
+
+				UIAccessibility.post(notification: .announcement, argument: self.transportsLabelMap[self.transport])
 			}
 		}
 	}
 
 	open var customBridges: [String]?
+
+	open var transportsLabelMap: [Transport: String] = [
+		.none: L10n.noBridges,
+		.obfs4: L10n.builtInObfs4,
+		.snowflake: L10n.builtInSnowflake,
+		.snowflakeAmp: L10n.builtInSnowflakeAmp,
+		.custom: L10n.customBridges,
+	]
+
 
 	open override func viewDidLoad() {
 		super.viewDidLoad()
@@ -63,20 +74,12 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 				barButtonSystemItem: .save, target: self, action: #selector(save))
 		}
 
-		var transports: [Transport: String] = [
-			.none: L10n.noBridges,
-			.obfs4: L10n.builtInObfs4,
-			.snowflake: L10n.builtInSnowflake,
-			.snowflakeAmp: L10n.builtInSnowflakeAmp,
-			.custom: L10n.customBridges,
-		]
-
 		if !(BuiltInBridges.shared?.meek?.isEmpty ?? true) {
-			transports[.meek] = L10n.builtInMeek
+			transportsLabelMap[.meek] = L10n.builtInMeek
 		}
 
 		if onDemandConf != nil {
-			transports[.onDemand] = Transport.onDemand.description
+			transportsLabelMap[.onDemand] = Transport.onDemand.description
 		}
 
 		transportSection.onSelectSelectableRow = { [weak self] _, row in
@@ -151,9 +154,9 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 
 		+++ transportSection
 
-		for t in transports.keys.sorted() {
+		for t in transportsLabelMap.keys.sorted() {
 			form.last! <<< ListCheckRow<Transport>() {
-				$0.title = transports[t]
+				$0.title = transportsLabelMap[t]
 				$0.selectableValue = t
 				$0.value = t == transport ? transport : nil
 				$0.cell.accessibilityIdentifier = "transport_\(t.rawValue)"

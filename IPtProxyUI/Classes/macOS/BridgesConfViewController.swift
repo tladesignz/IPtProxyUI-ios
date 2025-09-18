@@ -18,21 +18,27 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 				switch self.transport {
 				case .obfs4:
 					self.obfs4Rb.state = .on
+					self.announce(self.obfs4Rb.title)
 
 				case .snowflake:
 					self.snowflakeRb.state = .on
+					self.announce(self.snowflakeRb.title)
 
 				case .snowflakeAmp:
 					self.snowflakeAmpRb.state = .on
+					self.announce(self.snowflakeAmpRb.title)
 
 				case .meek:
 					self.meekRb.state = .on
+					self.announce(self.meekRb.title)
 
 				case .custom:
 					self.customBridgesRb.state = .on
+					self.announce(self.customBridgesRb.title)
 
 				default:
 					self.noBridgesRb.state = .on
+					self.announce(self.noBridgesRb.title)
 				}
 			}
 		}
@@ -43,45 +49,50 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 
 	@IBOutlet weak var autoConfBox: NSBox! {
 		didSet {
-            autoConfBox.title = L10n.automaticConfiguration
+			autoConfBox.title = L10n.automaticConfiguration
 		}
 	}
 
 	@IBOutlet weak var cannotConnectLb: NSTextField! {
 		didSet {
-            cannotConnectLb.stringValue = L10n.cannotConnect
+			cannotConnectLb.stringValue = L10n.cannotConnect
+			cannotConnectLb.cell?.setAccessibilityElement(false)
 		}
 	}
 
-	@IBOutlet weak var cannotConnectSw: NSSwitch!
+	@IBOutlet weak var cannotConnectSw: NSSwitch! {
+		didSet {
+			cannotConnectSw.setAccessibilityLabel(L10n.cannotConnect)
+		}
+	}
 
 	@IBOutlet weak var tryAutoConfBt: NSButton! {
 		didSet {
-            tryAutoConfBt.title = L10n.tryAutoConfiguration
+			tryAutoConfBt.title = L10n.tryAutoConfiguration
 		}
 	}
 
 	@IBOutlet weak var noBridgesRb: NSButton! {
 		didSet {
-            noBridgesRb.title = L10n.noBridges
+			noBridgesRb.title = L10n.noBridges
 		}
 	}
 
 	@IBOutlet weak var obfs4Rb: NSButton! {
 		didSet {
-            obfs4Rb.title = L10n.builtInObfs4
+			obfs4Rb.title = L10n.builtInObfs4
 		}
 	}
 
 	@IBOutlet weak var snowflakeRb: NSButton! {
 		didSet {
-            snowflakeRb.title = L10n.builtInSnowflake
+			snowflakeRb.title = L10n.builtInSnowflake
 		}
 	}
 
 	@IBOutlet weak var snowflakeAmpRb: NSButton! {
 		didSet {
-            snowflakeAmpRb.title = L10n.builtInSnowflakeAmp
+			snowflakeAmpRb.title = L10n.builtInSnowflakeAmp
 		}
 	}
 
@@ -93,19 +104,19 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 
 	@IBOutlet weak var customBridgesRb: NSButton! {
 		didSet {
-            customBridgesRb.title = L10n.customBridges
+			customBridgesRb.title = L10n.customBridges
 		}
 	}
 
 	@IBOutlet weak var descLb: NSTextField! {
 		didSet {
-            descLb.stringValue = L10n.bridgeTypeExplanation
+			descLb.stringValue = L10n.bridgeTypeExplanation
 		}
 	}
 
 	@IBOutlet weak var cancelBt: NSButton! {
 		didSet {
-            cancelBt.title = L10n.cancel
+			cancelBt.title = L10n.cancel
 		}
 	}
 
@@ -120,9 +131,9 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 	open override func viewWillAppear() {
 		super.viewWillAppear()
 
-        view.window?.title = L10n.bridgeConfiguration
+		view.window?.title = L10n.bridgeConfiguration
 
-        saveBt.title = saveButtonTitle ?? L10n.save
+		saveBt.title = saveButtonTitle ?? L10n.save
 
 		view.window?.defaultButtonCell = saveBt.cell as? NSButtonCell
 	}
@@ -167,6 +178,8 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 	@IBAction open func tryAutoConf(_ sender: Any) {
 		let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
 
+		announce(L10n.tryAutoConfiguration)
+
 		let autoconf = AutoConf(self)
 		autoconf.do(cannotConnectWithoutPt: cannotConnectSw.state == .on) { error in
 			DispatchQueue.main.async {
@@ -210,15 +223,15 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 			transport = .meek
 		}
 		else if sender == customBridgesRb {
-            let vc = CustomBridgesViewController()
-            vc.delegate = self
+			let vc = CustomBridgesViewController()
+			vc.delegate = self
 
-            let window = NSWindow(contentViewController: vc)
-            window.delegate = self
+			let window = NSWindow(contentViewController: vc)
+			window.delegate = self
 
-            NSApp.runModal(for: window)
+			NSApp.runModal(for: window)
 
-            window.close()
+			window.close()
 
 			// Trigger reset of selected transport UI, in case
 			// the user never added custom bridges.
@@ -242,5 +255,18 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 		NSApp.stopModal()
 
 		view.window?.close()
+	}
+
+
+	// MARK: Private Methods
+
+	private func announce(_ text: String) {
+		if let window = NSApp.mainWindow {
+			NSAccessibility.post(
+				element: window,
+				notification: .announcementRequested,
+				userInfo: [.announcement: text,
+						   .priority: NSAccessibilityPriorityLevel.high.rawValue])
+		}
 	}
 }
