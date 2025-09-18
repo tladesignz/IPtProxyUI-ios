@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 4.9.1
+- Improved accessibility with VoiceOver.
+- Updated to Xcode 26.
+
 ## 4.9.0
 - Followed Tor Project's switch from "meek-azure" to "meek"
 - Improved bridge parsing and construction. Added support for vanilla bridges.
