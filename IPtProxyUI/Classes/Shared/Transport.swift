@@ -17,21 +17,21 @@ public enum Transport: Int, CaseIterable, Comparable {
 		var errors = [String: Error]()
 
 		func stopped(_ name: String?, error: (any Error)?) {
-            guard let name = name else {
-                return
-            }
+			guard let name = name else {
+				return
+			}
 
-            DispatchQueue.global(qos: .userInitiated).sync {
-                started[name] = false
-                errors[name] = error
-            }
+			DispatchQueue.global(qos: .userInitiated).sync {
+				started[name] = false
+				errors[name] = error
+			}
 		}
 
 		func started(name: String) {
-            DispatchQueue.global(qos: .userInitiated).sync {
-                started[name] = true
-                errors[name] = nil
-            }
+			DispatchQueue.global(qos: .userInitiated).sync {
+				started[name] = true
+				errors[name] = nil
+			}
 		}
 	}
 
@@ -52,6 +52,11 @@ public enum Transport: Int, CaseIterable, Comparable {
 	 */
 	public static var customBridges: [String]?
 
+	/**
+	 Your proxy, in case it cannot be found in `Settings.proxy`.
+	 */
+	public static var proxy: URL?
+
 
 	private static var customTransports: Set<String> {
 		Set((customBridges ?? Settings.customBridges)?.compactMap({ Bridge($0).transport }) ?? [])
@@ -65,8 +70,8 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 	private static let controller: IPtProxyController? = {
 		return IPtProxyController(
-            stateLocation.path, enableLogging: true, unsafeLogging: false,
-            logLevel: "INFO", transportStopped: collector)
+			stateLocation.path, enableLogging: true, unsafeLogging: false,
+			logLevel: "INFO", transportStopped: collector)
 	}()
 
 	private static let collector = StatusCollector()
@@ -205,9 +210,11 @@ public enum Transport: Int, CaseIterable, Comparable {
 			break
 		}
 
+		let proxy = (Self.proxy ?? Settings.proxy)?.absoluteString
+
 		for name in transportNames {
 			do {
-				try Self.controller?.start(name, proxy: nil)
+				try Self.controller?.start(name, proxy: name == IPtProxySnowflake ? nil : proxy)
 				Self.collector.started(name: name)
 			}
 			catch {
@@ -293,8 +300,39 @@ public enum Transport: Int, CaseIterable, Comparable {
 			conf.append(ctp(IPtProxyMeekLite, port, cv))
 			conf += BuiltInBridges.shared?.meek?.map({ cv("Bridge", $0.raw) }) ?? []
 
-		default:
-			break
+		case .none:
+			if let proxy = Self.proxy ?? Settings.proxy,
+			   let hostPort = proxy.hostPort
+			{
+				switch proxy.scheme {
+				case "https":
+					conf.append(cv("HTTPSProxy", hostPort))
+
+					if let username = proxy.user, !username.isEmpty {
+						conf.append(cv("HTTPSProxyAuthenticator", "\(username):\(proxy.password ?? "")"))
+					}
+
+				case "socks4":
+					conf.append(cv("Socks4Proxy", hostPort))
+
+				case "socks5":
+					conf.append(cv("Socks5Proxy", hostPort))
+
+					if let username = proxy.user, !username.isEmpty {
+						conf.append(cv("Socks5ProxyUsername", username))
+
+						var password = proxy.password ?? " "
+						if password.isEmpty {
+							password = " "
+						}
+
+						conf.append(cv("Socks5ProxyPassword", password))
+					}
+
+				default:
+					break
+				}
+			}
 		}
 
 		return conf

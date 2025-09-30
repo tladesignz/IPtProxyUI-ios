@@ -12,8 +12,20 @@ open class AutoConf {
 
 	private weak var delegate: BridgesConfDelegate?
 
+	private var session: URLSession
+
 	public init(_ delegate: BridgesConfDelegate) {
 		self.delegate = delegate
+
+		if let proxy = (Transport.proxy ?? Settings.proxy)?.proxyDict {
+			let conf = URLSessionConfiguration.default
+			conf.connectionProxyDictionary = proxy
+
+			session = URLSession(configuration: conf)
+		}
+		else {
+			session = URLSession.shared
+		}
 	}
 
 	/**
@@ -43,7 +55,7 @@ open class AutoConf {
 
 			self.delegate?.auth(request: &request)
 
-			URLSession.shared.apiTask(with: request, { (response: MoatApi.SettingsResponse?, error) in
+			self.session.apiTask(with: request, { (response: MoatApi.SettingsResponse?, error) in
 
 				var cannotConnectWithoutPt = cannotConnectWithoutPt
 
@@ -88,7 +100,7 @@ open class AutoConf {
 
 				self.delegate?.auth(request: &request)
 
-				URLSession.shared.apiTask(with: request, { (response: MoatApi.SettingsResponse?, error) in
+				self.session.apiTask(with: request, { (response: MoatApi.SettingsResponse?, error) in
 					if let error = error {
 						return completion(error)
 					}
@@ -116,7 +128,7 @@ open class AutoConf {
 		{
 			delegate?.auth(request: &request)
 
-			URLSession.shared.apiTask(with: request, { (response: Data?, error) in
+			session.apiTask(with: request, { (response: Data?, error) in
 				if error == nil, let data = response, !data.isEmpty {
 					try? data.write(to: updateFile, options: .atomic)
 
@@ -145,7 +157,7 @@ open class AutoConf {
 
 		delegate?.startMeek()
 
-		let task = URLSession.shared.apiTask(with: request) { (response: [String: MoatApi.SettingsResponse]?, error) in
+		let task = session.apiTask(with: request) { (response: [String: MoatApi.SettingsResponse]?, error) in
 			self.delegate?.stopMeek()
 
 			completion(response, error)
@@ -167,7 +179,7 @@ open class AutoConf {
 
 		delegate?.startMeek()
 
-		let task = URLSession.shared.apiTask(with: request) { (response: [String: [String]]?, error) in
+		let task = session.apiTask(with: request) { (response: [String: [String]]?, error) in
 			self.delegate?.stopMeek()
 
 			completion(response, error)
@@ -189,7 +201,7 @@ open class AutoConf {
 
 		delegate?.startMeek()
 
-		let task = URLSession.shared.apiTask(with: request) { (response: [String]?, error) in
+		let task = session.apiTask(with: request) { (response: [String]?, error) in
 			self.delegate?.stopMeek()
 
 			completion(response, error)

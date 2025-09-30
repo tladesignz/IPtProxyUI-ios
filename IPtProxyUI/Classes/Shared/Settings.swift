@@ -44,10 +44,23 @@ open class Settings {
 
 	open class var stateLocation: URL {
 		get {
-            Transport.stateLocation
+			Transport.stateLocation
 		}
 		set {
-            Transport.stateLocation = newValue
+			Transport.stateLocation = newValue
+		}
+	}
+
+	open class var proxy: URL? {
+		get {
+			guard let proxy = defaults?.string(forKey: "proxy") else {
+				return nil
+			}
+
+			return URL(string: proxy)
+		}
+		set {
+			defaults?.set(newValue?.absoluteString, forKey: "proxy")
 		}
 	}
 }
