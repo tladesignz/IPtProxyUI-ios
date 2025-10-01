@@ -1,5 +1,8 @@
 # IPtProxyUI
 
+## 4.9.2
+- Added support for proxies.
+
 ## 4.9.1
 - Improved accessibility with VoiceOver.
 - Updated to Xcode 26.
