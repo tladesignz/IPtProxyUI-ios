@@ -23,7 +23,7 @@
 "Copy URL to Clipboard" = "Afrita slóð á klippispjald";
 
 /* MoatViewController */
-"Couldn't understand server response." = "Skildi ekki svar netþjónsins.\n";
+"Couldn't understand server response." = "Skildi ekki svar netþjónsins.";
 
 /* BridgeConfViewController */
 "Custom Bridges" = "Sérsniðnar brýr";
@@ -47,7 +47,7 @@
 "In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"" = "Í aðskildum vafra, farðu á %@ og ýttu á \"Ná í brýr\" > \"Gefðu mér bara brýrnar!\"";
 
 /* No comment provided by engineer. */
-"Meek bridge" = "Meek bridge";
+"Meek bridge" = "Meek-brú";
 
 /* BridgeConfViewController */
 "No Bridges" = "Engar brýr";
