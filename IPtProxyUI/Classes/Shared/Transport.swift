@@ -9,11 +9,47 @@
 import Foundation
 import IPtProxy
 
+public extension Notification.Name {
+
+	/**
+	 Emiited, when transports were *started* (not necessarily *connected*). Contained object is the list of started ``Transport``s.
+
+	 Typically that is only one, but could be X + ``Transport.custom``, if a custom transport is configured containing obfs4 or meek transport types,
+	 or when the transport is of type Snowflake.
+	 */
+	static let iPtProxyTransportStarted = Notification.Name("iptproxy-transport-started")
+
+	/**
+	 Emiited, when transports were *connected* . Contained object is the list of connected ``Transport``s.
+
+	 Typically that is only one, but could be X + ``Transport.custom``, if a custom transport is configured containing obfs4 or meek transport types,
+	 or when the transport is of type Snowflake.
+	 */
+	static let iPtProxyTransportConnected = Notification.Name("iptproxy-transport-connected")
+
+	/**
+	 Emiited, when transports have errors during  connecting . Contained object should be ``[Transport.snowflake, Transport.snowflakeAmp]``.
+
+	 This currently only happens with transports of type Snowflake, since all others will not finish ``Transport.start()`` on any error,
+	 while with Snowflake, errors can happen while trying to find a valid proxy.
+	 */
+	static let iPtProxyTransportErrored = Notification.Name("iptproxy-transport-errored")
+
+	/**
+	 Emiited, when transports were *stopped*. Contained object is the list of stopped ``Transport``s.
+
+	 Typically that is only one, but could be X + ``Transport.custom``, if a custom transport is configured containing obfs4 or meek transport types,
+	 or when the transport is of type Snowflake.
+	 */
+	static let iPtProxyTransportStopped = Notification.Name("iptproxy-transport-stopped")
+}
+
 public enum Transport: Int, CaseIterable, Comparable {
 
-	private class StatusCollector: NSObject, IPtProxyOnTransportStoppedProtocol {
+	private class StatusCollector: NSObject, IPtProxyOnTransportEventsProtocol {
 
 		var started = [String: Bool]()
+		var connected = [String: Bool]()
 		var errors = [String: Error]()
 
 		func stopped(_ name: String?, error: (any Error)?) {
@@ -23,14 +59,64 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 			DispatchQueue.global(qos: .userInitiated).sync {
 				started[name] = false
+				connected[name] = false
 				errors[name] = error
 			}
+
+			NotificationCenter.default.post(name: .iPtProxyTransportStopped, object: getTransports(from: name))
 		}
 
 		func started(name: String) {
 			DispatchQueue.global(qos: .userInitiated).sync {
 				started[name] = true
 				errors[name] = nil
+			}
+
+			NotificationCenter.default.post(name: .iPtProxyTransportStarted, object: getTransports(from: name))
+		}
+
+		func connected(_ name: String?) {
+			guard let name else {
+				return
+			}
+
+			DispatchQueue.global(qos: .userInitiated).sync {
+				connected[name] = true
+			}
+
+			NotificationCenter.default.post(name: .iPtProxyTransportConnected, object: getTransports(from: name))
+		}
+
+		func error(_ name: String?, error: (any Error)?) {
+			guard let name else {
+				return
+			}
+
+			DispatchQueue.global(qos: .userInitiated).sync {
+				errors[name] = error
+			}
+
+			NotificationCenter.default.post(name: .iPtProxyTransportErrored, object: getTransports(from: name))
+		}
+
+
+		private func getTransports(from name: String) -> [Transport] {
+			switch name {
+			case IPtProxyObfs4:
+				return [.obfs4] + (customTransports.contains(name) ? [.custom] : [])
+
+			case IPtProxySnowflake:
+				return [.snowflake, .snowflakeAmp]
+
+			case IPtProxyWebtunnel:
+				return [.custom]
+
+			case IPtProxyMeekLite:
+				return [.meek] + (customTransports.contains(name) ? [.custom] : [])
+
+			default:
+				assertionFailure("Transport \(name) unknown or unused.")
+				return []
 			}
 		}
 	}
@@ -71,7 +157,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	private static let controller: IPtProxyController? = {
 		return IPtProxyController(
 			stateLocation.path, enableLogging: true, unsafeLogging: false,
-			logLevel: "INFO", transportStopped: collector)
+			logLevel: "INFO", transportEvents: collector)
 	}()
 
 	private static let collector = StatusCollector()
@@ -134,28 +220,33 @@ public enum Transport: Int, CaseIterable, Comparable {
 		}
 	}
 
+	/**
+	 The first underlying transport's port which is actually up.
+	 */
 	public var port: Int {
-		guard let name = transportNames.first else {
-			return 0
+		for name in transportNames {
+			if let port = Self.controller?.port(name), port > 0 {
+				return port
+			}
 		}
 
-		return Self.controller?.port(name) ?? 0
+		return 0
 	}
 
+	/**
+	 If all underlying transports are actually started and connected.
+	 */
 	public var connected: Bool {
-		guard let name = transportNames.first else {
-			return false
+		transportNames.reduce(true) { partialResult, name in
+			partialResult && (Self.collector.started[name] ?? false) && (Self.collector.connected[name] ?? false)
 		}
-
-		return Self.collector.started[name] ?? false
 	}
 
+	/**
+	 The first error found on any used underlying transport. (But, the *last* one happening on that specific transport.)
+	 */
 	public var error: Error? {
-		guard let name = transportNames.first else {
-			return nil
-		}
-
-		return Self.collector.errors[name]
+		transportNames.compactMap({ Self.collector.errors[$0] }).first
 	}
 
 
