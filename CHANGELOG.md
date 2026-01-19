@@ -1,5 +1,10 @@
 # IPtProxyUI
 
+## 5.0.0
+- Updated to IPtProxy 5.0.0 therefore Lyrebird 0.8.1.
+- Added forwarding of new transport connection and error events using notifications.
+- Replaced `print` with proper logging.
+
 ## 4.10.0
 - Set minimal deployment target of iOS to 15.0 which is mandatory since Xcode 16. Ooops.
 - Updated dependencies to IPtProxy 4.3.0, which contains latest Lyrebird 0.8.0.
