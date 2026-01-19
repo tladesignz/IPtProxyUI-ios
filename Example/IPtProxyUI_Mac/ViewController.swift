@@ -3,7 +3,7 @@
 //  IPtProxyUI_Mac_Example
 //
 //  Created by Benjamin Erhart on 10.03.23.
-//  Copyright © 2023 CocoaPods. All rights reserved.
+//  Copyright © 2019 - 2026 Guardian Project. All rights reserved.
 //
 
 import Cocoa

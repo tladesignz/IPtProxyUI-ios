@@ -4,7 +4,7 @@
 #  IPtProxyUI
 #
 #  Created by Benjamin Erhart on 04.10.22.
-#  Copyright © 2019 - 2022 Guardian Project. All rights reserved.
+#  Copyright © 2019 - 2026 Guardian Project. All rights reserved.
 #
 
 BASE=$(dirname "$0")

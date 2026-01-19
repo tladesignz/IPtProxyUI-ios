@@ -3,7 +3,7 @@
 //  IPtProxyUI
 //
 //  Created by Benjamin Erhart on 03.12.19.
-//  Copyright © 2019 - 2022 Guardian Project. All rights reserved.
+//  Copyright © 2019 - 2026 Guardian Project. All rights reserved.
 //
 
 import Foundation

@@ -3,7 +3,7 @@
 //  IPtProxyUI-macOS
 //
 //  Created by Benjamin Erhart on 26.08.22.
-//  Copyright © 2019-2022 Guardian Project. All rights reserved.
+//  Copyright © 2019 - 2026 Guardian Project. All rights reserved.
 //
 
 import Cocoa
