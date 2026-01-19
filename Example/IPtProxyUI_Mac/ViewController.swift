@@ -8,6 +8,7 @@
 
 import Cocoa
 import IPtProxyUI
+import OSLog
 
 class ViewController: NSViewController, NSWindowDelegate, BridgesConfDelegate {
 
@@ -16,7 +17,9 @@ class ViewController: NSViewController, NSWindowDelegate, BridgesConfDelegate {
 
 		if let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first {
 			Settings.stateLocation = url
-			print("[\(String(describing: type(of: self)))] stateLocation=\(url)")
+
+			Logger(subsystem: "IPtProxyUI", category: String(describing: type(of: self)))
+				.info("stateLocation=\(url)")
 		}
 
 		bridgeSettings(self)

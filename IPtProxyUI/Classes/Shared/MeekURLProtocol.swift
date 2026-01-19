@@ -24,6 +24,7 @@
 
 import Foundation
 import IPtProxy
+import OSLog
 
 open class MeekURLProtocol: URLProtocol, HTTPConnectionDelegate {
 
@@ -36,7 +37,8 @@ open class MeekURLProtocol: URLProtocol, HTTPConnectionDelegate {
 			try Transport.meek.start()
 		}
 		catch {
-			print("[\(String(describing: self))] error starting Meek transport: \(error)")
+			Logger(subsystem: "IPtProxyUI", category: String(describing: type(of: self)))
+				.error("Error starting Meek transport: \(error)")
 		}
 
 		URLProtocol.registerClass(self)

@@ -8,6 +8,7 @@
 
 import UIKit
 import IPtProxyUI
+import OSLog
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,7 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		if let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first {
 			Settings.stateLocation = url
-			print("[\(String(describing: type(of: self)))] stateLocation=\(url)")
+
+			Logger(subsystem: "IPtProxyUI", category: String(describing: type(of: self)))
+				.info("stateLocation=\(url)")
 		}
 
 		return true

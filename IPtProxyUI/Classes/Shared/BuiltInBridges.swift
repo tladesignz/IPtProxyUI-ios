@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import OSLog
 
 open class BuiltInBridges: Codable {
 
@@ -91,7 +92,8 @@ open class BuiltInBridges: Codable {
 			return try MoatApi.decoder.decode(Self.self, from: data)
 		}
 		catch {
-			print("[\(String(describing: type(of: self)))] \(error)")
+			Logger(subsystem: "IPtProxyUI", category: String(describing: type(of: self)))
+				.error("\(error)")
 		}
 
 		return nil
@@ -100,7 +102,8 @@ open class BuiltInBridges: Codable {
 
 	open func store() {
 		guard let file = Self.updateFile else {
-			print("[\(String(describing: type(of: self)))] No caching directory available to store to!")
+			Logger(subsystem: "IPtProxyUI", category: String(describing: type(of: self)))
+				.error("No caching directory available to store to!")
 
 			return
 		}
@@ -111,7 +114,8 @@ open class BuiltInBridges: Codable {
 			try data.write(to: file, options: .atomic)
 		}
 		catch {
-			print("[\(String(describing: type(of: self)))] \(error)")
+			Logger(subsystem: "IPtProxyUI", category: String(describing: type(of: self)))
+				.error("\(error)")
 		}
 	}
 }
