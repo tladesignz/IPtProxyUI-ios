@@ -10,17 +10,17 @@ import Foundation
 
 extension String {
 
-    var middle: String.Index {
-        index(startIndex, offsetBy: count / 2)
-    }
+	var middle: String.Index {
+		index(startIndex, offsetBy: count / 2)
+	}
 
-    var firstHalf: String {
-        String(self[..<middle])
-    }
+	var firstHalf: String {
+		String(self[..<middle])
+	}
 
-    var secondHalf: String {
-        String(self[middle...])
-    }
+	var secondHalf: String {
+		String(self[middle...])
+	}
 }
 
 public enum MoatTunnel: String {

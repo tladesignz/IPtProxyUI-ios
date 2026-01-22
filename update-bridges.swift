@@ -10,7 +10,9 @@ import Foundation
 
 // MARK: Config
 
-let request = MoatApi.buildRequest(.builtin)
+let baseUrl = URL(string: "https://bridges.torproject.org")
+
+let request = MoatApi.buildRequest(baseUrl, .builtin)
 
 let outfile = resolve("IPtProxyUI/Assets/Shared/builtin-bridges.json")
 
