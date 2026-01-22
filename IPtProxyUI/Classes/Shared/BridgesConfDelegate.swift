@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import OSLog
 
 public protocol BridgesConfDelegate: AnyObject {
 
@@ -32,11 +33,17 @@ public extension BridgesConfDelegate {
     }
 
     func startMeek() {
-        MeekURLProtocol.start()
+        do {
+            try MoatTunnel.meek.transport.start()
+        }
+        catch {
+            Logger(subsystem: "IPtProxyUI", category: String(describing: type(of: self)))
+                .error("Error starting Meek transport: \(error)")
+        }
     }
 
     func stopMeek() {
-        MeekURLProtocol.stop()
+        MoatTunnel.meek.transport.stop()
     }
 
     func auth(request: inout URLRequest) {

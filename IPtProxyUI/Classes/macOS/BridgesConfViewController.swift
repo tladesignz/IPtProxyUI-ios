@@ -181,14 +181,11 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 		announce(L10n.tryAutoConfiguration)
 
 		let autoconf = AutoConf(self)
-		autoconf.do(cannotConnectWithoutPt: cannotConnectSw.state == .on) { error in
-			DispatchQueue.main.async {
-				if let error = error {
-					hud?.hide(true)
+		Task {
+			do {
+				try await autoconf.do(cannotConnectWithoutPt: cannotConnectSw.state == .on)
 
-					NSAlert(error: error).runModal()
-				}
-				else {
+				await MainActor.run {
 					var delay = 0.0
 
 					if let checkmark = NSImage(systemSymbolName: "checkmark", accessibilityDescription: nil) {
@@ -204,6 +201,13 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 					}
 
 					hud?.hide(true, afterDelay: delay)
+				}
+			}
+			catch {
+				await MainActor.run {
+					hud?.hide(true)
+
+					NSAlert(error: error).runModal()
 				}
 			}
 		}

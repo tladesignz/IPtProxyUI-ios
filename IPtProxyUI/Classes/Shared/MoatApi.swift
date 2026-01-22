@@ -36,25 +36,25 @@ open class MoatApi {
 		var path: String {
 			switch self {
 			case .fetch:
-				return "fetch"
+				return "moat/fetch"
 
 			case .check:
-				return "check"
+				return "moat/check"
 
 			case .settings:
-				return "circumvention/settings"
+				return "moat/circumvention/settings"
 
 			case .defaults:
-				return "circumvention/defaults"
+				return "moat/circumvention/defaults"
 
 			case .map:
-				return "circumvention/map"
+				return "moat/circumvention/map"
 
 			case .builtin:
-				return "circumvention/builtin"
+				return "moat/circumvention/builtin"
 
 			case .countries:
-				return "circumvention/countries"
+				return "moat/circumvention/countries"
 			}
 		}
 
@@ -79,15 +79,13 @@ open class MoatApi {
 		}
 	}
 
-	public static let moatBaseUrl = URL(string: "https://bridges.torproject.org/moat")
-
 	public static var encoder = JSONEncoder()
 
 	public static var decoder = JSONDecoder()
 
 
-	open class func buildRequest(_ endpoint: Endpoint) -> URLRequest? {
-		guard let url = moatBaseUrl?.appendingPathComponent(endpoint.path) else {
+	open class func buildRequest(_ baseUrl: URL?, _ endpoint: Endpoint) -> URLRequest? {
+		guard let url = baseUrl?.appendingPathComponent(endpoint.path) else {
 			return nil
 		}
 

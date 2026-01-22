@@ -12,20 +12,10 @@ open class AutoConf {
 
 	private weak var delegate: BridgesConfDelegate?
 
-	private var session: URLSession
+	private let tunnel = MoatTunnel.meek
 
 	public init(_ delegate: BridgesConfDelegate) {
 		self.delegate = delegate
-
-		if let proxy = (Transport.proxy ?? Settings.proxy)?.proxyDict {
-			let conf = URLSessionConfiguration.default
-			conf.connectionProxyDictionary = proxy
-
-			session = URLSession(configuration: conf)
-		}
-		else {
-			session = URLSession.shared
-		}
 	}
 
 	/**
@@ -35,178 +25,185 @@ open class AutoConf {
 	 If not provided, the MOAT service will deduct a country from your IP address (preferred!)
 	 - parameter cannotConnectWithoutPt: Set to `true`, if you are sure, that a PT configuration *is needed*,
 	 even though the MOAT service says, that in your country none is. In that case, a default configuration will be used.
-	 - parameter completion: A completion callback. If no `error` is returned, everything should now be configured correctly.
 	 */
-	open func `do`(country: String? = nil, cannotConnectWithoutPt: Bool = false, _ completion: @escaping (_ error: Error?) -> Void) {
-
-		delegate?.startMeek()
-
-		let completion = { (error: Error?) in
-			self.delegate?.stopMeek()
-
-			completion(error)
-		}
-
-		let main = {
-			guard var request = MoatApi.buildRequest(.settings(country: country))
-			else {
-				return completion(ApiError.noRequestPossible)
-			}
-
-			self.delegate?.auth(request: &request)
-
-			self.session.apiTask(with: request, { (response: MoatApi.SettingsResponse?, error) in
-
-				var cannotConnectWithoutPt = cannotConnectWithoutPt
-
-				if let error = error {
-					if let error = error as? MoatApi.MoatError,
-					   error.code == 404 /* Needs transport, but not the available ones */
-						|| error.code == 406 /* no country from IP address */
-					{
-						// Force fetch of defaults.
-						cannotConnectWithoutPt = true
-					}
-					else {
-						return completion(error)
-					}
-				}
-
-				// If there are no settings, that means that the MOAT service considers the
-				// country we're in to be safe for use without any transport.
-				// But only consider this, if the user isn't sure, that they cannot connect without PT.
-				if (response?.settings?.isEmpty ?? true) && !cannotConnectWithoutPt {
-					self.delegate?.transport = .none
-
-					return completion(nil)
-				}
-
-				// Otherwise, use the first advertised setting which is usable with IPtProxy.
-				if let conf = self.extract(from: response?.settings) {
-					self.delegate?.transport = conf.transport
-
-					if !conf.customBridges.isEmpty {
-						self.delegate?.customBridges = conf.customBridges
-					}
-
-					return completion(nil)
-				}
-
-				// If we couldn't understand that answer or it was empty, try the default settings.
-
-				guard var request = MoatApi.buildRequest(.defaults) else {
-					return completion(ApiError.noRequestPossible)
-				}
-
-				self.delegate?.auth(request: &request)
-
-				self.session.apiTask(with: request, { (response: MoatApi.SettingsResponse?, error) in
-					if let error = error {
-						return completion(error)
-					}
-
-					if let conf = self.extract(from: response?.settings) {
-						self.delegate?.transport = conf.transport
-
-						if !conf.customBridges.isEmpty {
-							self.delegate?.customBridges = conf.customBridges
-						}
-
-						return completion(nil)
-					}
-
-					return completion(ApiError.notUnderstandable)
-				}).resume()
-			}).resume()
-		}
-
+	open func `do`(country: String? = nil, cannotConnectWithoutPt: Bool = false) async throws {
+		let session = try start()
 
 		// First update built-ins.
 		if let updateFile = BuiltInBridges.updateFile,
 		   BuiltInBridges.outdated,
-		   var request = MoatApi.buildRequest(.builtin)
+		   var request = MoatApi.buildRequest(tunnel.baseUrl, .builtin)
 		{
 			delegate?.auth(request: &request)
 
-			session.apiTask(with: request, { (response: Data?, error) in
-				if error == nil, let data = response, !data.isEmpty {
-					try? data.write(to: updateFile, options: .atomic)
+			do {
+				let response: Data = try await session.apiTask(with: request)
+
+				if !response.isEmpty {
+					try? response.write(to: updateFile, options: .atomic)
 
 					BuiltInBridges.reload()
 				}
+			}
+			catch {
+				// Ignored.
+			}
+		}
 
-				main()
-			}).resume()
-		}
+		guard var request = MoatApi.buildRequest(tunnel.baseUrl, .settings(country: country))
 		else {
-			main()
+			throw stop(ApiError.noRequestPossible)
 		}
+
+		self.delegate?.auth(request: &request)
+
+		var cannotConnectWithoutPt = cannotConnectWithoutPt
+		var response: MoatApi.SettingsResponse?
+
+		do {
+			response = try await session.apiTask(with: request)
+		}
+		catch {
+			if let error = error as? MoatApi.MoatError,
+			   error.code == 404 /* Needs transport, but not the available ones */
+				|| error.code == 406 /* no country from IP address */
+			{
+				// Force fetch of defaults.
+				cannotConnectWithoutPt = true
+			}
+			else {
+				throw stop(error)
+			}
+		}
+
+		// If there are no settings, that means that the MOAT service considers the
+		// country we're in to be safe for use without any transport.
+		// But only consider this, if the user isn't sure, that they cannot connect without PT.
+		if (response?.settings?.isEmpty ?? true) && !cannotConnectWithoutPt {
+			self.delegate?.transport = .none
+
+			return stop()
+		}
+
+		// Otherwise, use the first advertised setting which is usable with IPtProxy.
+		if let conf = self.extract(from: response?.settings) {
+			self.delegate?.transport = conf.transport
+
+			if !conf.customBridges.isEmpty {
+				self.delegate?.customBridges = conf.customBridges
+			}
+
+			return stop()
+		}
+
+		// If we couldn't understand that answer or it was empty, try the default settings.
+
+		guard var request = MoatApi.buildRequest(tunnel.baseUrl, .defaults) else {
+			throw stop(ApiError.noRequestPossible)
+		}
+
+		self.delegate?.auth(request: &request)
+
+		response = try await session.apiTask(with: request)
+
+		stop()
+
+		if let conf = self.extract(from: response?.settings) {
+			self.delegate?.transport = conf.transport
+
+			if !conf.customBridges.isEmpty {
+				self.delegate?.customBridges = conf.customBridges
+			}
+
+			return
+		}
+
+		throw ApiError.notUnderstandable
 	}
 
 	/**
 	 Fetches the current knowledge of the circumvention mechanisms that works for each location.
-
-	 - parameter completion: Callback containing the response or any errors.
 	 */
-	open func fetchMap(_ completion: @escaping (_ response: [String: MoatApi.SettingsResponse]?, _ error: Error?) -> Void) {
-		guard var request = MoatApi.buildRequest(.map) else {
-			return completion(nil, ApiError.noRequestPossible)
+	open func fetchMap() async throws -> [String: MoatApi.SettingsResponse] {
+		guard var request = MoatApi.buildRequest(tunnel.baseUrl, .map) else {
+			throw ApiError.noRequestPossible
 		}
 
 		delegate?.auth(request: &request)
 
-		delegate?.startMeek()
+		let session = try start()
 
-		let task = session.apiTask(with: request) { (response: [String: MoatApi.SettingsResponse]?, error) in
-			self.delegate?.stopMeek()
+		do {
+			let response: [String: MoatApi.SettingsResponse] = try await session.apiTask(with: request)
 
-			completion(response, error)
+			return stop(response)
 		}
-		task.resume()
+		catch {
+			throw stop(error)
+		}
 	}
 
 	/**
 	 Provides the full list of builtin bridges currently in use. Builtin bridges are public bridges often included in the client.
-
-	 - parameter completion: Callback containing the response or any errors.
 	 */
-	open func fetchBuiltin(_ completion: @escaping (_ response: [String: [String]]?, _ error: Error?) -> Void) {
-		guard var request = MoatApi.buildRequest(.builtin) else {
-			return completion(nil, ApiError.noRequestPossible)
+	open func fetchBuiltin() async throws -> [String: [String]] {
+		guard var request = MoatApi.buildRequest(tunnel.baseUrl, .builtin) else {
+			throw ApiError.noRequestPossible
 		}
 
 		delegate?.auth(request: &request)
 
-		delegate?.startMeek()
+		let session = try start()
 
-		let task = session.apiTask(with: request) { (response: [String: [String]]?, error) in
-			self.delegate?.stopMeek()
+		do {
+			let response: [String: [String]] = try await session.apiTask(with: request)
 
-			completion(response, error)
+			return stop(response)
 		}
-		task.resume()
+		catch {
+			throw stop(error)
+		}
 	}
 
 	/**
 	 Provides the list of country codes for which we know circumvention is needed to connect to Tor.
-
-	 - parameter completion: Callback containing the response or any errors.
 	 */
-	open func fetchCountries(_ completion: @escaping (_ response: [String]?, _ error: Error?) -> Void) {
-		guard var request = MoatApi.buildRequest(.countries) else {
-			return completion(nil, ApiError.noRequestPossible)
+	open func fetchCountries() async throws -> [String] {
+		guard var request = MoatApi.buildRequest(tunnel.baseUrl, .countries) else {
+			throw ApiError.noRequestPossible
 		}
 
 		delegate?.auth(request: &request)
 
-		delegate?.startMeek()
+		let session = try start()
 
-		let task = session.apiTask(with: request) { (response: [String]?, error) in
-			self.delegate?.stopMeek()
+		do {
+			let response: [String] = try await session.apiTask(with: request)
 
-			completion(response, error)
+			return stop(response)
 		}
-		task.resume()
+		catch {
+			throw stop(error)
+		}
+	}
+
+	private func start() throws -> URLSession {
+		try tunnel.transport.start()
+
+		let conf = URLSessionConfiguration.default
+		conf.connectionProxyDictionary = tunnel.proxyConf
+
+		return URLSession(configuration: conf)
+	}
+
+	private func stop<T>(_ value: T) -> T {
+		tunnel.transport.stop()
+
+		return value
+	}
+
+	private func stop() {
+		tunnel.transport.stop()
 	}
 
 	/**

@@ -136,17 +136,20 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			ProgressHUD.animate()
 
 			let autoconf = AutoConf(self)
-			autoconf.do(cannotConnectWithoutPt: (self.form.rowBy(tag: "cannotConnect") as? SwitchRow)?.value ?? false) { [weak self] error in
-				DispatchQueue.main.async {
-					if let error = error {
+
+			Task {
+				do {
+					try await autoconf.do(cannotConnectWithoutPt: (self.form.rowBy(tag: "cannotConnect") as? SwitchRow)?.value ?? false)
+
+					await MainActor.run {
+						ProgressHUD.succeed()
+					}
+				}
+				catch {
+					await MainActor.run {
 						ProgressHUD.failed()
 
-						if let self = self {
-							AlertHelper.present(self, message: error.localizedDescription)
-						}
-					}
-					else {
-						ProgressHUD.succeed()
+						AlertHelper.present(self, message: error.localizedDescription)
 					}
 				}
 			}

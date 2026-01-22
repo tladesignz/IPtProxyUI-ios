@@ -54,4 +54,18 @@ public extension URLSession {
 			}
 		}
 	}
+
+	func apiTask<T: Codable>(with request: URLRequest) async throws -> T {
+		return try await withCheckedThrowingContinuation { continuation in
+			let task = self.apiTask(with: request) { result, error in
+				if let error {
+					return continuation.resume(throwing: error)
+				}
+
+				continuation.resume(returning: result!)
+			}
+
+			task.resume()
+		}
+	}
 }
