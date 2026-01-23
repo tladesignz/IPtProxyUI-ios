@@ -114,6 +114,9 @@ public enum Transport: Int, CaseIterable, Comparable {
 			case IPtProxyMeekLite:
 				return [.meek] + (customTransports.contains(name) ? [.custom] : [])
 
+			case IPtProxyDnstt:
+				return [.dnstt] + (customTransports.contains(name) ? [.custom] : [])
+
 			default:
 				assertionFailure("Transport \(name) unknown or unused.")
 				return []
@@ -121,7 +124,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 		}
 	}
 
-	public static let order: [Transport] = [.none, .obfs4, .snowflake, .snowflakeAmp, .meek, .custom, .onDemand]
+	public static let order: [Transport] = [.none, .obfs4, .snowflake, .snowflakeAmp, .meek, .dnstt, .custom, .onDemand]
 
 	public static func asArguments(key: String, value: String) -> [String] {
 		return ["--\(key)", value]
@@ -154,6 +157,8 @@ public enum Transport: Int, CaseIterable, Comparable {
 	private static let ampBroker = "https://snowflake-broker.torproject.net/"
 	private static let ampFronts = ["www.google.com"]
 
+	private static let dnsttBridges = [String]()
+
 	private static let controller: IPtProxyController? = {
 		return IPtProxyController(
 			stateLocation.path, enableLogging: true, unsafeLogging: false,
@@ -177,6 +182,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	case snowflakeAmp = 4
 	case onDemand = 5
 	case meek = 6
+	case dnstt = 7
 
 
 	public var description: String {
@@ -199,6 +205,9 @@ public enum Transport: Int, CaseIterable, Comparable {
 		case .meek:
 			return NSLocalizedString("Meek bridge", bundle: .iPtProxyUI, comment: "")
 
+		case .dnstt:
+			return NSLocalizedString("DNSTT bridge", bundle: .iPtProxyUI, comment: "")
+
 		default:
 			return ""
 		}
@@ -212,7 +221,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	 */
 	public var logFile: URL? {
 		switch self {
-		case .obfs4, .custom, .onDemand, .meek, .snowflake, .snowflakeAmp:
+		case .obfs4, .custom, .onDemand, .meek, .snowflake, .snowflakeAmp, .dnstt:
 			return Settings.stateLocation.appendingPathComponent(IPtProxyLogFileName)
 
 		default:
@@ -266,6 +275,9 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 		case .meek:
 			return [IPtProxyMeekLite]
+
+		case .dnstt:
+			return [IPtProxyDnstt]
 		}
 	}
 
@@ -305,7 +317,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 		for name in transportNames {
 			do {
-				try Self.controller?.start(name, proxy: name == IPtProxySnowflake ? nil : proxy)
+				try Self.controller?.start(name, proxy: [IPtProxySnowflake, IPtProxyDnstt].contains(proxy) ? nil : proxy)
 				Self.collector.started(name: name)
 			}
 			catch {
@@ -390,6 +402,10 @@ public enum Transport: Int, CaseIterable, Comparable {
 		case .meek:
 			conf.append(ctp(IPtProxyMeekLite, port, cv))
 			conf += BuiltInBridges.shared?.meek?.map({ cv("Bridge", $0.raw) }) ?? []
+
+		case .dnstt:
+			conf.append(ctp(IPtProxyDnstt, port, cv))
+			conf += Self.dnsttBridges.map({ cv("Bridge", $0) })
 
 		case .none:
 			if let proxy = Self.proxy ?? Settings.proxy,
