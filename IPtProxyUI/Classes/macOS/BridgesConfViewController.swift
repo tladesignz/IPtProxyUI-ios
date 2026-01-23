@@ -32,6 +32,10 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 					self.meekRb.state = .on
 					self.announce(self.meekRb.title)
 
+				case .dnstt:
+					self.dnsttRb.state = .on
+					self.announce(self.dnsttRb.title)
+
 				case .custom:
 					self.customBridgesRb.state = .on
 					self.announce(self.customBridgesRb.title)
@@ -99,6 +103,12 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 	@IBOutlet weak var meekRb: NSButton! {
 		didSet {
 			meekRb.title = L10n.builtInMeek
+		}
+	}
+
+	@IBOutlet weak var dnsttRb: NSButton! {
+		didSet {
+			dnsttRb.title = L10n.builtInDnstt
 		}
 	}
 
@@ -225,6 +235,9 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 		}
 		else if sender == meekRb {
 			transport = .meek
+		}
+		else if sender == dnsttRb {
+			transport = .dnstt
 		}
 		else if sender == customBridgesRb {
 			let vc = CustomBridgesViewController()

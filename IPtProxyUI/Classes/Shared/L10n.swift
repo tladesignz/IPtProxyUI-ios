@@ -50,6 +50,10 @@ public class L10n {
 		String(format: NSLocalizedString("Built-in %@", bundle: .iPtProxyUI, comment: ""), "meek")
 	}
 
+	public static var builtInDnstt: String {
+		String(format: NSLocalizedString("Built-in %@", bundle: .iPtProxyUI, comment: ""), "DNSTT")
+	}
+
 	public static var customBridges: String {
 		NSLocalizedString("Custom Bridges", bundle: .iPtProxyUI, comment: "")
 	}

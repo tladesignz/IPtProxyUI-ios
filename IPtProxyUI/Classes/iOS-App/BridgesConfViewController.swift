@@ -48,6 +48,7 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 		.obfs4: L10n.builtInObfs4,
 		.snowflake: L10n.builtInSnowflake,
 		.snowflakeAmp: L10n.builtInSnowflakeAmp,
+		.dnstt: L10n.builtInDnstt,
 		.custom: L10n.customBridges,
 	]
 
