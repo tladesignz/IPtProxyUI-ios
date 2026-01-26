@@ -8,7 +8,9 @@
 
 import Cocoa
 
-open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSWindowDelegate {
+open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSWindowDelegate,
+									  NSComboBoxDataSource, NSComboBoxDelegate
+{
 
 	open weak var delegate: BridgesConfDelegate?
 
@@ -67,6 +69,14 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 	@IBOutlet weak var cannotConnectSw: NSSwitch! {
 		didSet {
 			cannotConnectSw.setAccessibilityLabel(L10n.cannotConnect)
+		}
+	}
+
+	@IBOutlet weak var countryCb: NSComboBox! {
+		didSet {
+			countryCb.placeholderString = L10n.myCountry
+
+			countryCb.stringValue = Country.selected?.description ?? ""
 		}
 	}
 
@@ -133,6 +143,9 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 	@IBOutlet weak var saveBt: NSButton!
 
 
+	private var filteredCountries = Country.all
+
+
 	public convenience init() {
 		self.init(nibName: String(describing: BridgesConfViewController.self), bundle: .iPtProxyUI)
 	}
@@ -183,7 +196,59 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 	}
 
 
+	// MARK: NSComboBoxDataSource
+
+	public func numberOfItems(in comboBox: NSComboBox) -> Int {
+		filteredCountries.count
+	}
+
+	public func comboBox(_ comboBox: NSComboBox, objectValueForItemAt index: Int) -> Any? {
+		filteredCountries[index].description
+	}
+
+
+	// MARK: NSComboBoxDelegate
+
+	public func controlTextDidChange(_ obj: Notification) {
+		guard let comboBox = obj.object as? NSComboBox else {
+			return
+		}
+
+		let search = comboBox.stringValue
+
+		if search.isEmpty {
+			filteredCountries = Country.all
+		}
+		else {
+			filteredCountries = Country.all.filter({
+				$0.localizedName.localizedCaseInsensitiveContains(search)
+			})
+		}
+
+		comboBox.reloadData()
+
+		if !(comboBox.cell?.isAccessibilityExpanded() ?? false) {
+			comboBox.cell?.setAccessibilityExpanded(true)
+		}
+	}
+
+
 	// MARK: Actions
+
+	@IBAction func changeCountry(_ sender: NSComboBox) {
+		let entered = sender.stringValue
+
+		let country = Country.all.first { $0.description.localizedCaseInsensitiveCompare(entered) == .orderedSame }
+
+
+		if let country {
+			Settings.countryCode = country.code
+		}
+		else {
+			sender.stringValue = ""
+			Settings.countryCode = nil
+		}
+	}
 
 	@IBAction open func tryAutoConf(_ sender: Any) {
 		let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -193,7 +258,7 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 		let autoconf = AutoConf(self)
 		Task {
 			do {
-				try await autoconf.do(cannotConnectWithoutPt: cannotConnectSw.state == .on)
+				try await autoconf.do(country: Settings.countryCode, cannotConnectWithoutPt: cannotConnectSw.state == .on)
 
 				await MainActor.run {
 					var delay = 0.0

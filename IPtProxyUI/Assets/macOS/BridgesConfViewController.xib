@@ -12,6 +12,7 @@
                 <outlet property="cancelBt" destination="WdN-Vi-kt7" id="y4N-rr-edD"/>
                 <outlet property="cannotConnectLb" destination="4Rr-5c-piQ" id="vVP-XP-2hD"/>
                 <outlet property="cannotConnectSw" destination="78l-BB-4mq" id="UU5-fO-XwL"/>
+                <outlet property="countryCb" destination="wKB-3V-ExD" id="Z9k-wT-cU5"/>
                 <outlet property="customBridgesRb" destination="jKP-bE-B38" id="dGo-KD-4R6"/>
                 <outlet property="descLb" destination="H2l-LN-gF6" id="oog-gC-0t4"/>
                 <outlet property="dnsttRb" destination="oJw-JX-FvJ" id="jT4-gy-Jzi"/>
@@ -27,8 +28,8 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView misplaced="YES" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="402"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="408"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <box title="Automatic Configuration" translatesAutoresizingMaskIntoConstraints="NO" id="K3y-w5-SZT">
@@ -48,7 +49,20 @@
                             <switch horizontalHuggingPriority="750" verticalHuggingPriority="750" baseWritingDirection="leftToRight" alignment="left" translatesAutoresizingMaskIntoConstraints="NO" id="78l-BB-4mq">
                                 <rect key="frame" x="378" y="51" width="42" height="25"/>
                             </switch>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4bb-fF-DH3">
+                            <comboBox focusRingType="none" verticalHuggingPriority="750" contentType="country-name" translatesAutoresizingMaskIntoConstraints="NO" id="wKB-3V-ExD">
+                                <rect key="frame" x="19" y="18" width="234" height="23"/>
+                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="My Country (optional)" drawsBackground="YES" usesDataSource="YES" numberOfVisibleItems="12" id="dgI-OF-ulL">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </comboBoxCell>
+                                <connections>
+                                    <action selector="changeCountry:" target="-2" id="bV1-Ty-0X2"/>
+                                    <outlet property="dataSource" destination="-2" id="rFD-g6-ZDO"/>
+                                    <outlet property="delegate" destination="-2" id="gnL-CC-VeT"/>
+                                </connections>
+                            </comboBox>
+                            <button horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4bb-fF-DH3">
                                 <rect key="frame" x="251" y="13" width="174" height="32"/>
                                 <buttonCell key="cell" type="push" title="Try Auto-Configuration" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WhF-nG-1GQ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -61,14 +75,16 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="4bb-fF-DH3" firstAttribute="top" secondItem="4Rr-5c-piQ" secondAttribute="bottom" constant="16" id="0b0-jC-rUM"/>
+                            <constraint firstItem="wKB-3V-ExD" firstAttribute="leading" secondItem="coF-8h-8V3" secondAttribute="leading" constant="20" symbolic="YES" id="1Xc-Pp-ade"/>
                             <constraint firstItem="4Rr-5c-piQ" firstAttribute="top" secondItem="coF-8h-8V3" secondAttribute="top" constant="8" id="20a-Sj-2vN"/>
+                            <constraint firstItem="4bb-fF-DH3" firstAttribute="leading" secondItem="wKB-3V-ExD" secondAttribute="trailing" constant="8" symbolic="YES" id="5y2-my-j6O"/>
                             <constraint firstItem="78l-BB-4mq" firstAttribute="centerY" secondItem="4Rr-5c-piQ" secondAttribute="centerY" id="8Cu-cr-zM7"/>
                             <constraint firstAttribute="trailing" secondItem="4bb-fF-DH3" secondAttribute="trailing" constant="20" symbolic="YES" id="MET-uz-rux"/>
                             <constraint firstAttribute="bottom" secondItem="4bb-fF-DH3" secondAttribute="bottom" constant="20" symbolic="YES" id="Uyc-Jg-Gh2"/>
                             <constraint firstItem="4Rr-5c-piQ" firstAttribute="leading" secondItem="coF-8h-8V3" secondAttribute="leading" constant="20" symbolic="YES" id="Z6o-D0-adi"/>
                             <constraint firstAttribute="trailing" secondItem="78l-BB-4mq" secondAttribute="trailing" constant="20" symbolic="YES" id="Zvi-Di-Kl8"/>
+                            <constraint firstItem="wKB-3V-ExD" firstAttribute="top" secondItem="4Rr-5c-piQ" secondAttribute="bottom" constant="16" id="cPb-Ef-iT1"/>
                             <constraint firstItem="78l-BB-4mq" firstAttribute="leading" secondItem="4Rr-5c-piQ" secondAttribute="trailing" constant="8" symbolic="YES" id="nJc-M7-sHH"/>
-                            <constraint firstItem="4bb-fF-DH3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="coF-8h-8V3" secondAttribute="leading" constant="20" symbolic="YES" id="uOe-gg-ST1"/>
                         </constraints>
                     </view>
                 </box>

@@ -127,20 +127,34 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			$0.cell.textLabel?.font = UIFont(name: font.familyName, size: font.pointSize * 8 / 10)
 			$0.cell.textLabel?.numberOfLines = 0
 		}
+
+		<<< SearchablePushRow<Country>() {
+			$0.title = L10n.myCountry
+			$0.selectorTitle = L10n.myCountry
+			$0.options = Country.all
+
+			$0.value = Country.selected
+		}
+		.onChange({ row in
+			Settings.countryCode = row.value?.code
+		})
+
 		<<< ButtonRow() {
 			$0.title = L10n.tryAutoConfiguration
 		}
 		.cellUpdate({ cell, _ in
 			cell.accessibilityTraits = .button
 		})
-		.onCellSelection({ cell, row in
+		.onCellSelection({ _, row in
 			ProgressHUD.animate()
 
 			let autoconf = AutoConf(self)
 
 			Task {
 				do {
-					try await autoconf.do(cannotConnectWithoutPt: (self.form.rowBy(tag: "cannotConnect") as? SwitchRow)?.value ?? false)
+					try await autoconf.do(
+						country: Settings.countryCode,
+						cannotConnectWithoutPt: (self.form.rowBy(tag: "cannotConnect") as? SwitchRow)?.value ?? false)
 
 					await MainActor.run {
 						ProgressHUD.succeed()

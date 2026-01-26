@@ -18,6 +18,10 @@ public class L10n {
 						  bundle: .iPtProxyUI, comment: "")
 	}
 
+	public static var myCountry: String {
+		NSLocalizedString("My Country", bundle: .iPtProxyUI, comment: "")
+	}
+
 	public static var tryAutoConfiguration: String {
 		NSLocalizedString("Try Auto-Configuration", bundle: .iPtProxyUI, comment: "")
 	}

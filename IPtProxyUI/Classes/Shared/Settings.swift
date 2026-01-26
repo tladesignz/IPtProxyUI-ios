@@ -63,4 +63,13 @@ open class Settings {
 			defaults?.set(newValue?.absoluteString, forKey: "proxy")
 		}
 	}
+
+	open class var countryCode: String? {
+		get {
+			defaults?.string(forKey: "countryCode")
+		}
+		set {
+			defaults?.set(newValue, forKey: "countryCode")
+		}
+	}
 }
