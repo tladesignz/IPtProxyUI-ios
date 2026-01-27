@@ -26,17 +26,19 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 
 	open var transport: Transport = .none {
 		didSet {
-			DispatchQueue.main.async {
-				for row in self.transportSection as Section {
-					guard let row = row as? ListCheckRow<Transport> else {
-						continue
+			Task {
+				await MainActor.run {
+					for row in self.transportSection as Section {
+						guard let row = row as? ListCheckRow<Transport> else {
+							continue
+						}
+
+						row.value = row.selectableValue == self.transport ? row.selectableValue : nil
+						row.updateCell()
 					}
 
-					row.value = row.selectableValue == self.transport ? row.selectableValue : nil
-					row.updateCell()
+					UIAccessibility.post(notification: .announcement, argument: self.transportsLabelMap[self.transport])
 				}
-
-				UIAccessibility.post(notification: .announcement, argument: self.transportsLabelMap[self.transport])
 			}
 		}
 	}
@@ -93,24 +95,30 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			else if row.value == .onDemand, let self = self {
 				ProgressHUD.animate()
 
-				DispatchQueue.global(qos: .userInitiated).async {
+				Task {
 					OnDemand.shared.delegate = self
 
-					OnDemand.shared.fetch(self.onDemandConf!) { bridge, error in
-						if let bridge = bridge {
-							Settings.onDemandBridges = [bridge]
+					let bridge: String?
+
+					do {
+						bridge = try await OnDemand.shared.fetch(self.onDemandConf!)
+					}
+					catch {
+						await MainActor.run {
+							ProgressHUD.failed()
+
+							AlertHelper.present(self, message: error.localizedDescription)
 						}
 
-						DispatchQueue.main.async {
-							if let error = error {
-								ProgressHUD.failed()
+						return
+					}
 
-								AlertHelper.present(self, message: error.localizedDescription)
-							}
-							else {
-								ProgressHUD.succeed()
-							}
-						}
+					if let bridge = bridge {
+						Settings.onDemandBridges = [bridge]
+					}
+
+					await MainActor.run {
+						ProgressHUD.succeed()
 					}
 				}
 			}

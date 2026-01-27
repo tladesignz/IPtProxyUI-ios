@@ -32,12 +32,11 @@ open class OnDemand {
 	public weak var delegate: BridgesConfDelegate?
 
 
-	open func fetch(_ conf: Configuration, _ completed: ((_ bridge: String?, _ error: Error?) -> Void)?) {
+	open func fetch(_ conf: Configuration) async throws -> String? {
 		let conf = AwsConfiguration(conf.accessKey, conf.secretKey, conf.region, "gamelift", conf.groupName)
 
 		guard let url = conf.url else {
-			completed?(nil, ApiError.noRequestPossible)
-			return
+			throw ApiError.noRequestPossible
 		}
 
 		var request = URLRequest(url: url)
@@ -50,47 +49,41 @@ open class OnDemand {
 		request.httpBody = try? MoatApi.encoder.encode(ClaimGameServerRequest(groupName: conf.groupName))
 
 		guard let authorization = AwsAuthorization(request, conf) else {
-			completed?(nil, ApiError.noRequestPossible)
-			return
+			throw ApiError.noRequestPossible
 		}
 
 		request.setValue(authorization.description, forHTTPHeaderField: "Authorization")
 
 		delegate?.auth(request: &request)
 
-		let task = URLSession.shared.apiTask(with: request) { (response: ClaimGameServerResponse?, error: Error?) in
-//			if let response = response {
-//				print(response)
-//			}
-//
-//			if let error = error {
-//				print(error)
-//			}
+		let response: ClaimGameServerResponse
 
-			var bridge = response?.gameServer?.payload?.bridge
-
-			if bridge?.hasPrefix("Bridge ") ?? false {
-				bridge = String(bridge!.dropFirst(7))
-			}
-
-			var error = error
-
+		do {
+			response = try await URLSession.shared.apiTask(with: request)
+		}
+		catch {
 			switch error as? ApiError {
 			case .no200Status(_, let body):
 				if let body = body,
 					let awsError = (try? MoatApi.decoder.decode(AwsError.self, from: body))
 				{
-					error = awsError
+					throw awsError
 				}
 
 			default:
 				break
 			}
 
-			completed?(bridge, error)
+			throw error
 		}
 
-		task.resume()
+		var bridge = response.gameServer?.payload?.bridge
+
+		if bridge?.hasPrefix("Bridge ") ?? false {
+			bridge = String(bridge!.dropFirst(7))
+		}
+
+		return bridge
 	}
 }
 

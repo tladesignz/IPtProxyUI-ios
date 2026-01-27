@@ -223,13 +223,15 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 	private func extract(from image: UIImage?) {
 		let bridges = BaseScanViewController.extractBridges(from: image)
 
-		DispatchQueue.main.async {
-			if let bridges = bridges {
-				self.textAreaRow.value = bridges.joined(separator: "\n")
-				self.textAreaRow.updateCell()
-			}
-			else {
-				AlertHelper.present(self, message: ScanError.notBridges.localizedDescription)
+		Task {
+			await MainActor.run {
+				if let bridges = bridges {
+					self.textAreaRow.value = bridges.joined(separator: "\n")
+					self.textAreaRow.updateCell()
+				}
+				else {
+					AlertHelper.present(self, message: ScanError.notBridges.localizedDescription)
+				}
 			}
 		}
 	}

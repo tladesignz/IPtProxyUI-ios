@@ -82,8 +82,8 @@ open class BaseScanViewController: UIViewController, AVCaptureMetadataOutputObje
 			videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
 			videoPreviewLayer?.videoGravity = .resizeAspectFill
 
-			DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-				self?.captureSession?.startRunning()
+			Task {
+				captureSession?.startRunning()
 			}
 		}
 		catch {
