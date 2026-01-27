@@ -185,7 +185,20 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 		(form.last?.first(where: { ($0 as? ListCheckRow<Transport>)?.selectableValue == .custom }) as? ListCheckRow<Transport>)?.cellUpdate({ cell, _ in
 			cell.accessibilityTraits = .button
 		})
+	}
 
+	open override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+
+		NotificationCenter.default.addObserver(
+			self, selector: #selector(resetCountryLocalization),
+			name: NSLocale.currentLocaleDidChangeNotification, object: nil)
+	}
+
+	open override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+
+		NotificationCenter.default.removeObserver(self, name: NSLocale.currentLocaleDidChangeNotification, object: nil)
 	}
 
 
@@ -233,6 +246,16 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 		delegate?.save()
 
 		navigationController?.dismiss(animated: true)
+	}
+
+
+	@objc
+	private func resetCountryLocalization() {
+		for country in Country.all {
+			country.clearCache()
+		}
+
+		Country.all.sort()
 	}
 
 	@objc

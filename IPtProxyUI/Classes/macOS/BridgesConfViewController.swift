@@ -159,6 +159,18 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 		saveBt.title = saveButtonTitle ?? L10n.save
 
 		view.window?.defaultButtonCell = saveBt.cell as? NSButtonCell
+
+		NotificationCenter.default.addObserver(
+			self, selector: #selector(resetCountryLocalization),
+			name: NSLocale.currentLocaleDidChangeNotification, object: nil)
+
+		updateDnstt()
+	}
+
+	open override func viewWillDisappear() {
+		super.viewWillDisappear()
+
+		NotificationCenter.default.removeObserver(self, name: NSLocale.currentLocaleDidChangeNotification, object: nil)
 	}
 
 
@@ -337,6 +349,15 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 		NSApp.stopModal()
 
 		view.window?.close()
+	}
+
+	@objc
+	open func resetCountryLocalization() {
+		for country in Country.all {
+			country.clearCache()
+		}
+
+		Country.all.sort()
 	}
 
 
