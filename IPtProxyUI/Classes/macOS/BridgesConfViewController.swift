@@ -128,6 +128,8 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 		}
 	}
 
+	@IBOutlet weak var customBridgesRbTopConstraint: NSLayoutConstraint?
+
 	@IBOutlet weak var descLb: NSTextField! {
 		didSet {
 			descLb.stringValue = L10n.bridgeTypeExplanation
@@ -252,7 +254,6 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 
 		let country = Country.all.first { $0.description.localizedCaseInsensitiveCompare(entered) == .orderedSame }
 
-
 		if let country {
 			Settings.countryCode = country.code
 		}
@@ -260,6 +261,8 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 			sender.stringValue = ""
 			Settings.countryCode = nil
 		}
+
+		updateDnstt()
 	}
 
 	@IBAction open func tryAutoConf(_ sender: Any) {
@@ -352,7 +355,7 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 	}
 
 	@objc
-	open func resetCountryLocalization() {
+	private func resetCountryLocalization() {
 		for country in Country.all {
 			country.clearCache()
 		}
@@ -370,6 +373,23 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 				notification: .announcementRequested,
 				userInfo: [.announcement: text,
 						   .priority: NSAccessibilityPriorityLevel.high.rawValue])
+		}
+	}
+
+	private func updateDnstt() {
+		dnsttRb.isHidden = Settings.countryCode != "ir"
+
+		customBridgesRbTopConstraint?.isActive = false
+
+		let constraint = customBridgesRb.topAnchor.constraint(
+			equalTo: dnsttRb.isHidden ? meekRb.bottomAnchor : dnsttRb.bottomAnchor,
+			constant: 6)
+		constraint.isActive = true
+
+		customBridgesRbTopConstraint = constraint
+
+		if dnsttRb.isHidden && transport == .dnstt {
+			transport = .none
 		}
 	}
 }

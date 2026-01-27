@@ -128,7 +128,7 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			$0.cell.textLabel?.numberOfLines = 0
 		}
 
-		<<< SearchablePushRow<Country>() {
+		<<< SearchablePushRow<Country>("country") {
 			$0.title = L10n.myCountry
 			$0.selectorTitle = L10n.myCountry
 			$0.options = Country.all
@@ -178,6 +178,20 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 				$0.selectableValue = t
 				$0.value = t == transport ? transport : nil
 				$0.cell.accessibilityIdentifier = "transport_\(t.rawValue)"
+
+				if t == .dnstt {
+					$0.hidden = .function(["country"], { [weak self] _ in
+						Task {
+							await MainActor.run {
+								if Settings.countryCode != "ir" && self?.transport == .dnstt {
+									self?.transport = .none
+								}
+							}
+						}
+
+						return Settings.countryCode != "ir"
+					})
+				}
 			}
 		}
 
