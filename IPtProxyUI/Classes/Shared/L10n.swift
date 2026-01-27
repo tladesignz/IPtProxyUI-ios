@@ -55,7 +55,7 @@ public class L10n {
 	}
 
 	public static var builtInDnstt: String {
-		String(format: NSLocalizedString("Built-in %@", bundle: .iPtProxyUI, comment: ""), "DNSTT")
+		String(format: NSLocalizedString("Built-in %@", bundle: .iPtProxyUI, comment: ""), "DNS Tunnel")
 	}
 
 	public static var customBridges: String {

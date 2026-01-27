@@ -141,7 +141,7 @@
                 </button>
                 <button tag="5" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oJw-JX-FvJ">
                     <rect key="frame" x="19" y="125" width="442" height="18"/>
-                    <buttonCell key="cell" type="radio" title="Built-in DNSTT" bezelStyle="regularSquare" imagePosition="left" inset="2" id="f4B-dp-rDS">
+                    <buttonCell key="cell" type="radio" title="Built-in DNS Tunnel" bezelStyle="regularSquare" imagePosition="left" inset="2" id="f4B-dp-rDS">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
