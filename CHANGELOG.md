@@ -1,5 +1,14 @@
 # IPtProxyUI
 
+## 5.1.0
+- Added DNSTT support.
+- Modernized code to async/await.
+- Minor translation updates.
+- Replaced `MeekURLProtocol` with `URLSession` proxy config.
+- Added country picker for MOAT/RdSys auto-conf.
+- DNSTT option is only shown for Iranians for now, since it's still kind of experimental 
+  and working bridges are rare.
+
 ## 5.0.0
 - Updated to IPtProxy 5.0.0 therefore Lyrebird 0.8.1.
 - Added forwarding of new transport connection and error events using notifications.
