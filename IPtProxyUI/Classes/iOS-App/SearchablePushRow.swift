@@ -146,7 +146,7 @@ open class _SearchableSelectorViewController<Row: SelectableRowType, OptionsRow:
 				currentOptions = originalOptions
 			} else {
 				currentOptions = originalOptions.filter{
-					(row.displayValueFor?($0)?.contains(query))!
+					(row.displayValueFor?($0)?.localizedCaseInsensitiveContains(query))!
 				}
 			}
 		}
