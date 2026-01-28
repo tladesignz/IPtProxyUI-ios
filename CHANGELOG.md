@@ -1,5 +1,8 @@
 # IPtProxyUI
 
+## 5.1.1
+- Made iOS country search case insensitive.
+
 ## 5.1.0
 - Added DNSTT support.
 - Modernized code to async/await.
