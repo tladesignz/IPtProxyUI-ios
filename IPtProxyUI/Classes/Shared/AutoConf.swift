@@ -13,7 +13,7 @@ open class AutoConf {
 
 	private weak var delegate: BridgesConfDelegate?
 
-	private let tunnel = MoatTunnel.meek
+	private let tunnel = MoatTunnel.torProject
 
 	public init(_ delegate: BridgesConfDelegate) {
 		self.delegate = delegate

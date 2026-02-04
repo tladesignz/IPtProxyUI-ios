@@ -23,30 +23,30 @@ extension String {
 	}
 }
 
-public enum MoatTunnel: String {
-	case meek
-	case dnstt
+public enum MoatTunnel: String, CaseIterable {
+	case torProject
+	case guardianProject
 
-	static let meekConf = "url=https://1723079976.rsc.cdn77.org;front=www.phpmyadmin.net"
-	private static let dnsttConf = ""
+	private static let torProjectConf = "url=https://1723079976.rsc.cdn77.org;front=www.phpmyadmin.net"
+	private static let guardianProjectConf = "doh=https://dns.google/dns-query;pubkey=c07ae9dd7b86ded6121c3db173de048bfd4f41de38dd430e3dfaf83ec8f36a06;domain=t1.bypasscensorship.org"
 
 	var transport: Transport {
 		switch self {
-		case .meek:
+		case .torProject:
 			return .meek
 
-		case .dnstt:
+		case .guardianProject:
 			return .dnstt
 		}
 	}
 
 	var baseUrl: URL? {
 		switch self {
-		case .meek:
+		case .torProject:
 			return URL(string: "https://bridges.torproject.org")
 
-		case .dnstt:
-			return URL(string: "")
+		case .guardianProject:
+			return URL(string: "https://tns1.bypasscensorship.org")
 		}
 	}
 
@@ -55,13 +55,13 @@ public enum MoatTunnel: String {
 		let password: String
 
 		switch self {
-		case .meek:
-			user = Self.meekConf.firstHalf
-			password = Self.meekConf.secondHalf
+		case .torProject:
+			user = Self.torProjectConf.firstHalf
+			password = Self.torProjectConf.secondHalf
 
-		case .dnstt:
-			user = Self.dnsttConf.firstHalf
-			password = Self.dnsttConf.secondHalf
+		case .guardianProject:
+			user = Self.guardianProjectConf.firstHalf
+			password = Self.guardianProjectConf.secondHalf
 		}
 
 		return [

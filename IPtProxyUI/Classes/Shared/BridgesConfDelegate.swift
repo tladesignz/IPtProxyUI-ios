@@ -34,7 +34,7 @@ public extension BridgesConfDelegate {
 
     func startMeek() {
         do {
-            try MoatTunnel.meek.transport.start()
+            try MoatTunnel.torProject.transport.start()
         }
         catch {
             Logger(subsystem: "IPtProxyUI", category: String(describing: type(of: self)))
@@ -43,7 +43,7 @@ public extension BridgesConfDelegate {
     }
 
     func stopMeek() {
-        MoatTunnel.meek.transport.stop()
+        MoatTunnel.torProject.transport.stop()
     }
 
     func auth(request: inout URLRequest) {
