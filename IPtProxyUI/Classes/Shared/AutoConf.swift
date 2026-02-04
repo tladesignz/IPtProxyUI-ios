@@ -40,7 +40,8 @@ open class AutoConf {
 			do {
 				let response: Data = try await session.apiTask(with: request)
 
-				if !response.isEmpty {
+				// The return might be an empty JSON object. Only use, if there is substantial content.
+				if response.count > 7 {
 					try? response.write(to: updateFile, options: .atomic)
 
 					BuiltInBridges.reload()
