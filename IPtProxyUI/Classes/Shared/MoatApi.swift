@@ -114,7 +114,7 @@ open class MoatApi {
 		public let errors: [MoatError]
 	}
 
-	open class MoatError: LocalizedError, Codable {
+	open class MoatError: LocalizedError, CustomStringConvertible, Codable {
 
 		public let id: String?
 
@@ -144,6 +144,10 @@ open class MoatApi {
 			}
 
 			return msg.joined(separator: " ")
+		}
+
+		public var description: String {
+			errorDescription ?? "Unknown MoatError"
 		}
 	}
 
@@ -287,7 +291,7 @@ open class MoatApi {
 
 		public init(country: String? = nil) {
 			self.country = country
-			transports = ["obfs4", "snowflake", "webtunnel"]
+			transports = ["obfs4", "snowflake", "webtunnel", "dnstt"]
 
 			super.init()
 		}

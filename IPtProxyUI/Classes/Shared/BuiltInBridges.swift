@@ -64,14 +64,21 @@ open class BuiltInBridges: Codable {
 		}
 	}
 
+	open var dnstt: [Bridge]? {
+		didSet {
+			store()
+		}
+	}
+
 
 	// MARK: Codable
 
 	enum CodingKeys: String, CodingKey {
-		case meek = "meek"
+		case meek
 		case obfs4
 		case snowflake
 		case webtunnel
+		case dnstt
 	}
 
 

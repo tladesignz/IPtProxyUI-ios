@@ -158,6 +158,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	private static let ampFronts = ["www.google.com"]
 
 	private static let dnsttBridges = [
+		"dnstt 192.0.3.2:80 doh=https://dns.google/dns-query pubkey=a2fb71077eeaa54a02cda7a90be306af5d299ab21822a8b277d4eacbc9168631 domain=t2.bypasscensorship.org",
 		"dnstt 192.0.2.30:80 F6B3CCA08E3C4026783FA14DBB14A3ADBCD0D27D doh=https://dns.google/dns-query pubkey=488dd8eeab891e2df1b0fc0e5d8da28da23ea057a81934994d150105c2024048 domain=r.f14.1e-100.net",
 		"dnstt 192.0.2.31:80 F6B3CCA08E3C4026783FA14DBB14A3ADBCD0D27D udp=2.189.44.44:53 pubkey=488dd8eeab891e2df1b0fc0e5d8da28da23ea057a81934994d150105c2024048 domain=r.f14.1e-100.net",
 		"dnstt 192.0.2.32:80 A998F319ADB60EE344540EC4B21524CC484F96BE doh=https://dns.google/dns-query pubkey=241169008830694749fe96bb070c4855c5bb5b9c47b3833ed7d88521ba30a43f domain=t.ruhnama.net",
@@ -409,7 +410,8 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 		case .dnstt:
 			conf.append(ctp(IPtProxyDnstt, port, cv))
-			conf += Self.dnsttBridges.map({ cv("Bridge", $0) })
+			conf += (BuiltInBridges.shared?.dnstt?.map({ cv("Bridge", $0.raw) }) ?? [])
+				+ Self.dnsttBridges.map({ cv("Bridge", $0) })
 
 		case .none:
 			if let proxy = Self.proxy ?? Settings.proxy,

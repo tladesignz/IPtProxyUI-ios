@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import IPtProxy
 
 open class AutoConf {
 
@@ -215,6 +216,10 @@ open class AutoConf {
 	 - If there are Snowflake bridge lines given, we update the built-in list of Snowflake bridges.
 	 - If there are Obfs4 built-in bridge lines given, we update the built-in list of Obfs4 bridges.
 	 - If there are custom Obfs4 bridge lines given, we return these too, regardless of the actually selected transport,
+	 - If there are Webtunnel built-in bridge lines given, we update the built-in list of Webtunnel bridges.
+	 - If there are custom Webtunnel bridge lines given, we return these too, regardless of the actually selected transport,
+	 - If there are DNSTT built-in bridge lines given, we update the built-in list of DNSTT bridges.
+	 - If there are custom DNSTT bridge lines given, we return these too, regardless of the actually selected transport,
 	 so the user can later try these out, too, if the selected transport doesn't work.
 
 	 - parameter settings: The settings from the MOAT server.
@@ -224,7 +229,7 @@ open class AutoConf {
 		var customBridges = [String]()
 
 		for setting in settings ?? [] {
-			if setting.bridge.type == "snowflake" {
+			if setting.bridge.type == IPtProxySnowflake {
 				// If there are Snowflake bridge line updates, update our built-in ones!
 				// Note: We ignore the source ("bridgedb" or "builtin") here on purpose.
 				if let bridges = setting.bridge.bridges, !bridges.isEmpty {
@@ -235,7 +240,7 @@ open class AutoConf {
 					transport = .snowflake
 				}
 			}
-			else if setting.bridge.type == "obfs4" {
+			else if setting.bridge.type == IPtProxyObfs4 {
 				if setting.bridge.source == "builtin" {
 					// If there are Obfs4 bridge line updates, update our built-in ones!
 					if let bridges = setting.bridge.bridges, !bridges.isEmpty {
@@ -254,11 +259,31 @@ open class AutoConf {
 					}
 				}
 			}
-			else if setting.bridge.type == "webtunnel" {
+			else if setting.bridge.type == IPtProxyWebtunnel {
 				if setting.bridge.source == "builtin" {
 					// If there are Webtunnel bridge line updates, update our built-in ones!
 					if let bridges = setting.bridge.bridges, !bridges.isEmpty {
 						BuiltInBridges.shared?.webtunnel = bridges.map({ Bridge($0) })
+						customBridges.append(contentsOf: bridges)
+					}
+
+					if transport == nil {
+						transport = .custom
+					}
+				}
+				else if let bridges = setting.bridge.bridges, !bridges.isEmpty {
+					customBridges.append(contentsOf: bridges)
+
+					if transport == nil {
+						transport = .custom
+					}
+				}
+			}
+			else if setting.bridge.type == IPtProxyDnstt {
+				if setting.bridge.source == "builtin" {
+					// If there are DNSTT bridge line updates, update our built-in ones!
+					if let bridges = setting.bridge.bridges, !bridges.isEmpty {
+						BuiltInBridges.shared?.dnstt = bridges.map({ Bridge($0) })
 						customBridges.append(contentsOf: bridges)
 					}
 
