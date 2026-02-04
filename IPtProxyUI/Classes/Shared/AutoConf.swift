@@ -52,53 +52,72 @@ open class AutoConf {
 			}
 		}
 
-		guard var request = MoatApi.buildRequest(tunnel.baseUrl, .settings(country: country))
-		else {
-			throw stop(ApiError.noRequestPossible)
-		}
-
-		self.delegate?.auth(request: &request)
-
+		var lastError: Error?
 		var cannotConnectWithoutPt = cannotConnectWithoutPt
 		var response: MoatApi.SettingsResponse?
 
 		do {
-			response = try await session.apiTask(with: request)
-		}
-		catch {
-			if let error = error as? MoatApi.MoatError,
-			   error.code == 404 /* Needs transport, but not the available ones */
-				|| error.code == 406 /* no country from IP address */
-			{
-				// Force fetch of defaults.
+			response = try await loadSettings(from: tunnel, with: session, country)
+
+			// Force fetch of defaults.
+			if response == nil {
 				cannotConnectWithoutPt = true
 			}
-			else {
-				throw stop(error)
-			}
+		}
+		catch {
+			lastError = error
 		}
 
-		// If there are no settings, that means that the MOAT service considers the
+		var response2: MoatApi.SettingsResponse?
+
+		// Guardian Project's Moat is behind DNSTT. There is no source IP address available
+		// behind a DNSTT tunnel. So, only execute, when the user gave us a country.
+		if let country {
+			let tunnel2 = MoatTunnel.guardianProject
+			let session2 = try start(tunnel2)
+
+			do {
+				response2 = try await loadSettings(from: tunnel2, with: session2, country)
+			}
+			catch {
+				// Ignored, GP's MOAT service is still experimental.
+			}
+
+			tunnel2.transport.stop()
+		}
+
+		// If there are no settings, that means that the MOAT services consider the
 		// country we're in to be safe for use without any transport.
 		// But only consider this, if the user isn't sure, that they cannot connect without PT.
-		if (response?.settings?.isEmpty ?? true) && !cannotConnectWithoutPt {
-			self.delegate?.transport = .none
+		if (response?.settings?.isEmpty ?? true) && (response2?.settings?.isEmpty ?? true) && !cannotConnectWithoutPt {
+			stop()
 
-			return stop()
+			if let lastError {
+				throw lastError
+			}
+
+			delegate?.transport = .none
+
+			return
 		}
 
-		// Otherwise, use the first advertised setting which is usable with IPtProxy.
-		if let conf = self.extract(from: response?.settings) {
-			self.delegate?.transport = conf.transport
+		let conf1 = extract(from: response?.settings)
+		let conf2 = extract(from: response2?.settings)
+		let transport = conf2?.transport ?? conf1?.transport // Prefer Guardian Project MOAT's transport setting.
+		let customBridges = (conf1?.customBridges ?? []) + (conf2?.customBridges ?? []) // Use all custom bridges.
 
-			if !conf.customBridges.isEmpty {
-				self.delegate?.customBridges = conf.customBridges
+		// Otherwise, use the first advertised setting which is usable with IPtProxy.
+		if let transport {
+			delegate?.transport = transport
+
+			if !customBridges.isEmpty {
+				delegate?.customBridges = customBridges
 			}
 
 			return stop()
 		}
 
-		// If we couldn't understand that answer or it was empty, try the default settings.
+		// If we couldn't understand these answers or they were empty, try the default settings.
 
 		guard var request = MoatApi.buildRequest(tunnel.baseUrl, .defaults) else {
 			throw stop(ApiError.noRequestPossible)
@@ -194,11 +213,14 @@ open class AutoConf {
 		}
 	}
 
-	private func start() throws -> URLSession {
-		try tunnel.transport.start()
+
+	// MARK: Private Methods
+
+	private func start(_ tunnel: MoatTunnel? = nil) throws -> URLSession {
+		try (tunnel ?? self.tunnel).transport.start()
 
 		let conf = URLSessionConfiguration.default
-		conf.connectionProxyDictionary = tunnel.proxyConf
+		conf.connectionProxyDictionary = (tunnel ?? self.tunnel).proxyConf
 
 		return URLSession(configuration: conf)
 	}
@@ -312,5 +334,32 @@ open class AutoConf {
 		}
 
 		return nil
+	}
+
+	private func loadSettings(from tunnel: MoatTunnel, with session: URLSession, _ country: String?)
+	async throws -> MoatApi.SettingsResponse?
+	{
+		guard var request = MoatApi.buildRequest(tunnel.baseUrl, .settings(country: country))
+		else {
+			throw ApiError.noRequestPossible
+		}
+
+		delegate?.auth(request: &request)
+
+		do {
+			return try await session.apiTask(with: request)
+		}
+		catch {
+			if let error = error as? MoatApi.MoatError,
+			   error.code == 404 /* Needs transport, but not the available ones */
+				|| error.code == 406 /* no country from IP address */
+			{
+				// Force fetch of defaults.
+				return nil
+			}
+			else {
+				throw error
+			}
+		}
 	}
 }
