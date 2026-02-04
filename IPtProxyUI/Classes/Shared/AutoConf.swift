@@ -104,9 +104,14 @@ open class AutoConf {
 			throw stop(ApiError.noRequestPossible)
 		}
 
-		self.delegate?.auth(request: &request)
+		delegate?.auth(request: &request)
 
-		response = try await session.apiTask(with: request)
+		do {
+			response = try await session.apiTask(with: request)
+		}
+		catch {
+			throw stop(error)
+		}
 
 		stop()
 
