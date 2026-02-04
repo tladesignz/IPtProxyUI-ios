@@ -1,5 +1,10 @@
 # IPtProxyUI
 
+## 5.2.0
+- Updated DNSTT PT and further improved support.
+- Added support for Guardian Project's new MOAT service. Merge responses, if any.
+- Minor bug fixes.
+
 ## 5.1.1
 - Made iOS country search case insensitive.
 
