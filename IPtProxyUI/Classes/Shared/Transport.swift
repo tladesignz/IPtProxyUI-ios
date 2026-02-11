@@ -151,9 +151,6 @@ public enum Transport: Int, CaseIterable, Comparable {
 		Set((customBridges ?? Settings.customBridges)?.compactMap({ Bridge($0).transport }) ?? [])
 	}
 
-	// Seems more reliable in certain countries than the currently advertised one.
-	private static let addFronts = ["github.githubassets.com"]
-
 	private static let ampBroker = "https://snowflake-broker.torproject.net/"
 	private static let ampFronts = ["www.google.com"]
 
@@ -307,7 +304,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 			let snowflake = BuiltInBridges.shared?.snowflake?.first
 
 			// Seems more reliable in certain countries than the currently advertised one.
-			var fronts = Set(Self.addFronts)
+			var fronts = Set<String>()
 			if let f = snowflake?.front {
 				fronts.insert(f)
 			}
@@ -389,15 +386,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 		case .snowflake:
 			conf.append(ctp(IPtProxySnowflake, port, cv))
-			conf += BuiltInBridges.shared?.snowflake?
-				.compactMap({
-					let builder = Bridge.Builder(from: $0)
-
-					builder?.fronts.formUnion(Self.addFronts)
-
-					return builder?.build().raw
-				})
-				.map({ cv("Bridge", $0) }) ?? []
+			conf += BuiltInBridges.shared?.snowflake?.map({ cv("Bridge", $0.raw) }) ?? []
 
 		case .snowflakeAmp:
 			var idx = 0
