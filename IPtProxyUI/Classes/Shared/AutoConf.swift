@@ -244,11 +244,11 @@ open class AutoConf {
 	 - If there are Snowflake bridge lines given, we update the built-in list of Snowflake bridges.
 	 - If there are Obfs4 built-in bridge lines given, we update the built-in list of Obfs4 bridges.
 	 - If there are custom Obfs4 bridge lines given, we return these too, regardless of the actually selected transport,
+       so the user can later try these out, too, if the selected transport doesn't work.
 	 - If there are Webtunnel built-in bridge lines given, we update the built-in list of Webtunnel bridges.
-	 - If there are custom Webtunnel bridge lines given, we return these too, regardless of the actually selected transport,
+	 - If there are custom Webtunnel bridge lines given, we return these too, regardless of the actually selected transport.
 	 - If there are DNSTT built-in bridge lines given, we update the built-in list of DNSTT bridges.
-	 - If there are custom DNSTT bridge lines given, we return these too, regardless of the actually selected transport,
-	 so the user can later try these out, too, if the selected transport doesn't work.
+	 - If there are custom DNSTT bridge lines given, we return these too, regardless of the actually selected transport.
 
 	 - parameter settings: The settings from the MOAT server.
 	 */
