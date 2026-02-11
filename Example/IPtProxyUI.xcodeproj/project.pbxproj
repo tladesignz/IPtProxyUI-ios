@@ -44,6 +44,8 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7AFF447AA7859FB1C41AE439 /* Pods_IPtProxyUI_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IPtProxyUI_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		891775C0EC1858BD122A086E /* IPtProxyUI.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = IPtProxyUI.podspec; path = ../IPtProxyUI.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A03CBE2C2F3CC15E00B22D96 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = SOURCE_ROOT; };
+		A03CBE2D2F3CC15E00B22D96 /* .weblate */ = {isa = PBXFileReference; lastKnownFileType = text; name = .weblate; path = ../.weblate; sourceTree = SOURCE_ROOT; };
 		A064C2572F2A48F700C7FCF2 /* sq */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sq; path = sq.lproj/Main.strings; sourceTree = "<group>"; };
 		A064C2592F2A48F900C7FCF2 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
 		A064C25B2F2A48F900C7FCF2 /* bn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bn; path = bn.lproj/Main.strings; sourceTree = "<group>"; };
@@ -125,7 +127,6 @@
 		A0A15D1029BB7F3E0084B046 /* update-bridges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "update-bridges.swift"; path = "../update-bridges.swift"; sourceTree = "<group>"; };
 		A0A15D1129BB7F3E0084B046 /* update-bridges.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "update-bridges.sh"; path = "../update-bridges.sh"; sourceTree = "<group>"; };
 		A0A15D1229BB7F3E0084B046 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
-		A0A15D1329BB7F8C0084B046 /* .tx */ = {isa = PBXFileReference; lastKnownFileType = folder; name = .tx; path = ../.tx; sourceTree = "<group>"; };
 		A0A15D1429BB7F8C0084B046 /* .bartycrouch.toml */ = {isa = PBXFileReference; lastKnownFileType = text; name = .bartycrouch.toml; path = ../.bartycrouch.toml; sourceTree = "<group>"; };
 		A0A15D1929BB80140084B046 /* IPtProxyUI_Mac_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IPtProxyUI_Mac_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A15D1B29BB80140084B046 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +141,15 @@
 		E8DB746879AF33885F7C077E /* Pods-IPtProxyUI_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPtProxyUI_Example.release.xcconfig"; path = "Target Support Files/Pods-IPtProxyUI_Example/Pods-IPtProxyUI_Example.release.xcconfig"; sourceTree = "<group>"; };
 		F62F2DB502E34EDE1156BA03 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A03CBE452F3CC29800B22D96 /* docs */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			name = docs;
+			path = ../docs;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		607FACCD1AFB9204008FA782 /* Frameworks */ = {
@@ -241,7 +251,9 @@
 				A0A15D1129BB7F3E0084B046 /* update-bridges.sh */,
 				A0A15D1029BB7F3E0084B046 /* update-bridges.swift */,
 				A0A15D1429BB7F8C0084B046 /* .bartycrouch.toml */,
-				A0A15D1329BB7F8C0084B046 /* .tx */,
+				A03CBE2C2F3CC15E00B22D96 /* .gitignore */,
+				A03CBE2D2F3CC15E00B22D96 /* .weblate */,
+				A03CBE452F3CC29800B22D96 /* docs */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
