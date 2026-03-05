@@ -1,5 +1,12 @@
 # IPtProxyUI
 
+## 5.3.0
+- BREAKING: Improved support for Snowflake Client events. 
+  (`IPtProxySnowflakeClientConnectedProtocol` -> `IPtProxySnowflakeClientEventsProtocol`)
+- Improved DNSTT support.
+- Export selected country via `BridgesConfDelegate`.
+- Removed `builtin-bridges.json` from repository. No need to keep it around, it's updated every day anyway.
+
 ## 5.2.0
 - Updated DNSTT PT and further improved support.
 - Added support for Guardian Project's new MOAT service. Merge responses, if any.
