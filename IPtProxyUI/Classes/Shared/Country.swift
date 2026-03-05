@@ -32,18 +32,6 @@ open class Country: Comparable, CustomStringConvertible, Codable {
 		NSLocale.isoCountryCodes.map { Country(code: $0) }.sorted()
 	}()
 
-	/**
-	 The ``Country`` object from ``Country.all`` which has the stored ``Settings.countryCode``.
-	 */
-	public static var selected: Country? {
-		guard let code = Settings.countryCode
-		else {
-			return nil
-		}
-
-		return all.first { $0.code == code }
-	}
-
 
 	/**
 	 The ISO country code.
@@ -101,6 +89,19 @@ open class Country: Comparable, CustomStringConvertible, Codable {
 	open func clearCache() {
 		_flag = nil
 		_localizedName = nil
+	}
+
+	/**
+	 - parameter countryCode: The currently selected country code stored outside this lib.
+	 - returns: The ``Country`` object from ``Country.all`` which has the given `countryCode` or the stored ``Settings.countryCode``.
+	 */
+	open class func selected(_ countryCode: String? = nil) -> Country? {
+		guard let code = countryCode ?? Settings.countryCode
+		else {
+			return nil
+		}
+
+		return all.first { $0.code == code }
 	}
 
 

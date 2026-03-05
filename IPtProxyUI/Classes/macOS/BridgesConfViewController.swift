@@ -54,6 +54,16 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 
 	open var customBridges: [String]?
 
+	open var countryCode: String? {
+		get {
+			delegate?.countryCode ?? Settings.countryCode
+		}
+		set {
+			delegate?.countryCode = newValue
+			Settings.countryCode = newValue
+		}
+	}
+
 
 	@IBOutlet weak var autoConfBox: NSBox! {
 		didSet {
@@ -78,7 +88,7 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 		didSet {
 			countryCb.placeholderString = L10n.myCountry
 
-			countryCb.stringValue = Country.selected?.description ?? ""
+			countryCb.stringValue = Country.selected(countryCode)?.description ?? ""
 		}
 	}
 
@@ -257,11 +267,11 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 		let country = Country.all.first { $0.description.localizedCaseInsensitiveCompare(entered) == .orderedSame }
 
 		if let country {
-			Settings.countryCode = country.code
+			countryCode = country.code
 		}
 		else {
 			sender.stringValue = ""
-			Settings.countryCode = nil
+			countryCode = nil
 		}
 
 		updateDnstt()
@@ -275,7 +285,7 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 		let autoconf = AutoConf(self)
 		Task {
 			do {
-				try await autoconf.do(country: Settings.countryCode, cannotConnectWithoutPt: cannotConnectSw.state == .on)
+				try await autoconf.do(countryCode: countryCode, cannotConnectWithoutPt: cannotConnectSw.state == .on)
 
 				await MainActor.run {
 					var delay = 0.0

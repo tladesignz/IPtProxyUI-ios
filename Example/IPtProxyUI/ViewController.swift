@@ -8,8 +8,11 @@
 
 import UIKit
 import IPtProxyUI
+import OSLog
 
 class ViewController: UIViewController, BridgesConfDelegate {
+
+	private let log = Logger(subsystem: "IPtProxyUI", category: String(describing: ViewController.self))
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -24,11 +27,16 @@ class ViewController: UIViewController, BridgesConfDelegate {
 
 	var customBridges = Settings.customBridges
 
+	var countryCode = Settings.countryCode
+
 	var saveButtonTitle: String?
 
 	func save() {
 		Settings.transport = transport
 		Settings.customBridges = customBridges
+		Settings.countryCode = countryCode
+
+		log.info("Conf: \(Settings.transport.torConf(Transport.asArguments))")
 	}
 
 

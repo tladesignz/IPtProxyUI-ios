@@ -45,6 +45,16 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 
 	open var customBridges: [String]?
 
+	open var countryCode: String? {
+		get {
+			delegate?.countryCode ?? Settings.countryCode
+		}
+		set {
+			delegate?.countryCode = newValue
+			Settings.countryCode = newValue
+		}
+	}
+
 	open var transportsLabelMap: [Transport: String] = [
 		.none: L10n.noBridges,
 		.obfs4: L10n.builtInObfs4,
@@ -141,10 +151,10 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			$0.selectorTitle = L10n.myCountry
 			$0.options = Country.all
 
-			$0.value = Country.selected
+			$0.value = Country.selected(countryCode)
 		}
-		.onChange({ row in
-			Settings.countryCode = row.value?.code
+		.onChange({ [weak self] row in
+			self?.countryCode = row.value?.code
 		})
 
 		<<< ButtonRow() {
@@ -153,7 +163,7 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 		.cellUpdate({ cell, _ in
 			cell.accessibilityTraits = .button
 		})
-		.onCellSelection({ _, row in
+		.onCellSelection({ [weak self] _, row in
 			ProgressHUD.animate()
 
 			let autoconf = AutoConf(self)
@@ -161,8 +171,8 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 			Task {
 				do {
 					try await autoconf.do(
-						country: Settings.countryCode,
-						cannotConnectWithoutPt: (self.form.rowBy(tag: "cannotConnect") as? SwitchRow)?.value ?? false)
+						countryCode: self?.countryCode,
+						cannotConnectWithoutPt: (self?.form.rowBy(tag: "cannotConnect") as? SwitchRow)?.value ?? false)
 
 					await MainActor.run {
 						ProgressHUD.succeed()
@@ -172,7 +182,9 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 					await MainActor.run {
 						ProgressHUD.failed()
 
-						AlertHelper.present(self, message: error.localizedDescription)
+						if let self {
+							AlertHelper.present(self, message: error.localizedDescription)
+						}
 					}
 				}
 			}

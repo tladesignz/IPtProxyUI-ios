@@ -11,42 +11,44 @@ import OSLog
 
 public protocol BridgesConfDelegate: AnyObject {
 
-    var transport: Transport { get set }
+	var transport: Transport { get set }
 
-    var customBridges: [String]? { get set }
+	var customBridges: [String]? { get set }
 
-    var saveButtonTitle: String? { get }
+	var countryCode: String? { get set }
 
-    func save()
+	var saveButtonTitle: String? { get }
 
-    func startMeek()
+	func save()
 
-    func auth(request: inout URLRequest)
+	func startMeek()
 
-    func stopMeek()
+	func auth(request: inout URLRequest)
+
+	func stopMeek()
 }
 
 public extension BridgesConfDelegate {
 
-    var saveButtonTitle: String? {
-        nil
-    }
+	var saveButtonTitle: String? {
+		nil
+	}
 
-    func startMeek() {
-        do {
-            try MoatTunnel.torProject.transport.start()
-        }
-        catch {
-            Logger(subsystem: "IPtProxyUI", category: String(describing: type(of: self)))
-                .error("Error starting Meek transport: \(error)")
-        }
-    }
+	func startMeek() {
+		do {
+			try MoatTunnel.torProject.transport.start()
+		}
+		catch {
+			Logger(subsystem: "IPtProxyUI", category: String(describing: type(of: self)))
+				.error("Error starting Meek transport: \(error)")
+		}
+	}
 
-    func stopMeek() {
-        MoatTunnel.torProject.transport.stop()
-    }
+	func stopMeek() {
+		MoatTunnel.torProject.transport.stop()
+	}
 
-    func auth(request: inout URLRequest) {
-        // Nothing to do with the default implementation.
-    }
+	func auth(request: inout URLRequest) {
+		// Nothing to do with the default implementation.
+	}
 }

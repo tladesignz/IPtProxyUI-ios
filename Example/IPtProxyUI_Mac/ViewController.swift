@@ -12,14 +12,15 @@ import OSLog
 
 class ViewController: NSViewController, NSWindowDelegate, BridgesConfDelegate {
 
+	private let log = Logger(subsystem: "IPtProxyUI", category: String(describing: ViewController.self))
+
 	override func viewDidAppear() {
 		super.viewDidAppear()
 
 		if let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first {
 			Settings.stateLocation = url
 
-			Logger(subsystem: "IPtProxyUI", category: String(describing: type(of: self)))
-				.info("stateLocation=\(url)")
+			log.info("stateLocation=\(url)")
 		}
 
 		bridgeSettings(self)
@@ -36,13 +37,18 @@ class ViewController: NSViewController, NSWindowDelegate, BridgesConfDelegate {
 
 	var transport = Settings.transport
 
-	var customBridges: [String]? = Settings.customBridges
+	var customBridges = Settings.customBridges
+
+	var countryCode = Settings.countryCode
 
 	var saveButtonTitle: String? = nil
 
 	func save() {
 		Settings.transport = transport
 		Settings.customBridges = customBridges
+		Settings.countryCode = countryCode
+
+		log.info("Conf: \(Settings.transport.torConf(Transport.asArguments))")
 	}
 
 
