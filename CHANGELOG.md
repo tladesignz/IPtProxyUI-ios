@@ -1,5 +1,8 @@
 # IPtProxyUI
 
+## 5.3.1
+- Fixed issue with missing json files in pod asset bundle.
+
 ## 5.3.0
 - BREAKING: Improved support for Snowflake Client events. 
   (`IPtProxySnowflakeClientConnectedProtocol` -> `IPtProxySnowflakeClientEventsProtocol`)
