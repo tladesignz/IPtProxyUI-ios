@@ -42,7 +42,9 @@ open class BuiltInBridges: Codable {
 		Bridge("dnstt 192.0.2.4:2 80EEFA4F4875ED2B7B5A86DF2D7588AD32E29F15 doh=https://dns.google/dns-query pubkey=a2fb71077eeaa54a02cda7a90be306af5d299ab21822a8b277d4eacbc9168631 domain=t2.bypasscensorship.org"),
 	]
 
-	public static let maxDnsttBridgesCount = 50
+	// Tor will max at 32 simultaneous SOCKS connections to PTs.
+	// Leave a buffer, though, for other connections. Seems Tor wants that.
+	public static let maxDnsttBridgesCount = 32 - 2 - dnsttBridges.count
 
 
 	private static var _shared: BuiltInBridges?
@@ -169,6 +171,10 @@ open class BuiltInBridges: Codable {
 			for bridge in Self.dnsttBridges {
 				if let builder = bridge.buildUpon() {
 					builder.port = i
+
+					// Don't set a fingerprint, otherwise only the first bridge lines with unique fingerprints will be used.
+					builder.fingerprint1 = nil
+
 					builder.doh = nil
 					builder.dot = nil
 					builder.udp = "\(addr?.host ?? server.ip):\(addr?.port ?? 53)"
