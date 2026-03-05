@@ -154,25 +154,6 @@ public enum Transport: Int, CaseIterable, Comparable {
 	private static let ampBroker = "https://snowflake-broker.torproject.net/"
 	private static let ampFronts = ["www.google.com"]
 
-	/**
-	 * https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/trac/-/issues/40001#note_2811603
-	 *
-	 * "Use 192.0.2.4:1 for the placeholder bridge IP address. 192.0.2.3:1 is used for Snowflake, and
-	 *  tor does not handle well the case of different bridges having the same address, even if the
-	 *  address is not really used. We have been incrementing the last octet of placeholder addresses for
-	 *  each new transport that uses placeholder addresses: .1 = flashproxy, .2 = meek, .3 = snowflake,
-	 *  .4 = dnstt. If there are multiple dnstt bridges in the same torrc, increment the port number"
-	 */
-	private static let dnsttBridges = [
-		"dnstt 192.0.2.4:1 F6B3CCA08E3C4026783FA14DBB14A3ADBCD0D27D udp=2.176.225.123:53 pubkey=488dd8eeab891e2df1b0fc0e5d8da28da23ea057a81934994d150105c2024048 domain=r.f14.1e-100.net",
-		"dnstt 192.0.2.4:2 F6B3CCA08E3C4026783FA14DBB14A3ADBCD0D27D udp=185.129.168.241:53 pubkey=488dd8eeab891e2df1b0fc0e5d8da28da23ea057a81934994d150105c2024048 domain=r.f14.1e-100.net",
-		"dnstt 192.0.2.4:3 F6B3CCA08E3C4026783FA14DBB14A3ADBCD0D27D udp=188.121.110.163:53 pubkey=488dd8eeab891e2df1b0fc0e5d8da28da23ea057a81934994d150105c2024048 domain=r.f14.1e-100.net",
-		"dnstt 192.0.2.4:4 F6B3CCA08E3C4026783FA14DBB14A3ADBCD0D27D udp=195.114.8.10:53 pubkey=488dd8eeab891e2df1b0fc0e5d8da28da23ea057a81934994d150105c2024048 domain=r.f14.1e-100.net",
-		"dnstt 192.0.2.4:5 F6B3CCA08E3C4026783FA14DBB14A3ADBCD0D27D doh=https://dns.google/dns-query pubkey=488dd8eeab891e2df1b0fc0e5d8da28da23ea057a81934994d150105c2024048 domain=r.f14.1e-100.net",
-		"dnstt 192.0.2.4:6 A998F319ADB60EE344540EC4B21524CC484F96BE doh=https://dns.google/dns-query pubkey=241169008830694749fe96bb070c4855c5bb5b9c47b3833ed7d88521ba30a43f domain=t.ruhnama.net",
-		"dnstt 192.0.2.4:7 80EEFA4F4875ED2B7B5A86DF2D7588AD32E29F15 doh=https://dns.google/dns-query pubkey=a2fb71077eeaa54a02cda7a90be306af5d299ab21822a8b277d4eacbc9168631 domain=t2.bypasscensorship.org",
-	]
-
 	private static let controller: IPtProxyController? = {
 		return IPtProxyController(
 			stateLocation.path, enableLogging: true, unsafeLogging: false,
@@ -356,7 +337,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 		}
 	}
 
-	public func torConf<T>(_ cv: (String, String) -> T, onDemandBridges: [String]? = nil) -> [T] {
+	public func torConf<T>(_ cv: (String, String) -> T, onDemandBridges: [String]? = nil, countryCode: String? = nil) -> [T] {
 		var conf = [T]()
 
 		switch self {
@@ -411,8 +392,9 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 		case .dnstt:
 			conf.append(ctp(IPtProxyDnstt, port, cv))
-			conf += (BuiltInBridges.shared?.dnstt?.map({ cv("Bridge", $0.raw) }) ?? [])
-				+ Self.dnsttBridges.map({ cv("Bridge", $0) })
+
+			conf += (BuiltInBridges.getDnstt(for: countryCode ?? Settings.countryCode) ?? BuiltInBridges.dnsttBridges)
+				.map({ cv("Bridge", $0.raw) })
 
 		case .none:
 			if let proxy = Self.proxy ?? Settings.proxy,

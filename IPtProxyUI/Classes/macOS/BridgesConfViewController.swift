@@ -389,7 +389,7 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 	}
 
 	private func updateDnstt() {
-		dnsttRb.isHidden = Settings.countryCode != "ir"
+		dnsttRb.isHidden = !BuiltInBridges.dnsCountries.contains(countryCode ?? "")
 
 		customBridgesRbTopConstraint?.isActive = false
 

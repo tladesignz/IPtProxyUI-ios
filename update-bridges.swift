@@ -10,12 +10,19 @@ import Foundation
 
 // MARK: Config
 
-let baseUrl = URL(string: "https://bridges.torproject.org")
+let moatBaseUrl = URL(string: "https://bridges.torproject.org")
 
-let request = MoatApi.buildRequest(baseUrl, .builtin)
+let moatRequest = MoatApi.buildRequest(moatBaseUrl, .builtin)
 
-let outfile = resolve("IPtProxyUI/Assets/Shared/builtin-bridges.json")
+let outfolder = resolve("IPtProxyUI/Assets/Shared")
 
+let bridgesOutfile = outfolder.appendingPathComponent("builtin-bridges.json")
+
+let dnsSource = URL(string: "https://raw.githubusercontent.com/dnstt-xyz/dnstt_xyz_app/refs/heads/main/assets/dns")!
+
+let dnsCountries = ["ae", "af", "bd", "cn", "co", "global", "id", "ir", "kw", "pk", "qa", "ru", "sy", "tr", "ug", "uz"]
+
+let dnsFileExt = "json"
 
 
 // MARK: Helper Methods
@@ -35,35 +42,76 @@ func resolve(_ path: String) -> URL {
 
 // MARK: Main
 
-let modified = (try? outfile.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? Date(timeIntervalSince1970: 0)
+let modified = (try? bridgesOutfile.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? Date(timeIntervalSince1970: 0)
 
 guard Calendar.current.dateComponents([.day], from: modified, to: Date()).day ?? 2 > 1 else {
 	print("File too young, won't update!")
 	exit(0)
 }
 
+Task {
+	print("- Read builtin bridges")
 
-let task = URLSession.shared.apiTask(with: request!) { (response: Data?, error) in
-//	print("response=\(String(describing: response)), error=\(String(describing: error))")
-
-	if let error = error {
-		return exit(error.localizedDescription)
-	}
-
-	guard let response = response else {
-		return exit("Empty response!")
-	}
+	var lastError: Error?
+	let response: Data
 
 	do {
-		try response.write(to: outfile, options: .atomic)
+		response = try await URLSession.shared.apiTask(with: moatRequest!)
 	}
 	catch {
-		exit("JSON file could not be written! error=\(error)")
+		print(error)
+		lastError = error
+		response = .init()
 	}
 
-	exit(0)
+	if !response.isEmpty {
+		print("- Write builtin bridges")
+
+		do {
+			try response.write(to: bridgesOutfile, options: .atomic)
+		}
+		catch {
+			print(error)
+			lastError = error
+		}
+	}
+
+	for country in dnsCountries {
+		print("- Read DNS info for: \(country)")
+
+		let data: Data
+
+		do {
+			data = try await URLSession.shared.apiTask(with:
+					.init(url: dnsSource.appendingPathComponent(country).appendingPathExtension(dnsFileExt)))
+		}
+		catch {
+			print(error)
+			lastError = error
+			continue
+		}
+
+		print("- Write DNS info for: \(country)")
+
+		do {
+			try data.write(
+				to: outfolder.appendingPathComponent("dns-\(country)")
+					.appendingPathExtension(dnsFileExt),
+				options: .atomic)
+		}
+		catch {
+			print(error)
+			lastError = error
+		}
+	}
+
+	if let lastError {
+		exit(lastError.localizedDescription)
+	}
+	else {
+		exit(0)
+	}
 }
-task.resume()
 
 
 // Wait on explicit exit.

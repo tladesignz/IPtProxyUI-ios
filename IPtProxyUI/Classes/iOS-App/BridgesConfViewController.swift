@@ -201,15 +201,15 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 
 				if t == .dnstt {
 					$0.hidden = .function(["country"], { [weak self] _ in
-						Task {
-							await MainActor.run {
-								if Settings.countryCode != "ir" && self?.transport == .dnstt {
-									self?.transport = .none
-								}
+						let isDnsCountry = BuiltInBridges.dnsCountries.contains(self?.countryCode ?? "")
+
+						Task { @MainActor in
+							if !isDnsCountry && self?.transport == .dnstt {
+								self?.transport = .none
 							}
 						}
 
-						return Settings.countryCode != "ir"
+						return !isDnsCountry
 					})
 				}
 			}

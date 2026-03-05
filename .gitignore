@@ -1,3 +1,6 @@
+dns-*.json
+builtin-bridges.json
+
 # macOS
 .DS_Store
 

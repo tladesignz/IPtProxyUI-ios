@@ -26,6 +26,25 @@ open class BuiltInBridges: Codable {
 		return Calendar.current.dateComponents([.day], from: modified, to: Date()).day ?? 2 > 1
 	}
 
+	public static let dnsCountries = ["ae", "af", "bd", "cn", "co", "id", "ir", "kw", "pk", "qa", "ru", "sy", "tr", "ug", "uz"]
+
+	/**
+	 * https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/trac/-/issues/40001#note_2811603
+	 *
+	 * "Use 192.0.2.4:1 for the placeholder bridge IP address. 192.0.2.3:1 is used for Snowflake, and
+	 *  tor does not handle well the case of different bridges having the same address, even if the
+	 *  address is not really used. We have been incrementing the last octet of placeholder addresses for
+	 *  each new transport that uses placeholder addresses: .1 = flashproxy, .2 = meek, .3 = snowflake,
+	 *  .4 = dnstt. If there are multiple dnstt bridges in the same torrc, increment the port number"
+	 */
+	public static let dnsttBridges = [
+		Bridge("dnstt 192.0.2.4:1 A998F319ADB60EE344540EC4B21524CC484F96BE doh=https://dns.google/dns-query pubkey=241169008830694749fe96bb070c4855c5bb5b9c47b3833ed7d88521ba30a43f domain=t.ruhnama.net"),
+		Bridge("dnstt 192.0.2.4:2 80EEFA4F4875ED2B7B5A86DF2D7588AD32E29F15 doh=https://dns.google/dns-query pubkey=a2fb71077eeaa54a02cda7a90be306af5d299ab21822a8b277d4eacbc9168631 domain=t2.bypasscensorship.org"),
+	]
+
+	public static let maxDnsttBridgesCount = 50
+
+
 	private static var _shared: BuiltInBridges?
 	public class var shared: BuiltInBridges? {
 		if _shared == nil {
@@ -125,9 +144,75 @@ open class BuiltInBridges: Codable {
 				.error("\(error)")
 		}
 	}
+
+	class func getDnstt(for countryCode: String? = nil) -> [Bridge]? {
+		var countryCode = countryCode ?? ""
+
+		if !Self.dnsCountries.contains(countryCode) {
+			countryCode = "global"
+		}
+
+		guard let url = Bundle.iPtProxyUI.url(forResource: "dns-\(countryCode)", withExtension: "json"),
+			  let data = try? Data(contentsOf: url),
+			  let dnsInfo = try? MoatApi.decoder.decode(DnsInfo.self, from: data)
+		else {
+			return getDnstt() // Always fall back to "global", if country was unreadable.
+		}
+
+		var i = Self.dnsttBridges.count
+
+		var bridges = [Bridge]()
+
+		for server in dnsInfo.servers {
+			let addr = URLComponents(string: "scheme://\(server.ip)")
+
+			for bridge in Self.dnsttBridges {
+				if let builder = bridge.buildUpon() {
+					builder.port = i
+					builder.doh = nil
+					builder.dot = nil
+					builder.udp = "\(addr?.host ?? server.ip):\(addr?.port ?? 53)"
+
+					i += 1
+
+					bridges.append(builder.build())
+				}
+			}
+		}
+
+		if bridges.count <= maxDnsttBridgesCount {
+			return bridges + Self.dnsttBridges
+		}
+
+		var selection = Set<Bridge>()
+
+		while selection.count < maxDnsttBridgesCount {
+			if let bridge = bridges.randomElement() {
+				selection.insert(bridge)
+			}
+		}
+
+		return Array(selection) + Self.dnsttBridges
+	}
 }
 
-open class Bridge: Codable, CustomStringConvertible {
+open class Bridge: Codable, CustomStringConvertible, Hashable {
+
+	// MARK: Equatable
+
+	public static func == (lhs: Bridge, rhs: Bridge) -> Bool {
+		lhs.transport == rhs.transport && lhs.ip == rhs.ip && lhs.port == rhs.port
+	}
+
+
+	// MARK: Hashable
+
+	public func hash(into hasher: inout Hasher) {
+		hasher.combine(transport)
+		hasher.combine(ip)
+		hasher.combine(port)
+	}
+
 
 	open class Builder {
 
@@ -145,6 +230,13 @@ open class Bridge: Codable, CustomStringConvertible {
 		open var utls: String? = nil
 		open var utlsImitate: String? = nil
 		open var ver: String? = nil
+
+		// DNSTT
+		open var udp: String? = nil
+		open var doh: String? = nil
+		open var dot: String? = nil
+		open var pubkey: String? = nil
+		open var domain: String? = nil
 
 		public init(transport: String? = nil, ip: String, port: Int, fingerprint1: String? = nil) {
 			self.transport = transport
@@ -177,6 +269,11 @@ open class Bridge: Codable, CustomStringConvertible {
 			utls = bridge.utls
 			utlsImitate = bridge.utlsImitate
 			ver = bridge.ver
+			udp = bridge.udp
+			doh = bridge.doh
+			dot = bridge.dot
+			pubkey = bridge.pubkey
+			domain = bridge.domain
 		}
 
 		open func build() -> Bridge {
@@ -188,53 +285,40 @@ open class Bridge: Codable, CustomStringConvertible {
 
 			params.append("\(ip):\(port)")
 
-			if let fingerprint1 = fingerprint1, !fingerprint1.isEmpty {
+			if let fingerprint1, !fingerprint1.isEmpty {
 				params.append(fingerprint1)
 			}
 
-			if let fingerprint2 = fingerprint2, !fingerprint2.isEmpty {
-				params.append("fingerprint=\(fingerprint2)")
-			}
-
-			if let url = url, !url.absoluteString.isEmpty {
-				params.append("url=\(url.absoluteString)")
-			}
-
-			if let front = front, !front.isEmpty {
-				params.append("front=\(front)")
-			}
+			append(fingerprint2, to: &params, with: "fingerprint")
+			append(url?.absoluteString, to: &params, with: "url")
+			append(front, to: &params, with: "front")
 
 			let fronts = fronts.filter { !$0.isEmpty }
+			append(fronts.joined(separator: ","), to: &params, with: "fronts")
 
-			if !fronts.isEmpty {
-				params.append("fronts=\(fronts.joined(separator: ","))")
-			}
+			append(cert, to: &params, with: "cert")
 
-			if let cert = cert, !cert.isEmpty {
-				params.append("cert=\(cert)")
-			}
-
-			if let iatMode = iatMode {
+			if let iatMode {
 				params.append("iat-mode=\(iatMode)")
 			}
 
-			if let ice = ice, !ice.isEmpty {
-				params.append("ice=\(ice)")
-			}
-
-			if let utls = utls, !utls.isEmpty {
-				params.append("utls=\(utls)")
-			}
-
-			if let utlsImitate = utlsImitate, !utlsImitate.isEmpty {
-				params.append("utls-imitate=\(utlsImitate)")
-			}
-
-			if let ver = ver, !ver.isEmpty {
-				params.append("ver=\(ver)")
-			}
+			append(ice, to: &params, with: "ice")
+			append(utls, to: &params, with: "utls")
+			append(utlsImitate, to: &params, with: "utls-imitate")
+			append(ver, to: &params, with: "ver")
+			append(udp, to: &params, with: "udp")
+			append(doh, to: &params, with: "doh")
+			append(dot, to: &params, with: "dot")
+			append(pubkey, to: &params, with: "pubkey")
+			append(domain, to: &params, with: "domain")
 
 			return Bridge(params.joined(separator: " "))
+		}
+
+		private func append(_ value: String?, to array: inout [String], with name: String) {
+			if let value, !value.isEmpty {
+				array.append("\(name)=\(value)")
+			}
 		}
 	}
 
@@ -312,110 +396,81 @@ open class Bridge: Codable, CustomStringConvertible {
 	}
 
 	open var fingerprint2: String? {
-		if let piece = rawPieces.first(where: { $0.hasPrefix("fingerprint=") }),
-		   let fingerprint2 = piece.split(separator: "=").last
-		{
-			return String(fingerprint2)
-		}
-
-		return nil
+		getPiece("fingerprint")
 	}
 
 	open var url: URL? {
-		if let piece = rawPieces.first(where: { $0.hasPrefix("url=") }),
-		   let url = piece.split(separator: "=").last
-		{
-			return URL(string: String(url))
+		guard let url = getPiece("url") else {
+			return nil
 		}
 
-		return nil
+		return URL(string: url)
 	}
 
 	open var front: String? {
-		if let piece = rawPieces.first(where: { $0.hasPrefix("front=") }),
-		   let front = piece.split(separator: "=").last
-		{
-			return String(front)
-		}
-
-		return nil
+		getPiece("front")
 	}
 
 	open var fronts: [String]? {
-		if let piece = rawPieces.first(where: { $0.hasPrefix("fronts=") }),
-		   let fronts = piece.split(separator: "=").last
-		{
-			return fronts.split(separator: ",")
-				.filter({ !$0.isEmpty })
-				.map({ String($0) })
-		}
-
-		return nil
+		getPiece("fronts")?.split(separator: ",")
+			.filter({ !$0.isEmpty })
+			.map({ String($0) })
 	}
 
 	open var cert: String? {
-		if let piece = rawPieces.first(where: { $0.hasPrefix("cert=") }),
-		   let cert = piece.split(separator: "=").last
-		{
-			return String(cert)
-		}
-
-		return nil
+		getPiece("cert")
 	}
 
 	open var iatMode: Int? {
-		if let piece = rawPieces.first(where: { $0.hasPrefix("iat-mode=") }),
-		   let iatMode = piece.split(separator: "=").last
-		{
-			return Int(iatMode)
+		guard let iatMode = getPiece("iat-mode") else {
+			return nil
 		}
 
-		return nil
+		return Int(iatMode)
 	}
 
 	open var ice: String? {
-		if let piece = rawPieces.first(where: { $0.hasPrefix("ice=") }),
-		   let ice = piece.split(separator: "=").last
-		{
-			return String(ice)
-		}
-
-		return nil
+		getPiece("ice")
 	}
 
 	open var utls: String? {
-		if let piece = rawPieces.first(where: { $0.hasPrefix("utls=") }),
-		   let utls = piece.split(separator: "=").last
-		{
-			return String(utls)
-		}
-
-		return nil
+		getPiece("utls")
 	}
 
 	open var utlsImitate: String? {
-		if let piece = rawPieces.first(where: { $0.hasPrefix("utls-imitate=") }),
-		   let utlsImitate = piece.split(separator: "=").last
-		{
-			return String(utlsImitate)
-		}
-
-		return nil
+		getPiece("utls-imitate")
 	}
 
 	open var ver: String? {
-		if let piece = rawPieces.first(where: { $0.hasPrefix("ver=") }),
-		   let ver = piece.split(separator: "=").last
-		{
-			return String(ver)
-		}
-
-		return nil
+		getPiece("ver")
 	}
 
+	open var udp: String? {
+		getPiece("udp")
+	}
+
+	open var doh: String? {
+		getPiece("dot")
+	}
+
+	open var dot: String? {
+		getPiece("dot")
+	}
+
+	open var pubkey: String? {
+		getPiece("pubkey")
+	}
+
+	open var domain: String? {
+		getPiece("domain")
+	}
 
 	public init(_ raw: String) {
 		self.raw = raw
+	}
+
+	public func buildUpon() -> Bridge.Builder? {
+		.init(from: self)
 	}
 
 
@@ -445,6 +500,36 @@ open class Bridge: Codable, CustomStringConvertible {
 		+ "fingerprint2=\(fingerprint2 ?? "(nil)"), url=\(url?.absoluteString ?? "(nil)"), "
 		+ "front=\(front ?? "(nil)"), fronts=\(fronts ?? []), cert=\(cert ?? "(nil)"), "
 		+ "iatMode=\(iatMode ?? -1), ice=\(ice ?? "(nil)"), utls=\(utls ?? "(nil)"), "
-		+ "utlsImitate=\(utlsImitate ?? "(nil)"), ver=\(ver ?? "(nil)")"
+		+ "utlsImitate=\(utlsImitate ?? "(nil)"), ver=\(ver ?? "(nil)"), "
+		+ "udp=\(udp ?? "(nil)"), doh=\(doh ?? "(nil)"), dot=\(dot ?? "(nil)"), "
+		+ "pubkey=\(pubkey ?? "(nil)"), domain=\(domain ?? "(nil)")"
 	}
+
+
+	// MARK: Private Methods
+
+	private func getPiece(_ name: String) -> String? {
+		if let piece = rawPieces.first(where: { $0.hasPrefix("\(name)=") }),
+		   let value = piece.split(separator: "=").last
+		{
+			return String(value)
+		}
+
+		return nil
+	}
+}
+
+class DnsInfo: Codable {
+
+	let country: String
+	let countryCode: String
+	let description: String
+	let lastUpdated: String
+	let servers: [DnsServer]
+}
+
+class DnsServer: Codable {
+
+	let name: String
+	let ip: String
 }
