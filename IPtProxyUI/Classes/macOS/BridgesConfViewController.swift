@@ -16,37 +16,35 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 
 	open var transport: Transport = .none {
 		didSet {
-			Task {
-				await MainActor.run {
-					switch transport {
-					case .obfs4:
-						obfs4Rb.state = .on
-						announce(obfs4Rb.title)
+			Task { @MainActor in
+				switch transport {
+				case .obfs4:
+					obfs4Rb.state = .on
+					announce(obfs4Rb.title)
 
-					case .snowflake:
-						snowflakeRb.state = .on
-						announce(snowflakeRb.title)
+				case .snowflake:
+					snowflakeRb.state = .on
+					announce(snowflakeRb.title)
 
-					case .snowflakeAmp:
-						snowflakeAmpRb.state = .on
-						announce(snowflakeAmpRb.title)
+				case .snowflakeAmp:
+					snowflakeAmpRb.state = .on
+					announce(snowflakeAmpRb.title)
 
-					case .meek:
-						meekRb.state = .on
-						announce(meekRb.title)
+				case .meek:
+					meekRb.state = .on
+					announce(meekRb.title)
 
-					case .dnstt:
-						dnsttRb.state = .on
-						announce(dnsttRb.title)
+				case .dnstt:
+					dnsttRb.state = .on
+					announce(dnsttRb.title)
 
-					case .custom:
-						customBridgesRb.state = .on
-						announce(customBridgesRb.title)
+				case .custom:
+					customBridgesRb.state = .on
+					announce(customBridgesRb.title)
 
-					default:
-						noBridgesRb.state = .on
-						announce(noBridgesRb.title)
-					}
+				default:
+					noBridgesRb.state = .on
+					announce(noBridgesRb.title)
 				}
 			}
 		}

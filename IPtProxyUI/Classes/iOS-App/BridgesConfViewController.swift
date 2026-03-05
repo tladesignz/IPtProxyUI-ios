@@ -26,19 +26,17 @@ open class BridgesConfViewController: FixedFormViewController, UINavigationContr
 
 	open var transport: Transport = .none {
 		didSet {
-			Task {
-				await MainActor.run {
-					for row in self.transportSection as Section {
-						guard let row = row as? ListCheckRow<Transport> else {
-							continue
-						}
-
-						row.value = row.selectableValue == self.transport ? row.selectableValue : nil
-						row.updateCell()
+			Task { @MainActor in
+				for row in self.transportSection as Section {
+					guard let row = row as? ListCheckRow<Transport> else {
+						continue
 					}
 
-					UIAccessibility.post(notification: .announcement, argument: self.transportsLabelMap[self.transport])
+					row.value = row.selectableValue == self.transport ? row.selectableValue : nil
+					row.updateCell()
 				}
+
+				UIAccessibility.post(notification: .announcement, argument: self.transportsLabelMap[self.transport])
 			}
 		}
 	}
