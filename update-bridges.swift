@@ -44,7 +44,9 @@ func resolve(_ path: String) -> URL {
 
 let modified = (try? bridgesOutfile.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? Date(timeIntervalSince1970: 0)
 
-guard Calendar.current.dateComponents([.day], from: modified, to: Date()).day ?? 2 > 1 else {
+let size = (try? bridgesOutfile.resourceValues(forKeys: [.fileSizeKey]).fileSize) ?? 0
+
+if size > 128 && Calendar.current.dateComponents([.day], from: modified, to: Date()).day ?? 2 < 2 {
 	print("File too young, won't update!")
 	exit(0)
 }
