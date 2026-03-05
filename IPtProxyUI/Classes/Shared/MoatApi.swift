@@ -23,7 +23,7 @@ open class MoatApi {
 		@available(*, deprecated, message: "CAPTCHA use is now deprecated by Tor Project and can be replaced by using the obfs4/bridgedb piece of a `.defaults` response.")
 		case check(challenge: String, solution: String)
 
-		case settings(country: String? = nil)
+		case settings(countryCode: String? = nil)
 
 		case defaults
 
@@ -66,8 +66,8 @@ open class MoatApi {
 			case .check(let challenge, let solution):
 				return Wrapper(CheckRequest(challenge, solution))
 
-			case .settings(let country):
-				return SettingsRequest(country: country)
+			case .settings(let countryCode):
+				return SettingsRequest(countryCode: countryCode)
 
 			case .defaults:
 				return SettingsRequest()
@@ -277,20 +277,20 @@ open class MoatApi {
 	open class SettingsRequest: Body, CustomStringConvertible {
 
 		public enum CodingKeys: String, CodingKey {
-			case country
+			case countryCode = "country"
 			case transports
 		}
 
-		public let country: String?
+		public let countryCode: String?
 
 		public let transports: [String]?
 
 		public var description: String {
-			return "[\(String(describing: Swift.type(of: self))) country=\(country ?? "(nil)"), transports=\(transports?.description ?? "(nil)")]"
+			return "[\(String(describing: Swift.type(of: self))) countryCode=\(countryCode ?? "(nil)"), transports=\(transports?.description ?? "(nil)")]"
 		}
 
-		public init(country: String? = nil) {
-			self.country = country
+		public init(countryCode: String? = nil) {
+			self.countryCode = countryCode
 			transports = ["obfs4", "snowflake", "webtunnel", "dnstt"]
 
 			super.init()
@@ -300,7 +300,7 @@ open class MoatApi {
 		required public init(from decoder: Decoder) throws {
 			let container = try decoder.container(keyedBy: CodingKeys.self)
 
-			country = try container.decode(String.self, forKey: .country)
+			countryCode = try container.decode(String.self, forKey: .countryCode)
 			transports = try container.decode([String].self, forKey: .transports)
 
 			try super.init(from: decoder)
@@ -309,7 +309,7 @@ open class MoatApi {
 		open override func encode(to encoder: Encoder) throws {
 			var container = encoder.container(keyedBy: CodingKeys.self)
 
-			try container.encode(country, forKey: .country)
+			try container.encode(countryCode, forKey: .countryCode)
 			try container.encode(transports, forKey: .transports)
 
 			try super.encode(to: encoder)

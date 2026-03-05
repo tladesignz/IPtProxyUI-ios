@@ -22,12 +22,12 @@ open class AutoConf {
 	/**
 	 Tries to automatically configure Pluggable Transports, if the MOAT service decides, that in your country one is needed.
 
-	 - parameter country: An ISO 3166-1 Alpha 2 country code to force a specific country.
+	 - parameter countryCode: An ISO 3166-1 Alpha 2 country code to force a specific country.
 	 If not provided, the MOAT service will deduct a country from your IP address (preferred!)
 	 - parameter cannotConnectWithoutPt: Set to `true`, if you are sure, that a PT configuration *is needed*,
 	 even though the MOAT service says, that in your country none is. In that case, a default configuration will be used.
 	 */
-	open func `do`(country: String? = nil, cannotConnectWithoutPt: Bool = false) async throws {
+	open func `do`(countryCode: String? = nil, cannotConnectWithoutPt: Bool = false) async throws {
 		let session = try start()
 
 		// First update built-ins.
@@ -57,7 +57,7 @@ open class AutoConf {
 		var response: MoatApi.SettingsResponse?
 
 		do {
-			response = try await loadSettings(from: tunnel, with: session, country)
+			response = try await loadSettings(from: tunnel, with: session, countryCode)
 
 			// Force fetch of defaults.
 			if response == nil {
@@ -72,12 +72,12 @@ open class AutoConf {
 
 		// Guardian Project's Moat is behind DNSTT. There is no source IP address available
 		// behind a DNSTT tunnel. So, only execute, when the user gave us a country.
-		if let country {
+		if let countryCode {
 			let tunnel2 = MoatTunnel.guardianProject
 			let session2 = try start(tunnel2)
 
 			do {
-				response2 = try await loadSettings(from: tunnel2, with: session2, country)
+				response2 = try await loadSettings(from: tunnel2, with: session2, countryCode)
 			}
 			catch {
 				// Ignored, GP's MOAT service is still experimental.
@@ -336,10 +336,10 @@ open class AutoConf {
 		return nil
 	}
 
-	private func loadSettings(from tunnel: MoatTunnel, with session: URLSession, _ country: String?)
+	private func loadSettings(from tunnel: MoatTunnel, with session: URLSession, _ countryCode: String?)
 	async throws -> MoatApi.SettingsResponse?
 	{
-		guard var request = MoatApi.buildRequest(tunnel.baseUrl, .settings(country: country))
+		guard var request = MoatApi.buildRequest(tunnel.baseUrl, .settings(countryCode: countryCode))
 		else {
 			throw ApiError.noRequestPossible
 		}
