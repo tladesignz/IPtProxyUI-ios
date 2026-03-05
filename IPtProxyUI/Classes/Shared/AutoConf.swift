@@ -15,7 +15,7 @@ open class AutoConf {
 
 	private let tunnel = MoatTunnel.torProject
 
-	public init(_ delegate: BridgesConfDelegate) {
+	public init(_ delegate: BridgesConfDelegate?) {
 		self.delegate = delegate
 	}
 
