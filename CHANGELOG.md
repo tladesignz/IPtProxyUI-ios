@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 5.3.2
+- Improved DNSTT configuration to increase probability of connection.
+- Improved config update logic, so it also updates, when configs are obviously empty.
+
 ## 5.3.1
 - Fixed issue with missing json files in pod asset bundle.
 
