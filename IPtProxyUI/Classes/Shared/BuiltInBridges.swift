@@ -156,7 +156,7 @@ open class BuiltInBridges: Codable {
 			  let data = try? Data(contentsOf: url),
 			  let dnsInfo = try? MoatApi.decoder.decode(DnsInfo.self, from: data)
 		else {
-			return getDnstt() // Always fall back to "global", if country was unreadable.
+			return countryCode == "global" ? nil : getDnstt() // Always fall back to "global", if country was unreadable.
 		}
 
 		var i = Self.dnsttBridges.count
