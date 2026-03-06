@@ -393,7 +393,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 		case .dnstt:
 			conf.append(ctp(IPtProxyDnstt, port, cv))
 
-			conf += (BuiltInBridges.getDnstt(for: countryCode ?? Settings.countryCode) ?? BuiltInBridges.dnsttBridges)
+			conf += (BuiltInBridges.getUdpDnstt(for: countryCode ?? Settings.countryCode) ?? BuiltInBridges.dnsttBridges)
 				.map({ cv("Bridge", $0.raw) })
 
 		case .none:

@@ -44,7 +44,7 @@ open class BuiltInBridges: Codable {
 
 	// Tor will max at 32 simultaneous SOCKS connections to PTs.
 	// Leave a buffer, though, for other connections. Seems Tor wants that.
-	public static let maxDnsttBridgesCount = 32 - 2 - dnsttBridges.count
+	public static let maxDnsttBridgesCount = 32 - 2
 
 
 	private static var _shared: BuiltInBridges?
@@ -147,18 +147,34 @@ open class BuiltInBridges: Codable {
 		}
 	}
 
-	class func getDnstt(for countryCode: String? = nil) -> [Bridge]? {
-		var countryCode = countryCode ?? ""
+	/**
+	 Creates a list of DNSTT bridge lines using UDP DNS servers which are known to work in the given country.
 
-		if !Self.dnsCountries.contains(countryCode) {
-			countryCode = "global"
-		}
+	 Since Tor only creates up to ``BuiltInBridges.maxDnsttBridgesCount`` connections simultaneously, if the list
+	 of DNS servers times number of DNSTT servers we know is larger than that, a random sample of that size of the actual result is returned.
 
-		guard let url = Bundle.iPtProxyUI.url(forResource: "dns-\(countryCode)", withExtension: "json"),
+	 Note: There is a `global` list of UDP DNS servers, which you can theoretically fetch, but since UDP is not encrypted, it's typically a better
+	 idea to use DoH or DoT servers instead. (Like our base ``BuiltInBridges.dnsttBridges`` list does.
+
+	 The UDP servers only make sense to use in a heavily censored environment, where public DoH and DoH DNS servers are blocked.
+
+	 That's what these UDP lists are for. Insofar the `global` list is only there for the sake of completeness, not so much because it makes
+	 sense to use it.
+
+	 Here's a list of publicly available DoH servers, in case you're unhappy with our choice:
+	 https://github.com/curl/curl/wiki/DNS-over-HTTPS#publicly-available-servers
+
+	 - parameter countryCode: The country code for a country as listed in ``BuiltInBridges.dnsCountries`` or `global`.
+	 - returns: A list of DNSTT bridge lines using UDP DNS servers which are known to work in the given country.
+	 */
+	class func getUdpDnstt(for countryCode: String?) -> [Bridge]? {
+		guard let countryCode,
+			  countryCode == "global" || Self.dnsCountries.contains(countryCode),
+			  let url = Bundle.iPtProxyUI.url(forResource: "dns-\(countryCode)", withExtension: "json"),
 			  let data = try? Data(contentsOf: url),
 			  let dnsInfo = try? MoatApi.decoder.decode(DnsInfo.self, from: data)
 		else {
-			return countryCode == "global" ? nil : getDnstt() // Always fall back to "global", if country was unreadable.
+			return nil
 		}
 
 		var i = Self.dnsttBridges.count
@@ -187,7 +203,7 @@ open class BuiltInBridges: Codable {
 		}
 
 		if bridges.count <= maxDnsttBridgesCount {
-			return bridges + Self.dnsttBridges
+			return bridges
 		}
 
 		var selection = Set<Bridge>()
@@ -198,7 +214,7 @@ open class BuiltInBridges: Codable {
 			}
 		}
 
-		return Array(selection) + Self.dnsttBridges
+		return Array(selection)
 	}
 }
 
