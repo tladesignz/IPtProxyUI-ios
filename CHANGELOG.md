@@ -1,5 +1,11 @@
 # IPtProxyUI
 
+## 5.3.3
+- Store bridge lines and UDP server list within the repo (again).
+  These could go away, we want to have a copy secured.
+- Improved logic for DNSTT over UDP briddge lines creation. Don't add our base DoH lines.
+  The countries we need UDP in are for a reason. These just take up space and actually make it harder to connect.
+
 ## 5.3.2
 - Improved DNSTT configuration to increase probability of connection.
 - Improved config update logic, so it also updates, when configs are obviously empty.
