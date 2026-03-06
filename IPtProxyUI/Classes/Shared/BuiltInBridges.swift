@@ -42,8 +42,11 @@ open class BuiltInBridges: Codable {
 		Bridge("dnstt 192.0.2.4:2 80EEFA4F4875ED2B7B5A86DF2D7588AD32E29F15 doh=https://dns.google/dns-query pubkey=a2fb71077eeaa54a02cda7a90be306af5d299ab21822a8b277d4eacbc9168631 domain=t2.bypasscensorship.org"),
 	]
 
-	// Tor will max at 32 simultaneous SOCKS connections to PTs.
-	// Leave a buffer, though, for other connections. Seems Tor wants that.
+	/**
+	 Tor will max at 32 simultaneous SOCKS connections to PTs.
+
+	 Leave a buffer, though, for other connections. Seems Tor wants that.
+	 */
 	public static let maxDnsttBridgesCount = 32 - 2
 
 
@@ -154,9 +157,9 @@ open class BuiltInBridges: Codable {
 	 of DNS servers times number of DNSTT servers we know is larger than that, a random sample of that size of the actual result is returned.
 
 	 Note: There is a `global` list of UDP DNS servers, which you can theoretically fetch, but since UDP is not encrypted, it's typically a better
-	 idea to use DoH or DoT servers instead. (Like our base ``BuiltInBridges.dnsttBridges`` list does.
+	 idea to use DoH or DoT servers instead. (Like our base ``BuiltInBridges.dnsttBridges`` list does.)
 
-	 The UDP servers only make sense to use in a heavily censored environment, where public DoH and DoH DNS servers are blocked.
+	 The UDP servers only make sense to use in a heavily censored environment, where public DoH and DoT DNS servers are blocked.
 
 	 That's what these UDP lists are for. Insofar the `global` list is only there for the sake of completeness, not so much because it makes
 	 sense to use it.
