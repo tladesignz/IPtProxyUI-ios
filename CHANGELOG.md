@@ -1,5 +1,11 @@
 # IPtProxyUI
 
+## 5.3.4
+- Updated IPtProxy:
+  - Updated to Snowflake 2.12.1.
+  - Fixed DNSTT shutdown issue.
+  - Added `SummaryInterval` configuration option to `SnowflakeProxy`.
+
 ## 5.3.3
 - Store bridge lines and UDP server list within the repo (again).
   These could go away, we want to have a copy secured.
