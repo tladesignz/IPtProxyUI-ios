@@ -77,7 +77,7 @@
 "Paste Bridges" = "Brücken einfügen";
 
 /* CustomBridgesViewController; placeholder is "" "https://bridges.torproject.org/" */
-"QR Code could not be decoded! Are you sure you scanned a QR code from %@?" = "Der QR Code konnnte nicht dekodiert werden! Sicher, daß Du einen QR Code von %@ gescannt hast?";
+"QR Code could not be decoded! Are you sure you scanned a QR code from %@?" = "Der QR Code konnte nicht dekodiert werden! Sicher, daß Du einen QR Code von %@ gescannt hast?";
 
 /* BridgeConfViewController */
 "Request Bridges from torproject.org" = "Brücken von torproject.org anfordern";

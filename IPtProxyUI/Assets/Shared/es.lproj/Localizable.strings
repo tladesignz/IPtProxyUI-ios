@@ -35,10 +35,10 @@
 "Error" = "Error";
 
 /* BridgesConfViewController */
-"I'm sure I cannot connect without a bridge." = "Estoy segure de que no me puedo conectar sin un puente";
+"I'm sure I cannot connect without a bridge." = "Estoy seguro de que no me puedo conectar sin un puente.";
 
 /* BridgeConfViewController */
-"If one type of bridge does not work, try using a different one." = "Si un tipo de puente no funciona, intenta usando uno diferente.";
+"If one type of bridge does not work, try using a different one." = "Si un tipo de puente no funciona, intenta usar uno diferente.";
 
 /* BridgeConfViewController */
 "If you are in a country or using a connection that censors Tor, you might need to use bridges." = "Si estás en un país o usas una conexión que censura Tor, tal vez necesites usar puentes.";
@@ -47,7 +47,7 @@
 "In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"" = "En un navegador separado, visita %@ y luego pulsa \"Obtener Puentes\" > \"¡Solo Dame Puentes!\"";
 
 /* No comment provided by engineer. */
-"Meek bridge" = "Meek bridge";
+"Meek bridge" = "Puente Meek";
 
 /* BridgeConfViewController */
 "No Bridges" = "Sin Puentes";
@@ -59,7 +59,7 @@
 "No valid HTTP response." = "Respuesta HTTP no válida.";
 
 /* Transport */
-"Obfs4 bridges" = "Puentes Obfs4 ";
+"Obfs4 bridges" = "Puentes Obfs4";
 
 /* AlertHelper */
 "OK" = "OK";
@@ -74,7 +74,7 @@
 "Paste Bridges" = "Pegar Puentes";
 
 /* CustomBridgesViewController; placeholder is "" "https://bridges.torproject.org/" */
-"QR Code could not be decoded! Are you sure you scanned a QR code from %@?" = "¡El Código QR no se pudo decodificar! ¿Estás segura(o) que has escaneado un código QR de %@?";
+"QR Code could not be decoded! Are you sure you scanned a QR code from %@?" = "¡El Código QR no se pudo decodificar! ¿Estás seguro que has escaneado un código QR de %@?";
 
 /* BridgeConfViewController */
 "Request Bridges from torproject.org" = "Solicitar Puentes desde torproject.org";
@@ -98,13 +98,13 @@
 "Scan QR Code" = "Escanear Código QR";
 
 /* Transport */
-"Snowflake bridges" = "Puentes Snowflake ";
+"Snowflake bridges" = "Puentes Snowflake";
 
 /* Transport */
-"Snowflake bridges (AMP rendezvous)" = "Puentes Snowflake  (AMP rendezvous)";
+"Snowflake bridges (AMP rendezvous)" = "Puentes Snowflake (AMP rendezvous)";
 
 /* BridgesConfViewController */
-"Try Auto-Configuration" = "Pruebe la configuración automática";
+"Try Auto-Configuration" = "Prueba la configuración automática";
 
 /* CustomBridgesViewController */
 "Upload QR Code" = "Subir Código QR";
@@ -114,3 +114,4 @@
 
 /* CustomBridgesViewController */
 "Use QR Code" = "Usar Código QR";
+"My Country" = "Mi pais";
