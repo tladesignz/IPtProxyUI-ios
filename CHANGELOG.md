@@ -1,5 +1,11 @@
 # IPtProxyUI
 
+## 5.3.5
+- Updated IPtProxy:
+  - Updated Snowflake to version 2.13.1.
+  - Added support for Snowflake Proxy `CovertDTLSConfig` configuration option.
+- Updated translations.
+
 ## 5.3.4
 - Updated IPtProxy:
   - Updated to Snowflake 2.12.1.
