@@ -5,7 +5,7 @@
 "%1$@ %2$@ makes your traffic look like a phone call to a random user on the net." = "%1$@%2$@ 는 트래픽을 아무 유저와 통화하는것 처럼 보이게 합니다.";
 
 /* BridgesConfViewController */
-"Automatic Configuration" = "Automatic Configuration";
+"Automatic Configuration" = "자동 구성";
 
 /* BridgeConfViewController */
 "Bridge Configuration" = "브리지 구성";
@@ -29,13 +29,13 @@
 "Custom Bridges" = "사용자 지정 브릿지";
 
 /* Transport */
-"custom bridges" = "custom bridges";
+"custom bridges" = "사용자 정의 브리지";
 
 /* AlertHelper */
 "Error" = "오류";
 
 /* BridgesConfViewController */
-"I'm sure I cannot connect without a bridge." = "I'm sure I cannot connect without a bridge.";
+"I'm sure I cannot connect without a bridge." = "브리지 없이는 연결할 수 없다고 확신합니다.";
 
 /* BridgeConfViewController */
 "If one type of bridge does not work, try using a different one." = "한 유형의 브릿지가 작동하지 않는 경우 다른 브릿지를 사용해 보십시오.";
@@ -47,10 +47,10 @@
 "In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"" = "별도의 브라우저에서 %@ 를 방문하고 \"브릿지를 얻으세요!\" > \"그냥 브릿지 주세요!\" 를 누릅니다.";
 
 /* No comment provided by engineer. */
-"Meek bridge" = "Meek bridge";
+"Meek bridge" = "Meek 브리지";
 
 /* BridgeConfViewController */
-"No Bridges" = "브릿지 사용 안 함";
+"No Bridges" = "브리지 사용 안 함";
 
 /* ApiError, placeholder is a non-success status from the server. */
 "No success, but \"%@\" instead." = "성공이 아니라 \"%@\"입니다.";
@@ -59,7 +59,7 @@
 "No valid HTTP response." = "올바른 HTTP 응답이 없습니다.";
 
 /* Transport */
-"Obfs4 bridges" = "Obfs4 bridges";
+"Obfs4 bridges" = "Obfs4 브리지";
 
 /* AlertHelper */
 "OK" = "예";
@@ -86,7 +86,7 @@
 "Request via E-Mail" = "이메일을 통해 요청";
 
 /* CustomBridgesViewController */
-"Request via Telegram" = "Request via Telegram";
+"Request via Telegram" = "Telegram을 통해 요청";
 
 /* ApiError */
 "Response body missing." = "응답 본문이 없습니다.";
@@ -98,13 +98,13 @@
 "Scan QR Code" = "QR코드 스캔";
 
 /* Transport */
-"Snowflake bridges" = "Snowflake bridges";
+"Snowflake bridges" = "Snowflake 브리지";
 
 /* Transport */
-"Snowflake bridges (AMP rendezvous)" = "Snowflake bridges (AMP rendezvous)";
+"Snowflake bridges (AMP rendezvous)" = "Snowflake 브리지 (AMP 랑데부)";
 
 /* BridgesConfViewController */
-"Try Auto-Configuration" = "Try Auto-Configuration";
+"Try Auto-Configuration" = "자동 구성 시도";
 
 /* CustomBridgesViewController */
 "Upload QR Code" = "QR 코드 업로드";
@@ -114,3 +114,4 @@
 
 /* CustomBridgesViewController */
 "Use QR Code" = "QR 코드 사용하기";
+"My Country" = "현재 국가";
