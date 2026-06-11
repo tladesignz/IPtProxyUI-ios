@@ -1,5 +1,11 @@
 # IPtProxyUI
 
+## 5.4.0
+- Updated IPtProxy:
+  - Updated Snowflake to version 2.14.0.
+  - Minor change to `IPtProxySnowflakeProxy.start()`, which can now throw.
+- Updated Korean translation. (Thanks kimjuho!)
+
 ## 5.3.6
 - Updated IPtProxy:
   - Updated DNSTT to version 1.20260501.0.
