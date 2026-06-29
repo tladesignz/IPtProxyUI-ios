@@ -1,5 +1,10 @@
 # IPtProxyUI
 
+## 5.4.1
+- Updated IPtProxy:
+  - Updated Snowflake to version 2.14.1.
+- Updated Turkish translation.
+
 ## 5.4.0
 - Updated IPtProxy:
   - Updated Snowflake to version 2.14.0.
