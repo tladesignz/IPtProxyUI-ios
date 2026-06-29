@@ -360,7 +360,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 2640;
+				LastUpgradeCheck = 2660;
 				ORGANIZATIONNAME = "Guardian Project\n";
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
