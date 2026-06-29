@@ -14,7 +14,7 @@
 "Built-in %@" = "İç %@";
 
 /* ScanQrViewController */
-"Camera access was not granted or QR Code scanning is not supported by your device." = "Kamera erişim izni verilmemiş ya da aygırınız kare kod taramayı desteklemiyor.";
+"Camera access was not granted or QR Code scanning is not supported by your device." = "Kameraya erişme izni verilmemiş ya da aygıtınız kare kod taramayı desteklemiyor.";
 
 /* AlertHelper */
 "Cancel" = "İptal";
@@ -44,7 +44,7 @@
 "If you are in a country or using a connection that censors Tor, you might need to use bridges." = "Bulunduğunuz ülke ya da kullandığınız bağlantı Tor ağını engelliyorsa köprü kullanmalısınız.";
 
 /* CustomBridgesViewController; placeholder contains "https://bridges.torproject.org/", please visit that page and copy texts for your language! */
-"In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"" = "Ayrı bir tarayıcı ile %@ adresine giderek \"Köprüleri al\"  > \"Yalnızca köprüleri al\" üzerine dokunun";
+"In a separate browser, visit %@ and tap \"Get Bridges\" > \"Just Give Me Bridges!\"" = "Ayrı bir tarayıcı ile %@ adresine giderek \"Köprüleri al\" > \"Yalnızca köprüleri al\" üzerine dokunun";
 
 /* No comment provided by engineer. */
 "Meek bridge" = "Meek köprüsü";
@@ -114,3 +114,4 @@
 
 /* CustomBridgesViewController */
 "Use QR Code" = "Kare kodu kullan";
+"My Country" = "Ülkem";
