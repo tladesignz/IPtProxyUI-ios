@@ -45,6 +45,7 @@
 		7AFF447AA7859FB1C41AE439 /* Pods_IPtProxyUI_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IPtProxyUI_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		891775C0EC1858BD122A086E /* IPtProxyUI.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = IPtProxyUI.podspec; path = ../IPtProxyUI.podspec; sourceTree = "<group>"; usesTabs = 1; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A00FE5922FFD58DD00C1A5E3 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = SOURCE_ROOT; };
+		A00FE8452FFEB3F300C1A5E3 /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		A03CBE2C2F3CC15E00B22D96 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = SOURCE_ROOT; };
 		A03CBE2D2F3CC15E00B22D96 /* .weblate */ = {isa = PBXFileReference; lastKnownFileType = text; name = .weblate; path = ../.weblate; sourceTree = SOURCE_ROOT; };
 		A064C2572F2A48F700C7FCF2 /* sq */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sq; path = sq.lproj/Main.strings; sourceTree = "<group>"; };
@@ -246,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				891775C0EC1858BD122A086E /* IPtProxyUI.podspec */,
+				A00FE8452FFEB3F300C1A5E3 /* Podfile.lock */,
 				A00FE5922FFD58DD00C1A5E3 /* Package.swift */,
 				F62F2DB502E34EDE1156BA03 /* README.md */,
 				D05BF163D769854A5AC791A9 /* LICENSE */,
@@ -873,8 +875,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -895,8 +900,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
