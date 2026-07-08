@@ -183,25 +183,25 @@ public enum Transport: Int, CaseIterable, Comparable {
 	public var description: String {
 		switch self {
 		case .obfs4:
-			return NSLocalizedString("Obfs4 bridges", bundle: .iPtProxyUI, comment: "")
+			return NSLocalizedString("Obfs4 bridges", bundle: .module, comment: "")
 
 		case .snowflake:
-			return NSLocalizedString("Snowflake bridges", bundle: .iPtProxyUI, comment: "")
+			return NSLocalizedString("Snowflake bridges", bundle: .module, comment: "")
 
 		case .snowflakeAmp:
-			return NSLocalizedString("Snowflake bridges (AMP rendezvous)", bundle: .iPtProxyUI, comment: "")
+			return NSLocalizedString("Snowflake bridges (AMP rendezvous)", bundle: .module, comment: "")
 
 		case .custom:
-			return NSLocalizedString("custom bridges", bundle: .iPtProxyUI, comment: "")
+			return NSLocalizedString("custom bridges", bundle: .module, comment: "")
 
 		case .onDemand:
-			return NSLocalizedString("On-demand bridges", bundle: .iPtProxyUI, comment: "")
+			return NSLocalizedString("On-demand bridges", bundle: .module, comment: "")
 
 		case .meek:
-			return NSLocalizedString("Meek bridge", bundle: .iPtProxyUI, comment: "")
+			return NSLocalizedString("Meek bridge", bundle: .module, comment: "")
 
 		case .dnstt:
-			return NSLocalizedString("DNSTT bridge", bundle: .iPtProxyUI, comment: "")
+			return NSLocalizedString("DNSTT bridge", bundle: .module, comment: "")
 
 		default:
 			return ""

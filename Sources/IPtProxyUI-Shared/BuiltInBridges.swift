@@ -12,7 +12,7 @@ import OSLog
 open class BuiltInBridges: Codable {
 
 	public class var file: URL? {
-		Bundle.iPtProxyUI.url(forResource: "builtin-bridges", withExtension: "json")
+		Bundle.module.url(forResource: "builtin-bridges", withExtension: "json")
 	}
 
 	public class var updateFile: URL? {
@@ -173,7 +173,7 @@ open class BuiltInBridges: Codable {
 	class func getUdpDnstt(for countryCode: String?) -> [Bridge]? {
 		guard let countryCode,
 			  countryCode == "global" || Self.dnsCountries.contains(countryCode),
-			  let url = Bundle.iPtProxyUI.url(forResource: "dns-\(countryCode)", withExtension: "json"),
+			  let url = Bundle.module.url(forResource: "dns-\(countryCode)", withExtension: "json"),
 			  let data = try? Data(contentsOf: url),
 			  let dnsInfo = try? MoatApi.decoder.decode(DnsInfo.self, from: data)
 		else {

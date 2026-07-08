@@ -159,7 +159,7 @@ open class BridgesConfViewController: NSViewController, BridgesConfDelegate, NSW
 
 
 	public convenience init() {
-		self.init(nibName: String(describing: BridgesConfViewController.self), bundle: .iPtProxyUI)
+		self.init(nibName: String(describing: BridgesConfViewController.self), bundle: .module)
 	}
 
 

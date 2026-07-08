@@ -52,7 +52,7 @@ open class CustomBridgesViewController: NSViewController {
 
 
 	public convenience init() {
-		self.init(nibName: String(describing: CustomBridgesViewController.self), bundle: .iPtProxyUI)
+		self.init(nibName: String(describing: CustomBridgesViewController.self), bundle: .module)
 	}
 
 	open override func viewWillAppear() {

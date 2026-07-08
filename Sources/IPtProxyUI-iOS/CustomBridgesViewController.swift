@@ -34,8 +34,7 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 
 		textAreaRow.value = delegate?.customBridges?.joined(separator: "\n")
 
-		navigationItem.title = NSLocalizedString(
-			"Use Custom Bridges", bundle: .iPtProxyUI, comment: "")
+		navigationItem.title = L10n.useCustomBridges
 
 		if let title = delegate?.saveButtonTitle, !title.isEmpty {
 			navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -66,7 +65,7 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 				self?.navigationItem.rightBarButtonItem?.isEnabled = !(row.value?.isEmpty ?? true)
 			})
 
-		+++ Section(NSLocalizedString("Use QR Code", bundle: .iPtProxyUI, comment: ""))
+		+++ Section(L10n.useQrCode)
 		<<< ButtonRow() {
 			$0.title = L10n.scanQrCode
 		}
@@ -115,7 +114,7 @@ open class CustomBridgesViewController: FixedFormViewController, UIImagePickerCo
 
 		if MFMailComposeViewController.canSendMail() || UIApplication.shared.canOpenURL(Constants.telegramBot) {
 			form
-			+++ Section(NSLocalizedString("Other", bundle: .iPtProxyUI, comment: ""))
+			+++ Section(L10n.other)
 		}
 
 		if MFMailComposeViewController.canSendMail() {

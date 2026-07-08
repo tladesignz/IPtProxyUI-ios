@@ -31,14 +31,10 @@ public enum ScanError: Error, LocalizedError {
 	public var errorDescription: String? {
 		switch self {
 		case .notSupported:
-			return NSLocalizedString(
-				"Camera access was not granted or QR Code scanning is not supported by your device.",
-				bundle: .iPtProxyUI, comment: "")
+            return L10n.cameraNotSupported
 
 		case .notBridges:
-			return String(format: NSLocalizedString(
-				"QR Code could not be decoded! Are you sure you scanned a QR code from %@?",
-                bundle: .iPtProxyUI, comment: ""), Constants.bridgesUrl.absoluteString)
+            return L10n.qrCodeCouldNotBeDecoded
 		}
 	}
 }

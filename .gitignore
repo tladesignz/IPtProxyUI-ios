@@ -35,3 +35,10 @@ Carthage/Build
 # `pod install` in .travis.yml
 #
 Pods/
+
+# Swift Package Manager
+/.build
+/Packages
+.swiftpm/configuration/registries.json
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+.netrc

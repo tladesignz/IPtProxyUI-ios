@@ -10,8 +10,8 @@ import Foundation
 
 public extension Bundle {
 
-	class var iPtProxyUI: Bundle {
+	class var module: Bundle {
 		Bundle(url: Bundle(for: MoatApi.self)
-				.url(forResource: "IPtProxyUI", withExtension: "bundle")!)!
+			.url(forResource: "IPtProxyUI", withExtension: "bundle")!)!
 	}
 }

@@ -41,14 +41,16 @@ Pod::Spec.new do |s|
 	s.subspec 'AppEx' do |a|
 		a.preserve_paths = 'update-bridges.sh', 'update-bridges.swift', '.bartycrouch.toml'
 
-		a.ios.source_files = 'IPtProxyUI/Classes/{Shared,iOS-AppEx}/**/*'
-		a.osx.source_files = 'IPtProxyUI/Classes/{Shared,macOS}/**/*'
+		a.ios.source_files = 'Sources/IPtProxyUI-{Shared,iOS-AppEx}/*', 'Sources/CocoaPods/**/*'
+		a.osx.source_files = 'Sources/IPtProxyUI-{Shared,macOS}/*', 'Sources/IPtProxyUI-macOS-ObjC/**/*', 'Sources/CocoaPods/**/*'
+
+		a.exclude_files = 'Sources/IPtProxyUI-{macOS,iOS-AppEx,iOS}/Exports.swift'
 
 		a.ios.resource_bundles = {
-			'IPtProxyUI' => ['IPtProxyUI/Assets/{Shared,iOS}/**/*']
+			'IPtProxyUI' => ['Sources/IPtProxyUI-Shared/Resources/**/*']
 		}
 		a.osx.resource_bundles = {
-			'IPtProxyUI' => ['IPtProxyUI/Assets/{Shared,macOS}/**/*']
+			'IPtProxyUI' => ['Sources/IPtProxyUI-{Shared,macOS}/Resources/**/*']
 		}
 
 		a.script_phases = [
@@ -76,14 +78,16 @@ Pod::Spec.new do |s|
 
 		a.preserve_paths = 'update-bridges.sh', 'update-bridges.swift', '.bartycrouch.toml'
 
-		a.ios.source_files = 'IPtProxyUI/Classes/{Shared,iOS-App,iOS-AppEx}/**/*'
-		a.osx.source_files = 'IPtProxyUI/Classes/{Shared,macOS}/**/*'
+		a.ios.source_files = 'Sources/IPtProxyUI-{Shared,iOS,iOS-AppEx}/*', 'Sources/CocoaPods/**/*'
+		a.osx.source_files = 'Sources/IPtProxyUI-{Shared,macOS}/*', 'Sources/IPtProxyUI-macOS-ObjC/**/*', 'Sources/CocoaPods/**/*'
+
+		a.exclude_files = 'Sources/IPtProxyUI-{macOS,iOS-AppEx,iOS}/Exports.swift'
 
 		a.ios.resource_bundles = {
-			'IPtProxyUI' => ['IPtProxyUI/Assets/{Shared,iOS}/**/*']
+			'IPtProxyUI' => ['Sources/IPtProxyUI-Shared/Resources/**/*']
 		}
 		a.osx.resource_bundles = {
-			'IPtProxyUI' => ['IPtProxyUI/Assets/{Shared,macOS}/**/*']
+			'IPtProxyUI' => ['Sources/IPtProxyUI-{Shared,macOS}/Resources/**/*']
 		}
 
 		a.script_phases = [

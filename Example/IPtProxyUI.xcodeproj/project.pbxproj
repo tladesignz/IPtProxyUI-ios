@@ -43,7 +43,8 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7AFF447AA7859FB1C41AE439 /* Pods_IPtProxyUI_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IPtProxyUI_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		891775C0EC1858BD122A086E /* IPtProxyUI.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = IPtProxyUI.podspec; path = ../IPtProxyUI.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		891775C0EC1858BD122A086E /* IPtProxyUI.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = IPtProxyUI.podspec; path = ../IPtProxyUI.podspec; sourceTree = "<group>"; usesTabs = 1; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A00FE5922FFD58DD00C1A5E3 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = SOURCE_ROOT; };
 		A03CBE2C2F3CC15E00B22D96 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = SOURCE_ROOT; };
 		A03CBE2D2F3CC15E00B22D96 /* .weblate */ = {isa = PBXFileReference; lastKnownFileType = text; name = .weblate; path = ../.weblate; sourceTree = SOURCE_ROOT; };
 		A064C2572F2A48F700C7FCF2 /* sq */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sq; path = sq.lproj/Main.strings; sourceTree = "<group>"; };
@@ -245,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				891775C0EC1858BD122A086E /* IPtProxyUI.podspec */,
+				A00FE5922FFD58DD00C1A5E3 /* Package.swift */,
 				F62F2DB502E34EDE1156BA03 /* README.md */,
 				D05BF163D769854A5AC791A9 /* LICENSE */,
 				A0A15D1229BB7F3E0084B046 /* CHANGELOG.md */,

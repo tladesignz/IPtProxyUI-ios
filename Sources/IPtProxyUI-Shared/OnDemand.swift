@@ -6,6 +6,7 @@
 //  Copyright © 2019 - 2026 Guardian Project. All rights reserved.
 //
 
+import Foundation
 import CommonCrypto
 
 open class OnDemand {

@@ -14,7 +14,7 @@ let moatBaseUrl = URL(string: "https://bridges.torproject.org")
 
 let moatRequest = MoatApi.buildRequest(moatBaseUrl, .builtin)
 
-let outfolder = resolve("IPtProxyUI/Assets/Shared")
+let outfolder = resolve("Sources/IPtProxyUI-Shared/Resources")
 
 let bridgesOutfile = outfolder.appendingPathComponent("builtin-bridges.json")
 
