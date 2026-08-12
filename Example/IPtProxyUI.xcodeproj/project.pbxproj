@@ -145,9 +145,10 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		A03CBE452F3CC29800B22D96 /* docs */ = {
+		A03CBE452F3CC29800B22D96 /* ../docs */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			name = docs;
+			exceptions = (
+			);
 			path = ../docs;
 			sourceTree = SOURCE_ROOT;
 		};
@@ -257,7 +258,7 @@
 				A0A15D1429BB7F8C0084B046 /* .bartycrouch.toml */,
 				A03CBE2C2F3CC15E00B22D96 /* .gitignore */,
 				A03CBE2D2F3CC15E00B22D96 /* .weblate */,
-				A03CBE452F3CC29800B22D96 /* docs */,
+				A03CBE452F3CC29800B22D96 /* ../docs */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
@@ -500,13 +501,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-IPtProxyUI_Mac_Example/Pods-IPtProxyUI_Mac_Example-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-IPtProxyUI_Mac_Example/Pods-IPtProxyUI_Mac_Example-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -565,13 +562,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-IPtProxyUI_Example/Pods-IPtProxyUI_Example-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-IPtProxyUI_Example/Pods-IPtProxyUI_Example-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -586,13 +579,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-IPtProxyUI_Example/Pods-IPtProxyUI_Example-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-IPtProxyUI_Example/Pods-IPtProxyUI_Example-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

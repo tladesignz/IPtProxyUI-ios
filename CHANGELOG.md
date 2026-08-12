@@ -1,5 +1,10 @@
 # IPtProxyUI
 
+## 5.4.2
+- Fixed bug with DNSTT bridge parsing.
+- Added SPM support.
+- Updated Eureka dependency.
+
 ## 5.4.1
 - Updated IPtProxy:
   - Updated Snowflake to version 2.14.1.
