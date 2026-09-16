@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
 	s.social_media_url = 'https://chaos.social/@tla'
 
 	s.ios.deployment_target = '15.0'
-	s.osx.deployment_target = '11'
+	s.osx.deployment_target = '12'
 
 	s.swift_version = '5.5'
 
