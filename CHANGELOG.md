@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 5.5.0
+- Build with Xcode 27.0, dropped macOS 11 support.
+- Updated Lyrebird to version 0.9.0.
+
 ## 5.4.2
 - Fixed bug with DNSTT bridge parsing.
 - Added SPM support.
