@@ -14,6 +14,7 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		A07FDD9830755786004FF9D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FDD9730755786004FF9D9 /* SceneDelegate.swift */; };
 		A0A15D2829BB81240084B046 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A15D1B29BB80140084B046 /* AppDelegate.swift */; };
 		A0A15D2929BB81270084B046 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A15D1D29BB80140084B046 /* ViewController.swift */; };
 		A0A15D2A29BB81340084B046 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0A15D2129BB80150084B046 /* Main.storyboard */; };
@@ -126,6 +127,7 @@
 		A064C2EF2F2A49A800C7FCF2 /* tr-TR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "tr-TR"; path = "tr-TR.lproj/Main.strings"; sourceTree = "<group>"; };
 		A064C2F12F2A49AA00C7FCF2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
 		A064C2F32F2A49AB00C7FCF2 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Main.strings; sourceTree = "<group>"; };
+		A07FDD9730755786004FF9D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A0A15D1029BB7F3E0084B046 /* update-bridges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "update-bridges.swift"; path = "../update-bridges.swift"; sourceTree = "<group>"; };
 		A0A15D1129BB7F3E0084B046 /* update-bridges.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "update-bridges.sh"; path = "../update-bridges.sh"; sourceTree = "<group>"; };
 		A0A15D1229BB7F3E0084B046 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				A07FDD9730755786004FF9D9 /* SceneDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -597,6 +600,7 @@
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				A07FDD9830755786004FF9D9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
