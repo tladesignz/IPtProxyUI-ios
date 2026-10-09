@@ -18,7 +18,7 @@ let package = Package(
             targets: ["IPtProxyUI-iOS"])
     ],
     dependencies: [
-        .package(url: "https://github.com/tladesignz/IPtProxy.git", from: "5.6.0"),
+        .package(url: "https://github.com/tladesignz/IPtProxy.git", from: "5.7.0"),
 		.package(url: "https://github.com/xmartlabs/eureka.git", from: "5.5.0"),
 		.package(url: "https://github.com/relatedcode/ProgressHUD.git", from: "14.1.4"),
     ],

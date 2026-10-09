@@ -1,5 +1,9 @@
 # IPtProxyUI
 
+## 5.5.1
+- Fixed intermittent crash through race condition. (Thanks Oleg!)
+- Updated Snowflake to 2.15.1.
+
 ## 5.5.0
 - Build with Xcode 27.0, dropped macOS 11 support.
 - Updated Lyrebird to version 0.9.0.
