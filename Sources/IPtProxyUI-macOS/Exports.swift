@@ -1,2 +1,2 @@
-@_exported import IPtProxyUI_shared
-@_exported import IPtProxyUI_macOS_objc
+@_exported import IPtProxyUI_Shared
+@_exported import IPtProxyUI_macOS_ObjC

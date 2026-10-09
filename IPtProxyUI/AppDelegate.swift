@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import IPtProxyUI
+import IPtProxyUI_iOS
 import OSLog
 
 @UIApplicationMain

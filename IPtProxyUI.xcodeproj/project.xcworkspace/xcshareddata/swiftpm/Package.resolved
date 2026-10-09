@@ -1,0 +1,33 @@
+{
+  "originHash" : "9c2ef8e345256ec1c8eb33db1479f26db6051b040c2decc7dcb21c3c10c33bd1",
+  "pins" : [
+    {
+      "identity" : "eureka",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/xmartlabs/eureka.git",
+      "state" : {
+        "revision" : "028ef8e3191a256b8f6b8bb6b9496efcb0762dbc",
+        "version" : "5.5.0"
+      }
+    },
+    {
+      "identity" : "iptproxy",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tladesignz/IPtProxy.git",
+      "state" : {
+        "revision" : "46552b8422a200e3e69aa3686b6278be945138a5",
+        "version" : "5.7.0"
+      }
+    },
+    {
+      "identity" : "progresshud",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/relatedcode/ProgressHUD.git",
+      "state" : {
+        "revision" : "2ebecc236508c6d325a36aeeadfc8930dccd07f6",
+        "version" : "14.1.5"
+      }
+    }
+  ],
+  "version" : 3
+}

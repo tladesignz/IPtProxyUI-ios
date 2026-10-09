@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A0EFD028ECBEB6118B5C1D4 /* Pods_IPtProxyUI_Mac_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8B459B55B4FE617D0B08775 /* Pods_IPtProxyUI_Mac_Example.framework */; };
-		3B66CEAFAA0BC7B0B4F56C65 /* Pods_IPtProxyUI_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AFF447AA7859FB1C41AE439 /* Pods_IPtProxyUI_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -18,7 +16,9 @@
 		A0A15D2829BB81240084B046 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A15D1B29BB80140084B046 /* AppDelegate.swift */; };
 		A0A15D2929BB81270084B046 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A15D1D29BB80140084B046 /* ViewController.swift */; };
 		A0A15D2A29BB81340084B046 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0A15D2129BB80150084B046 /* Main.storyboard */; };
-		EFA7152FF4C675B435DF5706 /* Pods_IPtProxyUI_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA2FD82BB821535F439AB623 /* Pods_IPtProxyUI_Example.framework */; };
+		A0C4C8173078FC460077EABC /* IPtProxyUI-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = A0C4C8163078FC460077EABC /* IPtProxyUI-iOS */; };
+		A0C4C8193078FC460077EABC /* IPtProxyUI-macOS in Frameworks */ = {isa = PBXBuildFile; productRef = A0C4C8183078FC460077EABC /* IPtProxyUI-macOS */; };
+		A0C4C81B3078FC840077EABC /* IPtProxyUI-iOS in Frameworks */ = {isa = PBXBuildFile; productRef = A0C4C81A3078FC840077EABC /* IPtProxyUI-iOS */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,8 +32,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B833E9D55034A0A4EEDE784 /* Pods-IPtProxyUI_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPtProxyUI_Tests.debug.xcconfig"; path = "Target Support Files/Pods-IPtProxyUI_Tests/Pods-IPtProxyUI_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		2EA25499D0699F7B46345E9D /* Pods-IPtProxyUI_Mac_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPtProxyUI_Mac_Example.release.xcconfig"; path = "Target Support Files/Pods-IPtProxyUI_Mac_Example/Pods-IPtProxyUI_Mac_Example.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* IPtProxyUI_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IPtProxyUI_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -44,11 +42,6 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7AFF447AA7859FB1C41AE439 /* Pods_IPtProxyUI_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IPtProxyUI_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		891775C0EC1858BD122A086E /* IPtProxyUI.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = IPtProxyUI.podspec; path = ../IPtProxyUI.podspec; sourceTree = "<group>"; usesTabs = 1; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A00FE5922FFD58DD00C1A5E3 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = SOURCE_ROOT; };
-		A00FE8452FFEB3F300C1A5E3 /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
-		A03CBE2C2F3CC15E00B22D96 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = SOURCE_ROOT; };
-		A03CBE2D2F3CC15E00B22D96 /* .weblate */ = {isa = PBXFileReference; lastKnownFileType = text; name = .weblate; path = ../.weblate; sourceTree = SOURCE_ROOT; };
 		A064C2572F2A48F700C7FCF2 /* sq */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sq; path = sq.lproj/Main.strings; sourceTree = "<group>"; };
 		A064C2592F2A48F900C7FCF2 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
 		A064C25B2F2A48F900C7FCF2 /* bn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bn; path = bn.lproj/Main.strings; sourceTree = "<group>"; };
@@ -128,31 +121,30 @@
 		A064C2F12F2A49AA00C7FCF2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
 		A064C2F32F2A49AB00C7FCF2 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Main.strings; sourceTree = "<group>"; };
 		A07FDD9730755786004FF9D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A0A15D1029BB7F3E0084B046 /* update-bridges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "update-bridges.swift"; path = "../update-bridges.swift"; sourceTree = "<group>"; };
-		A0A15D1129BB7F3E0084B046 /* update-bridges.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "update-bridges.sh"; path = "../update-bridges.sh"; sourceTree = "<group>"; };
-		A0A15D1229BB7F3E0084B046 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
-		A0A15D1429BB7F8C0084B046 /* .bartycrouch.toml */ = {isa = PBXFileReference; lastKnownFileType = text; name = .bartycrouch.toml; path = ../.bartycrouch.toml; sourceTree = "<group>"; };
 		A0A15D1929BB80140084B046 /* IPtProxyUI_Mac_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IPtProxyUI_Mac_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A15D1B29BB80140084B046 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0A15D1D29BB80140084B046 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A0A15D2229BB80150084B046 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A0C4C8033078FB480077EABC /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		A0C4C8103078FB480077EABC /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		A0C4C8113078FB480077EABC /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		A0C4C8123078FB480077EABC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A0C4C8133078FB480077EABC /* update-bridges.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "update-bridges.sh"; sourceTree = "<group>"; };
+		A0C4C8143078FB480077EABC /* update-bridges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "update-bridges.swift"; sourceTree = "<group>"; };
 		A8B459B55B4FE617D0B08775 /* Pods_IPtProxyUI_Mac_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IPtProxyUI_Mac_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD28D6A391E435F3D42CC771 /* Pods-IPtProxyUI_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPtProxyUI_Tests.release.xcconfig"; path = "Target Support Files/Pods-IPtProxyUI_Tests/Pods-IPtProxyUI_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		B8B52351519CD24832B81169 /* Pods-IPtProxyUI_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPtProxyUI_Example.debug.xcconfig"; path = "Target Support Files/Pods-IPtProxyUI_Example/Pods-IPtProxyUI_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		BA2FD82BB821535F439AB623 /* Pods_IPtProxyUI_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IPtProxyUI_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BADA7BE7B470C7427E22C72F /* Pods-IPtProxyUI_Mac_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPtProxyUI_Mac_Example.debug.xcconfig"; path = "Target Support Files/Pods-IPtProxyUI_Mac_Example/Pods-IPtProxyUI_Mac_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		D05BF163D769854A5AC791A9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		E8DB746879AF33885F7C077E /* Pods-IPtProxyUI_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPtProxyUI_Example.release.xcconfig"; path = "Target Support Files/Pods-IPtProxyUI_Example/Pods-IPtProxyUI_Example.release.xcconfig"; sourceTree = "<group>"; };
-		F62F2DB502E34EDE1156BA03 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		A03CBE452F3CC29800B22D96 /* ../docs */ = {
+		A0C4C80F3078FB480077EABC /* docs */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
-			path = ../docs;
-			sourceTree = SOURCE_ROOT;
+			path = docs;
+			sourceTree = "<group>";
+		};
+		A0C4C8803078FD1E0077EABC /* Sources */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Sources;
+			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -161,7 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFA7152FF4C675B435DF5706 /* Pods_IPtProxyUI_Example.framework in Frameworks */,
+				A0C4C8173078FC460077EABC /* IPtProxyUI-iOS in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,7 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B66CEAFAA0BC7B0B4F56C65 /* Pods_IPtProxyUI_Tests.framework in Frameworks */,
+				A0C4C81B3078FC840077EABC /* IPtProxyUI-iOS in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,7 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A0EFD028ECBEB6118B5C1D4 /* Pods_IPtProxyUI_Mac_Example.framework in Frameworks */,
+				A0C4C8193078FC460077EABC /* IPtProxyUI-macOS in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,12 +179,18 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				607FACF51AFB993E008FA782 /* Podspec Metadata */,
+				A0C4C8123078FB480077EABC /* README.md */,
+				A0C4C8033078FB480077EABC /* CHANGELOG.md */,
+				A0C4C8103078FB480077EABC /* LICENSE */,
+				A0C4C8113078FB480077EABC /* Package.swift */,
+				A0C4C8133078FB480077EABC /* update-bridges.sh */,
+				A0C4C8143078FB480077EABC /* update-bridges.swift */,
+				A0C4C8803078FD1E0077EABC /* Sources */,
+				A0C4C80F3078FB480077EABC /* docs */,
 				607FACD21AFB9204008FA782 /* Example for IPtProxyUI */,
-				607FACE81AFB9204008FA782 /* Tests */,
 				A0A15D1A29BB80140084B046 /* IPtProxyUI_Mac */,
+				607FACE81AFB9204008FA782 /* Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
-				67D0E8875B5294D2C9565BF5 /* Pods */,
 				CC39ABCBA558491E11F37D96 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -247,38 +245,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
-			isa = PBXGroup;
-			children = (
-				891775C0EC1858BD122A086E /* IPtProxyUI.podspec */,
-				A00FE8452FFEB3F300C1A5E3 /* Podfile.lock */,
-				A00FE5922FFD58DD00C1A5E3 /* Package.swift */,
-				F62F2DB502E34EDE1156BA03 /* README.md */,
-				D05BF163D769854A5AC791A9 /* LICENSE */,
-				A0A15D1229BB7F3E0084B046 /* CHANGELOG.md */,
-				A0A15D1129BB7F3E0084B046 /* update-bridges.sh */,
-				A0A15D1029BB7F3E0084B046 /* update-bridges.swift */,
-				A0A15D1429BB7F8C0084B046 /* .bartycrouch.toml */,
-				A03CBE2C2F3CC15E00B22D96 /* .gitignore */,
-				A03CBE2D2F3CC15E00B22D96 /* .weblate */,
-				A03CBE452F3CC29800B22D96 /* ../docs */,
-			);
-			name = "Podspec Metadata";
-			sourceTree = "<group>";
-		};
-		67D0E8875B5294D2C9565BF5 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B8B52351519CD24832B81169 /* Pods-IPtProxyUI_Example.debug.xcconfig */,
-				E8DB746879AF33885F7C077E /* Pods-IPtProxyUI_Example.release.xcconfig */,
-				0B833E9D55034A0A4EEDE784 /* Pods-IPtProxyUI_Tests.debug.xcconfig */,
-				AD28D6A391E435F3D42CC771 /* Pods-IPtProxyUI_Tests.release.xcconfig */,
-				BADA7BE7B470C7427E22C72F /* Pods-IPtProxyUI_Mac_Example.debug.xcconfig */,
-				2EA25499D0699F7B46345E9D /* Pods-IPtProxyUI_Mac_Example.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		A0A15D1A29BB80140084B046 /* IPtProxyUI_Mac */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,18 +272,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "IPtProxyUI_Example" */;
 			buildPhases = (
-				BBEACFB984ADA19F5D7D523C /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				F5C4050BB3B746702521B52F /* [CP] Embed Pods Frameworks */,
-				E108EA9318EBC990494D79A3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = IPtProxyUI_Example;
+			packageProductDependencies = (
+				A0C4C8163078FC460077EABC /* IPtProxyUI-iOS */,
+			);
 			productName = IPtProxyUI;
 			productReference = 607FACD01AFB9204008FA782 /* IPtProxyUI_Example.app */;
 			productType = "com.apple.product-type.application";
@@ -326,7 +292,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "IPtProxyUI_Tests" */;
 			buildPhases = (
-				D971861939410D80C24BE39A /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
@@ -337,6 +302,9 @@
 				607FACE71AFB9204008FA782 /* PBXTargetDependency */,
 			);
 			name = IPtProxyUI_Tests;
+			packageProductDependencies = (
+				A0C4C81A3078FC840077EABC /* IPtProxyUI-iOS */,
+			);
 			productName = Tests;
 			productReference = 607FACE51AFB9204008FA782 /* IPtProxyUI_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -345,17 +313,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A0A15D2529BB80150084B046 /* Build configuration list for PBXNativeTarget "IPtProxyUI_Mac_Example" */;
 			buildPhases = (
-				63EF4A8A3C29005A9D82AC20 /* [CP] Check Pods Manifest.lock */,
 				A0A15D1529BB80140084B046 /* Sources */,
 				A0A15D1629BB80140084B046 /* Frameworks */,
 				A0A15D1729BB80140084B046 /* Resources */,
-				AAB2AC7B3005B7B8711892AE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = IPtProxyUI_Mac_Example;
+			packageProductDependencies = (
+				A0C4C8183078FC460077EABC /* IPtProxyUI-macOS */,
+			);
 			productName = IPtProxyUI_Mac_Example;
 			productReference = A0A15D1929BB80140084B046 /* IPtProxyUI_Mac_Example.app */;
 			productType = "com.apple.product-type.application";
@@ -434,6 +403,9 @@
 				"zh-Hant",
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
+			packageReferences = (
+				A0C4C8153078FC460077EABC /* XCLocalSwiftPackageReference "../IPtProxyUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
@@ -472,126 +444,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		63EF4A8A3C29005A9D82AC20 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-IPtProxyUI_Mac_Example-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AAB2AC7B3005B7B8711892AE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IPtProxyUI_Mac_Example/Pods-IPtProxyUI_Mac_Example-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IPtProxyUI_Mac_Example/Pods-IPtProxyUI_Mac_Example-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IPtProxyUI_Mac_Example/Pods-IPtProxyUI_Mac_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BBEACFB984ADA19F5D7D523C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-IPtProxyUI_Example-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D971861939410D80C24BE39A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-IPtProxyUI_Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E108EA9318EBC990494D79A3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IPtProxyUI_Example/Pods-IPtProxyUI_Example-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IPtProxyUI_Example/Pods-IPtProxyUI_Example-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IPtProxyUI_Example/Pods-IPtProxyUI_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F5C4050BB3B746702521B52F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IPtProxyUI_Example/Pods-IPtProxyUI_Example-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IPtProxyUI_Example/Pods-IPtProxyUI_Example-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IPtProxyUI_Example/Pods-IPtProxyUI_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		607FACCC1AFB9204008FA782 /* Sources */ = {
@@ -853,7 +705,6 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B8B52351519CD24832B81169 /* Pods-IPtProxyUI_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
@@ -878,7 +729,6 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E8DB746879AF33885F7C077E /* Pods-IPtProxyUI_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
@@ -903,7 +753,6 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0B833E9D55034A0A4EEDE784 /* Pods-IPtProxyUI_Tests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
@@ -933,7 +782,6 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AD28D6A391E435F3D42CC771 /* Pods-IPtProxyUI_Tests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
@@ -959,7 +807,6 @@
 		};
 		A0A15D2629BB80150084B046 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BADA7BE7B470C7427E22C72F /* Pods-IPtProxyUI_Mac_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1004,7 +851,6 @@
 		};
 		A0A15D2729BB80150084B046 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2EA25499D0699F7B46345E9D /* Pods-IPtProxyUI_Mac_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1084,6 +930,29 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		A0C4C8153078FC460077EABC /* XCLocalSwiftPackageReference "../IPtProxyUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../IPtProxyUI;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A0C4C8163078FC460077EABC /* IPtProxyUI-iOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "IPtProxyUI-iOS";
+		};
+		A0C4C8183078FC460077EABC /* IPtProxyUI-macOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "IPtProxyUI-macOS";
+		};
+		A0C4C81A3078FC840077EABC /* IPtProxyUI-iOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0C4C8153078FC460077EABC /* XCLocalSwiftPackageReference "../IPtProxyUI" */;
+			productName = "IPtProxyUI-iOS";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 607FACC81AFB9204008FA782 /* Project object */;
 }

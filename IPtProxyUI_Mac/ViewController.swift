@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import IPtProxyUI
+import IPtProxyUI_macOS
 import OSLog
 
 class ViewController: NSViewController, NSWindowDelegate, BridgesConfDelegate {
