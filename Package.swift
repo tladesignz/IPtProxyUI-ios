@@ -26,6 +26,9 @@ let package = Package(
 		.target(
 			name: "IPtProxyUI-Shared",
 			dependencies: ["IPtProxy"],
+			resources: [
+				.process("Resources")
+			],
 			packageAccess: false,
 			linkerSettings: [.linkedLibrary("resolv")]),
 		.target(
