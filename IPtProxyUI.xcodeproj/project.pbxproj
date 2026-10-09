@@ -273,6 +273,7 @@
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "IPtProxyUI_Example" */;
 			buildPhases = (
 				607FACCC1AFB9204008FA782 /* Sources */,
+				A0C4C881307904B90077EABC /* Update Bridges */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 			);
@@ -314,6 +315,7 @@
 			buildConfigurationList = A0A15D2529BB80150084B046 /* Build configuration list for PBXNativeTarget "IPtProxyUI_Mac_Example" */;
 			buildPhases = (
 				A0A15D1529BB80140084B046 /* Sources */,
+				A0C4C882307907020077EABC /* Update Bridges */,
 				A0A15D1629BB80140084B046 /* Frameworks */,
 				A0A15D1729BB80140084B046 /* Resources */,
 			);
@@ -444,6 +446,47 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A0C4C881307904B90077EABC /* Update Bridges */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update Bridges";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PROJECT_DIR}/update-bridges.sh\n";
+		};
+		A0C4C882307907020077EABC /* Update Bridges */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update Bridges";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PROJECT_DIR}/update-bridges.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		607FACCC1AFB9204008FA782 /* Sources */ = {

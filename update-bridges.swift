@@ -39,6 +39,12 @@ func resolve(_ path: String) -> URL {
 	return URL(fileURLWithPath: path, relativeTo: base)
 }
 
+extension Bundle {
+	class var module: Bundle {
+		Bundle(for: MoatApi.self)
+	}
+}
+
 
 // MARK: Main
 
