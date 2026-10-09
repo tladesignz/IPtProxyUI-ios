@@ -48,16 +48,21 @@ public enum Transport: Int, CaseIterable, Comparable {
 
 	private class StatusCollector: NSObject, IPtProxyOnTransportEventsProtocol {
 
-		var started = [String: Bool]()
-		var connected = [String: Bool]()
-		var errors = [String: Error]()
+		// All access to the three dictionaries below is serialized through this one queue.
+		// They are mutated from the IPtProxy Go/cgo callback thread (the On*Transport* events)
+		// and read from the main thread via `Transport.connected`/`.error`.
+		private let queue = DispatchQueue(label: "IPtProxyUI.Transport.StatusCollector")
+
+		private var started = [String: Bool]()
+		private var connected = [String: Bool]()
+		private var errors = [String: Error]()
 
 		func stopped(_ name: String?, error: (any Error)?) {
 			guard let name = name else {
 				return
 			}
 
-			DispatchQueue.global(qos: .userInitiated).sync {
+			queue.sync {
 				started[name] = false
 				connected[name] = false
 				errors[name] = error
@@ -67,7 +72,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 		}
 
 		func started(name: String) {
-			DispatchQueue.global(qos: .userInitiated).sync {
+			queue.sync {
 				started[name] = true
 				errors[name] = nil
 			}
@@ -80,7 +85,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 				return
 			}
 
-			DispatchQueue.global(qos: .userInitiated).sync {
+			queue.sync {
 				connected[name] = true
 			}
 
@@ -92,12 +97,17 @@ public enum Transport: Int, CaseIterable, Comparable {
 				return
 			}
 
-			DispatchQueue.global(qos: .userInitiated).sync {
+			queue.sync {
 				errors[name] = error
 			}
 
 			NotificationCenter.default.post(name: .iPtProxyTransportErrored, object: getTransports(from: name))
 		}
+
+		// Thread-safe reads for the enum's `connected`/`error` computed properties.
+		func isStarted(_ name: String) -> Bool { queue.sync { started[name] ?? false } }
+		func isConnected(_ name: String) -> Bool { queue.sync { connected[name] ?? false } }
+		func error(for name: String) -> Error? { queue.sync { errors[name] } }
 
 
 		private func getTransports(from name: String) -> [Transport] {
@@ -242,7 +252,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	 */
 	public var connected: Bool {
 		transportNames.reduce(true) { partialResult, name in
-			partialResult && (Self.collector.started[name] ?? false) && (Self.collector.connected[name] ?? false)
+			partialResult && Self.collector.isStarted(name) && Self.collector.isConnected(name)
 		}
 	}
 
@@ -250,7 +260,7 @@ public enum Transport: Int, CaseIterable, Comparable {
 	 The first error found on any used underlying transport. (But, the *last* one happening on that specific transport.)
 	 */
 	public var error: Error? {
-		transportNames.compactMap({ Self.collector.errors[$0] }).first
+		transportNames.compactMap({ Self.collector.error(for: $0) }).first
 	}
 
 
