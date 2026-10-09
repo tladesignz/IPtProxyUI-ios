@@ -70,4 +70,9 @@ class Tests: XCTestCase {
 
 		XCTAssertEqual(builder.build().raw, b.raw)
 	}
+
+	func testBuiltInAvailability() {
+		XCTAssertNotNil(BuiltInBridges.file)
+		XCTAssertNotNil(BuiltInBridges.shared)
+	}
 }
