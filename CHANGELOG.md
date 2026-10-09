@@ -1,5 +1,10 @@
 # IPtProxyUI
 
+## 6.0.0
+- Dropped CocoaPods support, as it's heavily deprecated.
+- Fixed preliminary SPM support.
+- Fixed tests.
+
 ## 5.5.1
 - Fixed intermittent crash through race condition. (Thanks Oleg!)
 - Updated Snowflake to 2.15.1.

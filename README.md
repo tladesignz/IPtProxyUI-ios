@@ -2,9 +2,10 @@
 
 Tor + Pluggable Transports on iOS and macOS
 
-[![Version](https://img.shields.io/cocoapods/v/IPtProxyUI.svg?style=flat)](https://cocoapods.org/pods/IPtProxyUI)
-[![License](https://img.shields.io/cocoapods/l/IPtProxyUI.svg?style=flat)](https://cocoapods.org/pods/IPtProxyUI)
-[![Platform](https://img.shields.io/cocoapods/p/IPtProxyUI.svg?style=flat)](https://cocoapods.org/pods/IPtProxyUI)
+[![Swift Package](https://img.shields.io/badge/SPM-Compatible-swift.svg?style=flat)](https://github.com/apple/swift-package-manager)
+[![Version](https://img.shields.io/github/v/release/tladesignz/IPtProxyUI-ios.svg?style=flat)](https://github.com/tladesignz/IPtProxyUI-ios/tags)
+[![License](https://img.shields.io/github/l/tladesignz/IPtProxyUI-ios?style=flat)](https://github.com/tladesignz/IPtProxyUI-ios/blob/main/LICENSE)
+[![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20macOS-lightgrey.svg?style=flat)](https://github.com/tladesignz/IPtProxyUI-ios/blob/main/Package.swift)
 
 IPtProxyUI provides all things necessary to use the Pluggable Transports from the 
 [IPtProxy](https://github.com/tladesignz/IPtProxy) library with Tor,
@@ -24,12 +25,9 @@ IPv6-only networks which are common with some mobile network carriers.
 
 ## Installation
 
-IPtProxyUI is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+IPtProxyUI is available through the Swift Package Manager. To install it, 
+simply add this repository to your Xcode project.
 
-```ruby
-pod 'IPtProxyUI'
-```
 
 ## Getting Started
 
@@ -41,7 +39,7 @@ the new [`TorManager` project](https://github.com/tladesignz/TorManager)!
 ### Do-it-yourself
 
 ```swift
-use IPtProxyUI
+use IPtProxyUI_iOS
 
 // ATTENTION: Since IPtProxy 2.0.0 this needs to be set explicitly before starting a transport!
 Settings.stateLocation = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("pt_state")
@@ -66,13 +64,20 @@ Don't use storyboard and xib file localization. That just messes up everything.
 Localize these by explicit calls in the code.
 
 
+## New Releases
+
+Make sure to run [update-bridges.sh](update-bridges.sh) before release. 
+It's added as a build script to the example projects, so you should be fine, if you're
+testing an update. 
+
+
 ## Dependencies
 
 - [IPtProxy](https://github.com/tladesignz/IPtProxy), licensed under [MIT](https://github.com/tladesignz/IPtProxy/blob/master/LICENSE)
 - [Eureka](https://github.com/xmartlabs/Eureka), licensed under [MIT](https://github.com/xmartlabs/Eureka/blob/master/LICENSE)
 - [ProgressHUD](https://github.com/relatedcode/ProgressHUD), licensed under [MIT](https://github.com/relatedcode/ProgressHUD/blob/master/LICENSE)
 - [MBProgressHUD-OSX](https://github.com/Foxnolds/MBProgressHUD-OSX), licensed under [MIT](https://github.com/Foxnolds/MBProgressHUD-OSX/blob/master/LICENSE)
-- [ReachabilitySwift](https://github.com/ashleymills/Reachability.swift), licensed under [MIT] (https://github.com/ashleymills/Reachability.swift/blob/master/LICENSE))
+- [ReachabilitySwift](https://github.com/ashleymills/Reachability.swift), licensed under [MIT] (https://github.com/ashleymills/Reachability.swift/blob/master/LICENSE)
 
 
 ## Further reading
