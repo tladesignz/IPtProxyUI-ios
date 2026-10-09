@@ -3,8 +3,8 @@
 Tor + Pluggable Transports on iOS and macOS
 
 [![Swift Package](https://img.shields.io/badge/SPM-Compatible-swift.svg?style=flat)](https://github.com/apple/swift-package-manager)
-[![Version](https://img.shields.io/github/v/release/tladesignz/IPtProxyUI-ios.svg?style=flat)](https://github.com/tladesignz/IPtProxyUI-ios/tags)
-[![License](https://img.shields.io/github/l/tladesignz/IPtProxyUI-ios?style=flat)](https://github.com/tladesignz/IPtProxyUI-ios/blob/main/LICENSE)
+[![Version](https://img.shields.io/github/v/tag/tladesignz/IPtProxyUI-ios.svg?style=flat)](https://github.com/tladesignz/IPtProxyUI-ios/tags)
+[![License](https://img.shields.io/github/license/tladesignz/IPtProxyUI-ios?style=flat)](https://github.com/tladesignz/IPtProxyUI-ios/blob/main/LICENSE)
 [![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20macOS-lightgrey.svg?style=flat)](https://github.com/tladesignz/IPtProxyUI-ios/blob/main/Package.swift)
 
 IPtProxyUI provides all things necessary to use the Pluggable Transports from the 
